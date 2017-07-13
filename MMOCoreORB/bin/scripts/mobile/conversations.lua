@@ -336,3 +336,14 @@ includeFile("conversations/junk_dealer/junk_dealer_quich_conv.lua")
 includeFile("conversations/junk_dealer/junk_dealer_reggi_conv.lua")
 includeFile("conversations/junk_dealer/junk_dealer_sheani_conv.lua")
 includeFile("conversations/junk_dealer/junk_dealer_sneg_conv.lua")
+
+-- Legend of Hondo
+-------------------
+
+-- Merchants
+includeFile("conversations/hondo/merchants/crazy_larry_conv.lua")
+includeFile("conversations/hondo/merchants/u8l7_conv.lua")
+includeFile("conversations/hondo/merchants/volrik_lonugs_conv.lua")
+includeFile("conversations/hondo/merchants/nal_yaro_conv.lua")
+includeFile("conversations/hondo/merchants/cyan_yaro_conv.lua")
+includeFile("conversations/hondo/merchants/yivvits_conv.lua")
