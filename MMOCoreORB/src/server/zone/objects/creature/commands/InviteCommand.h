@@ -38,11 +38,23 @@ public:
 
 		GroupManager* groupManager = GroupManager::instance();
 
+		String playerArg;
+		StringTokenizer args(arguments.toString());
+		args.getStringToken(playerArg);
+		
+		ManagedReference<CreatureObject*> targetPlayer = server->getZoneServer()->getPlayerManager()->getPlayer(playerArg);
+		
+		if(targetPlayer != nullptr) {
+			if (!targetPlayer->getPlayerObject()->isIgnoring(creature->getFirstName().toLowerCase()) || godMode) {
+				groupManager->inviteToGroup(creature, targetPlayer);
+				return SUCCESS;
+			}
+		}
+		
 		ManagedReference<SceneObject*> object = server->getZoneServer()->getObject(target);
 
-		if (object == nullptr)
+		if (object == nullptr) 
 			return GENERALERROR;
-
 
 		if (object->isPlayerCreature()) {
 			CreatureObject* player = cast<CreatureObject*>( object.get());
