@@ -6,9 +6,9 @@ knife_stone = {
 	customObjectName = "",
 	directObjectTemplate = "object/weapon/melee/knife/knife_stone.iff",
 	craftingValues = {
-		{"mindamage",14,26,0},
-		{"maxdamage",32,55,0},
-		{"attackspeed",3.9,2.7,1},
+		{"mindamage",8,20,0},
+		{"maxdamage",21,28,0},
+		{"attackspeed",3.8,2.5,1},
 		{"woundchance",6,12,0},
 		{"hitpoints",750,1500,0},
 		{"zerorangemod",17,33,0},
