@@ -1723,13 +1723,25 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 			uint32 combatXp = 0;
 
 			Locker crossLocker(attacker, destructedObject);
+			
+			uint32 totalPlayerDamage = 0;
+			for (int j = 0; j < entry->size(); ++j) {
+				uint32 damage = entry->elementAt(j).getValue();
+				totalPlayerDamage += damage;
+			}
 
 			for (int j = 0; j < entry->size(); ++j) {
 				uint32 damage = entry->elementAt(j).getValue();
 				String xpType = entry->elementAt(j).getKey();
 				float xpAmount = baseXp;
+				float bonusXp = baseXp / 4; // 25%
+
+				bonusXp *= (float) damage / totalPlayerDamage;
 
 				xpAmount *= (float) damage / totalDamage;
+				//xpAmount = xpAmount / (float)didDamage;
+
+				xpAmount = Math::min(xpAmount + bonusXp, baseXp);
 
 				//Cap xp based on level
 				xpAmount = Math::min(xpAmount, calculatePlayerLevel(attacker, xpType) * 300.f);
