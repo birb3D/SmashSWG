@@ -114,10 +114,10 @@ object_weapon_melee_knife_knife_stone = object_weapon_melee_knife_shared_knife_s
 	maxRange = 4,
 	maxRangeAccuracy = 5,
 
-	minDamage = 20,
+	minDamage = 22,
 	maxDamage = 30,
 
-	attackSpeed = 3,5,
+	attackSpeed = 3.5,
 
 	woundsRatio = 6
 }
