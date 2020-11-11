@@ -39,7 +39,7 @@ void ArmorObjectMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject, 
 			return;
 	}
 
-	if (!parent->isPlayerCreature() && player->hasSkill("social_imagedesigner")) {
+	if (!parent->isPlayerCreature() && player->hasSkill("social_imagedesigner_novice")) {
 				menuResponse->addRadialMenuItem(81, 3, "Modify Color");	
 		}
 	
