@@ -1741,7 +1741,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				xpAmount *= (float) damage / totalDamage;
 				//xpAmount = xpAmount / (float)didDamage;
 
-				xpAmount = Math::min(xpAmount + bonusXp, baseXp);
+				xpAmount = Math::min(xpAmount + bonusXp, (float)baseXp);
 
 				//Cap xp based on level
 				xpAmount = Math::min(xpAmount, calculatePlayerLevel(attacker, xpType) * 300.f);
