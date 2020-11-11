@@ -213,11 +213,10 @@ function HologrindJediManager:sendHolocronMessage(pCreatureObject)
 
 		local professions = PlayerObject(pGhost):getHologrindProfessions()
 		for i = 1, #professions, 1 do
-			CreatureObject(pCreatureObject):sendSystemMessage("HOLOCRON LOOP: " .. i .. " " .. professions[i]);
 			if not PlayerObject(pGhost):hasBadge(professions[i]) then
 				local professionText = self:getProfessionStringIdFromBadgeNumber(professions[i])
-				CreatureObject(pCreatureObject):sendSystemMessage("HOLOCRON LOOP FOUND: " .. professions[i] .. " | " .. professionText);
 				CreatureObject(pCreatureObject):sendSystemMessageWithTO("@jedi_spam:holocron_light_information", "@skl_n:" .. professionText)
+				return false;
 			end
 		end
 
