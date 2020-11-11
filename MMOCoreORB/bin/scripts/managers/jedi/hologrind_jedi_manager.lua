@@ -233,6 +233,7 @@ function HologrindJediManager:useItem(pSceneObject, itemType, pCreatureObject)
 	end
 
 	if itemType == ITEMHOLOCRON then
+		pCreatureObject:sendSystemMessage("Testing Holocron");
 		local isSilent = self:sendHolocronMessage(pCreatureObject)
 		if isSilent then
 			return
