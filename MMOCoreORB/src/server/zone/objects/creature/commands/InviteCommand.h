@@ -37,12 +37,8 @@ public:
 		}
 
 		GroupManager* groupManager = GroupManager::instance();
-
-		String playerArg;
-		StringTokenizer args(arguments.toString());
-		args.getStringToken(playerArg);
 		
-		ManagedReference<CreatureObject*> targetPlayer = server->getZoneServer()->getPlayerManager()->getPlayer(playerArg);
+		ManagedReference<CreatureObject*> targetPlayer = server->getZoneServer()->getPlayerManager()->getPlayer(arguments.toString());
 		
 		if(targetPlayer != nullptr) {
 			if (!targetPlayer->getPlayerObject()->isIgnoring(creature->getFirstName().toLowerCase()) || godMode) {
