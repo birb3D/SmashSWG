@@ -5,9 +5,9 @@ polearm_staff_wood = {
 	customObjectName = "",
 	directObjectTemplate = "object/weapon/melee/polearm/lance_staff_wood_s1.iff",
 	craftingValues = {
-		{"mindamage",15,25,0},
-		{"maxdamage",35,46,0},
-		{"attackspeed",5.25,4.75,1},
+		{"mindamage",25,46,0},
+		{"maxdamage",56,104,0},
+		{"attackspeed",5.8,4,1},
 		{"woundchance",3,7,0},
 		{"hitpoints",750,1500,0},
 		{"zerorangemod",14,26,0},
