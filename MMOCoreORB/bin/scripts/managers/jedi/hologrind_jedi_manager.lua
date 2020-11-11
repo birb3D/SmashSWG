@@ -210,6 +210,8 @@ function HologrindJediManager:sendHolocronMessage(pCreatureObject)
 		if (pGhost == nil) then
 			return false
 		end
+		
+		CreatureObject(pCreatureObject):sendSystemMessage("HOLOCRON: Before Test");
 
 		local professions = PlayerObject(pGhost):getHologrindProfessions()
 		for i = 1, #professions, 1 do
@@ -233,7 +235,6 @@ function HologrindJediManager:useItem(pSceneObject, itemType, pCreatureObject)
 	end
 
 	if itemType == ITEMHOLOCRON then
-		CreatureObject(pCreatureObject):sendSystemMessage("Testing Holocron");
 		local isSilent = self:sendHolocronMessage(pCreatureObject)
 		if isSilent then
 			return
