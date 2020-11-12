@@ -95,10 +95,10 @@ object_weapon_ranged_rifle_rifle_bowcaster = object_weapon_ranged_rifle_shared_r
 	maxRange = 64,
 	maxRangeAccuracy = -80,
 
-	minDamage = 110,
-	maxDamage = 180,
+	minDamage = 60,
+	maxDamage = 120,
 
-	attackSpeed = 6.3,
+	attackSpeed = 6.8,
 
 	woundsRatio = 13,
 
