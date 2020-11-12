@@ -9,10 +9,7 @@ synthetic_cloth = {
 		{"useCount",1,5,0},
 	},
 	customizationStringNames = {},
-	customizationValues = {},
-	junkDealerTypeNeeded = JUNKGENERIC,
-	junkMinValue = 60,
-	junkMaxValue = 120
+	customizationValues = {}
 }
 
 addLootItemTemplate("synthetic_cloth", synthetic_cloth)
