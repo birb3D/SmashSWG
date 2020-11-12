@@ -14,7 +14,6 @@ armor_segment_bone = {
 		{"armor_health_encumbrance",6,1,0},
 		{"armor_action_encumbrance",8,1,0},
 		{"armor_mind_encumbrance",5,1,0},
-		{"useCount",1,7,0},
 	},
 	customizationStringNames = {},
 	customizationValues = {}
