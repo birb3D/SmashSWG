@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_ithorian_guardian_ith_armor_s02_leggings = object_tangible_wearables_armor_ithorian_guardian_shared_ith_armor_s02_leggings:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 
 	templateType = ARMOROBJECT,
 

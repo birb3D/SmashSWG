@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_marauder_armor_marauder_s02_chest_plate_quest = object_tangible_wearables_armor_marauder_shared_armor_marauder_s02_chest_plate_quest:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/bothan_male.iff",

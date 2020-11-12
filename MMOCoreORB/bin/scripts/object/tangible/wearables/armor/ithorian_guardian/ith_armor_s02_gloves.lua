@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_ithorian_guardian_ith_armor_s02_gloves = object_tangible_wearables_armor_ithorian_guardian_shared_ith_armor_s02_gloves:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/ithorian_male.iff",

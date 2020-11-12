@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_singing_mountain_clan_armor_smc_s01_bracer_r = object_tangible_wearables_armor_singing_mountain_clan_shared_armor_smc_s01_bracer_r:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/bothan_female.iff",

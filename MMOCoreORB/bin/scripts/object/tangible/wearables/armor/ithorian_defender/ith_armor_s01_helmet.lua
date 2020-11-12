@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_ithorian_defender_ith_armor_s01_helmet = object_tangible_wearables_armor_ithorian_defender_shared_ith_armor_s01_helmet:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 
 	templateType = ARMOROBJECT,
 
