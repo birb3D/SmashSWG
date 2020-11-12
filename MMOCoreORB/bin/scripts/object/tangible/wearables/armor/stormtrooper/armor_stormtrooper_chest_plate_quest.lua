@@ -42,7 +42,6 @@
 
 
 object_tangible_wearables_armor_stormtrooper_armor_stormtrooper_chest_plate_quest = object_tangible_wearables_armor_stormtrooper_shared_armor_stormtrooper_chest_plate_quest:new {
-    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	faction = "Imperial",
