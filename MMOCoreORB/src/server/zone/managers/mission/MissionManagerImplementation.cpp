@@ -948,7 +948,9 @@ void MissionManagerImplementation::randomizeGenericSurveyMission(CreatureObject*
 	mission->setTargetTemplate(templateObject);
 
 	//Reward depending on mission level.
-	mission->setRewardCredits(400 + (randLevel - minLevel) * 20 + System::random(100));
+	int rewardCreds = 400 + (randLevel - minLevel) * 20 + System::random(100);
+	rewardCreds = ceil(rewardCreds / 2);
+	mission->setRewardCredits(rewardCreds);
 
 	mission->setFaction(faction);
 
