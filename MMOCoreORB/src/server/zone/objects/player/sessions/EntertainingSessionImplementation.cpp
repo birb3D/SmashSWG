@@ -209,6 +209,8 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 					&& groupMember->hasSkill("social_entertainer_novice")) {
 					String healxptype("entertainer_healing");
 
+					xp = ceil(xp * 2.5);
+					
 					if (playerManager != nullptr)
 						playerManager->awardExperience(groupMember, healxptype, xp, true);
 				}
@@ -1095,7 +1097,7 @@ void EntertainingSessionImplementation::awardEntertainerExperience() {
 
 			float totalBonus = 1.f + groupMod + audienceMod + applauseMod;
 
-			xpAmount = ceil(xpAmount * totalBonus);
+			xpAmount = ceil(xpAmount * totalBonus * 2.5);
 
 			if (playerManager != nullptr)
 				playerManager->awardExperience(player, xptype, xpAmount, true);
@@ -1108,6 +1110,8 @@ void EntertainingSessionImplementation::awardEntertainerExperience() {
 
 		if (healingXp > 0) {
 			String healxptype("entertainer_healing");
+			
+			healingXp = ceil(healingXp * 2.5);
 
 			if (playerManager != nullptr)
 				playerManager->awardExperience(player, healxptype, healingXp, true);
