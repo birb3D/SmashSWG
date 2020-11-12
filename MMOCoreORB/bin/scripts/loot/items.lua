@@ -10,6 +10,12 @@ JUNKGUNGAN = 128
 JUNKCORSEC = 256
 
 
+--custom loots
+includeFile("items/custom/fiberplast_panel.lua")
+includeFile("items/custom/synthetic_cloth.lua")
+includeFile("items/custom/armor_segment_bone.lua")
+
+
 includeFile("items/attachment_armor.lua")
 includeFile("items/attachment_clothing.lua")
 includeFile("items/balanced_feed_mechanism.lua")
@@ -402,7 +408,6 @@ includeFile("items/junk/slave_collar.lua")
 includeFile("items/junk/used_ticket.lua")
 includeFile("items/junk/wiring.lua")
 includeFile("items/junk/worklight.lua")
-includeFile("items/junk/fiberplast_panel.lua")
 
 --loot_kit sub-folder
 includeFile("items/loot_kit/blue_rug_adhesive.lua")
