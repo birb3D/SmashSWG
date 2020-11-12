@@ -42,7 +42,6 @@
 
 
 object_tangible_wearables_ring_ring_s02 = object_tangible_wearables_ring_shared_ring_s02:new {
-    objectMenuComponent = "ArmorObjectMenuComponent",
 	objectMenuComponent = "RingObjectMenuComponent",
 	playerRaces = { "object/creature/player/bothan_male.iff",
 				"object/creature/player/bothan_female.iff",
