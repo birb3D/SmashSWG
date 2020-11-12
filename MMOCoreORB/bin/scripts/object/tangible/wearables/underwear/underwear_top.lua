@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_underwear_underwear_top = object_tangible_wearables_underwear_shared_underwear_top:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 
 }
 
