@@ -232,6 +232,8 @@ void MissionObjectiveImplementation::awardReward() {
 	if (playerCount > players.size()) {
 		owner->sendSystemMessage("@mission/mission_generic:group_too_far"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
 	}
+	
+	divisor = players.size();
 
 	int dividedReward = mission->getRewardCredits() / Math::max(divisor, 1);
 
