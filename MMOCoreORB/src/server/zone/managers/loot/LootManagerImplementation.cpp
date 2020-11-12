@@ -637,7 +637,7 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 	if (lootCollection == nullptr)
 		return false;
 	
-	int rool = System::random(100);
+	int roll = System::random(100);
 	if(roll < 5) {
 		createLootFromCollection(trx, container, lootCollection, creature->getLevel());
 
