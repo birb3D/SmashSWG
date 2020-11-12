@@ -42,7 +42,7 @@
 
 
 object_tangible_wearables_earring_earring_s11 = object_tangible_wearables_earring_shared_earring_s11:new {
-    objectMenuComponent = "ArmorObjectMenuComponent",
+    
 
 }
 
