@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_kashyyykian_ceremonial_armor_kashyyykian_ceremonial_chest_plate = object_tangible_wearables_armor_kashyyykian_ceremonial_shared_armor_kashyyykian_ceremonial_chest_plate:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/wookiee_male.iff",

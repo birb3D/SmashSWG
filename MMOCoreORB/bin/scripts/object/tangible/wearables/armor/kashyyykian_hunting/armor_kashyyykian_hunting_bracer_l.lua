@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_kashyyykian_hunting_armor_kashyyykian_hunting_bracer_l = object_tangible_wearables_armor_kashyyykian_hunting_shared_armor_kashyyykian_hunting_bracer_l:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/wookiee_male.iff",

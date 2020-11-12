@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_stormtrooper_armor_stormtrooper_leggings = object_tangible_wearables_armor_stormtrooper_shared_armor_stormtrooper_leggings:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	faction = "Imperial",

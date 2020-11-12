@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_bounty_hunter_armor_bounty_hunter_belt = object_tangible_wearables_armor_bounty_hunter_shared_armor_bounty_hunter_belt:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = CLOTHINGOBJECT,
 
 	playerRaces = { "object/creature/player/bothan_male.iff",

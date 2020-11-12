@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_ithorian_sentinel_ith_armor_s03_bicep_r = object_tangible_wearables_armor_ithorian_sentinel_shared_ith_armor_s03_bicep_r:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/ithorian_male.iff",
