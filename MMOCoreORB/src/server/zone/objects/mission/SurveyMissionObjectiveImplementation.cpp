@@ -69,13 +69,13 @@ int SurveyMissionObjectiveImplementation::notifyObserverEvent(MissionObserver* o
 			startPosition.setX(mission->getStartPositionX());
 			startPosition.setY(mission->getStartPositionY());
 			float distance = startPosition.distanceTo(player->getWorldPosition());
-			if (distance > 1024.0f) {
+			if (distance > 500.0f) {
 				complete();
 
 				return 1;
 			} else {
 				StringIdChatParameter stringId("mission/mission_generic", "survey_too_close");
-				stringId.setDI(1024);
+				stringId.setDI(500);
 				stringId.setDF(distance);
 				player->sendSystemMessage(stringId);
 
