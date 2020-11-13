@@ -148,9 +148,9 @@ void LairObserverImplementation::checkForHeal(TangibleObject* lair, TangibleObje
 
 	if (healLairEvent == nullptr) {
 		healLairEvent = new HealLairObserverEvent(lair, attacker, _this.getReferenceUnsafeStaticCast());
-		healLairEvent->schedule(1000);
+		healLairEvent->schedule(2000);
 	} else if (!healLairEvent->isScheduled()) {
-		healLairEvent->schedule(1000);
+		healLairEvent->schedule(2000);
 	} else if (attacker != nullptr)
 		healLairEvent->setAttacker(attacker);
 }
@@ -171,8 +171,16 @@ void LairObserverImplementation::healLair(TangibleObject* lair, TangibleObject* 
 			continue;
 
 		//  TODO: Range check
-		damageToHeal += lairMaxCondition / 100;
-
+		if(creo->isInRange(lair, 20)) {
+			damageToHeal += lairMaxCondition / 100;
+		}
+		else {
+			AiAgent* ai = cast<AiAgent*>( creo);
+			//Locker clocker(creo, lair);
+			//creo->setDefender(attacker);
+			ai->setFollowObject(lair);
+			ai->setFollowState(AiAgent::LEASHING);
+		}
 	}
 
 	if (damageToHeal == 0)
