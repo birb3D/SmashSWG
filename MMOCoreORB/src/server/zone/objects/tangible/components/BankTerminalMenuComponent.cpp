@@ -30,25 +30,18 @@ void BankTerminalMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject,
 
 	String location = ghost->getBankLocation();
 
-	//if (location = "") {
+	if(!GLOBALSAFETYDEPOSIT) {
 		// Join Bank
 		menuResponse->addRadialMenuItemToRadialID(20, 71, 3, "@sui:bank_join");
-	//} else {
 		// Quit Bank - no checks here since there are error message stfs
 		menuResponse->addRadialMenuItemToRadialID(20, 72, 3, "@sui:bank_quit");
 
-		/*SceneObject* deposit = player->getSlottedObject("bank");
-		if (deposit->getContainerObjectsSize() == 0) {
-			// Quit Bank
-			menuResponse->addRadialMenuItemToRadialID(118, 128, 3, "@player_structure:permission_destroy"); //Destroy Structure
-		}
-		 */
 
-		String currentLocation = playerZone->getZoneName();
+		//String currentLocation = playerZone->getZoneName();
 		//if (currentLocation == location) {
-			menuResponse->addRadialMenuItemToRadialID(20, 73, 3, "@sui:bank_items"); //Safety Deposit
-		//}
-	//}
+		menuResponse->addRadialMenuItemToRadialID(20, 73, 3, "@sui:bank_items"); //Safety Deposit
+	}
+
 	menuResponse->addRadialMenuItemToRadialID(20, 68, 3, "@sui:bank_credits"); // Deposit/Withdrawal
 	menuResponse->addRadialMenuItemToRadialID(20, 69, 3, "@sui:bank_depositall"); // Deposit all
 	menuResponse->addRadialMenuItemToRadialID(20, 70, 3, "@sui:bank_withdrawall"); // Withdraw all
@@ -139,7 +132,7 @@ int BankTerminalMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject, 
 
 	} else if (selectedID == DEPOSIT) {
 
-		if (planet == playerZone->getZoneName() || GLOBALSAFETYDEPOSIT) {
+		if (GLOBALSAFETYDEPOSIT || planet == playerZone->getZoneName()) {
 
 			ManagedReference<SceneObject*> bank = creature->getSlottedObject("bank");
 			bank->openContainerTo(creature);
