@@ -9,9 +9,11 @@ tailor_components = {
 		{itemTemplate = "heavy_duty_clasp", weight = 3200000},
 		{itemTemplate = "heavy_duty_leather", weight = 3200000},
 		--4% below this point
-		{groupTemplate = "fiberplast_panel", weight = 175000},
-		{groupTemplate = "synthetic_cloth", weight = 175000},
-		{groupTemplate = "armor_segment_bone", weight = 50000},
+		{groupTemplate = "fiberplast_panel", weight = 150000},
+		{groupTemplate = "synthetic_cloth", weight = 150000},
+		{groupTemplate = "armor_segment_bone", weight = 33334},
+		{groupTemplate = "armor_segment_zam", weight = 33333},
+		{groupTemplate = "armor_segment_chitin", weight = 33333},
 	}
 }
 
