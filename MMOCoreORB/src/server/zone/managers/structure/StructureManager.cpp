@@ -1157,7 +1157,7 @@ void StructureManager::promptPayUncondemnMaintenance(CreatureObject* creature, S
 }
 
 void StructureManager::promptPayMaintenance(StructureObject* structure, CreatureObject* creature, SceneObject* terminal) {
-	int availableCredits = creature->getCashCredits();
+	int availableCredits = creature->getCashCredits() + creature->getBankCredits();
 
 	if (availableCredits <= 0) {
 		creature->sendSystemMessage("@player_structure:no_money"); //You do not have any money to pay maintenance.
@@ -1327,8 +1327,9 @@ void StructureManager::payMaintenance(StructureObject* structure,
 	}
 
 	int cash = creature->getCashCredits();
+	int totalfunds = creature->getBankCredits() + cash;
 
-	if (cash < amount) {
+	if (totalfunds < amount) {
 		creature->sendSystemMessage("@player_structure:insufficient_funds"); //You have insufficient funds to make this deposit.
 		return;
 	}
@@ -1341,7 +1342,15 @@ void StructureManager::payMaintenance(StructureObject* structure,
 
 	{
 		TransactionLog trx(creature, structure, TrxCode::STRUCTUREMAINTANENCE, amount, true);
-		creature->subtractCashCredits(amount);
+		
+		if(cash >= amount) {
+			creature->subtractCashCredits(amount);
+		}
+		else {
+			creature->subtractCashCredits(cash);
+			creature->subtractBankCredits(amount-cash);
+		}
+		
 		structure->addMaintenance(amount);
 	}
 
