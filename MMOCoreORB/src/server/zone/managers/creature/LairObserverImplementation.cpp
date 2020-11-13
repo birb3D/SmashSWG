@@ -123,19 +123,37 @@ int LairObserverImplementation::getLivingCreatureCount() {
 
 void LairObserverImplementation::doAggro(TangibleObject* lair, TangibleObject* attacker, bool allAttack){
 
+	CreatureObject* atkCreature = cast<CreatureObject*>(attacker);
+	ManagedReference<GroupObject*> group;
+	
+	if(atkCreature != nullptr) {
+		group = atkCreature->getGroup();
+	}
+
 	for (int i = 0; i < spawnedCreatures.size() ; ++i) {
-			CreatureObject* creo = spawnedCreatures.get(i);
+		CreatureObject* creo = spawnedCreatures.get(i);
 
-			if (creo->isDead() || creo->getZone() == nullptr)
-				continue;
+		if (creo->isDead() || creo->getZone() == nullptr)
+			continue;
 
-			if (creo->isAiAgent() && attacker != nullptr && (allAttack || (System::random(1) == 1))) {
-				// TODO: only set defender if needed
-				AiAgent* ai = cast<AiAgent*>( creo);
-				Locker clocker(creo, lair);
+		if (creo->isAiAgent() && attacker != nullptr && (allAttack || (System::random(1) == 1))) {
+			// TODO: only set defender if needed
+			AiAgent* ai = cast<AiAgent*>( creo);
+			Locker clocker(creo, lair);
+			
+			if(group == nullptr) {
 				creo->setDefender(attacker);
-
 			}
+			else {
+				ManagedReference<CreatureObject*> groupMember = group->getGroupMember(System::random(group->getGroupSize() - 1));
+				if(groupMember != nullptr && groupMember->isPlayerCreature() && groupMember->isInRange(lair,80)) {
+					creo->setDefender(groupMember);
+				}
+				else {
+					creo->setDefender(attacker);
+				}
+			}
+		}
 	}
 }
 
@@ -223,14 +241,14 @@ bool LairObserverImplementation::checkForNewSpawns(TangibleObject* lair, Tangibl
 			spawnNumber.increment();
 			break;
 		case 1:
-			if (conditionDamage > (maxCondition / 10)) {
+			if (conditionDamage > (maxCondition * 0.30)) {
 				spawnNumber.increment();
 			} else {
 				return false;
 			}
 			break;
 		case 2:
-			if (conditionDamage > (maxCondition / 2)) {
+			if (conditionDamage > (maxCondition * 0.60)) {
 				spawnNumber.increment();
 			} else {
 				return false;
@@ -346,7 +364,7 @@ bool LairObserverImplementation::checkForNewSpawns(TangibleObject* lair, Tangibl
 
 	if (spawnNumber == 4) {
 		Reference<LairAggroTask*> task = new LairAggroTask(lair, attacker, _this.getReferenceUnsafeStaticCast(), true);
-		task->schedule(1000);
+		task->schedule(3000);
 	}
 
 	return objectsToSpawn.size() > 0;
