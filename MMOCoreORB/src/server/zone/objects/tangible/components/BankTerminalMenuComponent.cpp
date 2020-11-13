@@ -41,6 +41,9 @@ void BankTerminalMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject,
 		//if (currentLocation == location) {
 		menuResponse->addRadialMenuItemToRadialID(20, 73, 3, "@sui:bank_items"); //Safety Deposit
 	}
+	else {
+		menuResponse->addRadialMenuItemToRadialID(20, 73, 3, "@sui:bank_items"); //Safety Deposit
+	}
 
 	menuResponse->addRadialMenuItemToRadialID(20, 68, 3, "@sui:bank_credits"); // Deposit/Withdrawal
 	menuResponse->addRadialMenuItemToRadialID(20, 69, 3, "@sui:bank_depositall"); // Deposit all
