@@ -248,8 +248,8 @@ void LootManagerImplementation::setCustomObjectName(TangibleObject* object, cons
 }
 
 int LootManagerImplementation::calculateLootCredits(int level) {
-	int maxcredits = (int) round((.03f * level * level) + (3 * level) + 30);
-	int mincredits = (int) round((((float) maxcredits) * .10f) + (2.0f * level));
+	int maxcredits = (int) round((.02f * level * level) + (4 * level) + 120);
+	int mincredits = (int) round((((float) maxcredits) * .2f) + (2.0f * level));
 
 	int credits = mincredits + System::random(maxcredits - mincredits);
 
@@ -637,8 +637,8 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 	if (lootCollection == nullptr)
 		return false;
 	
-	int roll = System::random(100);
-	if(roll < 5) {
+	int roll = System::random(10000);
+	if(roll < 1000) { // 10% Chance for two items
 		createLootFromCollection(trx, container, lootCollection, creature->getLevel());
 	}
 
