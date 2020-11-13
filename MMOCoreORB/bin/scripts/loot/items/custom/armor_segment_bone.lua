@@ -3,7 +3,7 @@
 armor_segment_bone = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "",
+	customObjectName = "Strange Bone Armor Segement",
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_bone_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",1,32,0},

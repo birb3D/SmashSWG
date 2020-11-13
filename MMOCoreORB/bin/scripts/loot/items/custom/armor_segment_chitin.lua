@@ -3,7 +3,7 @@
 armor_segment_chitin = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "",
+	customObjectName = "Strange Chitin Armor Segment",
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_chitin_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",1,32,0},
