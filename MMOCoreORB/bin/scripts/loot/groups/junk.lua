@@ -38,10 +38,7 @@ junk = {
 		{itemTemplate = "magic_eight_ball", weight = 285500},
 		{groupTemplate = "coa_encoded_disk_fragments", weight = 80000},
 		{groupTemplate = "coa2_decoder_components", weight = 80000},
-		{groupTemplate = "data_storage_unit_parts", weight = 285500},
-		{groupTemplate = "fiberplast_panel", weight = 300000},
-		{groupTemplate = "synthetic_cloth", weight = 300000},
-		{groupTemplate = "armor_segment_bone", weight = 104000},
+		{groupTemplate = "data_storage_unit_parts", weight = 989500},
 	}
 }
 

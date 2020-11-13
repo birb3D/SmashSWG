@@ -587,11 +587,17 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 			LootManager* lootManager = zoneServer->getLootManager();
 
 			if (destructedObject->isNonPlayerCreatureObject() && !destructedObject->isEventMob()) {
-				destructedObject->clearCashCredits();
-				int credits = lootManager->calculateLootCredits(destructedObject->getLevel());
-				TransactionLog trx(TrxCode::NPCLOOT, destructedObject, credits, true);
-				trx.addState("destructor", destructorObjectID);
-				destructedObject->addCashCredits(credits);
+				
+				int lootChance = 1500000 + (destructedObject->getLevel() * 20000); // 15% + (0.2% * level)
+				int roll = System::random(10000000);
+
+				if (roll < lootChance) {
+					destructedObject->clearCashCredits();
+					int credits = lootManager->calculateLootCredits(destructedObject->getLevel());
+					TransactionLog trx(TrxCode::NPCLOOT, destructedObject, credits, true);
+					trx.addState("destructor", destructorObjectID);
+					destructedObject->addCashCredits(credits);
+				}
 			}
 
 			Locker locker(creatureInventory);
