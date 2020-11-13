@@ -4,9 +4,9 @@ armor_segment_bone = {
 	minimumLevel = 0,
 	maximumLevel = -1,
 	customObjectName = "",
-	directObjectTemplate = "object/tangible/component/armor/armor_segment_bone.iff",
+	directObjectTemplate = "object/tangible/component/armor/armor_segment_bone_advanced.iff",
 	craftingValues = {
-		{"armor_special_type",1,8,0},
+		{"armor_special_type",1,32,0},
 		{"armor_effectiveness",3,10,10},
 		{"armor_special_effectiveness",3,15,10},
 		{"kineticeffectiveness",3,15,10},
@@ -14,6 +14,7 @@ armor_segment_bone = {
 		{"armor_health_encumbrance",6,1,0},
 		{"armor_action_encumbrance",8,1,0},
 		{"armor_mind_encumbrance",5,1,0},
+		{"useCount",1,2,0},
 	},
 	customizationStringNames = {},
 	customizationValues = {}

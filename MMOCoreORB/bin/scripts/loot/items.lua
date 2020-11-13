@@ -14,6 +14,8 @@ JUNKCORSEC = 256
 includeFile("items/custom/fiberplast_panel.lua")
 includeFile("items/custom/synthetic_cloth.lua")
 includeFile("items/custom/armor_segment_bone.lua")
+includeFile("items/custom/armor_segment_zam.lua")
+includeFile("items/custom/armor_segment_chitin.lua")
 
 
 includeFile("items/attachment_armor.lua")
