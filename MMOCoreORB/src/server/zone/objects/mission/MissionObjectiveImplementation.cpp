@@ -234,8 +234,12 @@ void MissionObjectiveImplementation::awardReward() {
 	}
 	
 	divisor = players.size();
+	
+	float bonus = 1.0f;
+	if(divisor > 1)
+		bonus = 1.1f;
 
-	int dividedReward = mission->getRewardCredits() / Math::max(divisor, 1);
+	int dividedReward = mission->getRewardCredits() / Math::max(divisor, 1) * bonus;
 
 	for (int i = 0; i < players.size(); i++) {
 		ManagedReference<CreatureObject*> player = players.get(i);
