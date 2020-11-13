@@ -5,12 +5,13 @@ tailor_components = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{itemTemplate = "crystalline_clothing_treatment", weight = 2966667},
-		{itemTemplate = "heavy_duty_clasp", weight = 2966667},
-		{itemTemplate = "heavy_duty_leather", weight = 2966666},
-		{groupTemplate = "fiberplast_panel", weight = 500000},
-		{groupTemplate = "synthetic_cloth", weight = 500000},
-		{groupTemplate = "armor_segment_bone", weight = 100000},
+		{itemTemplate = "crystalline_clothing_treatment", weight = 3200000},
+		{itemTemplate = "heavy_duty_clasp", weight = 3200000},
+		{itemTemplate = "heavy_duty_leather", weight = 3200000},
+		--4% below this point
+		{groupTemplate = "fiberplast_panel", weight = 175000},
+		{groupTemplate = "synthetic_cloth", weight = 175000},
+		{groupTemplate = "armor_segment_bone", weight = 50000},
 	}
 }
 
