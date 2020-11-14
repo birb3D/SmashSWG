@@ -13,7 +13,7 @@ armor_segment_chitin = {
 		{"armor_health_encumbrance",13,1,0},
 		{"armor_action_encumbrance",13,1,0},
 		{"armor_mind_encumbrance",16,1,0},
-		{"useCount",1,3,0},
+		{"useCount",3,8,0},
 	},
 	customizationStringNames = {},
 	customizationValues = {}
