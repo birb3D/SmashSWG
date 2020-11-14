@@ -926,8 +926,8 @@ void MissionManagerImplementation::randomizeGenericSurveyMission(CreatureObject*
 
 	int toolType = SurveyTool::MINERAL;
 
-	//75 % mineral, 25 % chemical.
-	if (System::random(3) == 0) {
+	//66 % mineral, 33 % chemical.
+	if (System::random(2) == 0) {
 		toolType = SurveyTool::CHEMICAL;
 	}
 
@@ -949,7 +949,7 @@ void MissionManagerImplementation::randomizeGenericSurveyMission(CreatureObject*
 
 	//Reward depending on mission level.
 	int rewardCreds = 400 + (randLevel - minLevel) * 20 + System::random(100);
-	rewardCreds = ceil(rewardCreds / 2);
+	rewardCreds = ceil(rewardCreds * 2 / 3);
 	mission->setRewardCredits(rewardCreds);
 
 	mission->setFaction(faction);
