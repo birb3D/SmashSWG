@@ -248,8 +248,8 @@ void LootManagerImplementation::setCustomObjectName(TangibleObject* object, cons
 }
 
 int LootManagerImplementation::calculateLootCredits(int level) {
-	int maxcredits = (int) round((.02f * level * level) + (4 * level) + 120);
-	int mincredits = (int) round((((float) maxcredits) * .2f) + (2.0f * level));
+	int maxcredits = (int) round((.02f * level * level) + (6 * level) + 120);
+	int mincredits = (int) round((((float) maxcredits) * .5f) + (2.0f * level));
 
 	int credits = mincredits + System::random(maxcredits - mincredits);
 
