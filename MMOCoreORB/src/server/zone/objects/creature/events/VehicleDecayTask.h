@@ -36,7 +36,7 @@ public:
 		int decayCycle = vehicleTemplate->getDecayCycle();
 
 		if (decayCycle == 0)
-			decayCycle = 600;
+			decayCycle = 120;
 
 		int decayRate = vehicleTemplate->getDecayRate();
 
