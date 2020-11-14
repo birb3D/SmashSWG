@@ -1370,9 +1370,8 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 	}
 	
 	float danceStrength = player->getSkillMod("healing_dance_ability");
-	float musicStrenght = player->getSkillMod("healing_music_ability");
+	float musicStrength = player->getSkillMod("healing_music_ability");
 	float strength = Math::max(danceStrength, musicStrength);
-	
 
 	NameManager* nm = processor->getNameManager();
 
