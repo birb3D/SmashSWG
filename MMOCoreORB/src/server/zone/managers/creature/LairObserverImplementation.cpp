@@ -146,7 +146,8 @@ void LairObserverImplementation::doAggro(TangibleObject* lair, TangibleObject* a
 			}
 			else {
 				ManagedReference<CreatureObject*> groupMember = group->getGroupMember(System::random(group->getGroupSize() - 1));
-				if(groupMember != nullptr && groupMember->isPlayerCreature() && groupMember->isInRange(lair,80)) {
+				int rando = System::random(100);
+				if(rando < 50 && groupMember != nullptr && groupMember->isPlayerCreature() && groupMember->isInRange(lair,80)) {
 					creo->setDefender(groupMember);
 				}
 				else {
