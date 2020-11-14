@@ -1368,6 +1368,11 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 	if (target == nullptr || !target->isStructureObject()) {
 		return;
 	}
+	
+	float danceStrength = player->getSkillMod("healing_dance_ability");
+	float musicStrenght = player->getSkillMod("healing_music_ability");
+	float strength = Math::max(danceStrength, musicStrength);
+	
 
 	NameManager* nm = processor->getNameManager();
 
@@ -1395,7 +1400,7 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 
 	mission->setTargetTemplate(TemplateManager::instance()->getTemplate(STRING_HASHCODE("object/building/general/mun_all_guild_theater_s01.iff")));
 
-	int distanceReward = player->getWorldPosition().distanceTo(target->getPosition());
+	int distanceReward = player->getWorldPosition().distanceTo(target->getPosition()) * strength / 50;
 
 	mission->setRewardCredits(100 + distanceReward + System::random(100));
 
