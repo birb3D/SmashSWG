@@ -1395,7 +1395,7 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 
 	mission->setTargetTemplate(TemplateManager::instance()->getTemplate(STRING_HASHCODE("object/building/general/mun_all_guild_theater_s01.iff")));
 
-	int distanceReward = player->getWorldPosition().distanceTo(target->getPosition()) / 10;
+	int distanceReward = player->getWorldPosition().distanceTo(target->getPosition());
 
 	mission->setRewardCredits(100 + distanceReward + System::random(100));
 
