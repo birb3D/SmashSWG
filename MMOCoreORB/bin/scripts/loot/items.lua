@@ -13,6 +13,7 @@ JUNKCORSEC = 256
 --custom loots
 includeFile("items/custom/fiberplast_panel.lua")
 includeFile("items/custom/synthetic_cloth.lua")
+includeFile("items/custom/reinforced_fiber_panel.lua")
 includeFile("items/custom/armor_segment_bone.lua")
 includeFile("items/custom/armor_segment_zam.lua")
 includeFile("items/custom/armor_segment_chitin.lua")
