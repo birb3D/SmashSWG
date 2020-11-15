@@ -249,7 +249,7 @@ public:
 
 		CreatureObject* player = cast<CreatureObject*>(creature);
 
-		int amount = (int)round((float)power * 0.25f);
+		int amount = (int)round((float)power * 0.32f);
 
 		if (amount <= 0)
 			return;
@@ -301,7 +301,11 @@ public:
 
 			sendHealMessage(creature, targetCreature, healthHealed, actionHealed, mindHealed);
 
-			if (targetCreature != creature && !targetCreature->isPet())
+			bool creatureInDuel = creatue->isPlayerCreature() && cast<PlayerObject*>(creature)->isDuelListEmpty();
+			bool targetInDuel = creatueTarget->isPlayerCreature() && cast<PlayerObject*>(creatureTarget)->isDuelListEmpty();
+			bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
+
+			if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
 				awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself or pets.
 
 			checkForTef(creature, targetCreature);
@@ -535,8 +539,12 @@ public:
 
 		Locker locker(stimPack);
 		stimPack->decreaseUseCount();
+		
+		bool creatureInDuel = creatue->isPlayerCreature() && cast<PlayerObject*>(creature)->isDuelListEmpty();
+		bool targetInDuel = creatueTarget->isPlayerCreature() && cast<PlayerObject*>(creatureTarget)->isDuelListEmpty();
+		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
 
-		if (targetCreature != creature && !targetCreature->isPet())
+		if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
 			awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself.
 
 		if (targetCreature != creature)
