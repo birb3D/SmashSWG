@@ -903,7 +903,7 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 	if (creature->getParent().get() != nullptr)
 		quantityExtracted = 1;
 	else if(quantityExtracted < 5 && creatureHealth != "creature_quality_skinny")
-		quantityExtrated = 5;
+		quantityExtracted = 5;
 
 	TransactionLog trx(TrxCode::HARVESTED, player, resourceSpawn);
 	resourceManager->harvestResourceToPlayer(trx, player, resourceSpawn, quantityExtracted);
