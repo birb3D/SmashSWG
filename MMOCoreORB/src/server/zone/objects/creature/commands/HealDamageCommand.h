@@ -301,15 +301,18 @@ public:
 
 			sendHealMessage(creature, targetCreature, healthHealed, actionHealed, mindHealed);
 
-			bool creatureInDuel = creature->isPlayerCreature() && ((PlayerObject*)creature)->isDuelListEmpty();
-			bool targetInDuel = creatureTarget->isPlayerCreature() && {(PlayerObject*)creatureTarget)->isDuelListEmpty();
-			bool creatureRecentCombat = System::getTime() - creature->getLastCombat() > (2 * 60 * 1000); //2 min
-			bool targetRecentCombat = System::getTime() - creatureTarget->getLastCombat() > (2 * 60 * 1000); //2 min
-			bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
-			combatCheck = combatCheck || creatureRecentCombat || targetRecentCombat;
+			// XP Checks
+			bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
+			bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
 
-			if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
+			if (targetCreature != creature && // Not Healing Self
+				!targetCreature->isPet() && // Not Healing Pet
+				(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat) && // Either target in combat (or recently)
+				!(creature->isPlayerCreature() && !((PlayerObject*)creature)->isDuelListEmpty()) && // Healer is not dueling
+				!(targetCreature->isPlayerCreature() && !((PlayerObject*)targetCreature)->isDuelListEmpty())) // Target is not dueling
+				{
 				awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself or pets.
+			}
 
 			checkForTef(creature, targetCreature);
 		}
@@ -543,15 +546,18 @@ public:
 		Locker locker(stimPack);
 		stimPack->decreaseUseCount();
 		
-		bool creatureInDuel = creature->isPlayerCreature() && ((PlayerObject*)creature)->isDuelListEmpty();
-		bool targetInDuel = creatureTarget->isPlayerCreature() && {(PlayerObject*)creatureTarget)->isDuelListEmpty();
-		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() > (2 * 60 * 1000); //2 min
-		bool targetRecentCombat = System::getTime() - creatureTarget->getLastCombat() > (2 * 60 * 1000); //2 min
-		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
-		combatCheck = combatCheck || creatureRecentCombat || targetRecentCombat;
+		// XP Checks
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
 
-		if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
+		if (targetCreature != creature && // Not Healing Self
+			!targetCreature->isPet() && // Not Healing Pet
+			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat) && // Either target in combat (or recently)
+			!(creature->isPlayerCreature() && !((PlayerObject*)creature)->isDuelListEmpty()) && // Healer is not dueling
+			!(targetCreature->isPlayerCreature() && !((PlayerObject*)targetCreature)->isDuelListEmpty())) // Target is not dueling
+			{
 			awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself.
+		}
 
 		if (targetCreature != creature)
 			clocker.release();
