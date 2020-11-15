@@ -307,9 +307,7 @@ public:
 
 			if (targetCreature != creature && // Not Healing Self
 				!targetCreature->isPet() && // Not Healing Pet
-				(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat) && // Either target in combat (or recently)
-				!(creature->isPlayerCreature() && !((PlayerObject*)creature)->isDuelListEmpty()) && // Healer is not dueling
-				!(targetCreature->isPlayerCreature() && !((PlayerObject*)targetCreature)->isDuelListEmpty())) // Target is not dueling
+				(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat))
 				{
 				awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself or pets.
 			}
@@ -552,9 +550,7 @@ public:
 
 		if (targetCreature != creature && // Not Healing Self
 			!targetCreature->isPet() && // Not Healing Pet
-			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat) && // Either target in combat (or recently)
-			!(creature->isPlayerCreature() && !((PlayerObject*)creature)->isDuelListEmpty()) && // Healer is not dueling
-			!(targetCreature->isPlayerCreature() && !((PlayerObject*)targetCreature)->isDuelListEmpty())) // Target is not dueling
+			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat))
 			{
 			awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself.
 		}
