@@ -303,7 +303,10 @@ public:
 
 			bool creatureInDuel = creatue->isPlayerCreature() && cast<PlayerObject*>(creature)->isDuelListEmpty();
 			bool targetInDuel = creatueTarget->isPlayerCreature() && cast<PlayerObject*>(creatureTarget)->isDuelListEmpty();
+			bool creatureRecentCombat = System::getTime() - creature->lastCombat > (2 * 60 * 1000); //2 min
+			bool targetRecentCombat = System::getTime() - creatureTarget->lastCombat > (2 * 60 * 1000); //2 min
 			bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
+			combatCheck = combatCheck || creatureRecentCombat || targetRecentCombat;
 
 			if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
 				awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself or pets.
@@ -542,7 +545,10 @@ public:
 		
 		bool creatureInDuel = creatue->isPlayerCreature() && cast<PlayerObject*>(creature)->isDuelListEmpty();
 		bool targetInDuel = creatueTarget->isPlayerCreature() && cast<PlayerObject*>(creatureTarget)->isDuelListEmpty();
+		bool creatureRecentCombat = System::getTime() - creature->lastCombat > (2 * 60 * 1000); //2 min
+		bool targetRecentCombat = System::getTime() - creatureTarget->lastCombat > (2 * 60 * 1000); //2 min
 		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
+		combatCheck = combatCheck || creatureRecentCombat || targetRecentCombat;
 
 		if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
 			awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself.

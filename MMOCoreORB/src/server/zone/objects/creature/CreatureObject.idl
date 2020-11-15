@@ -57,6 +57,8 @@ class CreatureObject extends TangibleObject {
     	// deprectated
 	protected int bankCredits;
 	protected int cashCredits;
+	
+	protected int lastCombat;
 
 	protected int hueValue;
 
