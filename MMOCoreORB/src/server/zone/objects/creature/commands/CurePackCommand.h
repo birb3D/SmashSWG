@@ -274,8 +274,12 @@ public:
 
 		sendCureMessage(creature, creatureTarget);
 
-		if (creatureTarget != creature && !creatureTarget->isPet())
-			awardXp(creature, "medical", 50); //No experience for healing yourself or pets.
+		bool creatureInDuel = creatue->isPlayerCreature() && cast<PlayerObject*>(creature)->isDuelListEmpty();
+		bool targetInDuel = creatueTarget->isPlayerCreature() && cast<PlayerObject*>(creatureTarget)->isDuelListEmpty();
+		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
+		
+		if (creatureTarget != creature && !creatureTarget->isPet() && combatCheck)
+			awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
 
 		checkForTef(creature, creatureTarget);
 	}
@@ -451,8 +455,12 @@ public:
 			curePack->decreaseUseCount();
 		}
 
-		if (targetCreature != creature && !targetCreature->isPet())
-			awardXp(creature, "medical", 50); //No experience for healing yourself or pets.
+		bool creatureInDuel = creatue->isPlayerCreature() && cast<PlayerObject*>(creature)->isDuelListEmpty();
+		bool targetInDuel = creatueTarget->isPlayerCreature() && cast<PlayerObject*>(creatureTarget)->isDuelListEmpty();
+		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
+
+		if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
+			awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
 
 		if (curePack->isArea()) {
 			if (creature != targetCreature)
