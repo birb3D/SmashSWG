@@ -36,6 +36,7 @@
 #include "server/zone/objects/creature/commands/AddIgnoreCommand.h"
 #include "server/zone/objects/creature/commands/AddMapLocationCommand.h"
 #include "server/zone/objects/creature/commands/AddPowerCommand.h"
+#include "server/zone/objects/creature/commands/AddPowerToCommand.h"
 #include "server/zone/objects/creature/commands/AdminCommand.h"
 #include "server/zone/objects/creature/commands/AdjustLotCountCommand.h"
 #include "server/zone/objects/creature/commands/AiIgnoreCommand.h"
@@ -439,6 +440,7 @@ void CommandConfigManager::registerCommands2() {
 	commandFactory.registerCommand<AddIgnoreCommand>(String("addIgnore").toLowerCase());
 	commandFactory.registerCommand<AddMapLocationCommand>(String("addMapLocation").toLowerCase());
 	commandFactory.registerCommand<AddPowerCommand>(String("addPower").toLowerCase());
+	commandFactory.registerCommand<AddPowerToCommand>(String("addPowerTo").toLowerCase());
 	commandFactory.registerCommand<AdjustLotCountCommand>(String("adjustLotCount").toLowerCase());
 	commandFactory.registerCommand<AiIgnoreCommand>(String("aiIgnore").toLowerCase());
 	commandFactory.registerCommand<AimCommand>(String("aim").toLowerCase());
