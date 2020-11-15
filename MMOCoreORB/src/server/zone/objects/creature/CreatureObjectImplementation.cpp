@@ -764,6 +764,8 @@ void CreatureObjectImplementation::clearCombatState(bool removedefenders) {
 		dcreo3->close();
 
 		broadcastMessage(dcreo3, true);
+		
+		lastCombat = System::getTime();
 	}
 
 	clearQueueActions(false);
