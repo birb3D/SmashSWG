@@ -773,6 +773,7 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 		owner->sendSystemMessage("@skl_use:group_harvest_bonus_masterranger");
 
 	/// Send group spam
+	/*
 	if (owner->isGrouped()) {
 		StringIdChatParameter bonusMessage("group", "notify_harvest_corpse");
 
@@ -783,7 +784,7 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 
 		ChatSystemMessage* sysMessage = new ChatSystemMessage(bonusMessage);
 		owner->getGroup()->broadcastMessage(owner, sysMessage, false);
-	}
+	}*/
 
 	ManagedReference<PlayerManager*> playerManager = zoneServer->getPlayerManager();
 
@@ -901,6 +902,8 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 
 	if (creature->getParent().get() != nullptr)
 		quantityExtracted = 1;
+	else if(quantityExtracted < 5 && creatureHealth != "creature_quality_skinny")
+		quantityExtrated = 5;
 
 	TransactionLog trx(TrxCode::HARVESTED, player, resourceSpawn);
 	resourceManager->harvestResourceToPlayer(trx, player, resourceSpawn, quantityExtracted);
@@ -923,6 +926,7 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 		player->sendSystemMessage("@skl_use:group_harvest_bonus_masterranger");
 
 	/// Send group spam
+	/*
 	if (player->isGrouped()) {
 		StringIdChatParameter bonusMessage("group", "notify_harvest_corpse");
 
@@ -933,7 +937,7 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 
 		ChatSystemMessage* sysMessage = new ChatSystemMessage(bonusMessage);
 		player->getGroup()->broadcastMessage(player, sysMessage, false);
-	}
+	}*/
 
 	ManagedReference<PlayerManager*> playerManager = zoneServer->getPlayerManager();
 
