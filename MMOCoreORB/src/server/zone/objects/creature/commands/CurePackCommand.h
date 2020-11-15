@@ -275,8 +275,8 @@ public:
 		sendCureMessage(creature, targetCreature);
 
 		// XP Checks
-		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
-		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
 
 		if (targetCreature != creature && // Not Healing Self
 			!targetCreature->isPet() && // Not Healing Pet
@@ -460,8 +460,8 @@ public:
 		}
 
 		// XP Checks
-		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
-		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
 
 		if (targetCreature != creature && // Not Healing Self
 			!targetCreature->isPet() && // Not Healing Pet

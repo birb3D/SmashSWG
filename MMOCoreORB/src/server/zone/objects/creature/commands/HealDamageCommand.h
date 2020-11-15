@@ -302,8 +302,8 @@ public:
 			sendHealMessage(creature, targetCreature, healthHealed, actionHealed, mindHealed);
 
 			// XP Checks
-			bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
-			bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
+			bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+			bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
 
 			if (targetCreature != creature && // Not Healing Self
 				!targetCreature->isPet() && // Not Healing Pet
@@ -545,8 +545,8 @@ public:
 		stimPack->decreaseUseCount();
 		
 		// XP Checks
-		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
-		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
 
 		if (targetCreature != creature && // Not Healing Self
 			!targetCreature->isPet() && // Not Healing Pet
