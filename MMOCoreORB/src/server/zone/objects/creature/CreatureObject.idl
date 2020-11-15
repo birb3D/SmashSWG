@@ -1495,6 +1495,11 @@ class CreatureObject extends TangibleObject {
 	public int getCashCredits() {
 		return creditObject.getCashCredits();
 	}
+	
+	@read
+	public int getLastCombat() {
+		return lastCombat;
+	}
 
 	@read
 	public int getBaseHAM(int idx) {
