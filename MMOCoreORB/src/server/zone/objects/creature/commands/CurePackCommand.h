@@ -274,8 +274,8 @@ public:
 
 		sendCureMessage(creature, creatureTarget);
 
-		bool creatureInDuel = creatue->isPlayerCreature() && creature->isDuelListEmpty();
-		bool targetInDuel = creatueTarget->isPlayerCreature() && creatureTarget->isDuelListEmpty();
+		bool creatureInDuel = creature->isPlayerCreature() && ((PlayerObject*)creature)->isDuelListEmpty();
+		bool targetInDuel = creatureTarget->isPlayerCreature() && {(PlayerObject*)creatureTarget)->isDuelListEmpty();
 		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() > (2 * 60 * 1000); //2 min
 		bool targetRecentCombat = System::getTime() - creatureTarget->getLastCombat() > (2 * 60 * 1000); //2 min
 		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
@@ -458,13 +458,13 @@ public:
 			curePack->decreaseUseCount();
 		}
 
-		bool creatureInDuel = creatue->isPlayerCreature() && creature->isDuelListEmpty();
-		bool targetInDuel = creatueTarget->isPlayerCreature() && creatureTarget->isDuelListEmpty();
+		bool creatureInDuel = creature->isPlayerCreature() && ((PlayerObject*)creature)->isDuelListEmpty();
+		bool targetInDuel = creatureTarget->isPlayerCreature() && {(PlayerObject*)creatureTarget)->isDuelListEmpty();
 		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() > (2 * 60 * 1000); //2 min
 		bool targetRecentCombat = System::getTime() - creatureTarget->getLastCombat() > (2 * 60 * 1000); //2 min
 		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
 		combatCheck = combatCheck || creatureRecentCombat || targetRecentCombat;
-
+		
 		if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
 			awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
 
