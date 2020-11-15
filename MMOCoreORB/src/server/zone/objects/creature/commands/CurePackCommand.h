@@ -262,7 +262,7 @@ public:
 		}
 	}
 
-	void doAreaMedicActionTarget(CreatureObject* creature, CreatureObject* creatureTarget, PharmaceuticalObject* pharma) const {
+	void doAreaMedicActionTarget(CreatureObject* creature, CreatureObject* targetCreature, PharmaceuticalObject* pharma) const {
 		CurePack* curePack = nullptr;
 
 		if (pharma->isCurePack())
@@ -270,21 +270,24 @@ public:
 		else
 			return;
 
-		creatureTarget->healDot(state, curePack->calculatePower(creature));
+		targetCreature->healDot(state, curePack->calculatePower(creature));
 
-		sendCureMessage(creature, creatureTarget);
+		sendCureMessage(creature, targetCreature);
 
-		bool creatureInDuel = creature->isPlayerCreature() && ((PlayerObject*)creature)->isDuelListEmpty();
-		bool targetInDuel = creatureTarget->isPlayerCreature() && {(PlayerObject*)creatureTarget)->isDuelListEmpty();
-		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() > (2 * 60 * 1000); //2 min
-		bool targetRecentCombat = System::getTime() - creatureTarget->getLastCombat() > (2 * 60 * 1000); //2 min
-		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
-		combatCheck = combatCheck || creatureRecentCombat || targetRecentCombat;
-		
-		if (creatureTarget != creature && !creatureTarget->isPet() && combatCheck)
-			awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
+		// XP Checks
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
 
-		checkForTef(creature, creatureTarget);
+		if (targetCreature != creature && // Not Healing Self
+			!targetCreature->isPet() && // Not Healing Pet
+			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat) && // Either target in combat (or recently)
+			!(creature->isPlayerCreature() && !((PlayerObject*)creature)->isDuelListEmpty()) && // Healer is not dueling
+			!(targetCreature->isPlayerCreature() && !((PlayerObject*)targetCreature)->isDuelListEmpty())) // Target is not dueling
+			{
+				awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
+		}
+
+		checkForTef(creature, targetCreature);
 	}
 
 	bool canPerformSkill(CreatureObject* creature, CreatureObject* creatureTarget, CurePack* curePack, int mindCostNew) const {
@@ -458,15 +461,18 @@ public:
 			curePack->decreaseUseCount();
 		}
 
-		bool creatureInDuel = creature->isPlayerCreature() && ((PlayerObject*)creature)->isDuelListEmpty();
-		bool targetInDuel = creatureTarget->isPlayerCreature() && {(PlayerObject*)creatureTarget)->isDuelListEmpty();
-		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() > (2 * 60 * 1000); //2 min
-		bool targetRecentCombat = System::getTime() - creatureTarget->getLastCombat() > (2 * 60 * 1000); //2 min
-		bool combatCheck = (creatureTarget->isInCombat() || creature->isInCombat()) && !creatureInDuel && !targetInDuel;
-		combatCheck = combatCheck || creatureRecentCombat || targetRecentCombat;
-		
-		if (targetCreature != creature && !targetCreature->isPet() && combatCheck)
+		// XP Checks
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60 * 1000); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60 * 1000); //2 min
+
+		if (targetCreature != creature && // Not Healing Self
+			!targetCreature->isPet() && // Not Healing Pet
+			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat) && // Either target in combat (or recently)
+			!(creature->isPlayerCreature() && !((PlayerObject*)creature)->isDuelListEmpty()) && // Healer is not dueling
+			!(targetCreature->isPlayerCreature() && !((PlayerObject*)targetCreature)->isDuelListEmpty())) // Target is not dueling
+			{
 			awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
+		}
 
 		if (curePack->isArea()) {
 			if (creature != targetCreature)
