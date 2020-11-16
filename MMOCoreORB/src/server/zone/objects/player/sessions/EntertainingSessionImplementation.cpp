@@ -1097,7 +1097,7 @@ void EntertainingSessionImplementation::awardEntertainerExperience() {
 
 			float totalBonus = 1.f + groupMod + audienceMod + applauseMod;
 
-			xpAmount = ceil(xpAmount * totalBonus * 2);
+			xpAmount = ceil(xpAmount * totalBonus);
 
 			if (playerManager != nullptr)
 				playerManager->awardExperience(player, xptype, xpAmount, true);
