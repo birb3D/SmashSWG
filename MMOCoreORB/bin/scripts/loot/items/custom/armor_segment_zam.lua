@@ -8,12 +8,12 @@ armor_segment_zam = {
 	craftingValues = {
 		{"armor_special_type",1,32,0},
 		{"armor_effectiveness",4,15,10},
-		{"armor_special_effectiveness",5,30,10},
+		{"armor_special_effectiveness",5,40,10},
 		{"armor_integrity",100,3000,10},
 		{"armor_health_encumbrance",8,1,0},
 		{"armor_action_encumbrance",10,1,0},
 		{"armor_mind_encumbrance",5,1,0},
-		{"useCount",1,2,0},
+		{"useCount",1,3,0},
 	},
 	customizationStringNames = {},
 	customizationValues = {}
