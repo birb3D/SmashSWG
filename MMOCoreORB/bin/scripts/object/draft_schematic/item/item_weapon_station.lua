@@ -55,9 +55,9 @@ object_draft_schematic_item_item_weapon_station = object_draft_schematic_item_sh
    xpType = "crafting_structure_general", 
    xp = 900, 
 
-   assemblySkill = "general_assembly", 
-   experimentingSkill = "general_experimentation", 
-   customizationSkill = "clothing_customization",
+   assemblySkill = "structure_assembly",
+	experimentingSkill = "structure_experimentation",
+	customizationSkill = "structure_customization",
 
    customizationOptions = {},
    customizationStringNames = {},
@@ -73,8 +73,6 @@ object_draft_schematic_item_item_weapon_station = object_draft_schematic_item_sh
 
    targetTemplate = "object/tangible/crafting/station/weapon_station.iff",
 
-   additionalTemplates = {
-             }
-
+   additionalTemplates = {}
 }
 ObjectTemplates:addTemplate(object_draft_schematic_item_item_weapon_station, "object/draft_schematic/item/item_weapon_station.iff")
