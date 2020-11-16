@@ -149,7 +149,7 @@ public:
 	}
 
 
-	Vector<ManagedReference<ArmorObject*> > getArmorAtHitLocation(uint8 hl) const {
+	Vector<ManagedReference<ArmorObject*> > getArmorAtHitLocation(uint8 hl, uint8 species) const {
 
 		// TODO: Migrate and remove this when the object versioning and migration system is in place
 
@@ -158,7 +158,6 @@ public:
 		case 1: // HIT_BODY
 			return protectionArmorMap.get((uint8)ArmorObjectTemplate::CHEST); // CHEST
 		case 2: // HIT_LARM
-		case 3: // HIT_RARM
 		{
 			Vector<ManagedReference<ArmorObject*> > armArmor = protectionArmorMap.get((uint8)ArmorObjectTemplate::ARMS); // ARMS
 			Vector<ManagedReference<ArmorObject*> > armorAtLocation;
@@ -166,6 +165,33 @@ public:
 			if(armArmor.isEmpty())
 				return armArmor;
 
+			int armLoc = System::random(2);
+
+			if(species == 4)
+				armLoc = 0; // Wookies only have bracers
+			else if(species == 2 && armLoc == 2)
+				armLoc = System::random(1); // Trandos can't wear gloves
+
+			for(int i=armArmor.size()-1; i>=0; i--) {
+				ArmorObject *obj = armArmor.get(i);
+
+				if(armLoc == 0 && obj->hasArrangementDescriptor("bracer_upper_l")) {
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+				else if(armLoc == 1 && obj->hasArrangementDescriptor("bicep_l")) {
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+				else if(armLoc == 2 && obj->hasArrangementDescriptor("gloves")){
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+			}
+			return armorAtLocation;
+
+			// Mini-Suit
+			/*
 			if(hl == 2) {
 				for(int i=armArmor.size()-1; i>=0; i--) {
 					ArmorObject *obj = armArmor.get(i);
@@ -184,13 +210,102 @@ public:
 			if(armorAtLocation.isEmpty())
 				return armArmor;
 			else
-				return armorAtLocation;
+				return armorAtLocation;*/
+		}
+		case 3: // HIT_RARM
+		{
+			Vector<ManagedReference<ArmorObject*> > armArmor = protectionArmorMap.get((uint8)ArmorObjectTemplate::ARMS); // ARMS
+			Vector<ManagedReference<ArmorObject*> > armorAtLocation;
+
+			if(armArmor.isEmpty())
+				return armArmor;
+
+			int armLoc = System::random(2);
+
+			if(species == 4)
+				armLoc = 0; // Wookies only have bracers
+			else if(species == 2 && armLoc == 2)
+				armLoc = System::random(1); // Trandos can't wear gloves
+
+			for(int i=armArmor.size()-1; i>=0; i--) {
+				ArmorObject *obj = armArmor.get(i);
+
+				if(armLoc == 0 && obj->hasArrangementDescriptor("bracer_upper_r")) {
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+				else if(armLoc == 1 && obj->hasArrangementDescriptor("bicep_r")) {
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+				else if(armLoc == 2 && obj->hasArrangementDescriptor("gloves")){
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+			}
+			return armorAtLocation;
+
+
+			// Mini-Suit
+			/*
+			if(hl == 2) {
+				for(int i=armArmor.size()-1; i>=0; i--) {
+					ArmorObject *obj = armArmor.get(i);
+					if(obj->hasArrangementDescriptor("bicep_l") || obj->hasArrangementDescriptor("bracer_upper_l") || obj->hasArrangementDescriptor("gloves"))
+						armorAtLocation.add(obj);
+				}
+			} else {
+				for(int i=armArmor.size()-1; i>=0; i--) {
+					ArmorObject *obj = armArmor.get(i);
+
+					if(obj->hasArrangementDescriptor("bicep_r") || obj->hasArrangementDescriptor("bracer_upper_r") || obj->hasArrangementDescriptor("gloves"))
+						armorAtLocation.add(obj);
+				}
+			}
+
+			if(armorAtLocation.isEmpty())
+				return armArmor;
+			else
+				return armorAtLocation;*/
 		}
 		case 4: // HIT_LLEG
 		case 5: // HIT_RLEG
-			return protectionArmorMap.get((uint8)ArmorObjectTemplate::LEGS); // LEGS
+		{
+			Vector<ManagedReference<ArmorObject*> > legArmor = protectionArmorMap.get((uint8)ArmorObjectTemplate::LEGS); // LEGS
+			Vector<ManagedReference<ArmorObject*> > armorAtLocation;
+
+			if(legArmor.isEmpty())
+				return legArmor;
+
+			int legLoc = System::random(1);
+
+			if(species == 4 || species == 2)
+				legLoc = 1; // Trandos & Wookies don't have shoes
+
+
+			for(int i=legArmor.size()-1; i>=0; i--) {
+				ArmorObject *obj = legArmor.get(i);
+
+				if(legLoc == 0 && obj->hasArrangementDescriptor("shoes")) {
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+				else if(legLoc == 1 && obj->hasArrangementDescriptor("pants1")){
+					armorAtLocation.add(obj);
+					return armorAtLocation;
+				}
+			}
+			return armorAtLocation;
+
+			// Mini Suit
+			//return protectionArmorMap.get((uint8)ArmorObjectTemplate::LEGS); // LEGS
+		}
 		case 6: // HIT_HEAD
+		{
+			if(species == 4) return protectionArmorMap.get((uint8)ArmorObjectTemplate::CHEST); // Wookies dont have helmets. Take from chest
+
 			return protectionArmorMap.get((uint8)ArmorObjectTemplate::HEAD); // HEAD
+		}
 		}
 
 		return protectionArmorMap.get((uint8)ArmorObjectTemplate::NOLOCATION);

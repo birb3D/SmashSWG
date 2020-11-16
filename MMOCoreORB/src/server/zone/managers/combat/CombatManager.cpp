@@ -1013,7 +1013,7 @@ int CombatManager::getArmorObjectReduction(ArmorObject* armor, int damageType) c
 }
 
 ArmorObject* CombatManager::getArmorObject(CreatureObject* defender, uint8 hitLocation) const {
-	Vector<ManagedReference<ArmorObject*> > armor = defender->getWearablesDeltaVector()->getArmorAtHitLocation(hitLocation);
+	Vector<ManagedReference<ArmorObject*> > armor = defender->getWearablesDeltaVector()->getArmorAtHitLocation(hitLocation, defender->getSpecies());
 
 	if(armor.isEmpty())
 		return nullptr;
@@ -1212,15 +1212,17 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 	if (armor != nullptr && !armor->isVulnerable(damageType)) {
 		float armorReduction = getArmorObjectReduction(armor, damageType);
-		float dmgAbsorbed = damage;
 
 		// use only the damage applied to the armor for piercing (after the PSG takes some off)
 		damage *= getArmorPiercing(armor, armorPiercing);
 
+		float dmgAbsorbed = damage;
+
 		if (armorReduction > 0) {
 			damage *= (1.f - (armorReduction / 100.f));
 			dmgAbsorbed -= damage;
-			sendMitigationCombatSpam(defender, armor, (int)dmgAbsorbed, ARMOR);
+			if(dmgAbsorbed > 0)
+				sendMitigationCombatSpam(defender, armor, (int)dmgAbsorbed, ARMOR);
 		}
 
 		// inflict condition damage
