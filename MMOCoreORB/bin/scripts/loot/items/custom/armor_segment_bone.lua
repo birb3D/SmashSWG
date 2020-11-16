@@ -8,8 +8,8 @@ armor_segment_bone = {
 	craftingValues = {
 		{"armor_special_type",1,32,0},
 		{"armor_effectiveness",3,10,10},
-		{"armor_special_effectiveness",3,15,10},
-		{"kineticeffectiveness",3,15,10},
+		{"armor_special_effectiveness",3,40,10},
+		{"kineticeffectiveness",3,40,10},
 		{"armor_integrity",100,2000,10},
 		{"armor_health_encumbrance",6,1,0},
 		{"armor_action_encumbrance",8,1,0},
