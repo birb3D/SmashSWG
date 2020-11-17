@@ -4,14 +4,14 @@ lok_destroy_missions = {
 	lairSpawns = {
 		{
 			lairTemplateName = "lok_pharple_lair_neutral_medium",
-			minDifficulty = 4,
-			maxDifficulty = 8,
+			minDifficulty = 9,
+			maxDifficulty = 13,
 			size = 25,
 		},
 		{
 			lairTemplateName = "lok_flit_lair_neutral_medium",
-			minDifficulty = 5,
-			maxDifficulty = 9,
+			minDifficulty = 9,
+			maxDifficulty = 13,
 			size = 25,
 		},
 		{

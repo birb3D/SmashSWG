@@ -4,14 +4,14 @@ endor_destroy_missions = {
 	lairSpawns = {
 		{
 			lairTemplateName = "endor_squall_rabid_neutral_small",
-			minDifficulty = 7,
-			maxDifficulty = 11,
+			minDifficulty = 13,
+			maxDifficulty = 17,
 			size = 25,
 		},
 		{
 			lairTemplateName = "endor_pouncing_jax_lair_neutral_small_boss_01",
-			minDifficulty = 11,
-			maxDifficulty = 15,
+			minDifficulty = 13,
+			maxDifficulty = 17,
 			size = 25,
 		},
 		{
