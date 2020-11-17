@@ -38,7 +38,7 @@ public:
 
 		if (strongReference->isStanding()) {
 			strongReference->setPosture(CreaturePosture::PRONE);
-			reschedule(departedTime * 1000);
+			reschedule(departedTime * 1000 * ((60 + System::random(80))/100));
 		} else {
 			strongReference->setPosture(CreaturePosture::UPRIGHT);
 			reschedule((landedTime + landingTime) * 1000);
