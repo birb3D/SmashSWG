@@ -1770,18 +1770,18 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 
 			//Check if the group leader is a squad leader
-			//if (group == nullptr)
-				//continue;
+			if (group == nullptr)
+				continue;
 
 			//Calculate squad leader group size experience @ 10% person + combat experience which is 10% of the variable
-			//float squadXp = (combatXp * 0.1f) + (combatXp * 0.1f * group->getGroupSize());
+			float squadXp = (combatXp * 0.1f) + (combatXp * 0.1f * group->getGroupSize());
 
 			//Vector3 pos(attacker->getWorldPosition());
 
 			crossLocker.release();
 
 			// Squad Leader XP
-			/*ManagedReference<CreatureObject*> groupLeader = group->getLeader();
+			ManagedReference<CreatureObject*> groupLeader = group->getLeader();
 
 			if (groupLeader == nullptr || !groupLeader->isPlayerCreature())
 				continue;
@@ -1790,14 +1790,14 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 			//If he is a squad leader, and is in range of this player, then add the combat exp for him to use.
 			//Removed distance check to keep current functionality. Attacker was previously comparing its location to itself
-			if (groupLeader->hasSkill("outdoors_squadleader_novice") && groupLeader->isInRange(attacker, 125.0f)) {
-				int v = slExperience.get(groupLeader) + squadXp;
-				slExperience.put(groupLeader, v);
-			}*/
+			if (groupLeader->hasSkill("outdoors_squadleader_novice") && groupLeader->isInRange(destructedObject, 125.0f)) {
+				if(squadXp > slExperience.get(groupLeader))
+					slExperience.put(groupLeader, squadXp);
+			}
 		}
 	}
 
-
+	/*
 	// Squad Leader XP
 	if(group != nullptr) {
 		ManagedReference<CreatureObject*> groupLeader = group->getLeader();
@@ -1814,9 +1814,8 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				awardExperience(groupLeader, "squadleader", squadxp);
 			}
 		}
-	}
+	}*/
 
-	/*
 	//Send out squad leader experience.
 	for (int i = 0; i < slExperience.size(); ++i) {
 		VectorMapEntry<ManagedReference<CreatureObject*>, int>* entry = &slExperience.elementAt(i);
@@ -1827,8 +1826,8 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 		Locker clock(leader, destructedObject);
 
-		awardExperience(leader, "squadleader", entry->getValue() * 2.f);
-	}*/
+		awardExperience(leader, "squadleader", entry->getValue());
+	}
 
 	threatMap->removeAll();
 }
