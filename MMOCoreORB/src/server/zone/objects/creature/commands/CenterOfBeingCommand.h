@@ -5,6 +5,8 @@
 #ifndef CENTEROFBEINGCOMMAND_H_
 #define CENTEROFBEINGCOMMAND_H_
 
+#include "server/zone/objects/creature/events/CenterOfBeingNotifyAvailableEvent.h"
+
 class CenterOfBeingCommand : public QueueCommand {
 public:
 
@@ -29,6 +31,11 @@ public:
 		if (creature->hasBuff(STRING_HASHCODE("centerofbeing"))) {
 			creature->sendSystemMessage("@combat_effects:already_centered");
 			return GENERALERROR;
+		}
+
+		if (!creature->checkCooldownRecovery("centerofbeing")) {
+			creature->sendSystemMessage("You cannot center yourself right now."); //You cannot burst run right now.
+			return false;
 		}
 
 		WeaponObject* weapon = creature->getWeapon();
@@ -61,14 +68,20 @@ public:
 		centered->setSkillModifier("private_center_of_being", efficacy);
 
 		StringIdChatParameter startMsg("combat_effects", "center_start");
-		StringIdChatParameter endMsg("combat_effects", "center_stop");
 		centered->setStartMessage(startMsg);
+
+		StringIdChatParameter endMsg("combat_effects", "center_stop");
 		centered->setEndMessage(endMsg);
 
 		centered->setStartFlyText("combat_effects", "center_start_fly", 0, 255, 0);
 		centered->setEndFlyText("combat_effects", "center_stop_fly", 255, 0, 0);
 
 		creature->addBuff(centered);
+
+		creature->updateCooldownTimer("centerofbeing", 35 * 1000);
+
+		Reference<CenterOfBeingNotifyAvailableEvent*> task = new CenterOfBeingNotifyAvailableEvent(creature);
+		creature->addPendingTask("center_of_being_notify", task, 35 * 1000);
 
 		return SUCCESS;
 	}
