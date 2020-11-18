@@ -1753,9 +1753,8 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				if (winningFaction == attacker->getFaction())
 					xpAmount *= gcwBonus;
 
-
 				// Slight lowering of combat xp
-				xpAmount *= 0.9f;
+				xpAmount *= 0.6f;
 
 				//Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
 				if (xpType != "jedi_general")
@@ -1771,17 +1770,18 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 
 			//Check if the group leader is a squad leader
-			if (group == nullptr)
-				continue;
+			//if (group == nullptr)
+				//continue;
 
 			//Calculate squad leader group size experience @ 10% person + combat experience which is 10% of the variable
-			float squadXp = (combatXp * 0.1f) + (combatXp * 0.1f * group->getGroupSize());
+			//float squadXp = (combatXp * 0.1f) + (combatXp * 0.1f * group->getGroupSize());
 
-			Vector3 pos(attacker->getWorldPosition());
+			//Vector3 pos(attacker->getWorldPosition());
 
 			crossLocker.release();
 
-			ManagedReference<CreatureObject*> groupLeader = group->getLeader();
+			// Squad Leader XP
+			/*ManagedReference<CreatureObject*> groupLeader = group->getLeader();
 
 			if (groupLeader == nullptr || !groupLeader->isPlayerCreature())
 				continue;
@@ -1790,16 +1790,33 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 			//If he is a squad leader, and is in range of this player, then add the combat exp for him to use.
 			//Removed distance check to keep current functionality. Attacker was previously comparing its location to itself
-			if (groupLeader->hasSkill("outdoors_squadleader_novice")) {
+			if (groupLeader->hasSkill("outdoors_squadleader_novice") && groupLeader->isInRange(attacker, 125.0f)) {
 				int v = slExperience.get(groupLeader) + squadXp;
 				slExperience.put(groupLeader, v);
-			}
+			}*/
 		}
 	}
 
 
+	// Squad Leader XP
+	if(group != nullptr) {
+		ManagedReference<CreatureObject*> groupLeader = group->getLeader();
 
+		if (groupLeader != nullptr && groupLeader->isPlayerCreature()) {
 
+			Locker squadLock(groupLeader, destructedObject);
+
+			//If he is a squad leader, and is in range of this player, then add the combat exp for him to use.
+			//Removed distance check to keep current functionality. Attacker was previously comparing its location to itself
+			if (groupLeader->hasSkill("outdoors_squadleader_novice") && groupLeader->isInRange(destructedObject, 125.0f)) {
+				float squadxp *= groupExpMultiplier * 0.1f;
+				squadxp = squadxp + (squadxp * 0.1f * group->getGroupSize());
+				awardExperience(groupLeader, "squadleader", squadxp);
+			}
+		}
+	}
+
+	/*
 	//Send out squad leader experience.
 	for (int i = 0; i < slExperience.size(); ++i) {
 		VectorMapEntry<ManagedReference<CreatureObject*>, int>* entry = &slExperience.elementAt(i);
@@ -1811,7 +1828,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 		Locker clock(leader, destructedObject);
 
 		awardExperience(leader, "squadleader", entry->getValue() * 2.f);
-	}
+	}*/
 
 	threatMap->removeAll();
 }
@@ -3737,7 +3754,7 @@ int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player) {
 	if (player->getPlayerObject() != nullptr && player->getPlayerObject()->isJedi() && weapon->isJediWeapon())
 		skillMod += player->getSkillMod("private_jedi_difficulty");
 
-	int level = Math::min(25, skillMod / 100 + 1);
+	int level = Math::min(25, skillMod / 150 + 1);
 
 	return level;
 }
@@ -3764,7 +3781,7 @@ int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player, St
 	else
 		weaponType = "heavyweapon";
 
-	int level = Math::min(25, player->getSkillMod("private_" + weaponType + "_combat_difficulty") / 100 + 1);
+	int level = Math::min(25, player->getSkillMod("private_" + weaponType + "_combat_difficulty") / 150 + 1);
 
 	return level;
 }
