@@ -198,6 +198,8 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 	ManagedReference<GroupObject*> group = entertainer->getGroup();
 	ManagedReference<PlayerManager*> playerManager = entertainer->getZoneServer()->getPlayerManager();
 	
+	if (playerManager != nullptr)
+		return;
 	
 	float maxDance = 1;
 	float maxMusic = 1;
@@ -239,25 +241,24 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 					&& groupMember->hasSkill("social_entertainer_novice")) {
 					String healxptype("entertainer_healing");
 
-					xp = ceil(xp * 2);
+					int rewardxp = ceil(xp * 2);
 					
 					float dance = (float) groupMember->getSkillMod("healing_dance_mind");
 					float music = (float) groupMember->getSkillMod("healing_music_mind");
 					
 					if(groupMember->isDancing()) {
-						xp = xp * dance / maxDance;
+						rewardxp = rewardxp * dance / maxDance;
 					}
 					else if (groupMember->isPlayingMusic()) {
-						xp = xp * music / maxMusic;
+						rewardxp = rewardxp * music / maxMusic;
 					}
 					else {
-						xp = 0;
+						rewardxp = 0;
 					}
 					
-					xp = xp * 1.1; // Group Bonus
+					rewardxp = rewardxp * 1.1; // Group Bonus
 					
-					if (playerManager != nullptr)
-						playerManager->awardExperience(groupMember, healxptype, xp, true);
+					playerManager->awardExperience(groupMember, healxptype, rewardxp, true);
 				}
 			}
 		} catch (Exception& e) {
