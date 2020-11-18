@@ -199,8 +199,8 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 	ManagedReference<PlayerManager*> playerManager = entertainer->getZoneServer()->getPlayerManager();
 	
 	
-	float groupStrength = 1;
-	float personalStrength = 0;
+	float maxDance = 1;
+	float maxMusic = 1;
 	
 	for (int i = 0; i < group->getGroupSize(); ++i) {
 		try {
@@ -212,11 +212,14 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 				if (groupMember->isEntertaining() && groupMember->isInRange(entertainer, 40.0f)
 					&& groupMember->hasSkill("social_entertainer_novice")) {
 
-					if(dancing) {
-						groupStrength += (float) groupMember->getSkillMod("healing_dance_mind");
+					float dance = (float) groupMember->getSkillMod("healing_dance_mind");
+					float music = (float) groupMember->getSkillMod("healing_music_mind");
+
+					if(groupMember->isDancing() && dance > maxDance ) {
+						maxDance = dance;
 					}
-					else if (playingMusic) {
-						groupStrength += (float) groupMember->getSkillMod("healing_music_mind");
+					else if (groupMember->isPlayingMusic() && music > maxMusic) {
+						maxMusic = music;
 					}
 				}
 			}
@@ -238,14 +241,20 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 
 					xp = ceil(xp * 2);
 					
-					if(dancing) {
-						personalStrength = (float) groupMember->getSkillMod("healing_dance_mind");
+					float dance = (float) groupMember->getSkillMod("healing_dance_mind");
+					float music = (float) groupMember->getSkillMod("healing_music_mind");
+					
+					if(groupMember->isDancing()) {
+						xp = xp * dance / maxDance;
 					}
-					else if (playingMusic) {
-						personalStrength = (float) groupMember->getSkillMod("healing_music_mind");
+					else if (groupMember->isPlayingMusic()) {
+						xp = xp * music / maxMusic;
+					}
+					else {
+						xp = 0;
 					}
 					
-					xp = xp * (personalStrength / groupStrength) * 1.1;
+					xp = xp * 1.1; // Group Bonus
 					
 					if (playerManager != nullptr)
 						playerManager->awardExperience(groupMember, healxptype, xp, true);
