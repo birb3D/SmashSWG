@@ -197,6 +197,33 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 
 	ManagedReference<GroupObject*> group = entertainer->getGroup();
 	ManagedReference<PlayerManager*> playerManager = entertainer->getZoneServer()->getPlayerManager();
+	
+	
+	float groupStrength = 1;
+	float personalStrength = 0;
+	
+	for (int i = 0; i < group->getGroupSize(); ++i) {
+		try {
+			ManagedReference<CreatureObject *> groupMember = group->getGroupMember(i);
+
+			if (groupMember != nullptr && groupMember->isPlayerCreature()) {
+				Locker clocker(groupMember, entertainer);
+
+				if (groupMember->isEntertaining() && groupMember->isInRange(entertainer, 40.0f)
+					&& groupMember->hasSkill("social_entertainer_novice")) {
+
+					if(dancing) {
+						groupStrength += (float) groupMember->getSkillMod("healing_dance_mind");
+					}
+					else if (playingMusic) {
+						groupStrength += (float) groupMember->getSkillMod("healing_music_mind");
+					}
+				}
+			}
+		} catch (Exception& e) {
+			warning("exception in EntertainingSessionImplementation::addHealingXpGroup: " + e.getMessage());
+		}
+	}
 
 	for (int i = 0; i < group->getGroupSize(); ++i) {
 		try {
@@ -210,6 +237,15 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 					String healxptype("entertainer_healing");
 
 					xp = ceil(xp * 2);
+					
+					if(dancing) {
+						personalStrength = (float) groupMember->getSkillMod("healing_dance_mind");
+					}
+					else if (playingMusic) {
+						personalStrength = (float) groupMember->getSkillMod("healing_music_mind");
+					}
+					
+					xp = xp * (personalStrength / groupStrength) * 1.1;
 					
 					if (playerManager != nullptr)
 						playerManager->awardExperience(groupMember, healxptype, xp, true);
