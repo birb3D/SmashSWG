@@ -2094,11 +2094,21 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 	int totalDamage =  (int) (healthDamage + actionDamage + mindDamage);
 	defender->notifyObservers(ObserverEventType::DAMAGERECEIVED, attacker, totalDamage);
 
+
+	// Two pools to wound. Two Chances.
 	if (poolsToWound.size() > 0 && System::random(100) < ratio) {
 		int poolToWound = poolsToWound.get(System::random(poolsToWound.size() - 1));
-		defender->addWounds(poolToWound,     1, true);
-		defender->addWounds(poolToWound + 1, 1, true);
-		defender->addWounds(poolToWound + 2, 1, true);
+		int woundAmount = System::random(10);
+		defender->addWounds(poolToWound,     woundAmount, true);
+		//defender->addWounds(poolToWound + 1, 1, true);
+		//defender->addWounds(poolToWound + 2, 1, true);
+	}
+	if (poolsToWound.size() > 0 && System::random(100) < ratio) {
+		int poolToWound = poolsToWound.get(System::random(poolsToWound.size() - 1));
+		int woundAmount = System::random(10);
+		defender->addWounds(poolToWound,     woundAmount, true);
+		//defender->addWounds(poolToWound + 1, 1, true);
+		//defender->addWounds(poolToWound + 2, 1, true);
 	}
 
 	if(attacker->isPlayerCreature())
