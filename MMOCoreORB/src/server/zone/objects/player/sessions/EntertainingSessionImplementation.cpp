@@ -185,10 +185,13 @@ void EntertainingSessionImplementation::healWounds(CreatureObject* creature, flo
 
 	clocker.release();
 
-	if(entertainer->getGroup() != nullptr)
-		addHealingXpGroup(amountHealed);
-	else
-		addHealingXp(amountHealed);
+	if(amountHealed > 0) {
+
+		if(entertainer->getGroup() != nullptr)
+			addHealingXpGroup(amountHealed);
+		else
+			addHealingXp(amountHealed);
+	}
 
 }
 
@@ -205,15 +208,11 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 			if (groupMember != nullptr && groupMember->isPlayerCreature()) {
 				Locker clocker(groupMember, entertainer);
 
-				std::cout << "ENT RANGE CHECK ";
-
 				if (groupMember->isEntertaining() && groupMember->isInRange(entertainer, 40.0f)
 					&& groupMember->hasSkill("social_entertainer_novice")) {
 					String healxptype("entertainer_healing");
 
-					std::cout << "ENT XP: " << xp << " ";
 					int rewardxp = ceil(((float)xp) * 2.0f * 1.1f); // Group Bonus
-					std::cout << "REWARD XP: " << rewardxp << " ";
 					
 					if (playerManager != nullptr)
 						playerManager->awardExperience(groupMember, healxptype, rewardxp, true);
