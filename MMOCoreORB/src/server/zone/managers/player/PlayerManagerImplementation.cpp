@@ -1734,7 +1734,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				uint32 damage = entry->elementAt(j).getValue();
 				String xpType = entry->elementAt(j).getKey();
 				float xpAmount = baseXp;
-				float bonusXp = baseXp / 4; // 25%
+				float bonusXp = baseXp * 0.18f; // 18%
 
 				bonusXp *= (float) damage / totalPlayerDamage;
 
