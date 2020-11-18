@@ -23,7 +23,7 @@ yavin4_destroy_missions = {
 		{
 			lairTemplateName = "yavin4_stintaril_lair_neutral_medium",
 			minDifficulty = 14,
-			maxDifficulty = 121,
+			maxDifficulty = 21,
 			size = 20,
 		},
 		{
