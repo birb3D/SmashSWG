@@ -201,35 +201,6 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 	if (playerManager != nullptr)
 		return;
 	
-	float maxDance = 1;
-	float maxMusic = 1;
-	
-	for (int i = 0; i < group->getGroupSize(); ++i) {
-		try {
-			ManagedReference<CreatureObject *> groupMember = group->getGroupMember(i);
-
-			if (groupMember != nullptr && groupMember->isPlayerCreature()) {
-				Locker clocker(groupMember, entertainer);
-
-				if (groupMember->isEntertaining() && groupMember->isInRange(entertainer, 40.0f)
-					&& groupMember->hasSkill("social_entertainer_novice")) {
-
-					float dance = (float) groupMember->getSkillMod("healing_dance_mind");
-					float music = (float) groupMember->getSkillMod("healing_music_mind");
-
-					if(groupMember->isDancing() && dance > maxDance ) {
-						maxDance = dance;
-					}
-					else if (groupMember->isPlayingMusic() && music > maxMusic) {
-						maxMusic = music;
-					}
-				}
-			}
-		} catch (Exception& e) {
-			warning("exception in EntertainingSessionImplementation::addHealingXpGroup: " + e.getMessage());
-		}
-	}
-
 	for (int i = 0; i < group->getGroupSize(); ++i) {
 		try {
 			ManagedReference<CreatureObject *> groupMember = group->getGroupMember(i);
@@ -241,22 +212,7 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 					&& groupMember->hasSkill("social_entertainer_novice")) {
 					String healxptype("entertainer_healing");
 
-					int rewardxp = ceil(xp * 2);
-					
-					float dance = (float) groupMember->getSkillMod("healing_dance_mind");
-					float music = (float) groupMember->getSkillMod("healing_music_mind");
-					
-					if(groupMember->isDancing()) {
-						rewardxp = rewardxp * dance / maxDance;
-					}
-					else if (groupMember->isPlayingMusic()) {
-						rewardxp = rewardxp * music / maxMusic;
-					}
-					else {
-						rewardxp = 0;
-					}
-					
-					rewardxp = rewardxp * 1.1; // Group Bonus
+					int rewardxp = ceil(xp * 2 * 1.1); // Group Bonus
 					
 					playerManager->awardExperience(groupMember, healxptype, rewardxp, true);
 				}
