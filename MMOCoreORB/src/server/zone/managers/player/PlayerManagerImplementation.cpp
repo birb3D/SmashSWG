@@ -1753,6 +1753,10 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				if (winningFaction == attacker->getFaction())
 					xpAmount *= gcwBonus;
 
+
+				// Slight lowering of combat xp
+				xpAmount *= 0.9f;
+
 				//Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
 				if (xpType != "jedi_general")
 					combatXp += xpAmount;
