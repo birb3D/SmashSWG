@@ -103,9 +103,9 @@ object_weapon_melee_unarmed_unarmed_default_player = object_weapon_melee_unarmed
 	       
 	
 	-- The values below are the default values.  To be used for blue frog objects primarily
-	healthAttackCost = 10,
-	actionAttackCost = 10,
-        mindAttackCost = 10,
+	healthAttackCost = 15,
+	actionAttackCost = 25,
+        mindAttackCost = 20,
 	forceCost = 0,
 	
 	pointBlankAccuracy = 0,
@@ -118,9 +118,9 @@ object_weapon_melee_unarmed_unarmed_default_player = object_weapon_melee_unarmed
 	maxRangeAccuracy = 5,
 
 	minDamage = 10,
-	maxDamage = 50,
+	maxDamage = 40,
 	
-	attackSpeed = 2,
+	attackSpeed = 3.5,
 	
 	woundsRatio = 5
 }
