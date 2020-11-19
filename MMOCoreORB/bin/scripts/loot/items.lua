@@ -17,6 +17,9 @@ includeFile("items/custom/reinforced_fiber_panel.lua")
 includeFile("items/custom/armor_segment_bone.lua")
 includeFile("items/custom/armor_segment_zam.lua")
 includeFile("items/custom/armor_segment_chitin.lua")
+includeFile("items/custom/armor_segment_padded.lua")
+includeFile("items/custom/armor_segment_ubese.lua")
+includeFile("items/custom/armor_segment_tantel.lua")
 
 
 includeFile("items/attachment_armor.lua")
