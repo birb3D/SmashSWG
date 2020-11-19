@@ -1079,13 +1079,13 @@ void TangibleObjectImplementation::repair(CreatureObject* player, RepairTool * r
 	}
 
 	/// Subtract battle fatigue
-	repairChance -= (player->getShockWounds() / 2);
+	//repairChance -= (player->getShockWounds() / 2);
 
 	/// Subtract complexity
 	repairChance -= (getComplexity() / 3);
 
 	/// 5% random failure
-	if (getMaxCondition() < 20 || roll < 5)
+	if (roll < 5)
 		repairChance = 0;
 
 	if (roll > 95)
