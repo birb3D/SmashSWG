@@ -5,23 +5,21 @@ tailor_components = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		--{itemTemplate = "crystalline_clothing_treatment", weight = 2900000},
-		--{itemTemplate = "heavy_duty_clasp", weight = 2900000},
-		--{itemTemplate = "heavy_duty_leather", weight = 2900000},
+		{itemTemplate = "crystalline_clothing_treatment", weight = 2900000},
+		{itemTemplate = "heavy_duty_clasp", weight = 2900000},
+		{itemTemplate = "heavy_duty_leather", weight = 2900000},
 		--13% below this point
-		--{groupTemplate = "fiberplast_panel", weight = 250000},
-		--{groupTemplate = "synthetic_cloth", weight = 250000},
-		--{groupTemplate = "reinforced_fiber_panel", weight = 250000},
-		--{groupTemplate = "armor_segment_bone", weight = 100000},
-		--{groupTemplate = "armor_segment_zam", weight = 100000},
-		--{groupTemplate = "armor_segment_chitin", weight = 100000},
-		--{groupTemplate = "armor_segment_padded", weight = 83334},
-		--{groupTemplate = "armor_segment_ubese", weight = 83333},
-		--{groupTemplate = "armor_segment_tantel", weight = 83333},
-		{groupTemplate = "armor_segment_padded", weight = 2500000},
-		{groupTemplate = "armor_segment_ubese", weight = 2500000},
-		{groupTemplate = "armor_segment_tantel", weight = 2500000},
-		{groupTemplate = "strange_biologic_effect_controller", weight = 2500000},
+		{groupTemplate = "fiberplast_panel", weight = 250000},
+		{groupTemplate = "synthetic_cloth", weight = 200000},
+		{groupTemplate = "reinforced_fiber_panel", weight = 200000},
+		{groupTemplate = "armor_segment_bone", weight = 100000},
+		{groupTemplate = "armor_segment_zam", weight = 100000},
+		{groupTemplate = "armor_segment_chitin", weight = 100000},
+		{groupTemplate = "strange_biologic_effect_controller", weight = 1000000},
+		{groupTemplate = "armor_segment_padded", weight = 83334},
+		{groupTemplate = "armor_segment_ubese", weight = 83333},
+		{groupTemplate = "armor_segment_tantel", weight = 83333},
+
 	}
 }
 

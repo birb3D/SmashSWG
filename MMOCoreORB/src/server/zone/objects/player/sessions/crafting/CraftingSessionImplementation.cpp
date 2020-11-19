@@ -741,6 +741,8 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 
 	addWeaponDots();
 
+
+
 	// Set default customization
 	SharedTangibleObjectTemplate* templateData =
 			cast<SharedTangibleObjectTemplate*>(prototype->getObjectTemplate());
@@ -759,6 +761,24 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 	}
 
 	prototype->setComplexity(manufactureSchematic->getComplexity());
+
+	if(craftingValues->hasProperty("charges") && craftingValues->getCurrentValue("charges") < 0) {
+		craftingValues->setCurrentValue("charges", 1);
+		prototype->setUseCount(1, true);
+	}
+
+	if(craftingValues->hasProperty("charge") && craftingValues->getCurrentValue("charge") < 0) {
+		craftingValues->setCurrentValue("charge", 1);
+		prototype->setUseCount(1, true);
+	}
+
+	if(craftingValues->hasProperty("quantity") && craftingValues->getCurrentValue("quantity") < 0) {
+		craftingValues->setCurrentValue("quantity", 1);
+		prototype->setUseCount(1, true);
+	}
+
+	prototype->updateCraftingValues(craftingValues, false);
+
 
 	// Start DMSCO3 ***********************************************************
 	// Sends the updated values to the crafting screen
