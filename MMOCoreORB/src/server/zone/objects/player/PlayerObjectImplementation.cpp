@@ -2,6 +2,7 @@
 				Copyright <SWGEmu>
 		See file COPYING for copying conditions. */
 
+#include <iostream>
 #include "server/zone/objects/player/PlayerObject.h"
 
 #include "server/zone/managers/object/ObjectManager.h"
@@ -2610,16 +2611,22 @@ void PlayerObjectImplementation::deleteAllWaypoints() {
 int PlayerObjectImplementation::getLotsRemaining() {
 	Locker locker(asPlayerObject());
 
-	int lotsRemaining = maximumLots;
-
+	int lotCount = 0;
 	for (int i = 0; i < ownedStructures.size(); ++i) {
 		auto oid = ownedStructures.get(i);
 
 		Reference<StructureObject*> structure = getZoneServer()->getObject(oid).castTo<StructureObject*>();
 
 		if (structure != nullptr) {
-			lotsRemaining = lotsRemaining - structure->getLotSize();
+			lotCount += structure->getLotSize();
 		}
+	}
+
+	
+	int lotsRemaining = 10 - lotCount;
+	std::cout << "Lots Max: " << 10 << " Count: " << lotCount << " Remaining: " << lotsRemaining << std::endl;
+	if( lotsRemaining < 0 ){
+		return 0;
 	}
 
 	return lotsRemaining;
