@@ -629,6 +629,9 @@ void TangibleObjectImplementation::setCountdownTimer(unsigned int newUseCount, b
 }
 
 void TangibleObjectImplementation::setUseCount(uint32 newUseCount, bool notifyClient) {
+
+	if(useCount < 0) newUseCount = 0;
+
 	if (useCount == newUseCount)
 		return;
 
