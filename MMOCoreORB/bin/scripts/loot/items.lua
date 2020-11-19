@@ -20,7 +20,7 @@ includeFile("items/custom/armor_segment_chitin.lua")
 includeFile("items/custom/armor_segment_padded.lua")
 includeFile("items/custom/armor_segment_ubese.lua")
 includeFile("items/custom/armor_segment_tantel.lua")
-
+includeFile("items/custom/strange_biologic_effect_controller.lua")
 
 includeFile("items/attachment_armor.lua")
 includeFile("items/attachment_clothing.lua")
