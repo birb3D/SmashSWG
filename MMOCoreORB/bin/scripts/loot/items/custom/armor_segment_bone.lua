@@ -7,8 +7,8 @@ armor_segment_bone = {
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_bone_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",1,32,0},
-		{"armor_effectiveness",3,20,10},
-		{"armor_special_effectiveness",3,40,10},
+		{"armor_effectiveness",3,30,10},
+		{"armor_special_effectiveness",3,45,10},
 		{"kineticeffectiveness",3,40,10},
 		{"armor_integrity",100,2000,10},
 		{"armor_health_encumbrance",6,1,0},
