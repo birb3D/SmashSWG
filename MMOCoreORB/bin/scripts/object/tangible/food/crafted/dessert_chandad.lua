@@ -54,8 +54,8 @@ object_tangible_food_crafted_dessert_chandad = object_tangible_food_crafted_shar
 	fillingMax = 10,
 	flavorMin = 720,
 	flavorMax = 1440,
-	nutritionMin = 7,
-	nutritionMax = 12,
+	nutritionMin = 25,
+	nutritionMax = 75,
 	quantityMin = 6,
 	quantityMax = 10,
 
