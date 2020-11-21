@@ -2621,10 +2621,8 @@ int PlayerObjectImplementation::getLotsRemaining() {
 			lotCount += structure->getLotSize();
 		}
 	}
-
 	
 	int lotsRemaining = 10 - lotCount;
-	std::cout << "Lots Max: " << 10 << " Count: " << lotCount << " Remaining: " << lotsRemaining << std::endl;
 	if( lotsRemaining < 0 ){
 		return 0;
 	}
