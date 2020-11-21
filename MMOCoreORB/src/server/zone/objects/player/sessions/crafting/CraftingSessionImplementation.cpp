@@ -30,7 +30,6 @@
 #include "templates/params/RangedIntCustomizationVariable.h"
 #include "server/zone/objects/transaction/TransactionLog.h"
 
-
 int CraftingSessionImplementation::initializeSession(CraftingTool* tool, CraftingStation* station) {
 
 	craftingTool = tool;

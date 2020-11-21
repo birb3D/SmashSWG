@@ -19,6 +19,7 @@ class DroidCraftingModuleDataComponent : public BaseDroidModuleComponent {
 
 protected:
 	int craftingType;
+	int craftingBonus;
 	String attributeListString;
 	ManagedReference<CraftingStation*> craftingStation;
 
@@ -54,6 +55,8 @@ public:
 	bool actsAsCraftingStation();
 
 	String toString() const;
+
+	void updateCraftingValues(CraftingValues* values, bool firstUpdate);
 
 	// crafting droid module specific
 	CraftingStation* getCraftingStation();
