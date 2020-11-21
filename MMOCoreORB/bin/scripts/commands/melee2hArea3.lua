@@ -43,8 +43,8 @@
 
 Melee2hArea3Command = {
         name = "melee2harea3",
-	damageMultiplier = 3.0,
-	speedMultiplier = 2.5,
+	damageMultiplier = 3.5,
+	speedMultiplier = 1.75,
 	healthCostMultiplier = 1.5,
 	actionCostMultiplier = 2.5,
 	mindCostMultiplier = 1.5,
