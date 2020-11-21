@@ -29,7 +29,7 @@ public:
 	virtual void initialize(ZoneServer* server);
 	virtual float getWeightedValue(ManufactureSchematic* manufactureSchematic, int type);
 	virtual int getCreationCount(ManufactureSchematic* manufactureSchematic) = 0;
-	virtual int calculateAssemblySuccess(CreatureObject* player,DraftSchematic* draftSchematic, float effectiveness);
+	virtual int calculateAssemblySuccess(CreatureObject* player,DraftSchematic* draftSchematic, float effectiveness, float stationOffset);
 protected:
 	ManagedReference<ZoneServer*> zoneServer;
 	float calculateExperimentationValueModifier(int experimentationResult, int pointsAttempted);

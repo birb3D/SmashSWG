@@ -91,4 +91,9 @@ class CraftingStation extends ToolTangibleObject {
 	public void setEffectiveness(float newValue) {
 		effectiveness = newValue;
 	}
+
+	@dirty
+	public int getEffectiveness() {
+		return effectiveness;
+	}
 }
