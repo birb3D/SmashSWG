@@ -662,8 +662,12 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 
 	// Determine the outcome of the craft, Amazing through Critical
 	float stationOffset = 0.725f;
-	if( craftingStation != nullptr && craftingStation->getComplexityLevel() > 50 ){
-		stationOffset = (80.0 + (craftingStation->getEffectiveness()/2.0))/100.0;
+	if( craftingStation != nullptr ){
+		if( craftingStation->getComplexityLevel() > 50 ){
+			stationOffset = (80.0 + (craftingStation->getEffectiveness()/2.0))/100.0;
+		}else{
+			stationOffset = 0.800f;
+		}
 	}
 	assemblyResult = craftingManager->calculateAssemblySuccess(crafter, draftSchematic, craftingTool->getEffectiveness(), stationOffset);
 
