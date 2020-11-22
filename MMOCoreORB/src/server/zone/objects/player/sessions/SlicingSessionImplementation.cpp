@@ -21,6 +21,9 @@
 #include "server/zone/objects/tangible/terminal/mission/MissionTerminal.h"
 #include "server/zone/objects/tangible/tool/smuggler/PrecisionLaserKnife.h"
 #include "server/zone/objects/tangible/powerup/PowerupObject.h"
+#include "server/zone/packets/object/PlayClientEffectObjectMessage.h"
+#include "server/zone/packets/scene/PlayClientEffectLocMessage.h"
+#include "templates/params/creature/CreatureAttribute.h"
 
 #include "server/zone/objects/player/sessions/sui/SlicingSessionSuiCallback.h"
 
@@ -146,6 +149,10 @@ void SlicingSessionImplementation::generateSliceMenu(SuiListBox* suiBox) {
 
 		suiBox->addMenuItem((cableBlue) ? "@slicing/slicing:blue_cable_cut" : "@slicing/slicing:blue_cable", 0);
 		suiBox->addMenuItem((cableRed) ? "@slicing/slicing:red_cable_cut" : "@slicing/slicing:red_cable", 1);
+
+		if(canUseColorCrystal(tangibleObject)) {
+			suiBox->addMenuItem("Attempt to divert power into a strange crystal", 4);
+		}
 	}
 
 	suiBox->setPromptText(prompt.toString());
@@ -204,12 +211,20 @@ void SlicingSessionImplementation::handleMenuSelect(CreatureObject* pl, byte men
 			handleUseFlowAnalyzer(); // Handle Use of Flow Analyzer
 			break;
 		}
+		case 4: {
+			handleUseColorCrystal(suiBox); // Handle Color Crystal Use
+			break;
+		}
 		default:
 			cancelSession();
 			break;
 		}
 	} else {
 		if (hasPrecisionLaserKnife()) {
+			if(menuID == 4) {
+				handleUseColorCrystal(suiBox); // Handle Color Crystal Use
+				return;
+			}
 			if (firstCable != menuID)
 				handleSlice(suiBox); // Handle Successful Slice
 			else
@@ -353,6 +368,65 @@ bool SlicingSessionImplementation::hasArmorUpgradeKit() {
 	return false;
 }
 
+
+bool SlicingSessionImplementation::canUseColorCrystal(TangibleObject* object) {
+	ManagedReference<CreatureObject*> player = this->player.get();
+
+	if(!object->isWeaponObject())
+		return false;
+
+	if (player == nullptr)
+		return false;
+
+	if(getSlicingSkill(player) < 3)
+		return false;
+
+	// Does player have battle fatigue?
+	if(player->getShockWounds() > 10)
+		return false;
+
+	ManagedReference<WeaponObject*> weapon = cast<WeaponObject*>(object);
+
+	int type = weapon->getDamageType();
+	if(type == SharedWeaponObjectTemplate::KINETIC || type == SharedWeaponObjectTemplate::ENERGY ) {
+		if(hasColorCrystal(false))
+			return true;
+	}
+
+	return false;
+}
+
+bool SlicingSessionImplementation::hasColorCrystal(bool removeItem) {
+	ManagedReference<CreatureObject*> player = this->player.get();
+
+	if (player == nullptr)
+		return 0;
+
+	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+
+	if (inventory == nullptr)
+		return false;
+
+	Locker inventoryLocker(inventory);
+
+	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
+		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
+
+		uint32 objType = sceno->getGameObjectType();
+
+		if (objType == 262156) { // Color Crystal??
+			if(removeItem) {
+				Locker locker(sceno);
+				sceno->destroyObjectFromWorld(true);
+				sceno->destroyObjectFromDatabase(true);
+			}
+			return true;
+		}
+	}
+
+	return 0;
+}
+
 void SlicingSessionImplementation::useClampFromInventory(SlicingTool* clamp) {
 	ManagedReference<CreatureObject*> player = this->player.get();
 
@@ -443,6 +517,104 @@ void SlicingSessionImplementation::handleUseFlowAnalyzer() {
 	}
 
 	player->sendSystemMessage("@slicing/slicing:no_node");
+}
+
+void SlicingSessionImplementation::handleUseColorCrystal(SuiListBox* suiBox) {
+	ManagedReference<CreatureObject*> player = this->player.get();
+	ManagedReference<TangibleObject*> tangibleObject = this->tangibleObject.get();
+
+	if (player == nullptr || tangibleObject == nullptr || !canUseColorCrystal(tangibleObject))
+		return;
+
+	Locker locker(player);
+	Locker clocker(tangibleObject, player);
+
+	PlayerManager* playerManager = player->getZoneServer()->getPlayerManager();
+
+	suiBox->removeAllMenuItems();
+	suiBox->setCancelButton(false,"@cancel");
+
+	StringBuffer prompt;
+	prompt << "@slicing/slicing:";
+	prompt << getPrefix(tangibleObject) + "examine";
+	suiBox->setPromptText(prompt.toString());
+
+	player->getPlayerObject()->addSuiBox(suiBox);
+	player->sendMessage(suiBox->generateMessage());
+
+	//handleWeaponSlice();
+
+	// Remove Color Crystal
+	hasColorCrystal(true);
+
+	WeaponObject* weapon = cast<WeaponObject*>(tangibleObject.get());
+
+	int rand = System::random(100);
+	//int rand = 80; // debug
+
+	if(rand < 25) {
+		// Critical Failure
+
+		// Break Item
+		weapon->setConditionDamage(weapon->getMaxCondition(), true);
+		weapon->setSliced(true);
+
+		// Apply Max Wounds & Battle Fatigue To Player
+		player->addWounds(CreatureAttribute::HEALTH, player->getHAM(CreatureAttribute::HEALTH)-5, true, false);
+		player->addWounds(CreatureAttribute::STRENGTH, player->getHAM(CreatureAttribute::STRENGTH)-5, true, false);
+		player->addWounds(CreatureAttribute::CONSTITUTION, player->getHAM(CreatureAttribute::CONSTITUTION)-5, true, false);
+		player->addWounds(CreatureAttribute::ACTION, player->getHAM(CreatureAttribute::ACTION)-5, true, false);
+		player->addWounds(CreatureAttribute::QUICKNESS, player->getHAM(CreatureAttribute::QUICKNESS)-5, true, false);
+		player->addWounds(CreatureAttribute::STAMINA, player->getHAM(CreatureAttribute::STAMINA)-5, true, false);
+		player->addWounds(CreatureAttribute::MIND, player->getHAM(CreatureAttribute::MIND)-5, true, false);
+		player->addWounds(CreatureAttribute::FOCUS, player->getHAM(CreatureAttribute::FOCUS)-5, true, false);
+		player->addWounds(CreatureAttribute::WILLPOWER, player->getHAM(CreatureAttribute::WILLPOWER)-5, true, false);
+		player->addShockWounds(500, true);
+
+		// Do explosion
+		PlayClientEffectLoc* explodeLoc = new PlayClientEffectLoc("clienteffect/combat_explosion_lair_large.cef", player->getZone()->getZoneName(), player->getPositionX(), player->getPositionZ(), player->getPositionY());
+		player->broadcastMessage(explodeLoc, false);
+
+		// Send fail message
+		player->sendSystemMessage("Oh No! Looks like you blew up the weapon trying to do that!");
+
+	}
+	else if(rand < 50) {
+
+		// Nothing Happens
+		weapon->setSliced(true);
+		player->sendSystemMessage("Huh? Nothing happened. I guess it could have been worse.");
+
+
+	}
+	else if(rand < 75) {
+
+		// Do a regular slice
+		handleWeaponSlice();
+		playerManager->awardExperience(player, "slicing", 250, true); // Weapon Slice XP
+	}
+	else {
+
+		int weaponType = System::random(6);
+		if(weaponType < 1) weapon->setDamageType(SharedWeaponObjectTemplate::BLAST);
+		else if(weaponType < 2) weapon->setDamageType(SharedWeaponObjectTemplate::STUN);
+		else if(weaponType < 3) weapon->setDamageType(SharedWeaponObjectTemplate::HEAT);
+		else if(weaponType < 4) weapon->setDamageType(SharedWeaponObjectTemplate::COLD);
+		else if(weaponType < 5) weapon->setDamageType(SharedWeaponObjectTemplate::ACID);
+		else weapon->setDamageType(SharedWeaponObjectTemplate::ELECTRICITY);
+
+		handleWeaponSlice();
+
+		playerManager->awardExperience(player, "slicing", 750, true); // Weapon Slice XP
+
+		player->sendSystemMessage("Something inside the weapon fundamentally changes. You have somehow altered the very fabric of reality.");
+
+	}
+
+	tangibleObject->notifyObservers(ObserverEventType::SLICED, player, 1);
+
+	endSlicing();
+
 }
 
 void SlicingSessionImplementation::handleSlice(SuiListBox* suiBox) {

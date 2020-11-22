@@ -348,6 +348,10 @@ class WeaponObject extends TangibleObject {
 	public int getDamageType() {
 		return damageType;
 	}
+	
+	public void setDamageType(int value) {
+		damageType = value;
+	}
 
 	@read
 	public string getXpType() {
