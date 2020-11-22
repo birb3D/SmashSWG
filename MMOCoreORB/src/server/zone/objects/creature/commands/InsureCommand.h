@@ -68,8 +68,12 @@ public:
 			for (int i = 0; i < insurableItems.size(); i++) {
 				SceneObject* item = insurableItems.get(i);
 
+				TangibleObject* titem = cast<TangibleObject*>( item );
+
+				int cost = (titem->getComplexity() * 5 * (2 - (titem->getConditionDamage() / titem->getMaxCondition())));
+
 				if (item != nullptr)
-					suiInsuranceMenuBox->addMenuItem(item->getDisplayedName(), item->getObjectID());
+					suiInsuranceMenuBox->addMenuItem(item->getDisplayedName() + " (" + cost + ")", item->getObjectID());
 			}
 
 			suiInsuranceMenuBox->setCancelButton(true, "Cancel");
