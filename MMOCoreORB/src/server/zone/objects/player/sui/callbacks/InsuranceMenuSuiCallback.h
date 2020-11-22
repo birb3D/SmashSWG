@@ -62,10 +62,25 @@ public:
 
 		if (otherPressed) {
 
+			// Calculate total cost
+			int totalcost = 0;
+			for(int i = 0; i < listBox->getMenuSize(); i++) {
+				//uint64 objectID = ;
+				ManagedReference<SceneObject*> obj = zoneServer->getObject(listBox->getMenuObjectID(i));
+
+				if (obj == nullptr || !obj->isTangibleObject())
+					continue;
+
+				TangibleObject* item = cast<TangibleObject*>( obj.get());
+
+				totalcost += (item->getComplexity() * 5 * (2 - (item->getConditionDamage() / item->getMaxCondition())));
+
+			}
+
 			int items = listBox->getMenuSize();
 
 			StringBuffer promptText;
-			promptText << "You are about to insure all your items. The total cost is " << String::valueOf(items * cost) << " credits.\n\nAre you sure?";
+			promptText << "You are about to insure all your items. The total cost is " << String::valueOf(totalcost) << " credits.\n\nAre you sure?";
 
 			ManagedReference<SuiMessageBox*> insureAll = new SuiMessageBox(player, SuiWindowType::INSURANCE_CONFIRM_ALL);
 			insureAll->setUsingObject(term);
@@ -92,6 +107,8 @@ public:
 				TangibleObject* item = cast<TangibleObject*>( obj.get());
 
 				Locker locker(item, player);
+
+				cost = (item->getComplexity() * 5 * (2 - (item->getConditionDamage() / item->getMaxCondition())));
 
 				if (!(item->getOptionsBitmask() & OptionBitmask::INSURED) && (item->isArmorObject() || item->isWearableObject())) {
 

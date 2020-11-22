@@ -62,50 +62,60 @@ public:
 		int money = cash + bank;
 
 		int j = 0;
+		int totalcost = 0;
 		bool finished = true;
+
+
 
 		TransactionLog trxBank(player, TrxCode::INSURANCESYSTEM, 100 * insurableItems.size()); // Actual cost is set below
 
 		for (int i = 0; i < insurableItems.size(); ++i) {
 			SceneObject* obj = insurableItems.get(i);
-			if (((i + 1) * 100) > money) {
-				StringIdChatParameter params;
-				params.setStringId("@error_message:prose_nsf_insure");
-				params.setTT(obj->getObjectName());
-				player->sendSystemMessage(params);
-				finished = false;
-				break;
-			}
 
 			if (obj != nullptr && obj->isTangibleObject()) {
-				j++;
+
 				TangibleObject* item = cast<TangibleObject*>( obj);
+
+				cost = (item->getComplexity() * 5 * (2 - (item->getConditionDamage() / item->getMaxCondition())));
+
+				if (cost > money) {
+					StringIdChatParameter params;
+					params.setStringId("@error_message:prose_nsf_insure");
+					params.setTT(obj->getObjectName());
+					player->sendSystemMessage(params);
+					finished = false;
+					break;
+				}
+
+				j++;
 
 				Locker locker(item, player);
 
 				uint32 bitmask = item->getOptionsBitmask();
 				bitmask |= OptionBitmask::INSURED;
 				item->setOptionsBitmask(bitmask);
+				totalcost += cost;
 				trxBank.addRelatedObject(obj->getObjectID());
+
 			}
 		}
 
 		trxBank.addState("insuredCount", j);
-		cost *= j;
+		//cost *= j;
 
-		if (bank < cost) {
-			int diff = cost - bank;
+		if (bank < totalcost) {
+			int diff = totalcost - bank;
 
 			trxBank.setAmount(diff, true);
-			player->subtractBankCredits(cost - diff);
+			player->subtractBankCredits(totalcost - diff);
 			trxBank.commit();
 
-			TransactionLog trxCash(player, TrxCode::INSURANCESYSTEM, cost - diff, true);
+			TransactionLog trxCash(player, TrxCode::INSURANCESYSTEM, totalcost - diff, true);
 			trxCash.groupWith(trxBank);
 			player->subtractCashCredits(diff);
 		} else {
-			trxBank.setAmount(cost, false);
-			player->subtractBankCredits(cost);
+			trxBank.setAmount(totalcost, false);
+			player->subtractBankCredits(totalcost);
 		}
 
 		if (finished) {
