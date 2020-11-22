@@ -6,9 +6,9 @@ armor_segment_padded = {
 	customObjectName = "Strange Padded Armor Segment",
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_padded_advanced.iff",
 	craftingValues = {
-		{"armor_special_type",1,32,0},
+		{"armor_special_type",1,16,0},
 		{"armor_effectiveness",5,45,10},
-		{"armor_special_effectiveness",8,50,10},
+		{"armor_special_effectiveness",1,20,10},
 		{"armor_integrity",100,3000,10},
 		{"armor_health_encumbrance",12,1,0},
 		{"armor_action_encumbrance",20,1,0},
