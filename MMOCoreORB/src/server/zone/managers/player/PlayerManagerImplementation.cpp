@@ -1734,7 +1734,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				uint32 damage = entry->elementAt(j).getValue();
 				String xpType = entry->elementAt(j).getKey();
 				float xpAmount = baseXp;
-				float bonusXp = baseXp * 0.135f; // 13.5% group xp minimum for hitting a creature
+				float bonusXp = baseXp * 0.15f; // 15% group xp minimum for hitting a creature
 
 				bonusXp *= (float) damage / totalPlayerDamage;
 
@@ -1754,7 +1754,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 					xpAmount *= gcwBonus;
 
 				// Slight lowering of combat xp
-				xpAmount *= 0.8f;
+				xpAmount *= 0.7f;
 
 				//Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
 				if (xpType != "jedi_general")
