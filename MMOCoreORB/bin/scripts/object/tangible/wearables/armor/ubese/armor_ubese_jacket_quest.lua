@@ -99,7 +99,7 @@ object_tangible_wearables_armor_ubese_armor_ubese_jacket_quest = object_tangible
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
 
-	maxCondition = 20000,
+	maxCondition = 40000,
 
 	kinetic = 20,
 	energy = 15,
