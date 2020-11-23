@@ -670,6 +670,8 @@ void CreatureObjectImplementation::addMountedCombatSlow() {
 			oldSpeed = petManager->getMountedRunSpeed(parent);
 		}
 
+		newSpeed *= 1.2f; // 20% movement bonus when on a mount even when in combat
+
 		float magnitude = newSpeed / oldSpeed;
 
 		constexpr auto crc = "mounted_combat_slow"_hashCode;
