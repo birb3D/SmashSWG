@@ -44,12 +44,12 @@ which carries forward this exception.
 
 --appearance filename, run speed, gallop speed multiplier, gallop duration (in seconds), gallop cooldown (in seconds)
 mountSpeedData = {
-	{"appearance/bantha_hue.sat", 13, 1.15, 120, 180},
-	{"appearance/bol_hue.sat", 14, 1.2, 60, 180},
-	{"appearance/brackaset_hue.sat", 13, 1.15, 120, 180},
-	{"appearance/carrion_spat_hue.sat", 15, 1.25, 30,180},
-	{"appearance/cu_pa_hue.sat", 15, 1.25, 30, 180},
-	{"appearance/dewback_hue.sat", 14, 1.2, 60, 180},
-	{"appearance/falumpaset_hue.sat", 13, 1.15, 120, 180},
-	{"appearance/kaadu_hue.sat", 15, 1.25, 30, 180},
+	{"appearance/bantha_hue.sat", 11, 1.15, 120, 180},
+	{"appearance/bol_hue.sat", 12, 1.2, 60, 180},
+	{"appearance/brackaset_hue.sat", 11, 1.15, 120, 180},
+	{"appearance/carrion_spat_hue.sat", 13, 1.25, 30,180},
+	{"appearance/cu_pa_hue.sat", 13, 1.25, 30, 180},
+	{"appearance/dewback_hue.sat", 12, 1.2, 60, 180},
+	{"appearance/falumpaset_hue.sat", 11, 1.15, 120, 180},
+	{"appearance/kaadu_hue.sat", 13, 1.25, 30, 180},
 }
