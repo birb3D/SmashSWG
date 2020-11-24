@@ -4,7 +4,7 @@ armor_segment_tantel = {
 	minimumLevel = 0,
 	maximumLevel = -1,
 	customObjectName = "Strange Tantel Armor Segment",
-	directObjectTemplate = "object/tangible/component/armor/armor_segment.iff",
+	directObjectTemplate = "object/tangible/component/armor/armor_segment_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
 		{"armor_effectiveness",4,30,10},
