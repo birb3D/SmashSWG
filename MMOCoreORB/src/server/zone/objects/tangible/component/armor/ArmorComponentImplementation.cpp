@@ -30,29 +30,33 @@ void ArmorComponentImplementation::updateCraftingValues(CraftingValues* values, 
 		calculateSpecialProtection(values);
 	}
 
-	String expProp = "exp_resistance";
-	float specialbase = values->getCurrentValue("armor_special_effectiveness");
 	int specialResists = values->getCurrentValue("armor_special_type");
-
 	if (specialResists != ValuesMap::VALUENOTFOUND) {
-		if (specialResists & SharedWeaponObjectTemplate::KINETIC)
-			addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::ENERGY)
-			addProperty("energyeffectiveness", specialbase + energy, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::BLAST)
-			addProperty("blasteffectiveness", specialbase + blast, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::STUN)
-			addProperty("stuneffectiveness", specialbase + stun, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::LIGHTSABER)
-			addProperty("restraineffectiveness", specialbase + lightSaber, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::HEAT)
-			addProperty("heateffectiveness", specialbase + heat, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::COLD)
-			addProperty("coldeffectiveness", specialbase + cold, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::ACID)
-			addProperty("acideffectiveness", specialbase + acid, 10, expProp);
-		if (specialResists & SharedWeaponObjectTemplate::ELECTRICITY)
-			addProperty("electricaleffectiveness", specialbase + electricity, 10, expProp);
+		const String expProp = "exp_resistance";
+		const float specialbase = values->getCurrentValue("armor_special_effectiveness");
+		
+		if( specialResists != -1 ){
+			if (specialResists & SharedWeaponObjectTemplate::KINETIC) addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::ENERGY) addProperty("energyeffectiveness", specialbase + energy, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::BLAST) addProperty("blasteffectiveness", specialbase + blast, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::STUN) addProperty("stuneffectiveness", specialbase + stun, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::LIGHTSABER) addProperty("restraineffectiveness", specialbase + lightSaber, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::HEAT) addProperty("heateffectiveness", specialbase + heat, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::COLD) addProperty("coldeffectiveness", specialbase + cold, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::ACID) addProperty("acideffectiveness", specialbase + acid, 10, expProp);
+			if (specialResists & SharedWeaponObjectTemplate::ELECTRICITY) addProperty("electricaleffectiveness", specialbase + electricity, 10, expProp);
+		}else{
+			if( System::frandom() > 0.1) addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("energyeffectiveness", specialbase + energy, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("blasteffectiveness", specialbase + blast, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("stuneffectiveness", specialbase + stun, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("restraineffectiveness", specialbase + lightSaber, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("heateffectiveness", specialbase + heat, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("coldeffectiveness", specialbase + cold, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("acideffectiveness", specialbase + acid, 10, expProp);
+			if (System::frandom() > 0.1) addProperty("electricaleffectiveness", specialbase + electricity, 10, expProp);
+		}
 	}
 }
 
