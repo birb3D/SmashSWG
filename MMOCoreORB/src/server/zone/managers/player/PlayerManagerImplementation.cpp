@@ -1653,6 +1653,23 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 		if (ai != nullptr)
 			baseXp = ai->getBaseXp();
 	}
+	
+	// Loop through and Remove pets from the total damage pool for better XP calc
+	for (int b = 0; i < threatMap->size(); ++b) {
+		ThreatMapEntry* entry = &threatMap->elementAt(b).getValue();
+		CreatureObject* attacker = threatMap->elementAt(b).getKey();
+	
+		if (entry == nullptr || attacker == nullptr) {
+			continue;
+		}
+	
+		if (attacker->isPet()) {
+			for (int j = 0; j < entry->size(); ++j) {
+				uint32 damage = entry->elementAt(j).getValue();
+				totalDamage -= damage;
+			}
+		}
+	}
 
 	for (int i = 0; i < threatMap->size(); ++i) {
 		ThreatMapEntry* entry = &threatMap->elementAt(i).getValue();
@@ -1737,7 +1754,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				float bonusXp = baseXp * 0.13f; // 13% group xp minimum for hitting a creature
 
 				bonusXp *= (float) damage / totalPlayerDamage;
-
+				
 				xpAmount *= (float) damage / totalDamage;
 				//xpAmount = xpAmount / (float)didDamage;
 
@@ -1755,6 +1772,9 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 				// Slight lowering of combat xp
 				xpAmount *= 0.8f;
+				
+				if(totalPlayerDamage >= totalDamage)
+					xpAmount *= 1.25f;
 
 				//Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
 				if (xpType != "jedi_general")
