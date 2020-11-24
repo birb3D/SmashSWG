@@ -8,9 +8,10 @@ kliknik_chitin_armor_segment = {
 	craftingValues = {
 		{"armor_special_type",0,0,0},
 		{"armor_effectiveness",1,15,10},
-		{"kineticeffectiveness",1,30,10},
+		{"kineticeffectiveness",1,20,10},
 		{"heateffectiveness",1,15,10},
 		{"armor_integrity",500,1000,0},
+		{"armor_health_encumbrance",-6,-14,0},
 		{"armor_action_encumbrance",-6,-14,0},
 		{"armor_mind_encumbrance",-6,-14,0},
 		{"useCount",1,10,0},
