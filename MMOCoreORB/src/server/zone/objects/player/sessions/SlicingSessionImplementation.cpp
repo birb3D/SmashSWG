@@ -248,7 +248,7 @@ void SlicingSessionImplementation::endSlicing() {
 	}
 
 	if (tangibleObject->isMissionTerminal())
-		player->addCooldown("slicing.terminal", (2 * (60 * 1000))); // 2min Cooldown
+		player->addCooldown("slicing.terminal", (1 * (60 * 1000))); // 1min Cooldown
 
 	cancelSession();
 
@@ -603,7 +603,7 @@ void SlicingSessionImplementation::handleUseColorCrystal(SuiListBox* suiBox) {
 		else if(weaponType < 5) weapon->setDamageType(SharedWeaponObjectTemplate::ACID);
 		else weapon->setDamageType(SharedWeaponObjectTemplate::ELECTRICITY);
 
-		handleWeaponSlice();
+		//handleWeaponSlice();
 
 		playerManager->awardExperience(player, "slicing", 750, true); // Weapon Slice XP
 
@@ -645,7 +645,7 @@ void SlicingSessionImplementation::handleSlice(SuiListBox* suiBox) {
 		playerManager->awardExperience(player, "slicing", 250, true); // Container Slice XP
 	} else if (tangibleObject->isMissionTerminal()) {
 		MissionTerminal* term = cast<MissionTerminal*>( tangibleObject.get());
-		playerManager->awardExperience(player, "slicing", 100, true); // Terminal Slice XP
+		playerManager->awardExperience(player, "slicing", 75, true); // Terminal Slice XP
 		term->addSlicer(player);
 		player->sendSystemMessage("@slicing/slicing:terminal_success");
 	} else if (tangibleObject->isWeaponObject()) {
