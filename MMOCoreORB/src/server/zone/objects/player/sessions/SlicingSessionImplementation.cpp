@@ -604,6 +604,7 @@ void SlicingSessionImplementation::handleUseColorCrystal(SuiListBox* suiBox) {
 		else weapon->setDamageType(SharedWeaponObjectTemplate::ELECTRICITY);
 
 		//handleWeaponSlice();
+		weapon->setSliced(true);
 
 		playerManager->awardExperience(player, "slicing", 750, true); // Weapon Slice XP
 
