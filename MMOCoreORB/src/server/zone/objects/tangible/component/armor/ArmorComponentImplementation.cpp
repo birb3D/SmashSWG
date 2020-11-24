@@ -34,7 +34,7 @@ void ArmorComponentImplementation::updateCraftingValues(CraftingValues* values, 
 	if (specialResists != ValuesMap::VALUENOTFOUND) {
 		const String expProp = "exp_resistance";
 		const float specialbase = values->getCurrentValue("armor_special_effectiveness");
-		
+
 		if( specialResists != -1 ){
 			if (specialResists & SharedWeaponObjectTemplate::KINETIC) addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
 			if (specialResists & SharedWeaponObjectTemplate::ENERGY) addProperty("energyeffectiveness", specialbase + energy, 10, expProp);
@@ -46,16 +46,15 @@ void ArmorComponentImplementation::updateCraftingValues(CraftingValues* values, 
 			if (specialResists & SharedWeaponObjectTemplate::ACID) addProperty("acideffectiveness", specialbase + acid, 10, expProp);
 			if (specialResists & SharedWeaponObjectTemplate::ELECTRICITY) addProperty("electricaleffectiveness", specialbase + electricity, 10, expProp);
 		}else{
-			if( System::frandom() > 0.1) addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("energyeffectiveness", specialbase + energy, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("blasteffectiveness", specialbase + blast, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("stuneffectiveness", specialbase + stun, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("restraineffectiveness", specialbase + lightSaber, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("heateffectiveness", specialbase + heat, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("coldeffectiveness", specialbase + cold, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("acideffectiveness", specialbase + acid, 10, expProp);
-			if (System::frandom() > 0.1) addProperty("electricaleffectiveness", specialbase + electricity, 10, expProp);
+			if( System::frandom() < 0.1) addProperty("kineticeffectiveness", specialbase + kinetic, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("energyeffectiveness", specialbase + energy, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("blasteffectiveness", specialbase + blast, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("stuneffectiveness", specialbase + stun, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("restraineffectiveness", specialbase + lightSaber, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("heateffectiveness", specialbase + heat, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("coldeffectiveness", specialbase + cold, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("acideffectiveness", specialbase + acid, 10, expProp);
+			if (System::frandom() < 0.1) addProperty("electricaleffectiveness", specialbase + electricity, 10, expProp);
 		}
 	}
 }
