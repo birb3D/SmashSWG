@@ -6,7 +6,7 @@ armor_segment_tantel = {
 	customObjectName = "Strange Tantel Armor Segment",
 	directObjectTemplate = "object/tangible/component/armor/armor_segment.iff",
 	craftingValues = {
-		{"armor_special_type",1,16,0},
+		{"armor_special_type",-1,-1,0},
 		{"armor_effectiveness",4,30,10},
 		{"armor_special_effectiveness",1,10,10},
 		{"armor_integrity",100,3000,10},
