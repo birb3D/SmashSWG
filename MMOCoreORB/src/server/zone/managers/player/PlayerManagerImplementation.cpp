@@ -1655,7 +1655,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 	}
 	
 	// Loop through and Remove pets from the total damage pool for better XP calc
-	for (int b = 0; i < threatMap->size(); ++b) {
+	for (int b = 0; b < threatMap->size(); ++b) {
 		ThreatMapEntry* entry = &threatMap->elementAt(b).getValue();
 		CreatureObject* attacker = threatMap->elementAt(b).getKey();
 	
