@@ -1214,7 +1214,7 @@ void StructureManager::promptWithdrawMaintenance(StructureObject* structure, Cre
 	sui->setCallback(new StructureWithdrawMaintenanceSuiCallback(server));
 	sui->setPromptTitle("@player_structure:withdraw_maintenance"); // Withdraw From Treasury
 	sui->setUsingObject(structure);
-	sui->setPromptText( "@player_structure:select_maint_amount \n@player_structure:current_maint_pool " + String::valueOf(surplusMaintenance));
+	sui->setPromptText( "Select the total amount you would like to withdraw from the existing maintenance pool. \nCurrent Maintenance: " + String::valueOf(surplusMaintenance));
 	sui->addFrom("@player_structure:total_funds", String::valueOf(surplusMaintenance), String::valueOf(surplusMaintenance), "1");
 	sui->addTo("@player_structure:to_pay", "0", "0", "1");
 
