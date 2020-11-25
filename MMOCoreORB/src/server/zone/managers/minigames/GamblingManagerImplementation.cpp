@@ -104,8 +104,9 @@ uint32 GamblingManagerImplementation::createSlotWindow(CreatureObject* player, u
 	else
 		box->setCancelButton(true, "@ui:spin");
 
-	box->setOtherButton(true,"Bet " + String::valueOf(terminal->getMinBet()));
+	//box->setOtherButton(true,"Bet " + String::valueOf(terminal->getMinBet()));
 	//box->setOtherButton(true, "@ui:bet_one");
+	box->setOtherButton(true, "@gambling/default_interface:opt_bet");
 	box->setOkButton(true, "@ui:bet_max");
 
 	box->setForceCloseDistance(32.f);
