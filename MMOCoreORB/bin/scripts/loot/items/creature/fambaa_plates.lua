@@ -8,6 +8,8 @@ fambaa_plates = {
 	craftingValues = {
 		{"armor_special_type",0,0,0},
 		{"coldeffectiveness",2,4,10},
+		{"armor_integrity",100,2000,0},
+		{"armor_effectiveness",-1,2,10},
 		{"armor_health_encumbrance",2,-2,0},
 		{"armor_action_encumbrance",2,-2,0},
 		{"armor_mind_encumbrance",2,-2,0},

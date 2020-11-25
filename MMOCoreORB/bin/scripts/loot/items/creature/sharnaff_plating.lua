@@ -7,6 +7,8 @@ sharnaff_plating = {
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_enhancement_sharnaff.iff",
 	craftingValues = {
 		{"armor_special_type",0,0,0},
+		{"armor_effectiveness",-1,2,10},
+		{"armor_integrity",100,2000,0},
 		{"acideffectiveness",2,4,10},
 		{"heateffectiveness",2,4,10},
 		{"coldeffectiveness",2,4,10},
