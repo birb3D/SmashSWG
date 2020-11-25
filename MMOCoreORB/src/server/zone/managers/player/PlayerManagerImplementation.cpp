@@ -1764,8 +1764,8 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				xpAmount = Math::min(xpAmount, calculatePlayerLevel(attacker, xpType) * 300.f);
 
 				//Apply group bonus if in group
-				if (group != nullptr)
-					xpAmount *= groupExpMultiplier;
+				//if (group != nullptr)
+					//xpAmount *= groupExpMultiplier;
 
 				if (winningFaction == attacker->getFaction())
 					xpAmount *= gcwBonus;
