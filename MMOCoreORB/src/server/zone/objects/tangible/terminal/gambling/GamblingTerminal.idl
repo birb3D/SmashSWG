@@ -83,6 +83,12 @@ class GamblingTerminal extends Terminal {
 	public static final int WHEELSLOW = 11;
 	public static final int WHEELSTOP = 12;
 	public static final int WHEELPAYOUT = 12;
+	
+	
+	public static final int ROULETTEMIN = 5;
+	public static final int ROULETTEMAX = 100000;
+	public static final int SLOTMIN = 5;
+	public static final int SLOTMAX = 20;
 
 	public GamblingTerminal() {
 		state = NOGAMERUNNING;
@@ -90,8 +96,8 @@ class GamblingTerminal extends Terminal {
 		second = 0;
 		third = 0;
 		gameCount = 0;
-		minBet = 1;
-		maxBet = 10000;
+		minBet = ROULETTEMIN;
+		maxBet = ROULETTEMAX;
 		Logger.setLoggingName("GamblingTerminal");
 	}
 
@@ -155,12 +161,18 @@ class GamblingTerminal extends Terminal {
 
 	@dirty
 	public int getMinBet() {
-		return minBet;
+		if (machineType == SLOTMACHINE) {
+			return SLOTMIN;
+		}
+		return ROULETTEMIN;
 	}
 
 	@dirty
 	public int getMaxBet() {
-		return maxBet;
+		if (machineType == SLOTMACHINE) {
+			return SLOTMAX;
+		}
+		return ROULETTEMAX;
 	}
 
 	@dirty
@@ -231,7 +243,8 @@ class GamblingTerminal extends Terminal {
 		machineType = templ.getMachineType();
 
 		if (machineType == SLOTMACHINE) {
-			maxBet = 3;
+			minBet = 5;
+			maxBet = 20;
 		}
 	}
 
