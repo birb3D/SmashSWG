@@ -1193,10 +1193,6 @@ void StructureManager::promptPayMaintenance(StructureObject* structure, Creature
 }
 
 void StructureManager::promptWithdrawMaintenance(StructureObject* structure, CreatureObject* creature) {
-	if (!structure->isGuildHall()) {
-		return;
-	}
-
 	if (!structure->isOnAdminList(creature)) {
 		creature->sendSystemMessage("@player_structure:withdraw_admin_only"); // You must be an administrator to remove credits from the treasury.
 		return;
@@ -1364,10 +1360,6 @@ void StructureManager::payMaintenance(StructureObject* structure,
 }
 
 void StructureManager::withdrawMaintenance(StructureObject* structure, CreatureObject* creature, int amount) {
-	if (!structure->isGuildHall()) {
-		return;
-	}
-
 	if (!structure->isOnAdminList(creature)) {
 		creature->sendSystemMessage("@player_structure:withdraw_admin_only"); // You must be an administrator to remove credits from the treasury.
 		return;
