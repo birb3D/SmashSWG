@@ -104,7 +104,8 @@ uint32 GamblingManagerImplementation::createSlotWindow(CreatureObject* player, u
 	else
 		box->setCancelButton(true, "@ui:spin");
 
-	box->setOtherButton(true,"@ui:bet_one");
+	box->setOtherButton(true,"Bet " + String::valueOf(terminal->getMinBet()));
+	//box->setOtherButton(true, "@ui:bet_one");
 	box->setOkButton(true, "@ui:bet_max");
 
 	box->setForceCloseDistance(32.f);
@@ -185,15 +186,15 @@ uint32 GamblingManagerImplementation::createPayoutWindow(CreatureObject* player)
 	ManagedReference<SuiListBox*> box = new SuiListBox(player, SuiWindowType::GAMBLING_SLOT_PAYOUT, 1);
 	box->setPromptTitle("PAYOUT SCHEDULE");
 	box->setPromptText(prompt);
-	box->addMenuItem("*1|2|3 -> base:2 max:6", 0);
-	box->addMenuItem("000 -> base:4 max:12", 1);
-	box->addMenuItem("111 -> base:50 max:150", 2);
-	box->addMenuItem("222 -> base:75 max:225", 3);
-	box->addMenuItem("333 -> base:100 max:300", 3);
-	box->addMenuItem("444 -> base:250 max:750", 3);
-	box->addMenuItem("555 -> base:500 max:1500", 3);
-	box->addMenuItem("666 -> base:1000 max:3000", 3);
-	box->addMenuItem("777 -> base:1500 max:5000", 3);
+	box->addMenuItem("*1|2|3 -> 2x", 0);
+	box->addMenuItem("000 -> 10x", 1);
+	box->addMenuItem("111 -> 20x", 2);
+	box->addMenuItem("222 -> 50x", 3);
+	box->addMenuItem("333 -> 100x", 3);
+	box->addMenuItem("444 -> 250x", 3);
+	box->addMenuItem("555 -> 500x", 3);
+	box->addMenuItem("666 -> 1000x", 3);
+	box->addMenuItem("777 -> 1500x", 3);
 	box->setCancelButton(false, "");
 	box->setOtherButton(false, "");
 	box->setOkButton(true, "@ui:ok");
@@ -244,12 +245,12 @@ void GamblingManagerImplementation::handleSlot(CreatureObject* player, bool canc
 		else
 			leaveTerminal(player, 1);
 	} else if (other) {
-		bet(terminal, player, 1, 0);
+		bet(terminal, player, terminal->getMinBet(), 0);
 	} else {
 		if (hasBets)
 			bet(terminal, player, terminal->getMaxBet() - terminal->getBets()->get(0)->getAmount(), 0);
 		else
-			bet(terminal, player, 3, 0);
+			bet(terminal, player, terminal->getMaxBet(), 0);
 	}
 }
 
@@ -259,6 +260,8 @@ void GamblingManagerImplementation::bet(CreatureObject* player, int amount, int 
 
 	if (machineType == 0) {
 		bet(rouletteGames.get(player), player, amount, target);
+		refreshRouletteMenu(player);
+
 	} else if (machineType == 1) {
 		bet(slotGames.get(player), player, amount, target);
 	}
@@ -596,104 +599,32 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 				for (int i=0; i < bets->size(); ++i) {
 					tempTarget = bets->get(i)->getTarget();
 
-					if (tempTarget == "odd") {
-						// odd
-						if (isOdd(terminal->getFirst())) {
+					if ((tempTarget == "odd" && isOdd(terminal->getFirst())) ||
+						(tempTarget == "even" && isEven(terminal->getFirst())) ||
+						(tempTarget == "high" && isHigh(terminal->getFirst())) ||
+						(tempTarget == "low" && isLow(terminal->getFirst())) ||
+						(tempTarget == "red" && isRed(terminal->getFirst())) ||
+						(tempTarget == "black" && isBlack(terminal->getFirst()))
+					) {
 
-							tempReward = (bets->get(i)->getAmount() * 2);
+						tempReward = (bets->get(i)->getAmount() * 2);
 
-							if (winnings->contains(bets->get(i)->getPlayer())) {
+						if (winnings->contains(bets->get(i)->getPlayer())) {
 
-								tempReward += winnings->get(bets->get(i)->getPlayer());
+							tempReward += winnings->get(bets->get(i)->getPlayer());
 
-								winnings->drop(bets->get(i)->getPlayer());
-
-							}
-
-							winnings->put(bets->get(i)->getPlayer(), tempReward);
+							winnings->drop(bets->get(i)->getPlayer());
 
 						}
-					} else if (tempTarget == "even") {
-						// even
-						if (isEven(terminal->getFirst())) {
 
-							tempReward = (bets->get(i)->getAmount() * 2);
+						winnings->put(bets->get(i)->getPlayer(), tempReward);
 
-							if (winnings->contains(bets->get(i)->getPlayer())) {
-
-								tempReward += winnings->get(bets->get(i)->getPlayer());
-
-								winnings->drop(bets->get(i)->getPlayer());
-							}
-
-							winnings->put(bets->get(i)->getPlayer(), tempReward);
-						}
-					} else if (tempTarget == "high") {
-						// high
-						if (isHigh(terminal->getFirst())) {
-
-							tempReward = (bets->get(i)->getAmount() * 2);
-
-							if (winnings->contains(bets->get(i)->getPlayer())) {
-
-								tempReward += winnings->get(bets->get(i)->getPlayer());
-
-								winnings->drop(bets->get(i)->getPlayer());
-							}
-
-							winnings->put(bets->get(i)->getPlayer(), tempReward);
-						}
-					} else if (tempTarget == "low") {
-						// low
-						if (isLow(terminal->getFirst())) {
-
-							tempReward = (bets->get(i)->getAmount() * 2);
-
-							if (winnings->contains(bets->get(i)->getPlayer())) {
-
-								tempReward += winnings->get(bets->get(i)->getPlayer());
-
-								winnings->drop(bets->get(i)->getPlayer());
-							}
-
-							winnings->put(bets->get(i)->getPlayer(), tempReward);
-						}
-					} else if (tempTarget == "red") {
-						// red
-						if (isRed(terminal->getFirst())) {
-
-							tempReward = (bets->get(i)->getAmount() * 2);
-
-							if (winnings->contains(bets->get(i)->getPlayer())) {
-
-								tempReward += winnings->get(bets->get(i)->getPlayer());
-
-								winnings->drop(bets->get(i)->getPlayer());
-							}
-
-							winnings->put(bets->get(i)->getPlayer(), tempReward);
-						}
-					} else if (tempTarget == "black") {
-						// black
-						if (isBlack(terminal->getFirst())) {
-
-							tempReward = (bets->get(i)->getAmount() * 2);
-
-							if (winnings->contains(bets->get(i)->getPlayer())) {
-
-								tempReward += winnings->get(bets->get(i)->getPlayer());
-
-								winnings->drop(bets->get(i)->getPlayer());
-							}
-
-							winnings->put(bets->get(i)->getPlayer(), tempReward);
-						}
 					} else {
 						// single number: 0,00,1-36
 
 						if (tempTarget == roulette.get(terminal->getFirst())) {
 
-							tempReward = ((bets->get(i)->getAmount() * 35) * 2);
+							tempReward = ((bets->get(i)->getAmount() * 36));
 
 							if (winnings->contains(bets->get(i)->getPlayer())) {
 

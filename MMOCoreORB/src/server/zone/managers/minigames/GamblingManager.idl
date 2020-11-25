@@ -82,9 +82,9 @@ class GamblingManager extends Observer implements Logger {
 	}
 	
 	public void initializeSlots() {
-		slot.add(4);
+		slot.add(10);
+		slot.add(20);
 		slot.add(50);
-		slot.add(75);
 		slot.add(100);
 		slot.add(250);
 		slot.add(500);

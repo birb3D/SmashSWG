@@ -24,7 +24,7 @@ public:
 		if (!checkInvalidLocomotions(creature))
 			return INVALIDLOCOMOTION;
 
-		return SUCCESS;
+		//return SUCCESS;
 
 		if (creature->isPlayerCreature()) {
 

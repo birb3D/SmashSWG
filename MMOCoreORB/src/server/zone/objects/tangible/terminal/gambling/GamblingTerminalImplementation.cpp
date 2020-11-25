@@ -12,7 +12,6 @@
 #include "server/zone/managers/minigames/events/GamblingEvent.h"
 
 int GamblingTerminalImplementation::handleObjectMenuSelect(CreatureObject* player, byte selectedID) {
-	return 0;
 
 	if (selectedID == 245 || selectedID == 20) {
 		if (playersWindows.contains(player)) {
@@ -212,6 +211,11 @@ void GamblingTerminalImplementation::closeMenu(CreatureObject* player, bool payo
 		if (box != nullptr)
 			player->sendMessage(box->generateCloseMessage());
 
+		ManagedReference<SuiListBox*> plainbox = ghost->getSuiBox(boxID).castTo<SuiListBox*>();
+
+		if (plainbox != nullptr)
+			player->sendMessage(plainbox->generateCloseMessage());
+
 		ghost->removeSuiBox(boxID);
 	}
 }
@@ -330,7 +334,7 @@ void GamblingTerminalImplementation::statusUpdate(CreatureObject* player, int ev
 					first = System::random(7);
 
 					if (player != nullptr) {
-						player->sendSystemMessage("Slot Machine Pay Line");
+						//player->sendSystemMessage("Slot Machine Pay Line");
 						player->sendSystemMessage("-- | " + String::valueOf(first) + " | | Rolling... | | Rolling... | --");
 					}
 
@@ -341,7 +345,7 @@ void GamblingTerminalImplementation::statusUpdate(CreatureObject* player, int ev
 					second = System::random(7);
 
 					if (player != nullptr) {
-						player->sendSystemMessage("Slot Machine Pay Line");
+						//player->sendSystemMessage("Slot Machine Pay Line");
 						player->sendSystemMessage("-- | " + String::valueOf(first) + " | | " + String::valueOf(second) + " | | Rolling... | --");
 					}
 
@@ -352,7 +356,7 @@ void GamblingTerminalImplementation::statusUpdate(CreatureObject* player, int ev
 					third = System::random(7);
 
 					if (player != nullptr) {
-						player->sendSystemMessage("Slot Machine Pay Line");
+						//player->sendSystemMessage("Slot Machine Pay Line");
 						player->sendSystemMessage("-- | " + String::valueOf(first) + " | | " + String::valueOf(second) + " | | " + String::valueOf(third) + "| --");
 					}
 
