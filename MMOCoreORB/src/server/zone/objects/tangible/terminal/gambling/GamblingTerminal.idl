@@ -88,7 +88,7 @@ class GamblingTerminal extends Terminal {
 	public static final int ROULETTEMIN = 5;
 	public static final int ROULETTEMAX = 100000;
 	public static final int SLOTMIN = 5;
-	public static final int SLOTMAX = 20;
+	public static final int SLOTMAX = 50;
 
 	public GamblingTerminal() {
 		state = NOGAMERUNNING;

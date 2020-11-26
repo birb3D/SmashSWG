@@ -67,7 +67,7 @@ bool GamblingTerminalImplementation::checkJoin(CreatureObject* player) {
 		}
 		case ROULETTEMACHINE: {
 
-			if (playersWindows.size() >= 4) {
+			if (playersWindows.size() >= 20) {
 
 				returnValue = false;
 
