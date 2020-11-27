@@ -42,6 +42,7 @@ class CityManager extends ManagedService implements Logger {
 	private transient static CityTaxMap cityTaxes;
 
 	public transient static int cityUpdateInterval;
+	public transient static int cityRankUpdateInterval;
 	public transient static int newCityGracePeriod;
 	public transient static int oldCityGracePeriod;
 	public transient static unsigned long citySpecializationCooldown;
@@ -96,6 +97,8 @@ class CityManager extends ManagedService implements Logger {
 	public native void assessCitizens(CityRegion city);
 
 	public native void processCityUpdate(CityRegion city);
+
+	public native void processCityRankUpdate(CityRegion city);
 
 	/**
 	 * Processes income tax from all citizens

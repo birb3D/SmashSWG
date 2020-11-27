@@ -21,6 +21,7 @@ include server.zone.objects.scene.variables.StringId;
 include system.lang.Time;
 include server.zone.objects.region.CitizenList;
 include server.zone.objects.region.events.CityUpdateEvent;
+include server.zone.objects.region.events.CityRankUpdateEvent;
 include server.zone.objects.region.events.CitizenAssessmentEvent;
 include system.thread.atomic.AtomicInteger;
 include pathfinding.RecastNavMesh;
@@ -95,12 +96,17 @@ class CityRegion extends ManagedObject implements Logger {
 	protected Time nextUpdateTime;
 
 	@dereferenced
+	protected Time nextRankUpdateTime;
+
+	@dereferenced
 	protected Time nextInauguration;
 
 	@dereferenced
 	protected Time nextCitizenAssessment;
 
 	protected transient CityUpdateEvent cityUpdateEvent;
+
+	protected transient CityRankUpdateEvent cityRankUpdateEvent;
 
 	protected transient CitizenAssessmentEvent citizenAssessmentEvent;
 
@@ -184,6 +190,10 @@ class CityRegion extends ManagedObject implements Logger {
 
 	@preLocked
 	public native void rescheduleUpdateEvent(unsigned int seconds);
+	
+	@preLocked
+	public native void rescheduleRankUpdateEvent(unsigned int seconds);
+
 	@preLocked
 	public native void scheduleCitizenAssessment(unsigned int seconds);
 
@@ -235,6 +245,12 @@ class CityRegion extends ManagedObject implements Logger {
 	@dirty
 	public Time getNextUpdateTime() {
 		return nextUpdateTime;
+	}
+
+	@local
+	@dirty
+	public Time getNextRankUpdateTime() {
+		return nextRankUpdateTime;
 	}
 
 	@local

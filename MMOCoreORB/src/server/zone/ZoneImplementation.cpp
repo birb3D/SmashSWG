@@ -867,37 +867,28 @@ void ZoneImplementation::updateCityRegions() {
 
 		Locker locker(city);
 
-		Time* nextUpdateTime = city->getNextUpdateTime();
-		int seconds = -1 * round(nextUpdateTime->miliDifference() / 1000.f);
+		int rankSeconds = -1 * round(city->getNextRankUpdateTime()->miliDifference() / 1000.f);
+		if (rankSeconds < 0) rankSeconds = 0;
+		city->rescheduleRankUpdateEvent(rankSeconds);
 
-		if (seconds < 0) //If the update occurred in the past, force an immediate update.
-			seconds = 0;
+		int seconds = -1 * round(city->getNextUpdateTime()->miliDifference() / 1000.f);
+		if (seconds < 0) seconds = 0;
+		city->rescheduleUpdateEvent(seconds);
 
 		city->setRadius(city->getRadius());
 		city->setLoaded();
-
 		city->cleanupCitizens();
-		//city->cleanupDuplicateCityStructures();
-
-		city->rescheduleUpdateEvent(seconds);
-
+		
 		if (city->hasAssessmentPending()) {
-			Time* nextAssessmentTime = city->getNextAssessmentTime();
-			int seconds2 = -1 * round(nextAssessmentTime->miliDifference() / 1000.f);
-
-			if (seconds2 < 0)
-				seconds2 = 0;
-
+			int seconds2 = -1 * round(city->getNextAssessmentTime()->miliDifference() / 1000.f);
+			if (seconds2 < 0) seconds2 = 0;
 			city->scheduleCitizenAssessment(seconds2);
 		}
 
 		city->createNavMesh(NavMeshManager::MeshQueue, forceRebuild);
 
-		if (!city->isRegistered())
-			continue;
-
-		if (city->getRegionsCount() == 0)
-			continue;
+		if (!city->isRegistered()) continue;
+		if (city->getRegionsCount() == 0) continue;
 
 		Region* region = city->getRegion(0);
 

@@ -7,6 +7,7 @@
 
 #include "server/zone/objects/region/CityRegion.h"
 #include "server/zone/objects/region/events/CityUpdateEvent.h"
+#include "server/zone/objects/region/events/CityRankUpdateEvent.h"
 #include "server/zone/objects/region/events/CitizenAssessmentEvent.h"
 #include "server/chat/StringIdChatParameter.h"
 #include "server/ServerCore.h"
@@ -29,6 +30,8 @@
 #include "server/zone/objects/creature/commands/TransferstructureCommand.h"
 #include "pathfinding/RecastNavMesh.h"
 #include "server/zone/objects/pathfinding/NavArea.h"
+
+#include <iostream>
 
 int BoardShuttleCommand::MAXIMUM_PLAYER_COUNT = 3000;
 
@@ -77,6 +80,7 @@ void CityRegionImplementation::initialize() {
 	navMesh = nullptr;
 
 	cityUpdateEvent = nullptr;
+	cityRankUpdateEvent = nullptr;
 
 	citizenAssessmentEvent = nullptr;
 
@@ -148,19 +152,33 @@ Region* CityRegionImplementation::addRegion(float x, float y, float radius, bool
 }
 
 void CityRegionImplementation::rescheduleUpdateEvent(uint32 seconds) {
-	if (cityRank == CityManager::CLIENT)
-		return;
+	if (cityRank == CityManager::CLIENT) return;
 
 	if (cityUpdateEvent == nullptr) {
 		cityUpdateEvent = new CityUpdateEvent(_this.getReferenceUnsafeStaticCast(), ServerCore::getZoneServer());
 	} else if (cityUpdateEvent->isScheduled()) {
 		cityUpdateEvent->cancel();
 	}
-
 	cityUpdateEvent->schedule(seconds * 1000);
 
 	AtomicTime next;
 	Core::getTaskManager()->getNextExecutionTime(cityUpdateEvent, next);
+
+	nextUpdateTime = next.getTimeObject();
+}
+
+void CityRegionImplementation::rescheduleRankUpdateEvent(uint32 seconds) {
+	if (cityRank == CityManager::CLIENT) return;
+
+	if (cityRankUpdateEvent == nullptr) {
+		cityRankUpdateEvent = new CityRankUpdateEvent(_this.getReferenceUnsafeStaticCast(), ServerCore::getZoneServer());
+	} else if (cityRankUpdateEvent->isScheduled()) {
+		cityRankUpdateEvent->cancel();
+	}
+	cityRankUpdateEvent->schedule(seconds * 1000);
+
+	AtomicTime next;
+	Core::getTaskManager()->getNextExecutionTime(cityRankUpdateEvent, next);
 
 	nextUpdateTime = next.getTimeObject();
 }
@@ -625,6 +643,13 @@ void CityRegionImplementation::cancelTasks() {
 			cityUpdateEvent->cancel();
 
 		cityUpdateEvent = nullptr;
+	}
+
+	if (cityRankUpdateEvent != nullptr) {
+		if (cityRankUpdateEvent->isScheduled())
+			cityRankUpdateEvent->cancel();
+
+		cityRankUpdateEvent = nullptr;
 	}
 
 	if (citizenAssessmentEvent != nullptr) {
