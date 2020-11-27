@@ -49,6 +49,7 @@ CityTaxMap CityManagerImplementation::cityTaxes;
 Vector<uint8> CityManagerImplementation::citizensPerRank;
 Vector<uint16> CityManagerImplementation::radiusPerRank;
 int CityManagerImplementation::cityUpdateInterval = 0;
+int CityManagerImplementation::cityRankUpdateInterval = 0;
 int CityManagerImplementation::newCityGracePeriod = 0;
 int CityManagerImplementation::oldCityGracePeriod = 0;
 uint64 CityManagerImplementation::citySpecializationCooldown = 0;
@@ -112,6 +113,7 @@ void CityManagerImplementation::loadLuaConfig() {
 
 	//Only load the static values on the first zone.
 	cityUpdateInterval = lua->getGlobalInt("CityUpdateInterval");
+	cityRankUpdateInterval = lua->getGlobalInt("CityRankUpdateInterval");
 	newCityGracePeriod = lua->getGlobalInt("NewCityGracePeriod");
 	oldCityGracePeriod = lua->getGlobalInt("OldCityGracePeriod");
 	citySpecializationCooldown = lua->getGlobalLong("CitySpecializationCooldown");
@@ -209,6 +211,7 @@ CityRegion* CityManagerImplementation::createCity(CreatureObject* mayor, const S
 	city->setAssessmentPending(true);
 	city->scheduleCitizenAssessment(newCityGracePeriod * 60);
 	city->rescheduleUpdateEvent(cityUpdateInterval * 60); //Minutes
+	city->rescheduleRankUpdateEvent(cityRankUpdateInterval * 60); //Minutes
 
 	StringIdChatParameter params("city/city", "new_city_body");
 	params.setTO(mayor->getObjectID());
@@ -736,48 +739,59 @@ void CityManagerImplementation::processCityUpdate(CityRegion* city) {
 	info("Processing city update: " + city->getRegionName(), true);
 
 	ManagedReference<StructureObject*> ch = city->getCityHall();
+	if (ch == nullptr) {
+		destroyCity(city);
+		return;
+	}
+
+	try {
+		if (city->getCityRank() == CLIENT) return;
+
+		ManagedReference<SceneObject*> mayor = zoneServer->getObject(city->getMayorID());
+		if (mayor != nullptr && mayor->isPlayerCreature()) {
+			Reference<PlayerObject*> ghost = mayor->getSlottedObject("ghost").castTo<PlayerObject*> ();
+			if (ghost != nullptr) {
+				ghost->addExperience("political", 750, true);
+			}
+		}
+
+		updateCityVoting(city);
+		processIncomeTax(city);
+		deductCityMaintenance(city);
+
+		city->rescheduleUpdateEvent(cityUpdateInterval * 60);
+	} catch (Exception& e) {
+		error(e.getMessage() + "in CityManagerImplementation::processCityUpdate");
+		e.printStackTrace();
+		return;
+	}
+
+}
+
+void CityManagerImplementation::processCityRankUpdate(CityRegion* city) {
+	info("Processing city rank update: " + city->getRegionName(), true);
+
+	ManagedReference<StructureObject*> ch = city->getCityHall();
 
 	if (ch == nullptr) {
 		destroyCity(city);
 		return;
 	}
 
-	int cityRank = 0;
-	float radius = 0;
-
 	try {
-		cityRank = city->getCityRank();
-
-		if (cityRank == CLIENT)
-			return; //It's a client region.
-
-		radius = city->getRadius();
+		int cityRank = city->getCityRank();
+		if (cityRank == CLIENT) return;
 
 		city->cleanupCitizens();
 
-		ManagedReference<SceneObject*> mayor = zoneServer->getObject(city->getMayorID());
-
-		if (mayor != nullptr && mayor->isPlayerCreature()) {
-			Reference<PlayerObject*> ghost = mayor->getSlottedObject("ghost").castTo<PlayerObject*> ();
-
-			if (ghost != nullptr) {
-				ghost->addExperience("political", 750, true);
-			}
-		}
-		updateCityVoting(city);
-
 		int citizens = city->getCitizenCount();
-
-		if (cityRank - 1 >= citizensPerRank.size())
-			return;
+		if (cityRank - 1 >= citizensPerRank.size()) return;
 
 		int maintainCitizens = citizensPerRank.get(cityRank - 1);
-
 		if (citizens < maintainCitizens) {
 			contractCity(city);
 		} else if (cityRank < METROPOLIS) {
 			int advanceCitizens = citizensPerRank.get(cityRank);
-
 			if (citizens >= advanceCitizens) {
 				expandCity(city);
 			} else {
@@ -785,14 +799,9 @@ void CityManagerImplementation::processCityUpdate(CityRegion* city) {
 			}
 		}
 
-		city->rescheduleUpdateEvent(cityUpdateInterval * 60);
-
-		processIncomeTax(city);
-
-		deductCityMaintenance(city);
-
+		city->rescheduleRankUpdateEvent(cityRankUpdateInterval * 60);
 	} catch (Exception& e) {
-		error(e.getMessage() + "in CityManagerImplementation::processCityUpdate");
+		error(e.getMessage() + "in CityManagerImplementation::processCityRankUpdate");
 		e.printStackTrace();
 		return;
 	}
@@ -1301,21 +1310,17 @@ void CityManagerImplementation::contractCity(CityRegion* city) {
 
 void CityManagerImplementation::expandCity(CityRegion* city) {
 	uint8 currentRank = city->getCityRank();
-
-	if (currentRank == METROPOLIS) //City doesn't expand if it's metropolis.
+	if (currentRank == METROPOLIS){ //City doesn't expand if it's metropolis.
 		return;
-
-	uint8 newRank = currentRank + 1;
+	}
 
 	Zone* zone = city->getZone();
+	if (zone == nullptr) return;
 
-	if (zone == nullptr)
-		return;
-
+	uint8 newRank = currentRank + 1;
 	bool rankCapped = isCityRankCapped(zone->getZoneName(), newRank);
 
 	ManagedReference<SceneObject*> obj = zoneServer->getObject(city->getMayorID());
-
 	if (obj != nullptr && obj->isPlayerCreature()) {
 		CreatureObject* mayor = cast<CreatureObject*> (obj.get());
 
