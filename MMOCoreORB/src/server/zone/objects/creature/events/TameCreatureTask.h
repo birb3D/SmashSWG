@@ -90,8 +90,7 @@ public:
 				resetStatus();
 
 				int ferocity = creature->getFerocity();
-
-				if (System::random(20 - ferocity) == 0) {
+				if( ferocity >= 10 || System::random(10 - ferocity) == 0) {
 					CombatManager::instance()->startCombat(creature,player,true);
 				}
 			}
