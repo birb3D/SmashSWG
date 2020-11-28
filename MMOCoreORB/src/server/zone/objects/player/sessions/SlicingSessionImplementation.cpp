@@ -707,12 +707,19 @@ void SlicingSessionImplementation::handleWeaponSlice() {
 
 	uint8 percentage = System::random(max - min) + min;
 
-	switch(System::random(1)) {
+	int rando = System::random(1);
+	if(sliceSkill >= 4)
+		rando = System::random(2);
+
+	switch(rando) {
 	case 0:
 		handleSliceDamage(percentage);
 		break;
 	case 1:
 		handleSliceSpeed(percentage);
+		break;
+	case 2:
+		handleSliceHam(percentage);
 		break;
 	}
 }
@@ -782,6 +789,28 @@ void SlicingSessionImplementation::handleSliceSpeed(uint8 percent) {
 	params.setStringId("@slicing/slicing:spd_mod");
 
 	player->sendSystemMessage(params);
+}
+
+void SlicingSessionImplementation::handleSliceHam(uint8 percent) {
+	ManagedReference<CreatureObject*> player = this->player.get();
+	ManagedReference<TangibleObject*> tangibleObject = this->tangibleObject.get();
+
+	if (tangibleObject == nullptr || player == nullptr || !tangibleObject->isWeaponObject())
+		return;
+
+	WeaponObject* weap = cast<WeaponObject*>(tangibleObject.get());
+
+	Locker locker(weap);
+
+	if (weap->hasPowerup())
+		this->detachPowerUp(player, weap);
+
+	weap->setHamSlice(percent / 100.f);
+	weap->setSliced(true);
+
+	String message = "You have successfully decreased the HAM cost of the weapon by " + String::valueOf(percent) + "%!";
+
+	player->sendSystemMessage(message);
 }
 
 void SlicingSessionImplementation::handleArmorSlice() {

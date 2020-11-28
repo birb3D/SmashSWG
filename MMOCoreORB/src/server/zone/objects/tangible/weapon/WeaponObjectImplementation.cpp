@@ -34,6 +34,10 @@ void WeaponObjectImplementation::initializeTransientMembers() {
 	if(speedSlice > 1.0 || speedSlice < .5) {
 		speedSlice = 1;
 	}
+
+	if(hamSlice > 1.0 || hamSlice < .5) {
+		hamSlice = 1;
+	}
 }
 
 void WeaponObjectImplementation::notifyLoadFromDatabase() {
@@ -550,24 +554,36 @@ float WeaponObjectImplementation::getDamageRadius(bool withPup) const {
 
 
 int WeaponObjectImplementation::getHealthAttackCost(bool withPup) const {
-	if (powerupObject != nullptr && withPup)
-		return healthAttackCost - (abs(healthAttackCost) * powerupObject->getPowerupStat("healthAttackCost"));
+	float hamCost = (float)healthAttackCost;
+	if (sliced)
+		hamCost = hamCost * hamSlice;
 
-	return healthAttackCost;
+	if (powerupObject != nullptr && withPup)
+		return (int)(hamCost - (abs(hamCost) * powerupObject->getPowerupStat("healthAttackCost")));
+
+	return (int)hamCost;
 }
 
 int WeaponObjectImplementation::getActionAttackCost(bool withPup) const {
-	if (powerupObject != nullptr && withPup)
-		return actionAttackCost - (abs(actionAttackCost) * powerupObject->getPowerupStat("actionAttackCost"));
+	float hamCost = (float)actionAttackCost;
+	if (sliced)
+		hamCost = hamCost * hamSlice;
 
-	return actionAttackCost;
+	if (powerupObject != nullptr && withPup)
+		return (int)(hamCost - (abs(hamCost) * powerupObject->getPowerupStat("actionAttackCost")));
+
+	return (int)hamCost;
 }
 
 int WeaponObjectImplementation::getMindAttackCost(bool withPup) const {
-	if (powerupObject != nullptr && withPup)
-		return mindAttackCost - (abs(mindAttackCost) * powerupObject->getPowerupStat("mindAttackCost"));
+	float hamCost = (float)mindAttackCost;
+	if (sliced)
+		hamCost = hamCost * hamSlice;
 
-	return mindAttackCost;
+	if (powerupObject != nullptr && withPup)
+		return (int)(hamCost - (abs(hamCost) * powerupObject->getPowerupStat("mindAttackCost")));
+
+	return (int)hamCost;
 }
 
 void WeaponObjectImplementation::updateCraftingValues(CraftingValues* values, bool firstUpdate) {
