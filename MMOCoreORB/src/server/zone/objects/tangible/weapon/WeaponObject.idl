@@ -62,6 +62,7 @@ class WeaponObject extends TangibleObject {
 
 	protected float damageSlice;
 	protected float speedSlice;
+	protected float hamSlice;
 
 	@dereferenced
 	protected Vector<int> dotType;
@@ -118,6 +119,7 @@ class WeaponObject extends TangibleObject {
 
 		damageSlice = 1;
 		speedSlice = 1;
+		hamSlice = 1;
 
 		wearableSkillMods.setAllowOverwriteInsertPlan();
 	}
@@ -560,6 +562,12 @@ class WeaponObject extends TangibleObject {
 		if(value > 0.5f || value < 0)
 			return;
 		speedSlice = 1 - value;
+	}
+	
+	public void setHamSlice(float value) {
+		if(value > 0.5f || value < 0)
+			return;
+		hamSlice = 1 - value;
 	}
 
 	@read
