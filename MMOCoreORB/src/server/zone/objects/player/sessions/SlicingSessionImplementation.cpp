@@ -552,7 +552,7 @@ void SlicingSessionImplementation::handleUseColorCrystal(SuiListBox* suiBox) {
 	int rand = System::random(100);
 	//int rand = 80; // debug
 
-	if(rand < 25) {
+	if(rand < 30) {
 		// Critical Failure
 
 		// Break Item
@@ -579,7 +579,7 @@ void SlicingSessionImplementation::handleUseColorCrystal(SuiListBox* suiBox) {
 		player->sendSystemMessage("Oh No! Looks like you blew up the weapon trying to do that!");
 
 	}
-	else if(rand < 50) {
+	else if(rand < 55) {
 
 		// Nothing Happens
 		weapon->setSliced(true);
@@ -587,7 +587,7 @@ void SlicingSessionImplementation::handleUseColorCrystal(SuiListBox* suiBox) {
 
 
 	}
-	else if(rand < 75) {
+	else if(rand < 85) {
 
 		// Do a regular slice
 		handleWeaponSlice();
