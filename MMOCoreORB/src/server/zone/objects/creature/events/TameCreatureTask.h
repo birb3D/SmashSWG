@@ -90,8 +90,23 @@ public:
 				resetStatus();
 
 				int ferocity = creature->getFerocity();
-				if( ferocity >= 10 || System::random(10 - ferocity) == 0) {
+
+				// Always attack back if greater than or equal to 10 ferocity
+				if( ferocity >= 10 ){
 					CombatManager::instance()->startCombat(creature,player,true);
+					break;
+				}
+
+				// Handle ferocious creatures Ferocity * 10% chance 
+				if( ferocity >= 3 && System::random(10) < ferocity ) {
+					CombatManager::instance()->startCombat(creature,player,true);
+					break;
+				}
+
+				// If creature is vicious there is a 25% final chance it might attack
+				if( ferocity < 3 && creature->isVicious() && System::random(100) < 25 ){
+					CombatManager::instance()->startCombat(creature,player,true);
+					break;
 				}
 			}
 
