@@ -64,7 +64,7 @@ CityVotingCyclesUntilLocked = 2
 CityUpdateInterval = 10080
 
 --The amount of time in minutes before the city performs a rank update.
-CityRankUpdateInterval = 1440
+CityRankUpdateInterval = 2880
 
 --The amount of time in minutes a new city has to gain enough citizens to remain a city.
 NewCityGracePeriod = 1440
