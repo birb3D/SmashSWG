@@ -159,6 +159,10 @@ void CityRegionImplementation::rescheduleUpdateEvent(uint32 seconds) {
 	} else if (cityUpdateEvent->isScheduled()) {
 		cityUpdateEvent->cancel();
 	}
+
+	if( seconds == 0 ) {
+		seconds = -1 * round(_this.getReferenceUnsafeStaticCast()->getNextUpdateTime()->miliDifference() / 1000.f);
+	}
 	cityUpdateEvent->schedule(seconds * 1000);
 
 	AtomicTime next;
@@ -174,6 +178,10 @@ void CityRegionImplementation::rescheduleRankUpdateEvent(uint32 seconds) {
 		cityRankUpdateEvent = new CityRankUpdateEvent(_this.getReferenceUnsafeStaticCast(), ServerCore::getZoneServer());
 	} else if (cityRankUpdateEvent->isScheduled()) {
 		cityRankUpdateEvent->cancel();
+	}
+
+	if( seconds == 0 ) {
+		seconds = -1 * round(_this.getReferenceUnsafeStaticCast()->getNextRankUpdateTime()->miliDifference() / 1000.f);
 	}
 	cityRankUpdateEvent->schedule(seconds * 1000);
 
