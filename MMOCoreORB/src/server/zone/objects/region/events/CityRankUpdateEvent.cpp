@@ -18,7 +18,7 @@ void CityRankUpdateEvent::run() {
 
 	Locker locker(city);
 	if (zoneServer->isServerLoading()) {
-		city->rescheduleRankUpdateEvent(120);
+		city->rescheduleRankUpdateEvent(0);
 		return;
 	}
 
