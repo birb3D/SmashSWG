@@ -2126,6 +2126,32 @@ void PlayerManagerImplementation::sendLoginMessage(CreatureObject* creature) {
 
 	ChatSystemMessage* csm = new ChatSystemMessage(UnicodeString(motd), ChatSystemMessage::DISPLAY_CHATONLY);
 	creature->sendMessage(csm);
+
+	//ManagedReference<SceneObject*> inventory = creature->getSlottedObject("inventory");
+
+	//if (inventory == nullptr)
+		//return;
+
+	for (int i = 0; i < creature->getSlottedObjectsSize(); ++i) {
+		ManagedReference<SceneObject*> item = creature->getSlottedObject(i);
+
+		if (item == nullptr || item->getObjectTemplate()->getFullTemplateString() != "object/weapon/melee/unarmed/unarmed_default_player.iff") {
+			continue;
+		}
+
+		WeaponObject* weapon = item.castTo<WeaponObject*>();
+		if(weapon == nullptr)
+			continue;
+
+		weapon->setHealthAttackCost(15);
+		weapon->setActionAttackCost(25);
+		weapon->setMindAttackCost(20);
+
+		weapon->setMinDamage(5);
+		weapon->setMaxDamage(35);
+
+		weapon->setAttackSpeed(3.5f);
+	}
 }
 
 void PlayerManagerImplementation::resendLoginMessageToAll() {
@@ -4327,6 +4353,7 @@ void PlayerManagerImplementation::fixBuffSkillMods(CreatureObject* player) {
 			player->updateGroupInviterID(grp->getLeader()->getObjectID());
 			GroupManager::instance()->joinGroup(player);
 		}
+
 	} catch (const Exception& e) {
 		error(e.getMessage());
 	}
