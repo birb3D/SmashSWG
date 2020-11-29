@@ -162,6 +162,9 @@ void CityRegionImplementation::rescheduleUpdateEvent(uint32 seconds) {
 
 	if( seconds == 0 ) {
 		seconds = -1 * round(_this.getReferenceUnsafeStaticCast()->getNextUpdateTime()->miliDifference() / 1000.f);
+
+		// Cap time at current update interval
+		seconds = Math::min(seconds, (uint32)CityManagerImplementation::cityUpdateInterval * 60);
 	}
 	cityUpdateEvent->schedule(seconds * 1000);
 
@@ -182,6 +185,9 @@ void CityRegionImplementation::rescheduleRankUpdateEvent(uint32 seconds) {
 
 	if( seconds == 0 ) {
 		seconds = -1 * round(_this.getReferenceUnsafeStaticCast()->getNextRankUpdateTime()->miliDifference() / 1000.f);
+		
+		// Cap time at current update interval
+		seconds = Math::min(seconds, (uint32)CityManagerImplementation::cityRankUpdateInterval * 60);
 	}
 	cityRankUpdateEvent->schedule(seconds * 1000);
 
