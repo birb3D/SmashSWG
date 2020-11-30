@@ -1282,7 +1282,7 @@ void AiAgentImplementation::addDefender(SceneObject* defender) {
 		showFlyText("npc_reaction/flytext", "threaten", 0xFF, 0, 0);
 		setFollowObject(defender);
 		if (defender->isCreatureObject() && threatMap != nullptr)
-			threatMap->addAggro(defender->asCreatureObject(), 1);
+			threatMap->addAggro(defender->asCreatureObject(), 100, 5);
 	} else if (stateCopy <= STALKING) {
 		setFollowState(AiAgent::FOLLOWING);
 	}
@@ -2511,7 +2511,7 @@ int AiAgentImplementation::inflictDamage(TangibleObject* attacker, int damageTyp
 		if (damage > 0) {
 			// This damage is DOT or other types of non direct combat damage, it should not count towards loot and thus not be added to the threat map damage.
 			// Adding aggro should still be done.
-			getThreatMap()->addAggro(creature, 1);
+			getThreatMap()->addAggro(creature, damage, 10);
 		}
 	}
 	activateInterrupt(attacker, ObserverEventType::DAMAGERECEIVED);

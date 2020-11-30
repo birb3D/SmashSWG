@@ -87,7 +87,7 @@ void ThreatMap::addDamage(CreatureObject* target, uint32 damage, String xp) {
 	if (idx == -1) {
 		ThreatMapEntry entry;
 		entry.addDamage(xpToAward, damage);
-		entry.addAggro(1);
+		entry.addAggro(damage);
 
 		put(target, entry);
 		registerObserver(target);
@@ -95,7 +95,7 @@ void ThreatMap::addDamage(CreatureObject* target, uint32 damage, String xp) {
 	} else {
 		ThreatMapEntry* entry = &elementAt(idx).getValue();
 		entry->addDamage(xpToAward, damage);
-		entry->addAggro(1);
+		entry->addAggro(damage);
 	}
 }
 
@@ -392,6 +392,10 @@ CreatureObject* ThreatMap::getHighestThreatCreature() {
 
 		ManagedReference<CreatureObject*> selfStrong = cast<CreatureObject*>(self.get().get());
 
+		entry->removeAggro(entry->getAggroMod() / 2);
+
+		System::out << creature->getFirstName() << ": " << entry->getAggroMod() << "\n";
+
 		if (!creature->isDead() && !creature->isIncapacitated() && creature->isInRange(selfStrong, 128.f) && creature->isAttackableBy(selfStrong))
 			threatMatrix.add(creature, entry);
 	}
@@ -462,13 +466,13 @@ void ThreatMap::addHeal(CreatureObject* target, int value) {
 	if (idx == -1) {
 		ThreatMapEntry entry;
 		entry.addHeal(value);
-		entry.addAggro(1);
+		entry.addAggro(value*20); // Heals Aggro 2x over damage
 		put(target, entry);
 		registerObserver(target);
 
 	} else {
 		ThreatMapEntry* entry = &elementAt(idx).getValue();
 		entry->addHeal(value);
-		entry->addAggro(1);
+		entry->addAggro(value*20);
 	}
 }
