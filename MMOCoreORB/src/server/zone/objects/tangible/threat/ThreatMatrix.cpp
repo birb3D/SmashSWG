@@ -105,19 +105,23 @@ CreatureObject* ThreatMatrix::getLargestThreat() {
 		if(aggroMap.size() > 0) {
 			targetSelection.add(aggroMap.elementAt(aggroMap.size() -1).getValue());
 			targetSelection.add(aggroMap.elementAt(aggroMap.size() -1).getValue());
+			targetSelection.add(aggroMap.elementAt(aggroMap.size() -1).getValue());
+			targetSelection.add(aggroMap.elementAt(aggroMap.size() -1).getValue());
 			targetSelection.add(aggroMap.elementAt(System::random(aggroMap.size() -1)).getValue());
 		}
 		else if(damageMap.size() > 0) {
 			targetSelection.add(damageMap.elementAt(damageMap.size() -1).getValue());
 			targetSelection.add(damageMap.elementAt(damageMap.size() -1).getValue());
+			targetSelection.add(damageMap.elementAt(damageMap.size() -1).getValue());
+			targetSelection.add(damageMap.elementAt(damageMap.size() -1).getValue());
 			targetSelection.add(damageMap.elementAt(System::random(damageMap.size() -1)).getValue());
 		}
 
-		/*
+
 		if(healMap.size() > 0) {
 			targetSelection.add(healMap.elementAt(healMap.size() -1).getValue());
 		}
-		*/
+
 
 		if (targetSelection.size() > 0)
 			returnThreat = targetSelection.get(System::random(targetSelection.size()- 1));
