@@ -128,7 +128,7 @@ class ThreatMap : public VectorMap<ManagedReference<CreatureObject*> , ThreatMap
 public:
 	/// Time between normal target evaluation
 	enum {
-		EVALUATIONCOOLDOWN = 6000
+		EVALUATIONCOOLDOWN = 8000
 	};
 
 protected:
