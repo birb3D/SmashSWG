@@ -466,13 +466,13 @@ void ThreatMap::addHeal(CreatureObject* target, int value) {
 	if (idx == -1) {
 		ThreatMapEntry entry;
 		entry.addHeal(value);
-		entry.addAggro(value*20); // Heals Aggro 2x over damage
+		entry.addAggro(value*10); // Heals Aggro 10x over damage
 		put(target, entry);
 		registerObserver(target);
 
 	} else {
 		ThreatMapEntry* entry = &elementAt(idx).getValue();
 		entry->addHeal(value);
-		entry->addAggro(value*20);
+		entry->addAggro(value*10);
 	}
 }
