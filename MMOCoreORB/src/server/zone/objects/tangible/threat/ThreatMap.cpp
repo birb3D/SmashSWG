@@ -394,7 +394,7 @@ CreatureObject* ThreatMap::getHighestThreatCreature() {
 
 		entry->removeAggro(entry->getAggroMod() / 2);
 
-		System::out << creature->getFirstName() << ": " << entry->getAggroMod() << "\n";
+		//System::out << creature->getFirstName() << ": " << entry->getAggroMod() << "\n";
 
 		if (!creature->isDead() && !creature->isIncapacitated() && creature->isInRange(selfStrong, 128.f) && creature->isAttackableBy(selfStrong))
 			threatMatrix.add(creature, entry);
