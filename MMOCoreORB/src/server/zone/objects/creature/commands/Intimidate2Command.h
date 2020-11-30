@@ -42,7 +42,7 @@ public:
 			CreatureObject* targetCreature = cast<CreatureObject*>(targetObject.get());
 			Locker clocker(targetCreature, creature);
 			if(targetCreature != nullptr && !targetObject->isPlayerCreature())
-				targetCreature->getThreatMap()->addAggro(creature, 6000);
+				targetCreature->getThreatMap()->addAggro(creature, 12000);
 
 			if (ghost != nullptr && !ghost->getCommandMessageString(STRING_HASHCODE("intimidate2")).isEmpty() && creature->checkCooldownRecovery("command_message")) {
 				UnicodeString shout(ghost->getCommandMessageString(STRING_HASHCODE("intimidate2")));
