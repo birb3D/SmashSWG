@@ -731,14 +731,17 @@ void WeaponObjectImplementation::decay(CreatureObject* user) {
 		return;
 	}
 
-	int roll = System::random(100);
-	int chance = 5;
+	Locker locker(_this.getReferenceUnsafeStaticCast());
+
+	int roll = System::random(10000);
+	int chance = (int)(getAttackSpeed() * 100); // Chance is based off attack speed (faster weapons have faster speed
+	if(chance < 50) chance = 50; // Minimum 0.5% chance
 
 	if (hasPowerup())
-		chance += 15;
+		chance *= 3; // Powerups cause decay 3x as fast
 
 	if (roll < chance) {
-		Locker locker(_this.getReferenceUnsafeStaticCast());
+
 
 		if (isJediWeapon()) {
 			ManagedReference<SceneObject*> saberInv = getSlottedObject("saber_inv");
