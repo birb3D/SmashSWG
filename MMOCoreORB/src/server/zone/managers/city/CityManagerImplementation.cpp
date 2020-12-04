@@ -320,7 +320,8 @@ void CityManagerImplementation::sendCityReport(CreatureObject* creature, const S
 			<< ", " << String::valueOf(city->getAllStructuresCount())
 			<< ", " << String::valueOf((int)city->getCityTreasury())
 			<< ", x: " << String::valueOf(city->getPositionX()) << " y:" << String::valueOf(city->getPositionY())
-			<< ", " << city->getNextUpdateTime()->getFormattedTime();
+			<< ", " << city->getNextUpdateTime()->getFormattedTime()
+			<< ", " << city->getNextRankUpdateTime()->getFormattedTime();
 
 		if (city->hasAssessmentPending()) {
 			report << ", " << city->getNextAssessmentTime()->getFormattedTime() << endl;

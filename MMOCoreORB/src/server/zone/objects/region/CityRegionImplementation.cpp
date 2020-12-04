@@ -194,7 +194,7 @@ void CityRegionImplementation::rescheduleRankUpdateEvent(uint32 seconds) {
 	AtomicTime next;
 	Core::getTaskManager()->getNextExecutionTime(cityRankUpdateEvent, next);
 
-	nextUpdateTime = next.getTimeObject();
+	nextRankUpdateTime = next.getTimeObject();
 }
 
 void CityRegionImplementation::scheduleCitizenAssessment(uint32 seconds) {
