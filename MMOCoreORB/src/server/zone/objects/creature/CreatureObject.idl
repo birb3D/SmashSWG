@@ -1367,8 +1367,8 @@ class CreatureObject extends TangibleObject {
 		return cooldownTimerMap.isPast("postureChangeDelay");
 	}
 
-	public void updatePostureDownRecovery() {
-		cooldownTimerMap.updateToCurrentAndAddMili("postureDownRecovery", 30000);
+	public void updatePostureDownRecovery(unsigned long recovery) {
+		cooldownTimerMap.updateToCurrentAndAddMili("postureDownRecovery", recovery);
 	}
 
 	@read
@@ -1376,8 +1376,8 @@ class CreatureObject extends TangibleObject {
 		return cooldownTimerMap.isPast("postureDownRecovery");
 	}
 
-	public void updatePostureUpRecovery() {
-		cooldownTimerMap.updateToCurrentAndAddMili("postureUpRecovery", 30000);
+	public void updatePostureUpRecovery(unsigned long recovery) {
+		cooldownTimerMap.updateToCurrentAndAddMili("postureUpRecovery", recovery);
 	}
 
 	@read
@@ -1385,8 +1385,8 @@ class CreatureObject extends TangibleObject {
 		return cooldownTimerMap.isPast("postureUpRecovery");
 	}
 
-	public void updateKnockdownRecovery() {
-		cooldownTimerMap.updateToCurrentAndAddMili("knockdownRecovery", 30000);
+	public void updateKnockdownRecovery(unsigned long recovery) {
+		cooldownTimerMap.updateToCurrentAndAddMili("knockdownRecovery", recovery);
 	}
 
 	@read
