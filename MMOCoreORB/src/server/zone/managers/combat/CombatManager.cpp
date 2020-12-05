@@ -1869,6 +1869,16 @@ void CombatManager::applyStates(CreatureObject* creature, CreatureObject* target
 			if (System::random(100) > accuracyMod - targetDefense)
 				failed = true;
 
+			// Hard chance to fail for certain status effects
+			if (effectType == CommandEffect::KNOCKDOWN ||
+				effectType == CommandEffect::POSTUREUP ||
+				effectType == CommandEffect::POSTUREDOWN ||
+				effectType == CommandEffect::INTIMIDATE ||
+				effectType == CommandEffect::NEXTATTACKDELAY) {
+				if(System::random(100) < 20)
+					failed = true;
+			}
+
 			// no reason to apply jedi defenses if primary defense was successful
 			// and only perform extra rolls if the character is a Jedi
 			if (!failed && targetCreature->isPlayerCreature() && targetCreature->getPlayerObject()->isJedi()) {
@@ -1906,19 +1916,22 @@ void CombatManager::applyStates(CreatureObject* creature, CreatureObject* target
 		if (failed) {
 			switch (effectType) {
 			case CommandEffect::KNOCKDOWN:
-				if (!targetCreature->checkKnockdownRecovery() && targetCreature->getPosture() != CreaturePosture::UPRIGHT)
-					targetCreature->setPosture(CreaturePosture::UPRIGHT);
-				creature->sendSystemMessage("@cbt_spam:knockdown_fail");
+				//if (!targetCreature->checkKnockdownRecovery() && targetCreature->getPosture() != CreaturePosture::UPRIGHT)
+				//	targetCreature->setPosture(CreaturePosture::UPRIGHT);
+				if(targetCreature->getPosture() != CreaturePosture::KNOCKEDDOWN) // Only send message if we CAN apply state
+					creature->sendSystemMessage("@cbt_spam:knockdown_fail");
 				break;
 			case CommandEffect::POSTUREDOWN:
-				if (!targetCreature->checkPostureDownRecovery() && targetCreature->getPosture() != CreaturePosture::UPRIGHT)
-					targetCreature->setPosture(CreaturePosture::UPRIGHT);
-				creature->sendSystemMessage("@cbt_spam:posture_change_fail");
+				//if (!targetCreature->checkPostureDownRecovery() && targetCreature->getPosture() != CreaturePosture::UPRIGHT)
+				//	targetCreature->setPosture(CreaturePosture::UPRIGHT);
+				if(targetCreature->getPosture() != CreaturePosture::PRONE) // Only send message if we CAN apply state
+					creature->sendSystemMessage("@cbt_spam:posture_change_fail");
 				break;
 			case CommandEffect::POSTUREUP:
-				if (!targetCreature->checkPostureUpRecovery() && targetCreature->getPosture() != CreaturePosture::UPRIGHT)
-					targetCreature->setPosture(CreaturePosture::UPRIGHT);
-				creature->sendSystemMessage("@cbt_spam:posture_change_fail");
+				//if (!targetCreature->checkPostureUpRecovery() && targetCreature->getPosture() != CreaturePosture::UPRIGHT)
+				//	targetCreature->setPosture(CreaturePosture::UPRIGHT);
+				if(targetCreature->getPosture() != CreaturePosture::UPRIGHT) // Only send message if we CAN apply state
+					creature->sendSystemMessage("@cbt_spam:posture_change_fail");
 				break;
 			case CommandEffect::NEXTATTACKDELAY:
 				targetCreature->showFlyText("combat_effects", "warcry_miss", 0xFF, 0, 0 );

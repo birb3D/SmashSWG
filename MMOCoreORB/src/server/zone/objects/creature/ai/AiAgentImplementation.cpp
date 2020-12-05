@@ -1065,7 +1065,12 @@ void AiAgentImplementation::selectWeapon() {
 	WeaponObject* finalWeap = nullptr;
 	ManagedReference<WeaponObject*> defaultWeapon = getSlottedObject("default_weapon").castTo<WeaponObject*>();
 
-	if (getUseRanged()) {
+	bool useRange = getUseRanged();
+
+	if(this->isKneeling() || this->isProne())
+		useRange = true;
+
+	if (useRange) {
 		if (readyWeapon != nullptr && readyWeapon->isRangedWeapon()) {
 			finalWeap = readyWeapon;
 		} else if (defaultWeapon != nullptr && defaultWeapon->isRangedWeapon()) {
