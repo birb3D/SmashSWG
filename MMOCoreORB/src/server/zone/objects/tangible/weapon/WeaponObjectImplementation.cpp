@@ -18,6 +18,7 @@
 #include "server/zone/objects/tangible/component/lightsaber/LightsaberCrystalComponent.h"
 #include "server/zone/packets/object/WeaponRanges.h"
 #include "server/zone/ZoneProcessServer.h"
+#include "server/zone/managers/combat/CombatManager.h"
 
 
 void WeaponObjectImplementation::initializeTransientMembers() {
@@ -734,11 +735,11 @@ void WeaponObjectImplementation::decay(CreatureObject* user) {
 	Locker locker(_this.getReferenceUnsafeStaticCast());
 
 	int roll = System::random(10000);
-	int chance = (int)(getAttackSpeed() * 100); // Chance is based off attack speed (faster weapons have faster speed
+	int chance = (int)(CombatManager::instance()->calculateWeaponAttackSpeed(user, _this.getReferenceUnsafeStaticCast(), 1.0f) * 2 * 100); // Chance is based off attack speed (faster weapons have faster speed
 	if(chance < 50) chance = 50; // Minimum 0.5% chance
 
 	if (hasPowerup())
-		chance *= 3; // Powerups cause decay 3x as fast
+		chance *= 2; // Powerups cause decay 2x as fast
 
 	if (roll < chance) {
 
@@ -758,7 +759,7 @@ void WeaponObjectImplementation::decay(CreatureObject* user) {
 				}
 			}
 		} else {
-			const int decayAmount = 1 + System::random(3);
+			const int decayAmount = 1 + System::random(2);
 			inflictDamage(_this.getReferenceUnsafeStaticCast(), 0, decayAmount, true, true);
 
 			if (((float)conditionDamage - 1 / (float)maxCondition < 0.75) && ((float)conditionDamage / (float)maxCondition > 0.75))
