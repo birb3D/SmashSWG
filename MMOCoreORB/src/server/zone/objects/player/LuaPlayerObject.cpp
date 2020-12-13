@@ -17,6 +17,8 @@
 #include "server/zone/objects/region/CityRegion.h"
 #include "server/zone/objects/player/sessions/SlicingSession.h"
 
+#include <iostream>
+
 const char LuaPlayerObject::className[] = "LuaPlayerObject";
 
 Luna<LuaPlayerObject>::RegType LuaPlayerObject::Register[] = {
@@ -40,6 +42,7 @@ Luna<LuaPlayerObject>::RegType LuaPlayerObject::Register[] = {
 		{ "awardBadge", &LuaPlayerObject::awardBadge },
 		{ "hasBadge", &LuaPlayerObject::hasBadge },
 		{ "addHologrindProfession", &LuaPlayerObject::addHologrindProfession },
+		{ "setHologrindProfession", &LuaPlayerObject::setHologrindProfession },
 		{ "getHologrindProfessions", &LuaPlayerObject::getHologrindProfessions },
 		{ "getForcePower", &LuaPlayerObject::getForcePower },
 		{ "getForcePowerMax", &LuaPlayerObject::getForcePowerMax },
@@ -82,6 +85,7 @@ Luna<LuaPlayerObject>::RegType LuaPlayerObject::Register[] = {
 		{ "startSlicingSession", &LuaPlayerObject::startSlicingSession },
 		{ "setVisibility", &LuaPlayerObject::setVisibility },
 		{ "getPlayedTimeString", &LuaPlayerObject::getPlayedTimeString },
+		{ "getFirstname", &LuaPlayerObject::getFirstname },
 		{ 0, 0 }
 };
 
@@ -334,6 +338,15 @@ int LuaPlayerObject::addHologrindProfession(lua_State* L){
 	byte profession = lua_tointeger(L, -1);
 
 	realObject->addHologrindProfession(profession);
+
+	return 0;
+}
+
+int LuaPlayerObject::setHologrindProfession(lua_State* L){
+	int index = lua_tointeger(L, -2) - 1;
+	byte profession = lua_tointeger(L, -1);
+
+	realObject->setHologrindProfession(index, profession);
 
 	return 0;
 }
@@ -747,6 +760,14 @@ int LuaPlayerObject::getPlayedTimeString(lua_State* L) {
 	Locker locker(realObject);
 
 	lua_pushstring(L, realObject->getPlayedTimeString(verbose).toCharArray());
+
+	return 1;
+}
+
+int LuaPlayerObject::getFirstname(lua_State* L) {
+	Locker locker(realObject);
+
+	lua_pushstring(L, realObject->getName().toCharArray());
 
 	return 1;
 }

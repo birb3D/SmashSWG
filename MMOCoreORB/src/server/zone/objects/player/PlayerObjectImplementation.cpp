@@ -114,6 +114,14 @@ PlayerObject* PlayerObject::asPlayerObject() {
 	return this;
 }
 
+String PlayerObjectImplementation::getName() {
+	ManagedReference<CreatureObject*> strongParent = getParent().get().castTo<CreatureObject*>();
+	if (strongParent == nullptr) {
+		return "";
+	}
+	return strongParent->getFirstName();
+}
+
 void PlayerObjectImplementation::checkPendingMessages() {
 	ObjectManager *objectManager = ObjectManager::instance();
 	ManagedReference<PendingMessageList*> messageList = getZoneServer()->getChatManager()->getPendingMessages(parent.getSavedObjectID());
