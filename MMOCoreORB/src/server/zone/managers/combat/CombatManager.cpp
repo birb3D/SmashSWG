@@ -1207,7 +1207,7 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 		Locker plocker(psg);
 
-		psg->inflictDamage(psg, 0, dmgAbsorbed * 0.05, true, true);
+		psg->inflictDamage(psg, 0, dmgAbsorbed * 0.025, true, true);
 
 	}
 
@@ -1234,9 +1234,9 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		Locker alocker(armor);
 
 		if(hitLocation == 1) // Body Armor should absorb more damage
-			armor->inflictDamage(armor, 0, dmgAbsorbed * 0.03, true, true);
+			armor->inflictDamage(armor, 0, dmgAbsorbed * 0.015, true, true);
 		else
-			armor->inflictDamage(armor, 0, dmgAbsorbed * 0.05, true, true);
+			armor->inflictDamage(armor, 0, dmgAbsorbed * 0.025, true, true);
 	}
 
 	return damage;
