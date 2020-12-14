@@ -7,11 +7,11 @@ strange_scope_weapon_advanced = {
 	directObjectTemplate = "object/tangible/component/weapon/scope_weapon_advanced.iff",
 	craftingValues = {
 		{"woundchance", 4,20,1},
-		{"hitpoints", 20,100,0},
+		{"hitpoints", 60,100,0},
 		{"midrangemod",9,60,0},
-		{"attackhealthcost",50,-15,0},
-		{"attackactioncost",50,-15,0},
-		{"attackmindcost",50,-15,0},
+		{"attackhealthcost",15,-15,0},
+		{"attackactioncost",15,-15,0},
+		{"attackmindcost",15,-15,0},
 		{"useCount",3,10,0}
 	},
 	customizationStringName = {},
