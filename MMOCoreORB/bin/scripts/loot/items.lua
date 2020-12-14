@@ -27,6 +27,8 @@ includeFile("items/custom/strange_bio_component_food_heavy.lua")
 includeFile("items/custom/strange_scope_weapon_advanced.lua")
 includeFile("items/custom/strange_reinforcement_core_advanced.lua")
 includeFile("items/custom/strange_sword_core_advanced.lua")
+includeFile("items/custom/strange_stock_advanced.lua")
+includeFile("items/custom/strange_vibro_unit_advanced.lua")
 
 includeFile("items/attachment_armor.lua")
 includeFile("items/attachment_clothing.lua")
