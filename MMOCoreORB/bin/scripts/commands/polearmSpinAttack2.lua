@@ -56,13 +56,13 @@ PolearmSpinAttack2Command = {
 
 	stateEffects = {
 	  StateEffect( 
-		DIZZY_EFFECT, 
+		BLIND_EFFECT, 
 		{}, 
-		{ "dizzy_defense" }, 
+		{ "blind_defense" }, 
 		{ "jedi_state_defense", "resistance_states" },
-		75, 
+		100, 
 		0, 
-		25 
+		50 
 	  )
 	},
 
