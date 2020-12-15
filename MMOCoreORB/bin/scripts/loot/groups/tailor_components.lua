@@ -6,13 +6,13 @@ tailor_components = {
 	maximumLevel = 0,
 	lootItems = {
 		{itemTemplate = "crystalline_clothing_treatment", weight = 2800000},
-		{itemTemplate = "heavy_duty_clasp", weight = 2800000},
-		{itemTemplate = "heavy_duty_leather", weight = 2800000},
+		{itemTemplate = "heavy_duty_clasp", weight = 2190000},
+		{itemTemplate = "heavy_duty_leather", weight = 2190000},
 		--16% below this point
-		{itemTemplate = "fiberplast_panel", weight = 250000},
-		{itemTemplate = "synthetic_cloth", weight = 200000},
-		{itemTemplate = "reinforced_fiber_panel", weight = 200000},
-		{itemTemplate = "armor_segment_bone", weight = 60000},
+		{itemTemplate = "fiberplast_panel", weight = 220000},
+		{itemTemplate = "synthetic_cloth", weight = 180000},
+		{itemTemplate = "reinforced_fiber_panel", weight = 180000},
+		{itemTemplate = "armor_segment_bone", weight = 50000},
 		{itemTemplate = "armor_segment_zam", weight = 50000},
 		{itemTemplate = "armor_segment_chitin", weight = 50000},
 		{itemTemplate = "strange_biologic_effect_controller", weight = 110000},
@@ -29,6 +29,12 @@ tailor_components = {
 		{itemTemplate = "strange_stock_advanced", weight = 50000},
 		{itemTemplate = "strange_droid_combat_module_slow", weight = 50000},
 		{itemTemplate = "strange_droid_combat_module_fast", weight = 50000},
+		{itemTemplate = "strange_structure_fluidic_drilling_pumping_unit", weight = 50000},
+		{itemTemplate = "strange_structure_harvesting_mechanism", weight = 50000},
+		{itemTemplate = "strange_structure_heavy_harvesting_mechanism", weight = 50000},
+		{itemTemplate = "strange_structure_light_ore_mining_unit", weight = 50000},
+		{itemTemplate = "strange_structure_ore_mining_unit", weight = 50000},
+		{itemTemplate = "strange_structure_turbo_fluidic_drilling_pumping_unit", weight = 50000},
 
 	}
 }
