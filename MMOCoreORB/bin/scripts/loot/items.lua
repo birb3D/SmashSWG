@@ -29,6 +29,8 @@ includeFile("items/custom/strange_reinforcement_core_advanced.lua")
 includeFile("items/custom/strange_sword_core_advanced.lua")
 includeFile("items/custom/strange_stock_advanced.lua")
 includeFile("items/custom/strange_vibro_unit_advanced.lua")
+includeFile("items/custom/strange_droid_combat_module_slow.lua")
+includeFile("items/custom/strange_droid_combat_module_fast.lua")
 
 includeFile("items/attachment_armor.lua")
 includeFile("items/attachment_clothing.lua")
