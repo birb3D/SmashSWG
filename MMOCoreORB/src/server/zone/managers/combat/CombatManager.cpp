@@ -2043,6 +2043,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 		defender->inflictDamage(attacker, CreatureAttribute::HEALTH, (int)healthDamage, true, xpType, true, true);
 
 		poolsToWound.add(CreatureAttribute::HEALTH);
+		poolsToWound.add(CreatureAttribute::HEALTH);
+		poolsToWound.add(CreatureAttribute::STRENGTH);
+		poolsToWound.add(CreatureAttribute::CONSTITUTION);
 	}
 
 	if (actionDamaged) {
@@ -2068,6 +2071,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 		defender->inflictDamage(attacker, CreatureAttribute::ACTION, (int)actionDamage, true, xpType, true, true);
 
 		poolsToWound.add(CreatureAttribute::ACTION);
+		poolsToWound.add(CreatureAttribute::ACTION);
+		poolsToWound.add(CreatureAttribute::QUICKNESS);
+		poolsToWound.add(CreatureAttribute::STAMINA);
 	}
 
 	if (mindDamaged) {
@@ -2091,6 +2097,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 		defender->inflictDamage(attacker, CreatureAttribute::MIND, (int)mindDamage, true, xpType, true, true);
 
 		poolsToWound.add(CreatureAttribute::MIND);
+		poolsToWound.add(CreatureAttribute::MIND);
+		poolsToWound.add(CreatureAttribute::FOCUS);
+		poolsToWound.add(CreatureAttribute::WILLPOWER);
 	}
 
 	if (numSpillOverPools > 0) {
