@@ -907,7 +907,7 @@ int AuctionManagerImplementation::checkBidAuction(CreatureObject* player, Auctio
 		return BidAuctionResponseMessage::INVALIDPRICE;
 	}
 
-	if (player->getBankCredits() < price1) { // Credit Check
+	if ((player->getCashCredits() + player->getBankCredits()) < price1) { // Credit Check
 		return BidAuctionResponseMessage::NOTENOUGHCREDITS;
 	}
 
@@ -965,7 +965,7 @@ void AuctionManagerImplementation::doInstantBuy(CreatureObject* player, AuctionI
 	trx.setAutoCommit(false);
 	trx.addRelatedObject(item->getAuctionedItemObjectID(), true);
 	trx.setExportRelatedObjects(true);
-	player->subtractBankCredits(item->getPrice());
+	player->subtractCredits(item->getPrice());
 
 	BaseMessage* msg = new BidAuctionResponseMessage(item->getAuctionedItemObjectID(), 0);
 	player->sendMessage(msg);
