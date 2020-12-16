@@ -28,6 +28,8 @@
 #include "server/zone/objects/building/BuildingObject.h"
 #include "server/chat/ChatManager.h"
 
+#include <iostream>
+
 void EntertainingSessionImplementation::doEntertainerPatronEffects() {
 	ManagedReference<CreatureObject*> creo = entertainer.get();
 
@@ -252,7 +254,20 @@ void EntertainingSessionImplementation::startTickTask() {
 	}
 
 	if (!tickTask->isScheduled()) {
-		tickTask->schedule(10000);
+		ManagedReference<CreatureObject*> player = this->entertainer.get();
+		ManagedReference<PlayerManager*> playerManager = player->getZoneServer()->getPlayerManager();
+
+		PerformanceManager* performanceManager = SkillManager::instance()->getPerformanceManager();
+		ManagedReference<Instrument*> instrument = getInstrument(player);
+		
+		Performance* performance = nullptr;
+		if (dancing){
+			performance = performanceManager->getDance(performanceName);
+		} else if (playingMusic && instrument) {
+			performance = performanceManager->getSong(performanceName, instrument->getInstrumentType());
+		}
+		
+		tickTask->schedule(performance->getLoopDuration() * 1000);
 	}
 }
 
