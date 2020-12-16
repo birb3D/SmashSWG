@@ -101,7 +101,7 @@ public:
 			}
 		}
 
-		StimPack* stimpack = module->findStimPack();
+		StimPack* stimpack = module->findStimPack(std::max(5, std::min(target->getSkillMod("healing_ability"), 35)));
 
 		// droid has to have a stimpack to give
 		if (stimpack == nullptr) {
