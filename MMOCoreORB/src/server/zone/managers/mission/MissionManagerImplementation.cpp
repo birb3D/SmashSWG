@@ -977,11 +977,23 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 
 	int level = 1;
 	int randomTexts = 25;
+	int rando = System::random(100);
 	if (player->hasSkill("combat_bountyhunter_investigation_03")) {
 		level = 3;
+		if(rando < 15) {
+			level = 1;
+		}
+		else if(rando < 35) {
+			level = 2;
+			randomTexts = 50;
+		}
 	} else if (player->hasSkill("combat_bountyhunter_investigation_01")) {
 		level = 2;
 		randomTexts = 50;
+		if(rando < 30) {
+			level = 1;
+			randomTexts = 25;
+		}
 	}
 
 	NameManager* nm = processor->getNameManager();
@@ -1088,6 +1100,10 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 		} else if (level == 3) {
 			reward = creoLevel * (300 + System::random(300));
 		}
+
+		// Increased rewards for droid missions
+		if(level > 1)
+			reward = (int)(reward * 1.5f);
 
 		mission->setRewardCredits(reward);
 
