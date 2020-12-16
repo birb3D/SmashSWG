@@ -93,7 +93,7 @@ object_weapon_ranged_grenade_grenade_bug_bomb = object_weapon_ranged_grenade_sha
 	speedModifiers = { "thrown_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "thrown_damage" },
 
 	useCount = 5,
 

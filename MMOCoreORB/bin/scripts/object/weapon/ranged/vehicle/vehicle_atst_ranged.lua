@@ -68,7 +68,7 @@ object_weapon_ranged_vehicle_vehicle_atst_ranged = object_weapon_ranged_vehicle_
 
 	speedModifiers = { "rifle_speed" },
 
-	damageModifiers = { },
+	damageModifiers = { "rifle_damage" },
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
 	healthAttackCost = 0,

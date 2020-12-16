@@ -94,7 +94,7 @@ object_weapon_melee_sword_crafted_saber_sword_lightsaber_s11_training = object_w
 	speedModifiers = { "onehandlightsaber_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "onehandlightsaber_damage" },
 	
 	defenderToughnessModifiers = { "lightsaber_toughness" },
 

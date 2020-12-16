@@ -94,7 +94,7 @@ object_weapon_ranged_grenade_grenade_cryoban = object_weapon_ranged_grenade_shar
 	speedModifiers = { "thrown_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "thrown_damage" },
 
 	useCount = 5,
 

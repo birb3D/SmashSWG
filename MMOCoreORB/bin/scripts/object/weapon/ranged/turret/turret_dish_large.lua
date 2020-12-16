@@ -58,7 +58,7 @@ object_weapon_ranged_turret_turret_dish_large = object_weapon_ranged_turret_shar
 	-- See http://www.ocdsoft.com/files/speed.xls
 	speedModifiers = { "rifle_speed" },
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "rifle_damage" },
 
 	pointBlankRange = 0,
 	pointBlankAccuracy = 0,
