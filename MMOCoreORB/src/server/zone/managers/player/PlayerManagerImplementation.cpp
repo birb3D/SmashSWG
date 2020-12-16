@@ -1191,7 +1191,7 @@ void PlayerManagerImplementation::killPlayer(TangibleObject* attacker, CreatureO
 	player->sendSystemMessage(stringId);
 
 	player->updateTimeOfDeath();
-	player->clearBuffs(true, false);
+	//player->clearBuffs(true, false);
 
 	PlayerObject* ghost = player->getPlayerObject();
 
@@ -1489,11 +1489,19 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 	ManagedReference<SceneObject*> preDesignatedFacility = server->getObject(preDesignatedFacilityOid);
 
 	if (preDesignatedFacility == nullptr || preDesignatedFacility != cloner) {
-		player->addWounds(CreatureAttribute::HEALTH, 100, true, false);
-		player->addWounds(CreatureAttribute::ACTION, 100, true, false);
-		player->addWounds(CreatureAttribute::MIND, 100, true, false);
-		player->addShockWounds(100, true);
+		player->addWounds(CreatureAttribute::HEALTH, 200, true, false);
+		player->addWounds(CreatureAttribute::STRENGTH, 100, true, false);
+		player->addWounds(CreatureAttribute::CONSTITUTION, 100, true, false);
+		player->addWounds(CreatureAttribute::ACTION, 200, true, false);
+		player->addWounds(CreatureAttribute::QUICKNESS, 100, true, false);
+		player->addWounds(CreatureAttribute::STAMINA, 100, true, false);
+		player->addWounds(CreatureAttribute::MIND, 200, true, false);
+		player->addWounds(CreatureAttribute::FOCUS, 100, true, false);
+		player->addWounds(CreatureAttribute::WILLPOWER, 100, true, false);
+		player->addShockWounds(200, true);
 	}
+
+	player->clearBuffs(true, false);
 
 	if (player->getFactionStatus() != FactionStatus::ONLEAVE && cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_IMPERIAL && cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_REBEL && !player->hasSkill("force_title_jedi_rank_03"))
 		player->setFactionStatus(FactionStatus::ONLEAVE);
