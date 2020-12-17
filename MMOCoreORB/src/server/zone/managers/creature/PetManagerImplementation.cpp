@@ -514,6 +514,8 @@ int PetManagerImplementation::notifyDestruction(TangibleObject* destructor, AiAg
 
 		uint32 incapTime = calculateIncapacitationTimer(destructedObject, condition);
 
+		petControlDevice->setVitality(petControlDevice->getVitality() - 3);
+
 		Reference<Task*> oldTask = destructedObject->getPendingTask("incapacitationRecovery");
 
 		if (oldTask != nullptr && oldTask->isScheduled()) {
@@ -602,7 +604,7 @@ void PetManagerImplementation::killPet(TangibleObject* attacker, AiAgent* pet, b
 
 			if (pet->getCooldownTimerMap() != nullptr && pet->getCooldownTimerMap()->isPast("vitalityLossCooldown")) {
 
-				petControlDevice->setVitality(petControlDevice->getVitality() - 2);
+				petControlDevice->setVitality(petControlDevice->getVitality() - 10);
 				pet->getCooldownTimerMap()->updateToCurrentAndAddMili("vitalityLossCooldown", 300000);
 			}
 		}
