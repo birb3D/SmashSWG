@@ -136,9 +136,7 @@ void EntertainingSessionImplementation::doEntertainerPatronEffects() {
 		}
 	} //else
 	//System::out << "There are no patrons.\n";
-
-
-	info("EntertainingSessionImplementation::doEntertainerPatronEffects() end");
+	// info("EntertainingSessionImplementation::doEntertainerPatronEffects() end");
 }
 
 bool EntertainingSessionImplementation::isInEntertainingBuilding(CreatureObject* creature) {
