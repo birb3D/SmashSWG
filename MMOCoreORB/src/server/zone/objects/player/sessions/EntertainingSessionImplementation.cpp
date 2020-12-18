@@ -267,7 +267,11 @@ void EntertainingSessionImplementation::startTickTask() {
 			performance = performanceManager->getSong(performanceName, instrument->getInstrumentType());
 		}
 		
-		tickTask->schedule(performance->getLoopDuration() * 1000);
+		int next = 10000;
+		if( performance != nullptr ){
+			next = performance->getLoopDuration() * 1000;
+		}
+		tickTask->schedule(next);
 	}
 }
 
