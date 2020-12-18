@@ -178,7 +178,7 @@ bool CellObjectImplementation::removeObject(SceneObject* object, SceneObject* de
 }
 
 int CellObjectImplementation::getCurrentNumberOfPlayerItems() {
-	int count = 0;
+	float count = 0;
 
 	ManagedReference<SceneObject*> strongParent = getParent().get();
 
@@ -187,16 +187,20 @@ int CellObjectImplementation::getCurrentNumberOfPlayerItems() {
 			ManagedReference<SceneObject*> containerObject = getContainerObject(j);
 
 			if (!strongParent->containsChildObject(containerObject) && !containerObject->isCreatureObject() && !containerObject->isVendor()) {
+				if (containerObject->isContainerObject()){
+					count += (float)containerObject->getCountableObjectsRecursive();
+				}
 
-				if (containerObject->isContainerObject())
-					count += containerObject->getCountableObjectsRecursive();
-
-				++count;
+				if (containerObject->getGameObjectType() == SceneObjectType::FURNITURE) {
+					count += 0.2;
+				}else{
+					count += 1.0;
+				}
 			}
 		}
 	}
 
-	return count;
+	return (int)count;
 }
 
 void CellObjectImplementation::destroyAllPlayerItems() {
