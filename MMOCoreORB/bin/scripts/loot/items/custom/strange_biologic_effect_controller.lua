@@ -4,8 +4,8 @@ strange_biologic_effect_controller = {
 	customObjectName = "Strange Advanced Biological Effect Controller",
 	directObjectTemplate = "object/tangible/component/chemistry/biologic_effect_controller_advanced.iff",
 	craftingValues = {
-		{"power", 60,250,0},
-		{"charges", -100,-100,0},
+		{"power", 200,360,0},
+		{"charges", -100,0,0},
 		{"useCount",1,8,0}
 	},
 	customizationStringName = {},
