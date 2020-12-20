@@ -54,7 +54,8 @@ public:
 			ManagedReference<CreatureObject*> targetCreature =
 					server->getZoneServer()->getObject(target).castTo<CreatureObject*>();
 
-			if (targetCreature == nullptr || !targetCreature->isCreature()) {
+			//if (targetCreature == nullptr || !targetCreature->isCreature()) {
+			if (targetCreature == nullptr) {
 				creature->sendSystemMessage("@trap/trap:sys_creatures_only");
 				return GENERALERROR;
 			}
@@ -172,7 +173,7 @@ public:
 
 
 			Reference<ThrowTrapTask*> trapTask = new ThrowTrapTask(creature, targetCreature, buff, message, trapData->getPoolToDamage(), damage, hit);
-			creature->addPendingTask("throwtrap", trapTask, 2300);
+			creature->addPendingTask("throwtrap", trapTask, 1500);
 
 			//Reduce cost based upon player's strength, quickness, and focus if any are over 300
 			int healthCost = creature->calculateCostAdjustment(CreatureAttribute::STRENGTH, trapData->getHealthCost());
@@ -193,7 +194,7 @@ public:
 	}
 
 	float getCommandDuration(CreatureObject* object, const UnicodeString& arguments) const {
-		return defaultTime;
+		return 3; // Traps changed to 3 second combat queue time
 	}
 
 };
