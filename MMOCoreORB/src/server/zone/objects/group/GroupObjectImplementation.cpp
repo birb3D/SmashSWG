@@ -413,8 +413,6 @@ void GroupObjectImplementation::calcGroupLevel() {
 	for (int i = 0; i < getGroupSize(); i++) {
 		Reference<CreatureObject*> member = getGroupMember(i);
 
-		std::cout << "Member [" << i << "] Level: " << member->getLevel() << std::endl;
-
 		if (member->isPet()) {
 			groupLevel += member->getLevel() / 5;
 
@@ -429,8 +427,6 @@ void GroupObjectImplementation::calcGroupLevel() {
 			}
 		}
 	}
-
-	std::cout << "Group Level: " << groupLevel << std::endl;
 
 	GroupObjectDeltaMessage6* msg = new GroupObjectDeltaMessage6(_this.getReferenceUnsafeStaticCast());
 

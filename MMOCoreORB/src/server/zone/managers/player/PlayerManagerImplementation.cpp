@@ -3841,8 +3841,6 @@ int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player, St
 	}
 	buffScale = std::max(buffScale + 0.5f, 1.0f);
 
-	std::cout << "Buff Scale: " << buffScale << std::endl;
-
 	return (int)(level * buffScale);
 }
 
