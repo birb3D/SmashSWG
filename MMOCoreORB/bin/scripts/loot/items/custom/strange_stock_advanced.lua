@@ -6,9 +6,9 @@ strange_stock_advanced = {
 	customObjectName = "Strange Advanced Weapon Stock",
 	directObjectTemplate = "object/tangible/component/weapon/stock_advanced.iff",
 	craftingValues = {
-		{"mindamage", 20,60,0},
-		{"maxdamage", 30,80,0},
-		{"attackspeed",0.5,-0.5,1},
+		{"mindamage", 10,60,0},
+		{"maxdamage", 25,70,0},
+		{"attackspeed",0.8,-0.3,1},
 		{"woundchance",10,25,1},
 		{"hitpoints",60,100,0},
 		{"zerorangemod",1,100,0},
@@ -17,7 +17,7 @@ strange_stock_advanced = {
 		{"attackhealthcost",20,-15,0},
 		{"attackactioncost",20,-15,0},
 		{"attackmindcost",20,-15,0},
-		{"useCount",3,10,0}
+		{"useCount",1,3,0}
 	},
 	customizationStringName = {},
 	customizationValues = {}
