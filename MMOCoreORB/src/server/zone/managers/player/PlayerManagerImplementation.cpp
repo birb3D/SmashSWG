@@ -3792,20 +3792,46 @@ SortedVector<ManagedReference<SceneObject*> > PlayerManagerImplementation::getIn
 }
 
 int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player) {
+	String xpType = "";
+	return calculatePlayerLevel(player, xpType);
+}
 
-	ManagedReference<WeaponObject*> weapon = player->getWeapon();
+int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player, String& xpType) {
+	int skillMod = 0;
+	if (xpType.isEmpty() || xpType == "jedi_general"){
+		ManagedReference<WeaponObject*> weapon = player->getWeapon();
+		if (weapon == nullptr) {
+			player->error("player with nullptr weapon");
+			return 0;
+		}
 
-	if (weapon == nullptr) {
-		player->error("player with nullptr weapon");
-		return 0;
+		skillMod = player->getSkillMod("private_" + weapon->getWeaponType() + "_combat_difficulty");
+		if (player->getPlayerObject() != nullptr && player->getPlayerObject()->isJedi() && weapon->isJediWeapon()){
+			skillMod += player->getSkillMod("private_jedi_difficulty");
+		}
+	}else{ 
+		String weaponType;
+		if (xpType.contains("onehand")) {
+			weaponType = "onehandmelee";
+		} else if (xpType.contains("polearm")) {
+			weaponType = "polearm";
+		} else if (xpType.contains("twohand")) {
+			weaponType = "twohandmelee";
+		} else if (xpType.contains("unarmed")) {
+			weaponType = "unarmed";
+		} else if (xpType.contains("carbine")) {
+			weaponType = "carbine";
+		} else if (xpType.contains("pistol")) {
+			weaponType = "pistol";
+		} else if (xpType.contains("rifle")) {
+			weaponType = "rifle";
+		} else {
+			weaponType = "heavyweapon";
+		}
+
+		skillMod = player->getSkillMod("private_" + weaponType + "_combat_difficulty");
 	}
-
-	String weaponType = weapon->getWeaponType();
-	int skillMod = player->getSkillMod("private_" + weaponType + "_combat_difficulty");
-
-	if (player->getPlayerObject() != nullptr && player->getPlayerObject()->isJedi() && weapon->isJediWeapon())
-		skillMod += player->getSkillMod("private_jedi_difficulty");
-
+	
 	int level = (skillMod / 100);
 	level = floor((0.04f * level * level) + (0.25f * level) + 1);
 
@@ -3816,41 +3842,6 @@ int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player) {
 	buffScale = std::max(buffScale + 0.5f, 1.0f);
 
 	std::cout << "Buff Scale: " << buffScale << std::endl;
-
-	return (int)(level * buffScale);
-}
-
-int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player, String& xpType) {
-	if (xpType.isEmpty() || xpType == "jedi_general")
-		return calculatePlayerLevel(player);
-
-	String weaponType;
-	if (xpType.contains("onehand"))
-		weaponType = "onehandmelee";
-	else if (xpType.contains("polearm"))
-		weaponType = "polearm";
-	else if (xpType.contains("twohand"))
-		weaponType = "twohandmelee";
-	else if (xpType.contains("unarmed"))
-		weaponType = "unarmed";
-	else if (xpType.contains("carbine"))
-		weaponType = "carbine";
-	else if (xpType.contains("pistol"))
-		weaponType = "pistol";
-	else if (xpType.contains("rifle"))
-		weaponType = "rifle";
-	else
-		weaponType = "heavyweapon";
-
-	const int skillMod = player->getSkillMod("private_" + weaponType + "_combat_difficulty");
-	int level = (skillMod / 100);
-	level = floor((0.04f * level * level) + (0.25f * level) + 1);
-
-	float buffScale = 0.0;
-	for( int i = 0; i < 9; i++ ){
-		buffScale += ((float)player->getMaxHAM(i) / (float)(player->getBaseHAM(i) + player->getEncumbrance(i/3))) / 18.0;
-	}
-	buffScale = std::max(buffScale + 0.5f, 1.0f);
 
 	return (int)(level * buffScale);
 }
