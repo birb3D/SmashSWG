@@ -1735,7 +1735,7 @@ LairSpawn* MissionManagerImplementation::getRandomLairSpawn(CreatureObject* play
 		return nullptr;
 
 	const Vector<Reference<LairSpawn*> >* availableLairList = nullptr;
-	int minLevelCeiling = 20;
+	int minLevelCeiling = 8;
 
 	if (type == MissionTypes::DESTROY) {
 		String missionGroup;
