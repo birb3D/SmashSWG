@@ -27,7 +27,6 @@ private:
 		const int current = target->getHAM(attribute) + target->getWounds(attribute);
 		return (max - current) >= delta;
 	}
-
 public:
 	DroidAutoHealTask(DroidStimpackModuleDataComponent* module, int maxUse, String droidName) : Task() {
 		this->module = module;
