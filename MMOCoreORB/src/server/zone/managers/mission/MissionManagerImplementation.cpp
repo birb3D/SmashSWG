@@ -754,7 +754,6 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 		return;
 	}
 
-	int playerLevel = server->getPlayerManager()->calculatePlayerLevel(player);
 	int maxDiff = randomLairSpawn->getMaxDifficulty();
 	int minDiff = randomLairSpawn->getMinDifficulty();
 	int difficultyLevel = System::random(maxDiff - minDiff) + minDiff;
@@ -767,7 +766,7 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 	if (player->isGrouped())
 		diffDisplay += player->getGroup()->getGroupLevel();
 	else
-		diffDisplay += playerLevel;
+		diffDisplay += server->getPlayerManager()->calculatePlayerLevel(player);
 
 	String building = lairTemplateObject->getMissionBuilding(difficulty);
 
