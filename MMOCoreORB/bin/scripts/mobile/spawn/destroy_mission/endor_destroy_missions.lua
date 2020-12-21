@@ -1,5 +1,5 @@
 endor_destroy_missions = {
-	minLevelCeiling = 40,
+	minLevelCeiling = 25,
 
 	lairSpawns = {
 		{
