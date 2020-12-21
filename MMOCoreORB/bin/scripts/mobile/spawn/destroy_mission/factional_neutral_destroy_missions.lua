@@ -1,5 +1,5 @@
 factional_neutral_destroy_missions = {
-	minLevelCeiling = 15,
+	minLevelCeiling = 10,
 
 	lairSpawns = {
 		{

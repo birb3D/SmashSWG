@@ -1,5 +1,5 @@
 factional_rebel_destroy_missions = {
-	minLevelCeiling = 20,
+	minLevelCeiling = 15,
 
 	lairSpawns = {
 		{

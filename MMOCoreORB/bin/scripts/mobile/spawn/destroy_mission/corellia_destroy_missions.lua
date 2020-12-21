@@ -1,5 +1,5 @@
 corellia_destroy_missions = {
-	minLevelCeiling = 25,
+	minLevelCeiling = 9,
 
 	lairSpawns = {
 		{
