@@ -148,50 +148,58 @@ int WearableObjectImplementation::socketsUsed() const {
 	}
 }
 
-void WearableObjectImplementation::applyAttachment(CreatureObject* player,
-		Attachment* attachment) {
-	if (!isASubChildOf(player))
+void WearableObjectImplementation::applyAttachment(CreatureObject* player, Attachment* attachment) {
+	if (!isASubChildOf(player)){
 		return;
+	}
+	
+	HashTable<String, int>* mods = attachment->getSkillMods();
+	HashTableIterator<String, int> iterator = mods->iterator();
 
-	if (socketsLeft() > 0) {
+	SortedVector<ModSortingHelper> sortedMods;
+	for( int i = 0; i < mods->size(); i++){
+		String statName;
+		int newValue;
+
+		iterator.getNextKeyAndValue(statName, newValue);
+		sortedMods.put(ModSortingHelper(statName, newValue));
+	}
+
+	bool wouldChange = false, shouldUseSocket = false;
+
+	// Select the next mod in the SEA, sorted high-to-low. If that skill mod is already on the
+	// wearable, with higher or equal value, don't apply and continue.
+
+	VectorMap<String, int> newMods = wearableSkillMods;
+	for( int i = 0; i < sortedMods.size(); i++ ) {
+		String modName = sortedMods.elementAt(i).getKey();
+		int modValue = sortedMods.elementAt(i).getValue();
+
+		if(newMods.contains(modName)){
+			if( modValue > newMods.get(modName) ) {
+				wouldChange = true;
+				newMods.put( modName, modValue );
+			}
+		}else{
+			if( newMods.size() < 6 ) {
+				wouldChange = true;
+				shouldUseSocket = true;
+				newMods.put( modName, modValue );
+			}
+		}
+	}
+		
+
+	if(wouldChange) {
 		Locker locker(player);
-
 		if (isEquipped()) {
 			removeSkillModsFrom(player);
 		}
 
-		if (wearableSkillMods.size() < 6) {
-			HashTable<String, int>* mods = attachment->getSkillMods();
-			HashTableIterator<String, int> iterator = mods->iterator();
+		wearableSkillMods = newMods;
 
-			String statName;
-			int newValue;
+		if(shouldUseSocket) usedSocketCount++;
 
-			SortedVector< ModSortingHelper > sortedMods;
-			for( int i = 0; i < mods->size(); i++){
-				iterator.getNextKeyAndValue(statName, newValue);
-				sortedMods.put( ModSortingHelper( statName, newValue));
-			}
-
-			// Select the next mod in the SEA, sorted high-to-low. If that skill mod is already on the
-			// wearable, with higher or equal value, don't apply and continue. Break once one mod
-			// is applied.
-			for( int i = 0; i < sortedMods.size(); i++ ) {
-				String modName = sortedMods.elementAt(i).getKey();
-				int modValue = sortedMods.elementAt(i).getValue();
-
-				int existingValue = -26;
-				if(wearableSkillMods.contains(modName))
-					existingValue = wearableSkillMods.get(modName);
-
-				if( modValue > existingValue) {
-					wearableSkillMods.put( modName, modValue );
-					break;
-				}
-			}
-		}
-
-		usedSocketCount++;
 		addMagicBit(true);
 		Locker clocker(attachment, player);
 		attachment->destroyObjectFromWorld(true);
