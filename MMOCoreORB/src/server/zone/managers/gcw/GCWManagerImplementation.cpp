@@ -2672,7 +2672,7 @@ void GCWManagerImplementation::performCheckWildContrabandScanTask() {
 	}
 
 	CheckWildContrabandScanTask* task = new CheckWildContrabandScanTask(_this.getReferenceUnsafeStaticCast());
-	task->schedule(10000);
+	task->schedule(60000);
 }
 
 bool GCWManagerImplementation::isContraband(SceneObject* item) {
