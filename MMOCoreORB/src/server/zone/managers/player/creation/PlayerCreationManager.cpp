@@ -574,12 +574,90 @@ bool PlayerCreationManager::createCharacter(ClientCreateCharacterCallback* callb
 	//Join auction chat room
 	ghost->addChatRoom(chatManager->getAuctionRoom()->getRoomID());
 
+	//Send Sui to player with server information
 	ManagedReference<SuiMessageBox*> box = new SuiMessageBox(playerCreature, SuiWindowType::NONE);
-	box->setPromptTitle("PLEASE NOTE");
-	box->setPromptText("You are limited to creating one character per hour. Attempting to create another character or deleting your character before the 1 hour timer expires will reset the timer.");
+	int playercount = zoneServer->getConnectionCount();
+  	String playerName = playerCreature->getFirstName();
+  	String galaxyName = playerCreature->getZoneServer()->getGalaxyName();
+	box->setPromptTitle("Welcome to " + galaxyName + "!");
+  	StringBuffer promptText;
+  	promptText << "\\#fff175-- Welcome to " + galaxyName + ", " << playerName << ". --";
 
+  	promptText << endl;
+	promptText << endl;
+	promptText << "\\#f2f5f9There are currently \\#ffab4c(" << playercount << ")\\#f2f5f9 players logged in."; //Current number of players currently logged in
+	promptText << endl;
+	promptText << endl;
+	promptText << endl;
+
+  	promptText << "You are limited to creating one character per hour. Attempting to create another character or deleting your character will reset the 1 hour timer.";
+	promptText << endl;
+	promptText << endl;
+	promptText << endl;
+
+	promptText << "\\#5bff71Account Info:";
+	promptText << endl;
+	promptText << "\\#f2f5f9-- You are allowed one account per IP.  (Special requests can be made for multiple people in the same household, please make your request in Discord.)";
+	promptText << endl;
+	promptText << "-- 2 characters per account";
+	promptText << endl;
+	promptText << "-- 10 lots per character";
+	promptText << endl;
+	promptText << "-- 2 instances allowed online per account";
+	promptText << endl;
+	promptText << endl;
+	promptText << endl;
+
+	promptText << "\\#5bff71AFK Farming Information:";
+	promptText << endl;
+	promptText << "\\#f2f5f9-- We want players to PLAY Star Wars Galaxies. In line with that we have strict rules against AFK farming:";
+	promptText << endl;
+	promptText << "-- No AFK Farming of any kind is allowed except for the following exceptions:";
+	promptText << endl;
+	promptText << "-- Surveying for resources";
+	promptText << endl;
+	promptText << "-- Dancing/Entertaining (No auto-invites or chat spam)";
+	promptText << endl;
+	promptText << endl;
+	promptText << endl;
+
+
+	promptText << "\\#5bff71General Information:";
+	promptText << endl;
+	promptText << "\\#f2f5f9-- We have doubled all character starting stats and reduced overall buffs. Please plan accordingly.";
+	promptText << endl;
+	promptText << "-- Armor requires a full suit of armor. Wookies & Trandoshans will be protected by next closest armor piece for pieces they cannot wear.";
+	promptText << endl;
+	promptText << endl;
+	promptText << endl;
+
+
+	promptText << "\\#5bff71Jedi information:";
+	promptText << endl;
+	promptText << "\\#f2f5f9-- Jedi grind starts with a 3 profession holo grind and all steps afterward are a secret.";
+	promptText << endl;
+	promptText << endl;
+	promptText << endl;
+
+
+	promptText << "\\#5bff71Flagship Discord Server:";
+	promptText << endl;
+	promptText << "\\#f2f5f9https://discord.gg/JqTmqdw";
+	promptText << endl;
+	promptText << endl;
+	promptText << endl;
+
+	box->setPromptText(promptText.toString());
+	box->setCancelButton(true, "@no");
+	box->setOkButton(true, "@yes");
+	box->setUsingObject(ghost);
 	ghost->addSuiBox(box);
-	playerCreature->sendMessage(box->generateMessage());
+	ghost->sendMessage(box->generateMessage());
+
+	playerCreature->sendExecuteConsoleCommand("/chatRoom join SWG." + galaxyName + ".General");
+	StringBuffer zBroadcast;
+	zBroadcast << "\\#ffab4c" << playerName << " has joined the Server!";
+	playerCreature->getZoneServer()->getChatManager()->broadcastGalaxy(NULL, zBroadcast.toString());
 
 	return true;
 }
