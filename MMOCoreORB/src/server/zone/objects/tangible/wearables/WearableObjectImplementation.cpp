@@ -112,14 +112,14 @@ void WearableObjectImplementation::generateSockets(CraftingValues* craftingValue
 
 			if (player != nullptr && draftSchematic != nullptr) {
 				String assemblySkill = draftSchematic->getAssemblySkill();
-				skill = player->getSkillMod(assemblySkill) * 2.5; // 0 to 250 max
+				skill = player->getSkillMod(assemblySkill) * 3.2; // 0 to 400 max (at 125 skill)
 				luck = System::random(player->getSkillMod("luck")
 						+ player->getSkillMod("force_luck"));
 			}
 		}
 	}
 
-	int random = (System::random(750)) - 250; // -250 to 500
+	int random = (System::random(800)) - 400; // -400 to 400
 
 	float roll = System::random(skill + luck + random);
 
