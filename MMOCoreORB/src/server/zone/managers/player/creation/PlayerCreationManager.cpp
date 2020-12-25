@@ -654,7 +654,7 @@ bool PlayerCreationManager::createCharacter(ClientCreateCharacterCallback* callb
 	ghost->addSuiBox(box);
 	ghost->sendMessage(box->generateMessage());
 
-	playerCreature->sendExecuteConsoleCommand("/chatRoom join SWG." + galaxyName + ".General");
+	playerCreature->sendExecuteConsoleCommand("/chatRoom join \"SWG." + galaxyName + ".General\"");
 	StringBuffer zBroadcast;
 	zBroadcast << "\\#ffab4c" << playerName << " has joined the Server!";
 	playerCreature->getZoneServer()->getChatManager()->broadcastGalaxy(NULL, zBroadcast.toString());

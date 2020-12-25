@@ -1388,7 +1388,7 @@ void PlayerObjectImplementation::notifyOnline() {
 
 	schedulePvpTefRemovalTask();
 
-	playerCreature->sendExecuteConsoleCommand("/chatRoom join SWG." + playerCreature->getZoneServer()->getGalaxyName() + ".General");
+	playerCreature->sendExecuteConsoleCommand("/chatRoom join \"SWG." + playerCreature->getZoneServer()->getGalaxyName() + ".General\"");
 
 	MissionManager* missionManager = zoneServer->getMissionManager();
 
