@@ -77,7 +77,7 @@ public:
 		if (group != nullptr) {
 			for (int i = 0; i < group->getGroupSize(); i++) {
 				Reference<CreatureObject*> member = group->getGroupMember(i);
-				if (member != nullptr && member->isPlayerCreature() && member->isInRange(droid, 10.0f)) {
+				if (member != nullptr && member->isPlayerCreature() && !member->isDead() && member->isInRange(droid, 10.0f)) {
 					if( isDamagedEnough(member, CreatureAttribute::HEALTH, 200) || isDamagedEnough(member, CreatureAttribute::ACTION, 200) ){
 						candidates.add(member);
 					}
