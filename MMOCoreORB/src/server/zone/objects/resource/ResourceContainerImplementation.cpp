@@ -22,6 +22,9 @@ void ResourceContainerImplementation::fillAttributeList(AttributeListMessage* al
 		spawnObject->fillAttributeList(alm, object);
 	else
 		object->sendSystemMessage("error resource container has no spawn object");
+
+   	String resourceName = getSpawnObject()->getFinalClass() + " (" + getSpawnName() + ")";
+    setCustomObjectName(resourceName, false);
 }
 
 void ResourceContainerImplementation::sendBaselinesTo(SceneObject* player) {
