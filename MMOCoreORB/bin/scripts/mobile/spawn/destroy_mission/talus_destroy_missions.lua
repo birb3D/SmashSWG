@@ -1,5 +1,5 @@
 talus_destroy_missions = {
-	minLevelCeiling = 13,
+	minLevelCeiling = 25,
 
 	lairSpawns = {
 		{

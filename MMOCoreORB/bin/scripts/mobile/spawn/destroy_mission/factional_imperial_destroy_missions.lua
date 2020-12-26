@@ -1,5 +1,5 @@
 factional_imperial_destroy_missions = {
-	minLevelCeiling = 14,
+	minLevelCeiling = 20,
 
 	lairSpawns = {
 		{

@@ -1,5 +1,5 @@
 rori_destroy_missions = {
-	minLevelCeiling = 11,
+	minLevelCeiling = 25,
 
 	lairSpawns = {
 		{
