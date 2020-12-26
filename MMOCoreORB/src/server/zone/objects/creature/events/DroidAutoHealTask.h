@@ -120,6 +120,7 @@ public:
 
 			if( healthHealed > 0 || actionHealed > 0 ){
 				stimpack->decreaseUseCount();
+				module->countUses();
 
             	selected->playEffect("clienteffect/healing_healdamage.cef", "");
 				droid->doAnimation("heal_other");
