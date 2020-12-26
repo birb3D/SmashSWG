@@ -252,7 +252,9 @@ lootableClothingAttachmentStatMods = {
 	"warcry",
 	"weapon_assembly",
 	"weapon_experimentation",
-	"weapon_repair"
+	"weapon_repair",
+	"bio_engineer_assembly",
+	"bio_engineer_experimentation"
 }
 
 lootableArmorStatMods = {
@@ -363,7 +365,9 @@ lootableArmorStatMods = {
 	"warcry",
 	"weapon_assembly",
 	"weapon_experimentation",
-	"weapon_repair"
+	"weapon_repair",
+	"bio_engineer_assembly",
+	"bio_engineer_experimentation"
 }
 
 lootableClothingStatMods = {
