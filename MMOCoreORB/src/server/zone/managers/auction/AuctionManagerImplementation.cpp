@@ -677,6 +677,9 @@ void AuctionManagerImplementation::addSaleItem(CreatureObject* player, uint64 ob
 
 		VendorDataComponent* vendorData = nullptr;
 		DataObjectComponentReference* data = vendor->getDataObjectComponent();
+		ChatManager* chatManager = zoneServer.get()->getChatManager();
+        chatManager->addPlayer(player);
+
 		if(data != nullptr && data->get() != nullptr && data->get()->isVendorData())
 			vendorData = cast<VendorDataComponent*>(data->get());
 
@@ -689,6 +692,8 @@ void AuctionManagerImplementation::addSaleItem(CreatureObject* player, uint64 ob
 				if(strongOwnerRef->isOnline()) {
 					strongOwnerRef->sendSystemMessage(player->getFirstName() + " has offered an item to " + vendor->getDisplayedName());
 				}
+
+				chatManager->sendMail("system", "New vendor offer", player->getFirstName() + " has offered item: " + item->getItemName() +  " to " + vendor->getDisplayedName(), strongOwnerRef->getFirstName());
 			}
 		}
 	}
