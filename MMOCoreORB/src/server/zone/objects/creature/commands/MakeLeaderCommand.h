@@ -30,18 +30,45 @@ public:
 		GroupManager* groupManager = GroupManager::instance();
 
 		ManagedReference<SceneObject*> object = server->getZoneServer()->getObject(target);
+		ManagedReference<PlayerManager*> playerManager = server->getPlayerManager();
+
+		CreatureObject* targetObject = nullptr;
+		GroupObject* group = creature->getGroup();
+
+		/*
 
 		if (object == nullptr || !object->isPlayerCreature())
 			return GENERALERROR;
 
 		CreatureObject* targetObject = cast<CreatureObject*>( object.get());
 
-		GroupObject* group = creature->getGroup();
+		*/
+
+		StringTokenizer args(arguments.toString());
+
+		if (object == nullptr || !object->isPlayerCreature()) {
+			String firstName;
+
+			if (args.hasMoreTokens()) {
+				args.getStringToken(firstName);
+				targetObject = playerManager->getPlayer(firstName);
+			}
+		}
+
+		if (object != nullptr && object->isPlayerCreature())
+			targetObject = cast<CreatureObject*>( object.get());
+
+		if (targetObject == nullptr)
+			return GENERALERROR;
 
 		if (group == nullptr)
 			return GENERALERROR;
 
-		groupManager->makeLeader(group, creature, targetObject);
+		//groupManager->makeLeader(group, creature, targetObject);
+
+		if (!targetObject->getPlayerObject()->isIgnoring(creature->getFirstName().toLowerCase()))
+			groupManager->makeLeader(group, creature, targetObject);
+
 
 		return SUCCESS;
 	}
