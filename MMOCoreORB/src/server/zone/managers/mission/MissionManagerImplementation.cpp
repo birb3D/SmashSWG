@@ -763,10 +763,10 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 		difficulty = 4;
 
 	int diffDisplay = difficultyLevel + 7;
-	if (player->isGrouped())
+	/*if (player->isGrouped())
 		diffDisplay += player->getGroup()->getGroupLevel();
 	else
-		diffDisplay += server->getPlayerManager()->calculatePlayerLevel(player);
+		diffDisplay += server->getPlayerManager()->calculatePlayerLevel(player);*/
 
 	String building = lairTemplateObject->getMissionBuilding(difficulty);
 
@@ -1082,7 +1082,8 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 			mission->setMissionDescription(stfFile, "m" + String::valueOf(randTexts) + "d");
 		}
 	} else {
-		mission->setMissionTargetName(nm->makeCreatureName());
+		String creatureName = nm->makeCreatureName();
+		mission->setMissionTargetName(creatureName);
 
 		String planet = playerZone->getZoneName();
 		if (level == 3 && bhTargetZones.size() > 0) {
@@ -1143,7 +1144,7 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 		}
 
 		mission->setMissionNumber(randTexts);
-		mission->setMissionDifficulty(3 * creoLevel + 7);
+		mission->setMissionDifficulty(creoLevel + 7);
 
 		UnicodeString possibleCreatorName = StringIdManager::instance()->getStringId(String::hashCode("@" + stfFile + diffString + ":" + "m" + String::valueOf(randTexts) + "o"));
 		String creatorName = "";
@@ -1155,8 +1156,11 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 			creatorName = nm->makeCreatureName();
 		}
 
+
+
 		mission->setCreatorName(creatorName);
-		mission->setMissionTitle(stfFile + diffString, "m" + String::valueOf(randTexts) + "t");
+		//mission->setMissionTitle(stfFile + diffString, "m" + String::valueOf(randTexts) + "t");
+		mission->setMissionTitle("CL" + String::valueOf(creoLevel + 7), " Track and neutralize " + String::valueOf(creatureName));
 		mission->setMissionDescription(stfFile + diffString, "m" + String::valueOf(randTexts) + "d");
 	}
 
@@ -1747,7 +1751,7 @@ LairSpawn* MissionManagerImplementation::getRandomLairSpawn(CreatureObject* play
 		return nullptr;
 
 	const Vector<Reference<LairSpawn*> >* availableLairList = nullptr;
-	int minLevelCeiling = 8;
+	int minLevelCeiling = 20;
 
 	if (type == MissionTypes::DESTROY) {
 		String missionGroup;
@@ -1816,6 +1820,16 @@ LairSpawn* MissionManagerImplementation::getRandomLairSpawn(CreatureObject* play
 
 	//Cap the minLevel to prevent a group from being too high to get missions on a planet
 	int minLevel = Math::min(playerLevel - 5, minLevelCeiling);
+
+	// 15% chance for ANY mission (+5/-infinite range)
+	// 30% chance for minimum range to be lowered by 10 for medium range missions (+5/-15 range)
+	// else stay with standard +5/-5 Range
+	int rando = System::random(100);
+	if(rando < 15)
+		minLevel = 1;
+	else if(rando < 30)
+		minLevel = minLevel > 10 ? minLevel - 10 : 1;
+
 
 	//Try to pick random lair within playerLevel +-5;
 	while (counter > 0 && !foundLair) {
