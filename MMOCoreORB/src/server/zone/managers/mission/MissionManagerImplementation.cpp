@@ -1541,10 +1541,14 @@ void MissionManagerImplementation::randomizeGenericHuntingMission(CreatureObject
 		diffString = "hard";
 	}
 
-	int baseReward = 500 + (difficulty * 100 * randomLairSpawn->getMinDifficulty());
-	mission->setRewardCredits(baseReward + System::random(100));
+	difficulty = (randomLairSpawn->getMinDifficulty() + randomLairSpawn->getMaxDifficulty()) /2;
+	difficulty += 7;
+
+	int baseReward = 500 + (200 * difficulty);
+	mission->setRewardCredits(baseReward + System::random(500));
 	mission->setMissionDifficulty(difficulty);
-	mission->setMissionTitle("mission/mission_npc_hunting_neutral_" + diffString, "m" + String::valueOf(randTexts) + "t");
+	//mission->setMissionTitle("mission/mission_npc_hunting_neutral_" + diffString, "m" + String::valueOf(randTexts) + "t");
+	mission->setMissionTitle("CL" + String::valueOf(difficulty), " Hunt " + mobileName.replaceAll("_", " ") + "s");
 	mission->setMissionDescription("mission/mission_npc_hunting_neutral_" + diffString, "m" + String::valueOf(randTexts) + "o");
 
 	mission->setTypeCRC(MissionTypes::HUNTING);
@@ -1787,6 +1791,18 @@ LairSpawn* MissionManagerImplementation::getRandomLairSpawn(CreatureObject* play
 
 	} else if (type == MissionTypes::HUNTING) {
 		CreatureManager* creatureManager = zone->getCreatureManager();
+
+		String missionGroup = zone->getZoneName() + "_world";
+
+		SpawnGroup* huntingMissionGroup = CreatureTemplateManager::instance()->getSpawnGroup(missionGroup.hashCode());
+
+		if (huntingMissionGroup == nullptr) {
+			return nullptr;
+		}
+
+		availableLairList = &huntingMissionGroup->getSpawnList();
+
+		/*
 		auto worldAreas = creatureManager->getWorldSpawnAreas();
 
 		ManagedReference<SpawnArea*> spawnArea = nullptr;
@@ -1803,7 +1819,7 @@ LairSpawn* MissionManagerImplementation::getRandomLairSpawn(CreatureObject* play
 			return nullptr;
 		}
 
-		availableLairList = spawnArea->getSpawnList();
+		availableLairList = spawnArea->getSpawnList();*/
 	}
 
 	if (availableLairList == nullptr || availableLairList->size() == 0) {

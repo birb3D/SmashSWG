@@ -24,7 +24,7 @@ void HuntingMissionObjectiveImplementation::activate() {
 	if (hasObservers())
 		return;
 
-	targetsKilled = 15 * getMissionObject().get()->getDifficultyLevel();
+	targetsKilled = System::random(20) + 20;
 
 	ManagedReference<CreatureObject*> player = getPlayerOwner();
 
