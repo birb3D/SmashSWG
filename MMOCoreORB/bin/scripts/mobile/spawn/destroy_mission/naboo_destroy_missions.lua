@@ -1,5 +1,5 @@
 naboo_destroy_missions = {
-	minLevelCeiling = 9,
+	minLevelCeiling = 25,
 
 	lairSpawns = {
 		{

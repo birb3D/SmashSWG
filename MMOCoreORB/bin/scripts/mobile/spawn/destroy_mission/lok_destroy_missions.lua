@@ -1,5 +1,5 @@
 lok_destroy_missions = {
-	minLevelCeiling = 23,
+	minLevelCeiling = 35,
 
 	lairSpawns = {
 		{

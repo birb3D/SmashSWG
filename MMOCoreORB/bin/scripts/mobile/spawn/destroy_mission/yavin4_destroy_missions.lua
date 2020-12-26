@@ -1,5 +1,5 @@
 yavin4_destroy_missions = {
-	minLevelCeiling = 17,
+	minLevelCeiling = 25,
 
 	lairSpawns = {
 		{

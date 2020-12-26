@@ -1,5 +1,5 @@
 dantooine_destroy_missions = {
-	minLevelCeiling = 35,
+	minLevelCeiling = 45,
 
 	lairSpawns = {
 		{

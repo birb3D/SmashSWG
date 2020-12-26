@@ -1,5 +1,5 @@
 dathomir_destroy_missions = {
-	minLevelCeiling = 27,
+	minLevelCeiling = 45,
 
 	lairSpawns = {
 		{
