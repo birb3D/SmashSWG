@@ -640,13 +640,7 @@ void CityManagerImplementation::depositToCityTreasury(CityRegion* city, Creature
 	{
 		TransactionLog trx(creature, TrxCode::CITYTREASURY, total, true);
 		trx.addState("treasury", city->getCityTreasury());
-		if (cash > total) {
-			creature->subtractCashCredits(total);
-		} else {
-			int diff = total - cash;
-			creature->subtractCashCredits(cash); //Take all from cash, since they didn't have enough to cover.
-			creature->subtractBankCredits(diff); //Take the rest from bank.
-		}
+		creature->subtractCredits(total);
 		city->addToCityTreasury(total);
 	}
 
