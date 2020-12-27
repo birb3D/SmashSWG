@@ -29,8 +29,9 @@ probot_crafted_advanced = Creature:new {
 		"object/creature/npc/droid/crafted/probe_droid_advanced.iff"
 	},
 	lootGroups = {},
-	defaultAttack = "attack",
+	defaultAttack = "creaturerangedattack",
 	weapons = {"droid_probot_ranged"},
+	attacks = merge(marksmanmaster,pistoleernovice),
 	conversationTemplate = "",
 }
 
