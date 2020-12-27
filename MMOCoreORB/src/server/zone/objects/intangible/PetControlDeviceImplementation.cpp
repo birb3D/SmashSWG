@@ -419,6 +419,10 @@ void PetControlDeviceImplementation::spawnObject(CreatureObject* player) {
 		// Submit new skill mod task
 		Reference<Task*> droidSkillModTask = new DroidSkillModTask( droid, player );
 		droid->addPendingTask("droid_skill_mod", droidSkillModTask, 3000); // 3 sec
+
+		if((droid->getSpecies() == DroidObject::DZ70 || droid->getSpecies() == DroidObject::PROBOT) ) {
+			useRanged = true;
+		}
 	}
 
 	pet->setHomeLocation(player->getPositionX(), player->getPositionZ(), player->getPositionY(), parent);
