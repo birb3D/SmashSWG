@@ -31,7 +31,6 @@ probot_crafted_advanced = Creature:new {
 	lootGroups = {},
 	defaultAttack = "creaturerangedattack",
 	weapons = {"droid_probot_ranged"},
-	attacks = merge(marksmanmaster,pistoleernovice),
 	conversationTemplate = "",
 }
 
