@@ -284,6 +284,7 @@ void ContrabandScanSessionImplementation::checkIfPlayerShouldBeScanned(CreatureO
 	if (System::random(SCANINITIATECHANCE) >= SCANINITIATECHANCE - 1 || enforcedScan) { // 1 in SCANINITIATECHANCE chance to initiate the scan.
 		scanState = INITIATESCAN;
 		player->updateCooldownTimer("crackdown_scan", player->getZone()->getGCWManager()->getCrackdownPlayerScanCooldown());
+		info("(Contraband) Player " + player->getDisplayedName() + " - Cooldown updated - Normal");
 	} else {
 		scanState = FINISHED;
 	}
