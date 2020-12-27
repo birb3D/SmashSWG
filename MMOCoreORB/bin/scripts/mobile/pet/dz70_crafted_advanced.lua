@@ -29,8 +29,9 @@ dz70_crafted_advanced = Creature:new {
 		"object/creature/npc/droid/crafted/dz_70_fugitive_tracker_droid_advanced.iff"
 	},
 	lootGroups = {},
-	defaultAttack = "attack",
+	defaultAttack = "creaturerangedattack",
 	weapons = {"droid_probot_ranged"},
+	attacks = merge(marksmanmaster,pistoleernovice),
 	conversationTemplate = "",
 }
 
