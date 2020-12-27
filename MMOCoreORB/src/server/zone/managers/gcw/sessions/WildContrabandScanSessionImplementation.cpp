@@ -39,6 +39,7 @@ int WildContrabandScanSessionImplementation::initializeSession() {
 	}
 
 	player->updateCooldownTimer("crackdown_scan", zone->getGCWManager()->getCrackdownPlayerScanCooldown());
+	info("(Contraband) Player " + player->getDisplayedName() + " - Cooldown updated - Wild");
 
 	if (player->getActiveSession(SessionFacadeType::WILDCONTRABANDSCAN) != nullptr) {
 		player->dropActiveSession(SessionFacadeType::WILDCONTRABANDSCAN);

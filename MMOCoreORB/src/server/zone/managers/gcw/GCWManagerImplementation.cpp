@@ -2646,14 +2646,19 @@ void GCWManagerImplementation::performCheckWildContrabandScanTask() {
 	zone->getInRangePlayers(hitPoint.getX(), hitPoint.getY(), crackdownPerformanceWildScanPlayerFindRadius, closePlayers);
 
 	if (closePlayers->size() > 0) {
+		info("(Contraband) Found " + String::valueOf(closePlayers->size()) + " players in range of coordinates (" + String::valueOf(hitPoint.getX()) + ", " + String::valueOf(hitPoint.getY()) + ").");
+
 		int playerIndex = int(System::random(closePlayers->size() - 1));
 		SceneObject* object = cast<SceneObject*>(closePlayers->get(playerIndex).get());
 		CreatureObject* player = object->asCreatureObject();
+
+		info("(Contraband) Selected player [" + String::valueOf(playerIndex) + "] " + player->getDisplayedName() + ".");
 
 		if (player->checkCooldownRecovery("crackdown_scan") && (player->getParentID() == 0 || player->isRidingMount()) && player->getPlayerObject() != nullptr &&
 			player->getPlayerObject()->getSessionMiliSecs() > 60 * 1000 && !player->isDead() && !player->isIncapacitated() && !player->isFeigningDeath() && !player->isInCombat() &&
 			zone->getPlanetManager()->isSpawningPermittedAt(player->getWorldPositionX(), player->getWorldPositionY())) {
 			if (crackdownScanPrivilegedPlayers || (player->getPlayerObject() != nullptr && !player->getPlayerObject()->isPrivileged())) {
+				info("(Contraband) Started wild scan on player [" + String::valueOf(playerIndex) + "] " + player->getDisplayedName() + ".");
 				WildContrabandScanSession* wildContrabandScanSession = new WildContrabandScanSession(player, getWinningFactionDifficultyScaling());
 				wildContrabandScanSession->initializeSession();
 			}
