@@ -315,45 +315,43 @@ void GamblingManagerImplementation::refreshCrapsMenu(CreatureObject* player) {
 }
 
 void GamblingManagerImplementation::pullCrapsBets(CreatureObject* player) {
+	if( player != nullptr ) return;
 
-	if (player != nullptr) {
+	ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+	if( terminal != nullptr && terminal->getState() >= 3 ) {
+		return;
+	}
 
+	int tempReward = 0;
+	Vector<Reference<GamblingBet*>> remainingBets;
 
-		ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+	for (int i=0; i < terminal->getBets()->size(); ++i) {
+		GamblingBet *bet = terminal->getBets()->get(i);
 
-		if(terminal->getState() >= 3)
-			return;
-
-		auto bets = terminal->getBets();
-
-		int tempReward = 0;
-		String tempTarget;
-
-		for (int i=0; i < bets->size(); ++i) {
-
-			if(player != bets->get(i)->getPlayer())
-				continue;
-
-			tempTarget = bets->get(i)->getTarget();
-
-			if(terminal->getButton() >= 4) {
-				if(tempTarget == "pass" || tempTarget == "nopass")
-					continue;
-			}
-
-			tempReward += bets->get(i)->getAmount();
-
-			bets->remove(i);
-			i--;
+		if(player != bet->getPlayer()){
+			remainingBets.add(bet);
+			continue;
 		}
 
-		StringIdChatParameter textPlayer("gambling/default_interface","prose_payout");
-		textPlayer.setDI(tempReward);
-		player->sendSystemMessage(textPlayer);
+		if(terminal->getButton() >= 4) {
+			if(bet->getTarget() == "pass" || bet->getTarget() == "nopass"){
+				remainingBets.add(bet);
+				continue;
+			}
+		}
 
-		TransactionLog trx(TrxCode::GAMBLINGROULETTE, player, tempReward, true);
-		player->addCashCredits(tempReward, true);
+		tempReward += bet->getAmount();
 	}
+
+	Locker locker(terminal);
+	terminal->setBets(&remainingBets);
+
+	StringIdChatParameter textPlayer("gambling/default_interface","prose_payout");
+	textPlayer.setDI(tempReward);
+	player->sendSystemMessage(textPlayer);
+
+	TransactionLog trx(TrxCode::GAMBLINGROULETTE, player, tempReward, true);
+	player->addCashCredits(tempReward, true);
 }
 
 void GamblingManagerImplementation::refreshSlotMenu(CreatureObject* player, GamblingTerminal* terminal) {

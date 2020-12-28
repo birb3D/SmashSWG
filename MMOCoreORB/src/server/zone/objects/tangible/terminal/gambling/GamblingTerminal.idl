@@ -128,6 +128,9 @@ class GamblingTerminal extends Terminal {
 	}
 
 	@local
+	public native void setBets(Vector<Reference<GamblingBet> > bets);
+
+	@local
 	public VectorMap<CreatureObject, unsigned int> getPlayersWindows() {
 		return playersWindows;
 	}
