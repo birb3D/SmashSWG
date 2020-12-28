@@ -162,6 +162,7 @@ public:
 		GAMBLING_ROULETTE                  = 261,
 		GAMBLING_SLOT                      = 262,
 		GAMBLING_SLOT_PAYOUT               = 263,
+		GAMBLING_CRAPS              	   = 264,
 
 		//Fishing 271 - 280
 		FISHING                            = 271,

@@ -838,7 +838,7 @@ const String TransactionLog::trxCodeToString(TrxCode code) {
 	case TrxCode::BADGROUPCOINSPLIT:        return "badgroupcoinsplit";         // Group Split Error Account
 	case TrxCode::GAMBLINGSLOTSTANDARD:     return "gamblingslotstandard";      // Standard Slot Machine Account
 	case TrxCode::GAMBLINGROULETTE:         return "gamblingroulette";          // Roulette Account
-	case TrxCode::GAMBLINGCARDSABACC:       return "gamblingcardsabacc";        // Sabacc Account
+	case TrxCode::GAMBLINGCRAPS:            return "gamblingcraps";             // Craps Account
 	case TrxCode::VEHICLEREPAIRS:           return "vehiclerepairs";            // Vehicle Repair System
 	case TrxCode::RELICDEALER:              return "relicdealer";               // Relic Dealer
 	case TrxCode::NEWPLAYERQUESTS:          return "newplayerquests";           // New Player Quests

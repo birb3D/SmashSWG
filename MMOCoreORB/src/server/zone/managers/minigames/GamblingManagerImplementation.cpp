@@ -18,6 +18,7 @@
 #include "server/zone/objects/player/sui/slotmachinebox/SuiSlotMachineBox.h"
 #include "server/zone/objects/player/sui/callbacks/GamblingSlotSuiCallback.h"
 #include "server/zone/objects/player/sui/callbacks/GamblingRouletteSuiCallback.h"
+#include "server/zone/objects/player/sui/callbacks/GamblingCrapsSuiCallback.h"
 #include "server/zone/objects/player/sui/callbacks/GamblingSlotPayoutSuiCallback.h"
 #include "server/zone/managers/minigames/GamblingBet.h"
 #include "server/zone/objects/transaction/TransactionLog.h"
@@ -34,6 +35,10 @@ void GamblingManagerImplementation::registerPlayer(GamblingTerminal* terminal, C
 		}
 		case GamblingTerminal::ROULETTEMACHINE: {
 			rouletteGames.put(player, terminal);
+			break;
+		}
+		case GamblingTerminal::CRAPS: {
+			crapsGames.put(player, terminal);
 			break;
 		}
 	}
@@ -56,6 +61,12 @@ uint32 GamblingManagerImplementation::createWindow(GamblingTerminal* terminal, C
 		case GamblingTerminal::ROULETTEMACHINE: {
 
 			boxID = createRouletteWindow(player);
+
+			break;
+		}
+		case GamblingTerminal::CRAPS: {
+
+			boxID = createCrapsWindow(player);
 
 			break;
 		}
@@ -177,6 +188,75 @@ uint32 GamblingManagerImplementation::createRouletteWindow(CreatureObject* playe
 	return box->getBoxID();
 }
 
+uint32 GamblingManagerImplementation::createCrapsWindow(CreatureObject* player) {
+	if (player == nullptr)
+		return 0;
+
+	int totalBet = 0;
+
+
+
+	// create new window
+	ManagedReference<SuiListBox*> box = new SuiListBox(player, SuiWindowType::GAMBLING_CRAPS, 3);
+	box->setPromptTitle("CRAPS");
+
+	ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+
+	String prompt = "\\#ffffffPASS LINE: " + (terminal->getButton() < 4 ? "\\#00ff00OPEN" : ("\\#ff0000CLOSED\n\\#00ff00BUTTON: " + String::valueOf(terminal->getButton()))) + "\n"
+				+ "\n"
+				+ "\\#ffffffUse /bet <amount> <option> to wager.\nExample: '/bet 5 pass' to wager 5 credits on the pass line\n\n"
+				+ "\\#fff175Pass Bets: \\#ffffffpass, nopass\n"
+				+ "\\#5bff71ANY TIME BETS:\n"
+				+ "\\#fff175One Roll Bets: \\#ffffff2, 3, 7, 11, 12, craps, field, hilo, horn\n"
+				+ "\\#fff175Lay Bets: \\#fffffflay4, lay5, lay6, lay8, lay9, lay10\n"
+				+ "\\#5bff71BUTTON ONLY BETS:\n"
+				+ "\\#fff175Place Bets: \\#ffffff4, 5, 6, 8, 9, 10, odds\n"
+				+ "\\#fff175Hard Ways: \\#ffffffhard4, hard6, hard8, hard10\n"
+				+ "\nCash : "
+				+ String::valueOf(player->getCashCredits())
+				+ "\n\nNOTE: Pass/No Pass bets cannot be pulled after the button is established. If you leave the table you will pull back whatever bets you can.";
+
+	box->setPromptText(prompt);
+
+	box->setUsingObject(terminal);
+
+
+	if (terminal->getBets()->size() != 0) {
+		for (int i=0; i < terminal->getBets()->size(); ++i) {
+			if (terminal->getBets()->get(i)->getPlayer() == player) {
+				totalBet += terminal->getBets()->get(i)->getAmount();
+				String target = terminal->getBets()->get(i)->getTarget();
+				target[0] = toupper(target[0]);
+				box->addMenuItem(target + ": " + String::valueOf(terminal->getBets()->get(i)->getAmount()), i);
+			}
+		}
+	}
+
+
+
+	if (totalBet == 0) {
+		box->addMenuItem("Total Bet : 0", 0);
+	} else {
+		box->addMenuItem(" ", -2);
+		box->addMenuItem("Total Bet : "+String::valueOf(totalBet), -3);
+	}
+	box->setCancelButton(true, "@ui:leave_game");
+	box->setOtherButton(true, "@cmd_n:pull");
+	box->setOkButton(true, "@ui:refresh");
+
+	box->setForceCloseDistance(32.f);
+
+	ZoneServer* server = player->getZoneServer();
+
+	box->setCallback(new GamblingCrapsSuiCallback(server));
+
+	player->getPlayerObject()->addSuiBox(box);
+
+	player->sendMessage(box->generateMessage());
+
+	return box->getBoxID();
+}
+
 uint32 GamblingManagerImplementation::createPayoutWindow(CreatureObject* player) {
 	if (player == nullptr)
 		return 0;
@@ -219,6 +299,60 @@ void GamblingManagerImplementation::refreshRouletteMenu(CreatureObject* player) 
 
 		terminal->getPlayersWindows()->drop(player);
 		terminal->getPlayersWindows()->put(player, createRouletteWindow(player));
+	}
+}
+
+void GamblingManagerImplementation::refreshCrapsMenu(CreatureObject* player) {
+
+	if (player != nullptr) {
+
+		ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+		terminal->closeMenu(player, false);
+
+		terminal->getPlayersWindows()->drop(player);
+		terminal->getPlayersWindows()->put(player, createCrapsWindow(player));
+	}
+}
+
+void GamblingManagerImplementation::pullCrapsBets(CreatureObject* player) {
+
+	if (player != nullptr) {
+
+
+		ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+
+		if(terminal->getState() >= 3)
+			return;
+
+		auto bets = terminal->getBets();
+
+		int tempReward = 0;
+		String tempTarget;
+
+		for (int i=0; i < bets->size(); ++i) {
+
+			if(player != bets->get(i)->getPlayer())
+				continue;
+
+			tempTarget = bets->get(i)->getTarget();
+
+			if(terminal->getButton() >= 4) {
+				if(tempTarget == "pass" || tempTarget == "nopass")
+					continue;
+			}
+
+			tempReward += bets->get(i)->getAmount();
+
+			bets->remove(i);
+			i--;
+		}
+
+		StringIdChatParameter textPlayer("gambling/default_interface","prose_payout");
+		textPlayer.setDI(tempReward);
+		player->sendSystemMessage(textPlayer);
+
+		TransactionLog trx(TrxCode::GAMBLINGROULETTE, player, tempReward, true);
+		player->addCashCredits(tempReward, true);
 	}
 }
 
@@ -265,6 +399,11 @@ void GamblingManagerImplementation::bet(CreatureObject* player, int amount, int 
 
 	} else if (machineType == 1) {
 		bet(slotGames.get(player), player, amount, target);
+	}
+	else if (machineType == 2) {
+		bet(crapsGames.get(player), player, amount, target);
+		refreshCrapsMenu(player);
+
 	}
 }
 
@@ -363,6 +502,58 @@ void GamblingManagerImplementation::bet(GamblingTerminal* terminal, CreatureObje
 			}
 			break;
 		}
+		case GamblingTerminal::CRAPS: {
+			if (amount > terminal->getMaxBet()) {
+
+				StringIdChatParameter body("gambling/default_interface","bet_above_max");
+				body.setDI(terminal->getMaxBet());
+
+				player->sendSystemMessage(body);
+
+			} else if (player->getCashCredits() < amount) {
+
+				player->sendSystemMessage("@gambling/default_interface:player_broke");
+
+			} else if (!player->isInRange(terminal, 25.0)) {
+
+				player->sendSystemMessage("@gambling/default_interface:bet_failed_distance");
+
+			} else if (amount < terminal->getMinBet()) {
+
+				StringIdChatParameter body("event_/default_interface","bet_below_min");
+				body.setDI(terminal->getMinBet());
+
+				player->sendSystemMessage(body);
+
+			} else if (terminal->getButton() < 4 && target >= 17 ) {
+
+				player->sendSystemMessage("That bet can only be placed after the button has been established.");
+
+			} else if (terminal->getButton() >= 4 && target < 2 ) {
+
+				player->sendSystemMessage("You can only bet on the pass line when there is no button.");
+
+			} else if (terminal->getState() < 3 && ((terminal->getButton() >= 4 && target >= 2) || (terminal->getButton() < 4 && target < 17))){
+
+				Locker _locker(terminal);
+				{
+					TransactionLog trx(player, TrxCode::GAMBLINGCRAPS, amount, true);
+					player->subtractCashCredits(amount);
+				}
+				terminal->getBets()->add(new GamblingBet(player, amount, craps.get(target)));
+				StringIdChatParameter textPlayer("gambling/default_interface","prose_bet_placed");
+				textPlayer.setDI(amount);
+				player->sendSystemMessage(textPlayer);
+			}
+			else if(terminal->getState() >= 3){
+				player->sendSystemMessage("You can't bet while the dice are rolling or during payouts.");
+			}
+			else {
+				player->sendSystemMessage("@gambling/saarlac_wheel:invalid_bet");
+			}
+
+			break;
+		}
 	}
 }
 
@@ -376,6 +567,10 @@ void GamblingManagerImplementation::startGame(CreatureObject* player, int machin
 			}
 			case GamblingTerminal::ROULETTEMACHINE: {
 				startGame(rouletteGames.get(player));
+				break;
+			}
+			case GamblingTerminal::CRAPS: {
+				startGame(crapsGames.get(player));
 				break;
 			}
 		}
@@ -406,6 +601,14 @@ void GamblingManagerImplementation::startGame(GamblingTerminal* terminal) {
 				terminal->statusUpdate(terminal->getState());
 
 				createEvent(terminal, rouletteTimer.get(terminal->getState() - 1) * 1000);
+
+				break;
+			}
+			case GamblingTerminal::CRAPS: {
+
+				terminal->statusUpdate(terminal->getState());
+
+				createEvent(terminal, crapsTimer.get(terminal->getState() - 1) * 1000);
 
 				break;
 			}
@@ -470,6 +673,42 @@ void GamblingManagerImplementation::continueGame(GamblingTerminal* terminal) {
 
 					break;
 				}
+				case GamblingTerminal::CRAPS: {
+
+					if(terminal->getState() == 5) {
+						int total = terminal->getFirst() + terminal->getSecond();
+
+
+						if(terminal->getButton() >= 4 && total == 7)
+							terminal->setState(7); // end game
+						else
+							terminal->setState(6); // roll again
+
+						createEvent(terminal, 2000);
+					}
+					else if (terminal->getState() == 6) {
+						// pay logic and continue
+						calculateOutcome(terminal);
+						terminal->setState(1);
+						terminal->statusUpdate(1);
+						createEvent(terminal, crapsTimer.get(0) * 1000);
+
+					}
+					else if (terminal->getState() == 7) {
+
+						stopGame(terminal, false);
+
+					} else {
+
+						terminal->setState(terminal->getState() + 1);
+
+						terminal->statusUpdate(terminal->getState());
+
+						createEvent(terminal, crapsTimer.get(terminal->getState() - 1) * 1000);
+					}
+
+					break;
+				}
 			}
 		}
 	}
@@ -507,6 +746,27 @@ void GamblingManagerImplementation::stopGame(GamblingTerminal* terminal, bool ca
 				break;
 			}
 			case GamblingTerminal::ROULETTEMACHINE: {
+
+				if (!cancel) {
+
+					calculateOutcome(terminal);
+
+					terminal->closeAllMenus();
+
+					terminal->reset();
+				} else {
+
+					terminal->closeAllMenus();
+
+					if (terminal->getEvent() != nullptr) {
+						terminal->getEvent()->cancel();
+					}
+
+					terminal->reset();
+				}
+				break;
+			}
+			case GamblingTerminal::CRAPS: {
 
 				if (!cancel) {
 
@@ -675,6 +935,305 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 
 				break;
 			}
+			case GamblingTerminal::CRAPS: {
+
+				VectorMap<ManagedReference<CreatureObject*>, int>* winnings = terminal->getWinnings();
+
+				winnings->removeAll();
+
+				auto bets = terminal->getBets();
+
+				bool remove = false;
+
+				int tempReward;
+				String tempTarget;
+
+				int total = terminal->getFirst() + terminal->getSecond();
+
+				// Button Not Established payouts
+				for (int i=0; i < bets->size(); ++i) {
+
+					tempTarget = bets->get(i)->getTarget();
+
+					// Initialize winnings for all players
+					if (!winnings->contains(bets->get(i)->getPlayer())) {
+						winnings->put(bets->get(i)->getPlayer(), 0);
+					}
+
+					tempReward = 0;
+					remove = false;
+
+					if(terminal->getButton() < 4) { // No Button (pass/nopass)
+
+						if(total == 11 || total == 7) {
+							if(tempTarget == "pass")
+								tempReward = bets->get(i)->getAmount();
+							else if(tempTarget == "nopass")
+								remove = true;
+						}
+						else if(total == 2 || total == 3) {
+							if(tempTarget == "nopass")
+								tempReward = bets->get(i)->getAmount();
+							else if(tempTarget == "pass")
+								remove = true;
+						}
+					}
+					else { // Button Bets
+
+						if(terminal->getButton() == total) { // Button hit
+							// Pass line
+							if(tempTarget == "pass") {
+								tempReward = bets->get(i)->getAmount();
+							}
+							else if(tempTarget == "odds") {
+								tempReward = bets->get(i)->getAmount() * 3; // 4 and 10
+								if(total == 5 || total == 9) tempReward = bets->get(i)->getAmount() * 5 / 2;
+								else if(total == 6 || total == 8) tempReward = bets->get(i)->getAmount() * 9 / 5;
+								remove = true;
+							}
+							else if(tempTarget == "nopass")
+								remove = true;
+						}
+						else if(total == 7) {
+							// No Pass line
+							if(tempTarget == "nopass") {
+								tempReward = bets->get(i)->getAmount() * 2;
+							}
+							else if(tempTarget == "pass" || tempTarget == "hard4" || tempTarget == "hard6" || tempTarget == "hard8" || tempTarget == "hard10")
+								remove = true;
+						}
+
+
+						if(total == 4) {
+							if(tempTarget == "4")
+								tempReward = bets->get(i)->getAmount() * 9 / 5;
+							else if(tempTarget == "hard4") {
+								if(terminal->getFirst() == terminal->getSecond())
+									tempReward = bets->get(i)->getAmount() * 8;
+								else
+									remove = true;
+							}
+						}
+						else if(total == 5) {
+							if(tempTarget == "5")
+								tempReward = bets->get(i)->getAmount() * 7 / 5;
+						}
+						else if(total == 6) {
+							if(tempTarget == "6")
+								tempReward = bets->get(i)->getAmount() * 7 / 6;
+							else if(tempTarget == "hard6") {
+								if(terminal->getFirst() == terminal->getSecond())
+									tempReward = bets->get(i)->getAmount() * 10;
+								else
+									remove = true;
+							}
+						}
+						else if(total == 8) {
+							if(tempTarget == "8")
+								tempReward = bets->get(i)->getAmount() * 7 / 6;
+							else if(tempTarget == "hard8") {
+								if(terminal->getFirst() == terminal->getSecond())
+									tempReward = bets->get(i)->getAmount() * 10;
+								else
+									remove = true;
+							}
+						}
+						else if(total == 9) {
+							if(tempTarget == "9")
+								tempReward = bets->get(i)->getAmount() * 7 / 5;
+						}
+						else if(total == 10) {
+							if(tempTarget == "10")
+								tempReward = bets->get(i)->getAmount() * 9 / 5;
+							else if(tempTarget == "hard10") {
+								if(terminal->getFirst() == terminal->getSecond())
+									tempReward = bets->get(i)->getAmount() * 8;
+								else
+									remove = true;
+							}
+						}
+					}
+
+
+					// Lay Bet Removal
+					if(total == 4 && tempTarget == "lay4") {
+						remove = true;
+					}
+					else if(total == 5 && tempTarget == "lay5") {
+						remove = true;
+					}
+					else if(total == 6 && tempTarget == "lay6") {
+						remove = true;
+					}
+					else if(total == 8 && tempTarget == "lay8") {
+						remove = true;
+					}
+					else if(total == 9 && tempTarget == "lay9") {
+						remove = true;
+					}
+					else if(total == 10 && tempTarget == "lay10") {
+						remove = true;
+					}
+
+					// One roll bets
+					if(total == 2) {
+						if(tempTarget == "2") {
+							tempReward = bets->get(i)->getAmount() * 31;
+						}
+						else if(tempTarget == "craps") {
+							tempReward = bets->get(i)->getAmount() * 8;
+						}
+						else if(tempTarget == "hilo") {
+							tempReward = bets->get(i)->getAmount() * 16;
+						}
+						else if(tempTarget == "field") {
+							tempReward = bets->get(i)->getAmount() * 3;
+						}
+						else if(tempTarget == "horn") {
+							tempReward = bets->get(i)->getAmount() * 17 / 2;
+						}
+					}
+					else if(total == 12) {
+						if(tempTarget == "12") {
+							tempReward = bets->get(i)->getAmount() * 31;
+						}
+						else if(tempTarget == "craps") {
+							tempReward = bets->get(i)->getAmount() * 8;
+						}
+						else if(tempTarget == "hilo") {
+							tempReward = bets->get(i)->getAmount() * 16;
+						}
+						else if(tempTarget == "field") {
+							tempReward = bets->get(i)->getAmount() * 3;
+						}
+						else if(tempTarget == "horn") {
+							tempReward = bets->get(i)->getAmount() * 17 / 2;
+						}
+					}
+					else if(total == 3) {
+						if(tempTarget == "3") {
+							tempReward = bets->get(i)->getAmount() * 16;
+						}
+						else if(tempTarget == "craps") {
+							tempReward = bets->get(i)->getAmount() * 8;
+						}
+						else if(tempTarget == "field") {
+							tempReward = bets->get(i)->getAmount() * 2;
+						}
+						else if(tempTarget == "horn") {
+							tempReward = bets->get(i)->getAmount() * 19 / 4;
+						}
+					}
+					else if(total == 11) {
+						if(tempTarget == "11") {
+							tempReward = bets->get(i)->getAmount() * 16;
+						}
+						else if(tempTarget == "field") {
+							tempReward = bets->get(i)->getAmount() * 2;
+						}
+						else if(tempTarget == "horn") {
+							tempReward = bets->get(i)->getAmount() * 19 / 4;
+						}
+					}
+					else if(total == 4 || total == 9 || total == 10) {
+						if(tempTarget == "field") {
+							tempReward = bets->get(i)->getAmount() * 2;
+						}
+					}
+					else if(total == 7) {
+						if(tempTarget == "7") {
+							tempReward = bets->get(i)->getAmount() * 5;
+						}
+						else if(tempTarget == "lay4" || tempTarget == "lay10") {
+							tempReward = bets->get(i)->getAmount() * 3 / 2;
+							remove = true;
+						}
+						else if(tempTarget == "lay5" || tempTarget == "lay9") {
+							tempReward = bets->get(i)->getAmount() * 5 / 3;
+							remove = true;
+						}
+						else if(tempTarget == "lay6" || tempTarget == "lay8") {
+							tempReward = bets->get(i)->getAmount() * 11 / 6;
+							remove = true;
+						}
+					}
+
+					if(tempTarget == "2" || tempTarget == "3" || tempTarget == "7" || tempTarget == "11" || tempTarget == "12" || tempTarget == "horn" || tempTarget == "field" || tempTarget == "craps" || tempTarget == "hilo") {
+						remove = true;
+					}
+
+
+					if(tempReward > 0) {
+
+						tempReward += winnings->get(bets->get(i)->getPlayer());
+						winnings->drop(bets->get(i)->getPlayer());
+
+						winnings->put(bets->get(i)->getPlayer(), tempReward);
+					}
+
+					if(remove) {
+						bets->remove(i);
+						i--;
+					}
+
+				}
+
+
+				// Handle button stuff
+				// No button established
+				if(terminal->getButton() < 4) {
+					// set button
+					if(total >= 4 && total <= 10 && total != 7) {
+						terminal->setButton(total);
+						terminal->notifyAll("The button is now on: " + String::valueOf(total));
+					}
+				}
+				else {
+					// button established
+					if(total == terminal->getButton() || total == 7) {
+						terminal->setButton(0);
+					}
+				}
+
+
+
+				for (int i = 0; i < winnings->size(); ++i) { // send money and messages to players
+
+					CreatureObject* player = winnings->elementAt(i).getKey();
+
+					if (player != nullptr) {
+
+						refreshCrapsMenu(player);
+
+						if (winnings->get(i) == 0) {
+
+							player->sendSystemMessage("You don't win anything");
+
+						} else {
+
+							Locker _locker(player);
+
+							// Send message to others
+							StringIdChatParameter textOther("gambling/default_interface","winner_to_other");
+							textOther.setDI(winnings->get(i));
+							textOther.setTO(player->getFirstName());
+							textOther.setTO(player->getObjectID());
+							terminal->notifyOthers(player, &textOther);
+
+							StringIdChatParameter textPlayer("gambling/default_interface","winner_to_winner");
+							textPlayer.setDI(winnings->get(i));
+							player->sendSystemMessage(textPlayer);
+
+							{
+								TransactionLog trx(TrxCode::GAMBLINGCRAPS, player, winnings->get(i), true);
+								player->addCashCredits(winnings->get(i), true);
+							}
+						}
+					}
+				}
+
+				break;
+			}
 		}
 	}
 }
@@ -710,6 +1269,22 @@ void GamblingManagerImplementation::leaveTerminal(CreatureObject* player, int ma
 					if (terminal->getPlayersWindows()->contains(player)) {
 						terminal->leaveTerminal(player);
 						rouletteGames.drop(player);
+					}
+				}
+
+				break;
+			}
+			case GamblingTerminal::CRAPS: {
+
+				ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+
+				if (terminal != nullptr) {
+					Locker locker(terminal);
+
+					if (terminal->getPlayersWindows()->contains(player)) {
+						pullCrapsBets(player);
+						terminal->leaveTerminal(player);
+						crapsGames.drop(player);
 					}
 				}
 

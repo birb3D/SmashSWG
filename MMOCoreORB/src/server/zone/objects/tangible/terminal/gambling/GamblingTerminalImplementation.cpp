@@ -89,6 +89,30 @@ bool GamblingTerminalImplementation::checkJoin(CreatureObject* player) {
 
 			break;
 		}
+		case CRAPS: {
+
+			if (playersWindows.size() >= 20) {
+
+				returnValue = false;
+
+				StringIdChatParameter textPlayer("gambling/default_interface","prose_station_full");
+				textPlayer.setTT(getMachineTypeText());
+				player->sendSystemMessage(textPlayer);
+
+			} else if (!player->isInRange(_this.getReferenceUnsafeStaticCast(), 20.0)) {
+				returnValue = false;
+
+				StringIdChatParameter textPlayer("ui","radial_out_of_range_prose");
+				textPlayer.setTT(getMachineTypeText());
+				textPlayer.setTO("@gambling/default_interface:mnu_join");
+				player->sendSystemMessage(textPlayer);
+
+				info(String::valueOf(machineType),true);
+				info(String::valueOf(getObjectID()),true);
+			}
+
+			break;
+		}
 		// INSERT SWITCH CASES HERE FOR ADDITIONAL GAMES
 		/*case SABACC: {
 			if (playersWindows.size() > 5) {
@@ -147,6 +171,28 @@ void GamblingTerminalImplementation::joinTerminal(CreatureObject* player) {
 			break;
 		}
 		case ROULETTEMACHINE: {
+			if (checkJoin(player)) {
+
+				winnings.put(player, 0);
+
+				gamblingManager->registerPlayer(_this.getReferenceUnsafeStaticCast(), player);
+
+				playersWindows.put(player, gamblingManager->createWindow(_this.getReferenceUnsafeStaticCast(), player));
+
+				statusUpdate(player, JOINTERMINAL);
+
+				if(!gameRunning()) {
+					setState(GAMESTARTING);
+					incGameCount();
+
+					gamblingManager->startGame(_this.getReferenceUnsafeStaticCast());
+				}
+
+			}
+
+			break;
+		}
+		case CRAPS: {
 			if (checkJoin(player)) {
 
 				winnings.put(player, 0);
@@ -237,6 +283,14 @@ void GamblingTerminalImplementation::closeAllMenus() {
 
 			break;
 		}
+		case CRAPS: {
+
+			for (int i = 0; i < playersWindows.size(); ++i) {
+				closeMenu(playersWindows.elementAt(i).getKey(),false);
+			}
+
+			break;
+		}
 		// INSERT SWITCH CASES HERE FOR ADDITIONAL GAMES
 	}
 }
@@ -273,6 +327,22 @@ void GamblingTerminalImplementation::leaveTerminal(CreatureObject* player) {
 
 			break;
 		}
+		case CRAPS: {
+
+			closeMenu(player, false);
+
+			statusUpdate(player, LEAVETERMINAL);
+
+			playersWindows.drop(player);
+
+			winnings.drop(player);
+
+			if (playersWindows.size() == 0) {
+				gamblingManager->stopGame(_this.getReferenceUnsafeStaticCast(), true);
+			}
+
+			break;
+		}
 		// INSERT SWITCH CASES HERE FOR ADDITIONAL GAMES
 	}
 
@@ -287,6 +357,12 @@ void GamblingTerminalImplementation::statusUpdate(int event) {
 			break;
 		}
 		case ROULETTEMACHINE: {
+
+			statusUpdate(nullptr, event);
+
+			break;
+		}
+		case CRAPS: {
 
 			statusUpdate(nullptr, event);
 
@@ -552,6 +628,91 @@ void GamblingTerminalImplementation::statusUpdate(CreatureObject* player, int ev
 
 			break;
 		}
+		case CRAPS: {
+
+			switch (event) {
+				case JOINTERMINAL: {
+
+					StringIdChatParameter textOthers("gambling/default_interface","prose_player_join_other");
+
+					if (player != nullptr) {
+						StringIdChatParameter textPlayer("gambling/default_interface","prose_player_join");
+						textPlayer.setTO(getMachineTypeText());
+						player->sendSystemMessage(textPlayer);
+
+						textOthers.setTT(player->getFirstName());
+					}
+
+					notifyOthers(player, &textOthers);
+
+					break;
+				}
+				case LEAVETERMINAL: {
+
+					StringIdChatParameter textOthers("gambling/default_interface","prose_player_leave_other");
+
+					if (player != nullptr) {
+						StringIdChatParameter textPlayer("gambling/default_interface","prose_player_leave");
+						textPlayer.setTO(getMachineTypeText());
+						player->sendSystemMessage(textPlayer);
+
+						textOthers.setTT(player->getFirstName());
+					}
+
+					notifyOthers(player, &textOthers);
+
+					break;
+				}
+				case 1: {
+					//60 seconds till roll
+
+					notifyAll("Rolling the dice in 60 seconds");
+
+					break;
+				}
+				case 2: {
+					//30 seconds till roll
+
+					notifyAll("Rolling the dice in 30 seconds");
+
+					break;
+				}
+				case 3: {
+					// Roll first dice
+
+					first = System::random(5) + 1;
+					StringIdChatParameter body("dice/dice","roll_one_other"); //"%TU's %TT-sided die rolled a value of%TO.
+					body.setTU("The Table");
+					body.setTT("six");
+					body.setTO(" " + String::valueOf(first));
+					notifyAll(&body);
+
+					break;
+				}
+				case 4: {
+					// Roll second dice
+
+					second = System::random(5) + 1;
+					StringIdChatParameter body("dice/dice","roll_one_other"); //"%TU's %TT-sided die rolled a value of%TO.
+					body.setTU("The Table");
+					body.setTT("six");
+					body.setTO(" " + String::valueOf(second));
+					notifyAll(&body);
+
+					break;
+				}
+				case 5: {
+					// Total Dice and do logics
+
+					int total = first + second;
+					notifyAll("The Table's dice total " + String::valueOf(total));
+
+					break;
+				}
+			}
+
+			break;
+		}
 		// INSERT SWITCH CASES HERE FOR ADDITIONAL GAMES
 	}
 }
@@ -562,11 +723,29 @@ void GamblingTerminalImplementation::notifyAll(StringIdChatParameter* text) {
 	}
 }
 
+void GamblingTerminalImplementation::notifyAll(const String& text) {
+	for (int i = 0; i < playersWindows.size(); ++i) {
+		playersWindows.elementAt(i).getKey()->sendSystemMessage(text);
+	}
+}
+
 void GamblingTerminalImplementation::notifyOthers(CreatureObject* player, StringIdChatParameter* text) {
 	if (player != nullptr) {
 		for (int i = 0; i < playersWindows.size(); ++i) {
 			if (playersWindows.elementAt(i).getKey() != player) {
 				playersWindows.elementAt(i).getKey()->sendSystemMessage(*text);
+			}
+		}
+	} else {
+		notifyAll(text);
+	}
+}
+
+void GamblingTerminalImplementation::notifyOthers(CreatureObject* player, const String& text) {
+	if (player != nullptr) {
+		for (int i = 0; i < playersWindows.size(); ++i) {
+			if (playersWindows.elementAt(i).getKey() != player) {
+				playersWindows.elementAt(i).getKey()->sendSystemMessage(text);
 			}
 		}
 	} else {

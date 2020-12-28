@@ -47,7 +47,7 @@ enum class TrxCode {
 	BADGROUPCOINSPLIT    = 27, // Group Split Error Account
 	GAMBLINGSLOTSTANDARD = 28, // Standard Slot Machine Account
 	GAMBLINGROULETTE     = 29, // Roulette Account
-	GAMBLINGCARDSABACC   = 30, // Sabacc Account
+	GAMBLINGCRAPS        = 30, // Craps Account
 	VEHICLEREPAIRS       = 31, // Vehicle Repair System
 	RELICDEALER          = 32, // Relic Dealer
 	NEWPLAYERQUESTS      = 33, // New Player Quests
