@@ -339,8 +339,6 @@ void InstallationObjectImplementation::updateHopper(Time& workingTime, bool shut
 	if (getZone() == nullptr)
 		return;
 
-	Time timeToWorkTill;
-
 	if (!isOperating()) {
 		if(lastStopTime.compareTo(resourceHopperTimestamp) != -1)
 			return;
@@ -382,7 +380,7 @@ void InstallationObjectImplementation::updateHopper(Time& workingTime, bool shut
 
 	float currentQuantity = container->getQuantity();
 
-
+	std::cout << "Expected Harvest: " << harvestAmount << " Currently Operating: " << isOperating() << std::endl;
 	if(harvestAmount > 0 || !isOperating()) {
 		Locker spawnLocker(currentSpawn);
 
