@@ -315,10 +315,10 @@ void GamblingManagerImplementation::refreshCrapsMenu(CreatureObject* player) {
 }
 
 void GamblingManagerImplementation::pullCrapsBets(CreatureObject* player) {
-	if( player != nullptr ) return;
+	if( player == nullptr ) return;
 
 	ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
-	if( terminal != nullptr && terminal->getState() >= 3 ) {
+	if( terminal == nullptr || terminal->getState() >= 3 ) {
 		return;
 	}
 
@@ -345,6 +345,8 @@ void GamblingManagerImplementation::pullCrapsBets(CreatureObject* player) {
 
 	Locker locker(terminal);
 	terminal->setBets(&remainingBets);
+
+	if( tempReward == 0 ) return;
 
 	StringIdChatParameter textPlayer("gambling/default_interface","prose_payout");
 	textPlayer.setDI(tempReward);
