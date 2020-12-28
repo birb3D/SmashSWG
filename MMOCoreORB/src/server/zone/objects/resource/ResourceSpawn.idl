@@ -210,6 +210,9 @@ class ResourceSpawn extends SceneObject {
 	}
 
 	@read
+	public native string getFriendlyName();
+
+	@read
 	public native string getFamilyName();
 
 	@read
