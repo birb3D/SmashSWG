@@ -3069,7 +3069,7 @@ void PlayerManagerImplementation::startWatch(CreatureObject* creature, uint64 en
 	//setEntertainerBuffDuration(PerformanceType::DANCE, 0.0f);
 	//setEntertainerBuffStrength(PerformanceType::DANCE, 0.0f);
 
-	creature->info("started watching [" + entertainer->getCustomObjectName().toString() + "]");
+	//creature->info("started watching [" + entertainer->getCustomObjectName().toString() + "]");
 
 	creature->setWatchToID(entertainer->getObjectID());
 	//watchID =  entid;
@@ -3204,7 +3204,7 @@ void PlayerManagerImplementation::startListen(CreatureObject* creature, uint64 e
 	//setEntertainerBuffDuration(PerformanceType::DANCE, 0.0f);
 	//setEntertainerBuffStrength(PerformanceType::DANCE, 0.0f);
 
-	creature->info("started listening to [" + entertainer->getCustomObjectName().toString() + "]");
+	//creature->info("started listening to [" + entertainer->getCustomObjectName().toString() + "]");
 
 	creature->setListenToID(entertainer->getObjectID());
 	//watchID =  entid;
