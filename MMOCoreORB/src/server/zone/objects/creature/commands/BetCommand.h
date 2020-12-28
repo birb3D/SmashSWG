@@ -55,10 +55,30 @@ public:
 
 					int targetBet = -1;
 
-					for (int i=0; i<gamblingManager->getRoulette()->size(); ++i) {
+					if(gamblingManager->isPlayingRoulette(player)) {
 
-						if (gamblingManager->getRoulette()->get(i)==bet) {
-							targetBet = i;
+						for (int i=0; i<gamblingManager->getRoulette()->size(); ++i) {
+
+							if (gamblingManager->getRoulette()->get(i)==bet) {
+								targetBet = i;
+							}
+						}
+
+						if(targetBet != -1) {
+							gamblingManager->bet(player, amount, targetBet, 0);
+						}
+					}
+					else if(gamblingManager->isPlayingCraps(player)) {
+
+						for (int k=0; k<gamblingManager->getCraps()->size(); ++k) {
+
+							if (gamblingManager->getCraps()->get(k)==bet) {
+								targetBet = k;
+							}
+						}
+
+						if(targetBet != -1) {
+							gamblingManager->bet(player, amount, targetBet, 2);
 						}
 					}
 
@@ -67,7 +87,6 @@ public:
 						return GENERALERROR;
 					}
 
-					gamblingManager->bet(player, amount, targetBet, 0);
 				}
 			} catch (Exception& e) {
 				player->sendSystemMessage("@gambling/default_interface:bet_failed_amt");

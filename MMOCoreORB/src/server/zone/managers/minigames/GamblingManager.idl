@@ -21,9 +21,16 @@ class GamblingManager extends Observer implements Logger {
 	@dereferenced
 	protected VectorMap<CreatureObject, GamblingTerminal> rouletteGames;
 	
+	@dereferenced
+	protected VectorMap<CreatureObject, GamblingTerminal> crapsGames;
+	
 	// Stored possible roulette bet targets
 	@dereferenced
 	protected Vector<string> roulette;
+	
+	// Stored possible craps bet targets
+	@dereferenced
+	protected Vector<string> craps;
 	
 	// Stores the numbers that belong to red, black are {1-36}\red
 	@dereferenced
@@ -39,14 +46,20 @@ class GamblingManager extends Observer implements Logger {
 	@dereferenced
 	protected Vector<int> rouletteTimer;
 	
+	@dereferenced
+	protected Vector<int> crapsTimer;
+	
 	public GamblingManager() {
 		initializeRoulette();
 		initializeRouletteRed();
 		initializeSlots();
+		initializeCraps();
 		
 		initializeSlotTimer();
 		
 		initializeRouletteTimer();
+		
+		initializeCrapsTimer();
 		
 		Logger.setLoggingName("GamblingManager");
 		Logger.setLogging(true);
@@ -55,6 +68,11 @@ class GamblingManager extends Observer implements Logger {
 	@local
 	public Vector<string> getRoulette() {
 		return roulette;
+	}
+	
+	@local
+	public Vector<string> getCraps() {
+		return craps;
 	}
 	
 	public void initializeSlotTimer() {
@@ -81,6 +99,16 @@ class GamblingManager extends Observer implements Logger {
 		rouletteTimer.add(2);
 	}
 	
+	public void initializeCrapsTimer() {
+		crapsTimer.add(30); // 30
+		crapsTimer.add(30);
+		crapsTimer.add(5);
+		crapsTimer.add(1);
+		crapsTimer.add(1);
+		crapsTimer.add(10); // not really used but here just incase
+		crapsTimer.add(10);
+	}
+	
 	public void initializeSlots() {
 		slot.add(10);
 		slot.add(20);
@@ -90,6 +118,37 @@ class GamblingManager extends Observer implements Logger {
 		slot.add(500);
 		slot.add(1000);
 		slot.add(1500);
+	}
+	
+	public void initializeCraps() {
+		craps.add("pass");
+		craps.add("nopass");
+		craps.add("hilo"); // start of single roll bets
+		craps.add("field");
+		craps.add("craps");
+		craps.add("7");
+		craps.add("horn");
+		craps.add("2");
+		craps.add("3");
+		craps.add("11");
+		craps.add("12"); 
+		craps.add("lay4");
+		craps.add("lay5");
+		craps.add("lay6");
+		craps.add("lay8");
+		craps.add("lay9");
+		craps.add("lay10"); // anything after can only be placed after button established
+		craps.add("odds");
+		craps.add("4");
+		craps.add("5");
+		craps.add("6");
+		craps.add("8");
+		craps.add("9");
+		craps.add("10");
+		craps.add("hard4");
+		craps.add("hard6");
+		craps.add("hard8");
+		craps.add("hard10");
 	}
 	
 	public void initializeRouletteRed() {
@@ -295,6 +354,25 @@ class GamblingManager extends Observer implements Logger {
 	public native void refreshRouletteMenu(CreatureObject player);
 	
 	/**
+	 * Refreshes the menu
+	 * This method receives a CreatureObject, looks it up in the Craps VectorMap
+	 * and then closes the Craps Menu, reopening it
+	 * @pre { this object is not locked }
+	 * @post { this object is not locked }
+	 * @param player CreatureObject for which to refresh menu
+	 */
+	public native void refreshCrapsMenu(CreatureObject player);
+	
+	/**
+	 * Pulls all valid bets off the craps table
+	 * This method receives a CreatureObject, looks it up in the Craps VectorMap
+	 * @pre { this object is not locked }
+	 * @post { this object is not locked }
+	 * @param player CreatureObject for which to refresh menu
+	 */
+	public native void pullCrapsBets(CreatureObject player);
+	
+	/**
 	 * Continues the Game
 	 * This method receives a CreatureObject, looks it up in the Roulette VectorMap
 	 * and then closes the Roulette Menu, reopening it
@@ -366,6 +444,16 @@ class GamblingManager extends Observer implements Logger {
 	public native unsigned int createRouletteWindow(CreatureObject player);
 	
 	/**
+	 * Creates the CrapsWindow
+	 * This method receives a CreatureObject, looks it up in the Craps VectorMap
+	 * and then closes the Craps Menu, reopening it
+	 * @pre { this object is not locked }
+	 * @post { this object is not locked }
+	 * @param player CreatureObject for which to refresh menu
+	 */
+	public native unsigned int createCrapsWindow(CreatureObject player);
+	
+	/**
 	 * Creates Events
 	 * This method receives a Terminal and a time,
 	 * creates a GamblingEvent, stores it in the Terminal and schedules it to time
@@ -377,7 +465,15 @@ class GamblingManager extends Observer implements Logger {
 	public native void createEvent(GamblingTerminal terminal, int time);
 	
 	public boolean isPlaying(CreatureObject player) {
-		return (slotGames.contains(player) || rouletteGames.contains(player));
+		return (slotGames.contains(player) || rouletteGames.contains(player) || crapsGames.contains(player));
+	}
+	
+	public boolean isPlayingCraps(CreatureObject player) {
+		return crapsGames.contains(player);
+	}
+	
+	public boolean isPlayingRoulette(CreatureObject player) {
+		return rouletteGames.contains(player);
 	}
 	
 }

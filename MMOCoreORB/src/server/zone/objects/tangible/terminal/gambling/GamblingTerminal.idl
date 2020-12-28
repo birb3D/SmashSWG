@@ -40,6 +40,8 @@ class GamblingTerminal extends Terminal {
 
 	protected int minBet;
 	protected int maxBet;
+	
+	protected int button;
 
 	protected int state;
 	/*
@@ -55,6 +57,7 @@ class GamblingTerminal extends Terminal {
 	// Machine Types
 	public static final int ROULETTEMACHINE = 0;
 	public static final int SLOTMACHINE = 1;
+	public static final int CRAPS = 2;
 
 	//public static final int SABACC = 2;
 
@@ -96,6 +99,7 @@ class GamblingTerminal extends Terminal {
 		second = 0;
 		third = 0;
 		gameCount = 0;
+		button = 0;
 		minBet = ROULETTEMIN;
 		maxBet = ROULETTEMAX;
 		Logger.setLoggingName("GamblingTerminal");
@@ -112,6 +116,7 @@ class GamblingTerminal extends Terminal {
 		first = 0;
 		second = 0;
 		third = 0;
+		button = 0;
 		playersWindows.removeAll();
 		winnings.removeAll();
 		bets.removeAll();
@@ -131,6 +136,11 @@ class GamblingTerminal extends Terminal {
 	public VectorMap<CreatureObject, int> getWinnings() {
 		return winnings;
 	}
+	
+	@dirty
+	public int getButton() {
+		return button;
+	}
 
 	@dirty
 	public int getFirst() {
@@ -145,6 +155,10 @@ class GamblingTerminal extends Terminal {
 	@dirty
 	public int getThird() {
 		return third;
+	}
+	
+	public void setButton(int value) {
+		button = value;
 	}
 
 	public void setFirst(int value) {
@@ -220,7 +234,7 @@ class GamblingTerminal extends Terminal {
 		else if (machineType == SLOTMACHINE)
 			return "@gambling/game_n:slot_standard";
 		else
-			return "Sabacc";
+			return "Craps";
 	}
 
 	/**
@@ -297,6 +311,17 @@ class GamblingTerminal extends Terminal {
 	public boolean gameRunning() {
 		return state != NOGAMERUNNING;
 	}
+	
+	/**
+	 * Notifies other Players
+	 * This method sends the argument text to every Player joined to the Terminal except the Player provided
+	 * @pre { this object is locked }
+	 * @post { this object is locked }
+	 * @param player CreatureObject who won't receive the text
+	 * @param text Message to send to players
+	 */
+	@local
+	public native void notifyOthers(CreatureObject player, final string text);
 
 	/**
 	 * Notifies other Players
@@ -309,6 +334,16 @@ class GamblingTerminal extends Terminal {
 	@local
 	public native void notifyOthers(CreatureObject player, StringIdChatParameter text);
 
+	/**
+	 * Notifies all Players
+	 * This method sends the argument text to every Player joined to the Terminal
+	 * @pre { this object is locked }
+	 * @post { this object is locked }
+	 * @param text Message to send to players
+	 */
+	@local
+	public native void notifyAll(final string text);
+	
 	/**
 	 * Notifies all Players
 	 * This method sends the argument text to every Player joined to the Terminal
