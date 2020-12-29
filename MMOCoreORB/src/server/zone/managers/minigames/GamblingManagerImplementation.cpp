@@ -315,6 +315,8 @@ void GamblingManagerImplementation::refreshCrapsMenu(CreatureObject* player) {
 }
 
 void GamblingManagerImplementation::pullCrapsBets(CreatureObject* player) {
+	info("(Craps) Removing bets for pull");
+
 	if( player == nullptr ) return;
 
 	ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
@@ -949,6 +951,7 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 				String tempTarget;
 
 				int total = terminal->getFirst() + terminal->getSecond();
+				info("(Craps) Removing bets for payouts");
 
 				// Button Not Established payouts
 				for (int i=0; i < bets->size(); ++i) {
