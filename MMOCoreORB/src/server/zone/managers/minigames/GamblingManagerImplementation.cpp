@@ -536,16 +536,51 @@ void GamblingManagerImplementation::bet(GamblingTerminal* terminal, CreatureObje
 				player->sendSystemMessage("You can only bet on the pass line when there is no button.");
 
 			} else if (terminal->getState() < 3 && ((terminal->getButton() >= 4 && target >= 2) || (terminal->getButton() < 4 && target < 17))){
-
 				Locker _locker(terminal);
-				{
-					TransactionLog trx(player, TrxCode::GAMBLINGCRAPS, amount, true);
-					player->subtractCashCredits(amount);
+
+				GamblingBet *existing = nullptr;
+				for (int i=0; i < terminal->getBets()->size(); ++i) {
+					GamblingBet *bet = terminal->getBets()->get(i);
+
+					// Ignore other player
+					if(player != bet->getPlayer()){
+						continue;
+					}
+
+					if(bet->getTarget() != craps.get(target)){
+						continue;
+					}
+
+					existing = bet;
 				}
-				terminal->getBets()->add(new GamblingBet(player, amount, craps.get(target)));
-				StringIdChatParameter textPlayer("gambling/default_interface","prose_bet_placed");
-				textPlayer.setDI(amount);
-				player->sendSystemMessage(textPlayer);
+
+				if( existing == nullptr ){
+					{
+						TransactionLog trx(player, TrxCode::GAMBLINGCRAPS, amount, true);
+						player->subtractCashCredits(amount);
+					}
+					terminal->getBets()->add(new GamblingBet(player, amount, craps.get(target)));
+
+					StringIdChatParameter textPlayer("gambling/default_interface","prose_bet_placed");
+					textPlayer.setDI(amount);
+					player->sendSystemMessage(textPlayer);
+				}else{
+					if( existing->getAmount() > terminal->getMaxBet()) {
+						StringIdChatParameter body("gambling/default_interface","bet_above_max");
+						body.setDI(terminal->getMaxBet());
+						player->sendSystemMessage(body);
+					}else{
+						{
+							TransactionLog trx(player, TrxCode::GAMBLINGCRAPS, amount, true);
+							player->subtractCashCredits(amount);
+						}
+						existing->setAmount(existing->getAmount() + amount);
+						
+						StringIdChatParameter textPlayer("gambling/default_interface","prose_bet_placed");
+						textPlayer.setDI(amount);
+						player->sendSystemMessage(textPlayer);
+					}
+				}
 			}
 			else if(terminal->getState() >= 3){
 				player->sendSystemMessage("You can't bet while the dice are rolling or during payouts.");
