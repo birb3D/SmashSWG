@@ -2652,35 +2652,35 @@ bool GCWManagerImplementation::shouldInitiateWildContrabandScan(CreatureObject* 
 	if( !player->checkCooldownRecovery("crackdown_scan") ) {
 		return false;
 	}
-	localLog.info("Scan: Passed Cooldown", true);
+	localLog.info("Scan: " + player->getDisplayedName() + " has an expired cooldown.", true);
 
-	// Are they mounted?
+	// Are they in a building?
 	if( player->getParentID() != 0 && !player->isRidingMount() ) {
-		localLog.info("Scan: Mount", true);
+		localLog.info("Scan: " + player->getDisplayedName() + " is inside.", true);
 		return false;
 	}
 
 	// Have they been online for at least 60 seconds?
 	if( player->getPlayerObject() != nullptr && player->getPlayerObject()->getSessionMiliSecs() < 60 * 1000) {
-		localLog.info("Scan: Login", true);
+		localLog.info("Scan: " + player->getDisplayedName() + " has just logged in.", true);
 		return false;
 	}
 
 	// Check that they are not dead, incapped, feigning death or in combat
 	if( player->isDead() || player->isIncapacitated() || player->isFeigningDeath() || player->isInCombat() ) {
-		localLog.info("Scan: State", true);
+		localLog.info("Scan: " + player->getDisplayedName() + " has an unwanted state.", true);
 		return false;
 	}
 
 	// Are we allowed to spawn near them?
 	if( !zone->getPlanetManager()->isSpawningPermittedAt(player->getWorldPositionX(), player->getWorldPositionY())) {
-		localLog.info("Scan: Spawn", true);
+		localLog.info("Scan: " + player->getDisplayedName() + " is in a place that we can't spawn near.", true);
 		return false;
 	}
 
 	// Are they a privilaged player?
 	if( !crackdownScanPrivilegedPlayers && (player->getPlayerObject() != nullptr && player->getPlayerObject()->isPrivileged())) {
-		localLog.info("Scan: Privilaged", true);
+		localLog.info("Scan: " + player->getDisplayedName() + " is a privilaged player.", true);
 		return false;
 	}
 
