@@ -28,7 +28,7 @@ class ShipControlDevice extends ControlDevice {
 	@preLocked
 	@arg1preLocked
 	public int handleObjectMenuSelect(CreatureObject player, byte selectedID) {
-		Logger.info("selected call");
+		//Logger.info("selected call");
 
 		if (selectedID == RadialOptions.VEHICLE_GENERATE) {
 
