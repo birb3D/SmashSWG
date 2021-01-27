@@ -9,6 +9,8 @@
 #include <utility>
 #include <mutex>
 
+#include "server/metrics/Prometheus.h"
+
 #include "server/zone/packets/charcreation/ClientCreateCharacterCallback.h"
 #include "server/zone/packets/charcreation/ClientCreateCharacterFailed.h"
 #include "server/zone/ZoneServer.h"
@@ -6323,6 +6325,7 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 	logEntry["countPlayers"] = countPlayers;
 	logEntry["countDistinctIPs"] = countDistinctIPs;
 
+	server::metrics::Prometheus::GetInstance()->GetGauge("player_online").Set(countOnline);
 	if (countOnline != countPlayers)
 		logEntry["countOnline"] = countOnline;
 
