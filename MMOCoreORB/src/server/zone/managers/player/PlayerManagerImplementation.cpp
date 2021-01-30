@@ -6221,6 +6221,7 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 	auto iter = onlineZoneClientMap.iterator();
 
 	server::metrics::Prometheus::GetInstance()->ResetZones();
+	server::metrics::Prometheus::GetInstance()->ResetProfessions();
 	server::metrics::Prometheus::GetInstance()->GaugeSet("player_afk", 0);
 	server::metrics::Prometheus::GetInstance()->GaugeSet("player_online", 0);
 	server::metrics::Prometheus::GetInstance()->GaugeSet("account_online", 0);
@@ -6264,6 +6265,16 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_rebel");
 				}else{
 					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_neutral");
+				}
+
+				Vector<String> skills;
+				creature->getSkillList()->getStringList(skills);
+				for(int i = 0; i < skills.size(); i++){
+					String skill = skills.get(i);
+					if(skill.contains("novice") || skill.contains("master")){
+						const int start = skill.indexOf('_');
+						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_profession_" + skill.subString(start+1));
+					}
 				}
 
 				Reference<PlayerObject*> ghost = creature->getPlayerObject();

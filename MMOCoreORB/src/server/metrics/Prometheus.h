@@ -17,6 +17,7 @@ namespace metrics {
 			void GaugeAdd(String name, double value);
 			void GaugeSet(String name, double value);
 			void ResetZones();	  
+			void ResetProfessions();
 			static Prometheus* GetInstance();
 		private:
 			Prometheus();

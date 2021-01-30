@@ -6,6 +6,8 @@
 
 Prometheus* Prometheus::mSingleton = new (std::nothrow) Prometheus;
 
+String *Professions;
+
 Prometheus::Prometheus() {
 	mExposer = new prometheus::Exposer{"0.0.0.0:9323"};
 
@@ -24,7 +26,7 @@ Prometheus::Prometheus() {
 	// Factions
 	auto &faction_gauge = prometheus::BuildGauge().Name("swgemu_player_faction").Register(*mRegistry);
 	Gauges->put("player_faction_neutral", &faction_gauge.Add({{"name", "neutral"}}));
-	Gauges->put("player_faction_rebal", &faction_gauge.Add({{"name", "rebel"}}));
+	Gauges->put("player_faction_rebel", &faction_gauge.Add({{"name", "rebel"}}));
 	Gauges->put("player_faction_imperial", &faction_gauge.Add({{"name", "imperial"}}));
 
 	// Zones
@@ -42,6 +44,21 @@ Prometheus::Prometheus() {
 	Gauges->put("player_zone_tutorial", &zone_guage.Add({{"name", "tutorial"}}));
 	Gauges->put("player_zone_yavin4", &zone_guage.Add({{"name", "yavin4"}}));
 
+	// professions
+	Professions = new String[33]{
+	    "artisan", "brawler", "entertainer", "marksman", "medic", "politician", "scout",
+    	    "1hsword", "2hsword", "architect", "armorsmith", "bio_engineer", "bountyhunter",
+	    "carbine", "chef", "combatmedic", "commando", "creaturehandler", "dancer", "doctor",
+	    "droidengineer", "imagedesigner", "merchant", "musician", "pistol", "polearm",
+	    "ranger", "rifleman", "smuggler", "squadleader", "tailor", "unarmed", "weaponsmith"
+        };
+	
+	auto &profession_guage = prometheus::BuildGauge().Name("swgemu_player_profession").Register(*mRegistry);
+	for( int i = 0; i < 33; i++){
+		Gauges->put("player_profession_" + Professions[i] + "_novice", &profession_guage.Add({{"rank", "novice"}, {"name", Professions[i]}}));
+		Gauges->put("player_profession_" + Professions[i] + "_master", &profession_guage.Add({{"rank", "master"}, {"name", Professions[i]}}));
+	}
+
 	mExposer->RegisterCollectable(mRegistry);
 }
 
@@ -49,6 +66,7 @@ void Prometheus::CounterIncrement(String name){
 	auto counter = Counters->get(name);
 	if( counter == nullptr ){
 		std::cout << "Invalid Counter " << name.toCharArray() << std::endl;
+		return;
 	}
 	counter->Increment();
 }
@@ -57,6 +75,7 @@ void Prometheus::GaugeIncrement(String name){
 	auto gauge = Gauges->get(name);
 	if( gauge == nullptr ){
 		std::cout << "Invalid Gauge " << name.toCharArray() << std::endl;
+		return;
 	}
 	gauge->Increment();
 }
@@ -65,6 +84,7 @@ void Prometheus::GaugeAdd(String name, double value){
 	auto gauge = Gauges->get(name);
 	if( gauge == nullptr ){
 		std::cout << "Invalid Gauge " << name.toCharArray() << std::endl;
+		return;
 	}
 	gauge->Set(gauge->Value() + value);
 }
@@ -73,6 +93,7 @@ void Prometheus::GaugeSet(String name, double value){
 	auto gauge = Gauges->get(name);
 	if( gauge == nullptr ){
 		std::cout << "Invalid Gauge " << name.toCharArray() << std::endl;
+		return;
 	}
 	gauge->Set(value);
 }
@@ -90,6 +111,13 @@ void Prometheus::ResetZones(){
 	GaugeSet("player_zone_tatooine", 0);
 	GaugeSet("player_zone_tutorial", 0);
 	GaugeSet("player_zone_yavin4", 0);
+}
+
+void Prometheus::ResetProfessions(){
+	for( int i = 0; i < 33; i++){
+		GaugeSet("player_profession_" + Professions[i] + "_novice", 0);
+		GaugeSet("player_profession_" + Professions[i] + "_master", 0);
+	}
 }
 
 Prometheus* Prometheus::GetInstance(){
