@@ -6220,8 +6220,14 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 
 	auto iter = onlineZoneClientMap.iterator();
 
+	server::metrics::Prometheus::GetInstance()->ResetZones();
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_afk", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_online", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("account_online", 0);
+
 	while (iter.hasNext()) {
 		countAccounts++;
+		server::metrics::Prometheus::GetInstance()->GaugeIncrement("account_online");
 
 		auto clients = iter.next();
 
@@ -6265,6 +6271,7 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 
 					if (ghost->isOnline()) {
 						countOnline++;
+						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_online");
 
 						auto zone = creature->getZone();
 
@@ -6275,13 +6282,16 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 							logClient["worldPositionZ"] = (int)worldPosition.getZ();
 							logClient["worldPositionY"] = (int)worldPosition.getY();
 							logClient["zone"] = zone->getZoneName();
+							server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_zone_" + zone->getZoneName());
 						}
 					} else {
 						logClient["isOnline"] = false;
 					}
 
-					if (ghost->isAFK())
+					if (ghost->isAFK()){
 						logClient["isAFK"] = true;
+						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_afk");
+					}
 				} else {
 					countnullptrGhost++;
 				}
@@ -6310,6 +6320,7 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 
 	if (server != nullptr) {
 		logEntry["uptime"] = (int)(server->getStartTimestamp()->miliDifference(now) / 1000);
+		server::metrics::Prometheus::GetInstance()->GaugeSet("server_uptime", logEntry["uptime"]);
 
 		if (server->isServerLocked())
 			logEntry["isServerLocked"] = true;
@@ -6325,7 +6336,6 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 	logEntry["countPlayers"] = countPlayers;
 	logEntry["countDistinctIPs"] = countDistinctIPs;
 
-	server::metrics::Prometheus::GetInstance()->GetGauge("player_online").Set(countOnline);
 	if (countOnline != countPlayers)
 		logEntry["countOnline"] = countOnline;
 

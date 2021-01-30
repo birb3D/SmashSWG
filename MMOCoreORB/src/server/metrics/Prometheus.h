@@ -11,22 +11,24 @@
 namespace server {
 namespace metrics {
 	class Prometheus {
-	public:
-	  prometheus::Counter& GetCounter(String name);
-	  prometheus::Gauge& GetGauge(String name);	  
-        static Prometheus* GetInstance();
-	private:
-        Prometheus();
-        ~Prometheus();
-        Prometheus(const Prometheus &signal);
-        const Prometheus &operator=(const Prometheus &signal);
+		public:
+			void CounterIncrement(String name);
+			void GaugeIncrement(String name);
+			void GaugeSet(String name, double value);
+			void ResetZones();	  
+			static Prometheus* GetInstance();
+		private:
+			Prometheus();
+			~Prometheus();
+			Prometheus(const Prometheus &signal);
+			const Prometheus &operator=(const Prometheus &signal);
 
-	VectorMap<String, prometheus::Counter*> *Counters;
-        VectorMap<String, prometheus::Gauge*> *Gauges;
+			VectorMap<String, prometheus::Counter*> *Counters;
+			VectorMap<String, prometheus::Gauge*> *Gauges;
 
-	prometheus::Exposer *mExposer;
-        std::shared_ptr<prometheus::Registry> mRegistry;
-        static Prometheus *mSingleton;
+			prometheus::Exposer *mExposer;
+			std::shared_ptr<prometheus::Registry> mRegistry;
+			static Prometheus *mSingleton;
 	};
 } // namespace metrics
 } // namespace server
