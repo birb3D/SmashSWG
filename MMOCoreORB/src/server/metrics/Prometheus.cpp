@@ -47,17 +47,20 @@ Prometheus::Prometheus() {
 	// professions
 	Professions = new String[33]{
 	    "artisan", "brawler", "entertainer", "marksman", "medic", "politician", "scout",
-    	    "1hsword", "2hsword", "architect", "armorsmith", "bio_engineer", "bountyhunter",
+		"1hsword", "2hsword", "architect", "armorsmith", "bio_engineer", "bountyhunter",
 	    "carbine", "chef", "combatmedic", "commando", "creaturehandler", "dancer", "doctor",
 	    "droidengineer", "imagedesigner", "merchant", "musician", "pistol", "polearm",
 	    "ranger", "rifleman", "smuggler", "squadleader", "tailor", "unarmed", "weaponsmith"
-        };
-	
+	};
+
 	auto &profession_guage = prometheus::BuildGauge().Name("swgemu_player_profession").Register(*mRegistry);
 	for( int i = 0; i < 33; i++){
 		Gauges->put("player_profession_" + Professions[i] + "_novice", &profession_guage.Add({{"rank", "novice"}, {"name", Professions[i]}}));
 		Gauges->put("player_profession_" + Professions[i] + "_master", &profession_guage.Add({{"rank", "master"}, {"name", Professions[i]}}));
 	}
+
+	// Guilds
+	Guilds = &prometheus::BuildGauge().Name("swgemu_guild_players").Register(*mRegistry);
 
 	mExposer->RegisterCollectable(mRegistry);
 }
@@ -98,25 +101,34 @@ void Prometheus::GaugeSet(String name, double value){
 	gauge->Set(value);
 }
 
+void Prometheus::GuildIncrement(String name, String abbr){
+	if(!Gauges->contains("guild_players_" + abbr) ) {
+		Gauges->put("guild_players_" + abbr, &Guilds->Add({{"name", name}, {"abbreviation", abbr}}));
+	}
+
+	auto gauge = Gauges->get("guild_players_" + abbr);
+	if( gauge == nullptr ){
+		std::cout << "Invalid Gauge guild_" << abbr.toCharArray() << std::endl;
+		return;
+	}
+	gauge->Increment();
+}
+
 void Prometheus::ResetZones(){
-	GaugeSet("player_zone_corellia", 0);
-	GaugeSet("player_zone_dantooine", 0);
-	GaugeSet("player_zone_dathomir", 0);
-	GaugeSet("player_zone_dungeon1", 0);
-	GaugeSet("player_zone_endor", 0);
-	GaugeSet("player_zone_lok", 0);
-	GaugeSet("player_zone_naboo", 0);
-	GaugeSet("player_zone_rori", 0);
-	GaugeSet("player_zone_talus", 0);
-	GaugeSet("player_zone_tatooine", 0);
-	GaugeSet("player_zone_tutorial", 0);
-	GaugeSet("player_zone_yavin4", 0);
+	for (auto i = Gauges->begin(); i != Gauges->end(); ++i){
+		if( (*i).getKey().contains("player_zone_") ) (*i).getValue()->Set(0);
+	}
 }
 
 void Prometheus::ResetProfessions(){
-	for( int i = 0; i < 33; i++){
-		GaugeSet("player_profession_" + Professions[i] + "_novice", 0);
-		GaugeSet("player_profession_" + Professions[i] + "_master", 0);
+	for (auto i = Gauges->begin(); i != Gauges->end(); ++i){
+		if( (*i).getKey().contains("player_profession_") ) (*i).getValue()->Set(0);
+	}
+}
+
+void Prometheus::ResetGuilds(){
+	for (auto i = Gauges->begin(); i != Gauges->end(); ++i){
+		if( (*i).getKey().contains("guild_") ) (*i).getValue()->Set(0);
 	}
 }
 

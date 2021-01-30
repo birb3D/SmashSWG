@@ -91,6 +91,7 @@
 #include "server/zone/objects/player/sui/callbacks/ConfirmVeteranRewardSuiCallback.h"
 #include "server/zone/objects/player/sui/callbacks/ConfirmDivorceSuiCallback.h"
 
+#include "server/zone/objects/guild/GuildObject.h"
 #include "server/zone/managers/stringid/StringIdManager.h"
 #include "server/zone/objects/creature/buffs/PowerBoostBuff.h"
 #include "server/zone/objects/creature/buffs/ForceWeakenDebuff.h"
@@ -6221,6 +6222,7 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 	auto iter = onlineZoneClientMap.iterator();
 
 	server::metrics::Prometheus::GetInstance()->ResetZones();
+	server::metrics::Prometheus::GetInstance()->ResetGuilds();
 	server::metrics::Prometheus::GetInstance()->ResetProfessions();
 	server::metrics::Prometheus::GetInstance()->GaugeSet("player_afk", 0);
 	server::metrics::Prometheus::GetInstance()->GaugeSet("player_online", 0);
@@ -6275,6 +6277,11 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 						const int start = skill.indexOf('_');
 						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_profession_" + skill.subString(start+1));
 					}
+				}
+
+				if( creature->isInGuild() ){
+					auto guild = creature->getGuildObject().get();
+					server::metrics::Prometheus::GetInstance()->GuildIncrement(guild->getGuildName(), guild->getGuildAbbrev());
 				}
 
 				Reference<PlayerObject*> ghost = creature->getPlayerObject();

@@ -5,6 +5,7 @@
 #include <prometheus/gauge.h>
 #include <prometheus/exposer.h>
 #include <prometheus/registry.h>
+#include <prometheus/family.h>
 
 #include "system/util/VectorMap.h"
 
@@ -16,7 +17,9 @@ namespace metrics {
 			void GaugeIncrement(String name);
 			void GaugeAdd(String name, double value);
 			void GaugeSet(String name, double value);
-			void ResetZones();	  
+			void GuildIncrement(String name, String abbr);
+			void ResetZones();
+			void ResetGuilds();
 			void ResetProfessions();
 			static Prometheus* GetInstance();
 		private:
@@ -27,6 +30,7 @@ namespace metrics {
 
 			VectorMap<String, prometheus::Counter*> *Counters;
 			VectorMap<String, prometheus::Gauge*> *Gauges;
+			prometheus::Family<prometheus::Gauge> *Guilds;
 
 			prometheus::Exposer *mExposer;
 			std::shared_ptr<prometheus::Registry> mRegistry;
