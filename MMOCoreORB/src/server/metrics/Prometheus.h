@@ -14,6 +14,7 @@ namespace metrics {
 		public:
 			void CounterIncrement(String name);
 			void GaugeIncrement(String name);
+			void GaugeAdd(String name, double value);
 			void GaugeSet(String name, double value);
 			void ResetZones();	  
 			static Prometheus* GetInstance();

@@ -6224,6 +6224,10 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 	server::metrics::Prometheus::GetInstance()->GaugeSet("player_afk", 0);
 	server::metrics::Prometheus::GetInstance()->GaugeSet("player_online", 0);
 	server::metrics::Prometheus::GetInstance()->GaugeSet("account_online", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("lots_used", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_faction_imperial", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_faction_rebel", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_faction_neutral", 0);
 
 	while (iter.hasNext()) {
 		countAccounts++;
@@ -6245,7 +6249,6 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 			logClient["ip"] = client->getIPAddress();
 
 			Reference<CreatureObject*> creature = client->getPlayer();
-
 			if (creature != nullptr) {
 				countPlayers++;
 
@@ -6255,8 +6258,15 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 				if (creature->isInvisible())
 					logClient["invisible"] = true;
 
-				Reference<PlayerObject*> ghost = creature->getPlayerObject();
+				if(creature->getFaction() == Factions::FACTIONIMPERIAL){
+					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_imperial");
+				}else if(creature->getFaction() == Factions::FACTIONREBEL){
+					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_rebel");
+				}else{
+					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_neutral");
+				}
 
+				Reference<PlayerObject*> ghost = creature->getPlayerObject();
 				if (ghost != nullptr) {
 					Locker lock(ghost);
 
@@ -6265,10 +6275,11 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 					logClient["totalMovement"] = ghost->getSessionTotalMovement();
 
 					auto admin_level = ghost->getAdminLevel();
-
 					if (admin_level > 0 && ghost->hasAbility("admin"))
 						logClient["admin_level"] = admin_level;
 
+					server::metrics::Prometheus::GetInstance()->GaugeAdd("lots_used", (10-ghost->getLotsRemaining()));
+					
 					if (ghost->isOnline()) {
 						countOnline++;
 						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_online");

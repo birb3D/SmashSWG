@@ -7,7 +7,7 @@
 Prometheus* Prometheus::mSingleton = new (std::nothrow) Prometheus;
 
 Prometheus::Prometheus() {
-	mExposer = new prometheus::Exposer{"127.0.0.1:9323"};
+	mExposer = new prometheus::Exposer{"0.0.0.0:9323"};
 
 	mRegistry = std::make_shared<prometheus::Registry>();
 
@@ -19,6 +19,13 @@ Prometheus::Prometheus() {
 	Gauges->put("account_online", &prometheus::BuildGauge().Name("swgemu_account_online").Register(*mRegistry).Add({}));
 	Gauges->put("player_online", &prometheus::BuildGauge().Name("swgemu_player_online").Register(*mRegistry).Add({}));
 	Gauges->put("player_afk", &prometheus::BuildGauge().Name("swgemu_player_afk").Register(*mRegistry).Add({}));
+	Gauges->put("lots_used", &prometheus::BuildGauge().Name("swgemu_lots_used").Register(*mRegistry).Add({}));
+
+	// Factions
+	auto &faction_gauge = prometheus::BuildGauge().Name("swgemu_player_faction").Register(*mRegistry);
+	Gauges->put("player_faction_neutral", &faction_gauge.Add({{"name", "neutral"}}));
+	Gauges->put("player_faction_rebal", &faction_gauge.Add({{"name", "rebel"}}));
+	Gauges->put("player_faction_imperial", &faction_gauge.Add({{"name", "imperial"}}));
 
 	// Zones
 	auto &zone_guage = prometheus::BuildGauge().Name("swgemu_player_zone").Register(*mRegistry);
@@ -52,6 +59,14 @@ void Prometheus::GaugeIncrement(String name){
 		std::cout << "Invalid Gauge " << name.toCharArray() << std::endl;
 	}
 	gauge->Increment();
+}
+
+void Prometheus::GaugeAdd(String name, double value){
+	auto gauge = Gauges->get(name);
+	if( gauge == nullptr ){
+		std::cout << "Invalid Gauge " << name.toCharArray() << std::endl;
+	}
+	gauge->Set(gauge->Value() + value);
 }
 
 void Prometheus::GaugeSet(String name, double value){
