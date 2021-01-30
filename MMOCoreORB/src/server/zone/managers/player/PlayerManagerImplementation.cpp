@@ -6282,6 +6282,8 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 				if( creature->isInGuild() ){
 					auto guild = creature->getGuildObject().get();
 					server::metrics::Prometheus::GetInstance()->GuildIncrement(guild->getGuildName(), guild->getGuildAbbrev());
+				}else{
+					server::metrics::Prometheus::GetInstance()->GuildIncrement("none", "");
 				}
 
 				Reference<PlayerObject*> ghost = creature->getPlayerObject();
