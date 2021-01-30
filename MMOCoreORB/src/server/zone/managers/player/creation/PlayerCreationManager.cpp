@@ -328,8 +328,8 @@ bool PlayerCreationManager::createCharacter(ClientCreateCharacterCallback* callb
 
 	auto client = callback->getClient();
 
-	if (client->getCharacterCount(zoneServer.get()->getGalaxyID()) >= 2) {
-		ErrorMessage* errMsg = new ErrorMessage("Create Error", "You are limited to 2 characters per galaxy.", 0x0);
+	if (client->getCharacterCount(zoneServer.get()->getGalaxyID()) >= 3) {
+		ErrorMessage* errMsg = new ErrorMessage("Create Error", "You are limited to 3 characters per galaxy.", 0x0);
 		client->sendMessage(errMsg);
 
 		return false;
@@ -599,7 +599,7 @@ bool PlayerCreationManager::createCharacter(ClientCreateCharacterCallback* callb
 	promptText << endl;
 	promptText << "\\#f2f5f9-- You are allowed one account per IP.  (Special requests can be made for multiple people in the same household, please make your request in Discord.)";
 	promptText << endl;
-	promptText << "-- 2 characters per account";
+	promptText << "-- 3 characters per account";
 	promptText << endl;
 	promptText << "-- 10 lots per character";
 	promptText << endl;
