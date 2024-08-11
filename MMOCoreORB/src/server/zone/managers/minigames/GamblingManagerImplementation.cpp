@@ -321,7 +321,7 @@ void GamblingManagerImplementation::pullCrapsBets(CreatureObject* player) {
 
 		ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
 
-		if(terminal->getState() >= 3)
+		if(terminal != nullptr && terminal->getState() >= 3)
 			return;
 
 		auto bets = terminal->getBets();
