@@ -35,6 +35,10 @@ public:
 		return amount;
 	}
 
+	void setAmount(int amount) {
+		this->amount = amount;
+	}
+
 	const String& getTarget() const {
 		return target;
 	}

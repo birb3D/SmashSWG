@@ -9,6 +9,8 @@
 #include <utility>
 #include <mutex>
 
+#include "server/metrics/Prometheus.h"
+
 #include "server/zone/packets/charcreation/ClientCreateCharacterCallback.h"
 #include "server/zone/packets/charcreation/ClientCreateCharacterFailed.h"
 #include "server/zone/ZoneServer.h"
@@ -89,6 +91,7 @@
 #include "server/zone/objects/player/sui/callbacks/ConfirmVeteranRewardSuiCallback.h"
 #include "server/zone/objects/player/sui/callbacks/ConfirmDivorceSuiCallback.h"
 
+#include "server/zone/objects/guild/GuildObject.h"
 #include "server/zone/managers/stringid/StringIdManager.h"
 #include "server/zone/objects/creature/buffs/PowerBoostBuff.h"
 #include "server/zone/objects/creature/buffs/ForceWeakenDebuff.h"
@@ -3069,7 +3072,7 @@ void PlayerManagerImplementation::startWatch(CreatureObject* creature, uint64 en
 	//setEntertainerBuffDuration(PerformanceType::DANCE, 0.0f);
 	//setEntertainerBuffStrength(PerformanceType::DANCE, 0.0f);
 
-	creature->info("started watching [" + entertainer->getCustomObjectName().toString() + "]");
+	//creature->info("started watching [" + entertainer->getCustomObjectName().toString() + "]");
 
 	creature->setWatchToID(entertainer->getObjectID());
 	//watchID =  entid;
@@ -3204,7 +3207,7 @@ void PlayerManagerImplementation::startListen(CreatureObject* creature, uint64 e
 	//setEntertainerBuffDuration(PerformanceType::DANCE, 0.0f);
 	//setEntertainerBuffStrength(PerformanceType::DANCE, 0.0f);
 
-	creature->info("started listening to [" + entertainer->getCustomObjectName().toString() + "]");
+	//creature->info("started listening to [" + entertainer->getCustomObjectName().toString() + "]");
 
 	creature->setListenToID(entertainer->getObjectID());
 	//watchID =  entid;
@@ -3710,7 +3713,7 @@ void PlayerManagerImplementation::addInsurableItemsRecursive(SceneObject* obj, S
 
 		TangibleObject* item = cast<TangibleObject*>( object);
 
-		if (item == nullptr || item->hasAntiDecayKit())
+		if (item == nullptr || item->hasAntiDecayKit() || item->isJediRobe())
 			continue;
 
 		if (!(item->getOptionsBitmask() & OptionBitmask::INSURED) && (item->isArmorObject() || item->isWearableObject())) {
@@ -3744,7 +3747,7 @@ SortedVector<ManagedReference<SceneObject*> > PlayerManagerImplementation::getIn
 		if (container->isTangibleObject()) {
 			TangibleObject* item = cast<TangibleObject*>( container);
 
-			if (item == nullptr || item->hasAntiDecayKit())
+			if (item == nullptr || item->hasAntiDecayKit() || item->isJediRobe())
 				continue;
 
 			if (!(item->getOptionsBitmask() & OptionBitmask::INSURED) && (item->isArmorObject() || item->isWearableObject())) {
@@ -6218,8 +6221,20 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 
 	auto iter = onlineZoneClientMap.iterator();
 
+	server::metrics::Prometheus::GetInstance()->ResetZones();
+	server::metrics::Prometheus::GetInstance()->ResetGuilds();
+	server::metrics::Prometheus::GetInstance()->ResetProfessions();
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_afk", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_online", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("account_online", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("lots_used", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_faction_imperial", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_faction_rebel", 0);
+	server::metrics::Prometheus::GetInstance()->GaugeSet("player_faction_neutral", 0);
+
 	while (iter.hasNext()) {
 		countAccounts++;
+		server::metrics::Prometheus::GetInstance()->GaugeIncrement("account_online");
 
 		auto clients = iter.next();
 
@@ -6237,7 +6252,6 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 			logClient["ip"] = client->getIPAddress();
 
 			Reference<CreatureObject*> creature = client->getPlayer();
-
 			if (creature != nullptr) {
 				countPlayers++;
 
@@ -6247,8 +6261,32 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 				if (creature->isInvisible())
 					logClient["invisible"] = true;
 
-				Reference<PlayerObject*> ghost = creature->getPlayerObject();
+				if(creature->getFaction() == Factions::FACTIONIMPERIAL){
+					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_imperial");
+				}else if(creature->getFaction() == Factions::FACTIONREBEL){
+					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_rebel");
+				}else{
+					server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_faction_neutral");
+				}
 
+				Vector<String> skills;
+				creature->getSkillList()->getStringList(skills);
+				for(int i = 0; i < skills.size(); i++){
+					String skill = skills.get(i);
+					if(skill.contains("novice") || skill.contains("master")){
+						const int start = skill.indexOf('_');
+						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_profession_" + skill.subString(start+1));
+					}
+				}
+
+				if( creature->isInGuild() ){
+					auto guild = creature->getGuildObject().get();
+					server::metrics::Prometheus::GetInstance()->GuildIncrement(guild->getGuildName(), guild->getGuildAbbrev());
+				}else{
+					server::metrics::Prometheus::GetInstance()->GuildIncrement("none", "");
+				}
+
+				Reference<PlayerObject*> ghost = creature->getPlayerObject();
 				if (ghost != nullptr) {
 					Locker lock(ghost);
 
@@ -6257,12 +6295,14 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 					logClient["totalMovement"] = ghost->getSessionTotalMovement();
 
 					auto admin_level = ghost->getAdminLevel();
-
 					if (admin_level > 0 && ghost->hasAbility("admin"))
 						logClient["admin_level"] = admin_level;
 
+					server::metrics::Prometheus::GetInstance()->GaugeAdd("lots_used", (10-ghost->getLotsRemaining()));
+					
 					if (ghost->isOnline()) {
 						countOnline++;
+						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_online");
 
 						auto zone = creature->getZone();
 
@@ -6273,13 +6313,16 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 							logClient["worldPositionZ"] = (int)worldPosition.getZ();
 							logClient["worldPositionY"] = (int)worldPosition.getY();
 							logClient["zone"] = zone->getZoneName();
+							server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_zone_" + zone->getZoneName());
 						}
 					} else {
 						logClient["isOnline"] = false;
 					}
 
-					if (ghost->isAFK())
+					if (ghost->isAFK()){
 						logClient["isAFK"] = true;
+						server::metrics::Prometheus::GetInstance()->GaugeIncrement("player_afk");
+					}
 				} else {
 					countnullptrGhost++;
 				}
@@ -6308,6 +6351,7 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 
 	if (server != nullptr) {
 		logEntry["uptime"] = (int)(server->getStartTimestamp()->miliDifference(now) / 1000);
+		server::metrics::Prometheus::GetInstance()->GaugeSet("server_uptime", logEntry["uptime"]);
 
 		if (server->isServerLocked())
 			logEntry["isServerLocked"] = true;

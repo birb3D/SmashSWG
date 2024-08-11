@@ -745,8 +745,7 @@ public:
 				defender->dismount();
 			}
 
-			int delay = 1000;
-
+			int delay = 2500;
 
 			if (defender->getPosture() == CreaturePosture::UPRIGHT) {
 				defender->setPosture(CreaturePosture::CROUCHED, false, false);
@@ -756,13 +755,13 @@ public:
 				defender->setPosture(CreaturePosture::PRONE, false, false);
 				defender->sendSystemMessage("@cbt_spam:force_posture_change_2");
 				defender->sendStateCombatSpam("cbt_spam", "force_posture_change_2", 0, 0, false);
-				delay += 2000;
+				delay += 2500;
 			}
 
-			delay += System::random(6000);
+			delay += System::random(5000);
 
-			defender->updatePostureDownRecovery(5000); // Can posture change up every 5 seconds
-			defender->updatePostureChangeDelay(delay); // NPCs recover from posture change between 1 and 7 seconds
+			defender->updatePostureDownRecovery(15000); // Can posture change up every 15 seconds
+			defender->updatePostureChangeDelay(delay); // NPCs recover from posture change between 2.5 and 10 seconds
 			defender->removeBuff(STRING_HASHCODE("burstrun"));
 			defender->removeBuff(STRING_HASHCODE("retreat"));
 			break;

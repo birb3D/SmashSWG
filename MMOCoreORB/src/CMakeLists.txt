@@ -69,6 +69,9 @@ endif(ENABLE_ODB)
 file(GLOB_RECURSE tests_sources "tests/*.cpp")
 file(GLOB_RECURSE tests_headers "tests/*.h")
 
+
+file(GLOB_RECURSE metrics_sources "server/metrics/*.cpp")
+
 set(core3tests_libs)
 set(gmock_libs)
 
@@ -83,7 +86,13 @@ if(COMPILE_TESTS)
 endif(COMPILE_TESTS)
 
 # Create core3 binary
-add_executable(core3 main.cpp server/ServerCore.cpp ${core3tests_libs} ${tre3_sources} ${tre3_headers} ${zone3_sources} ${zone3_headers})
+add_executable(core3 main.cpp server/ServerCore.cpp ${core3tests_libs} ${tre3_sources} ${tre3_headers} ${zone3_sources} ${zone3_headers} ${metrics_sources} )
+
+find_package(prometheus-cpp CONFIG)
+if(prometheus-cpp_FOUND)
+	include_directories(${prometheus-cpp_INCLUDE_DIRS})
+	target_link_libraries(core3 "-lprometheus-cpp-pull -lprometheus-cpp-core -lz")
+endif()
 
 if(ENABLE_ODB)
 	add_executable(odb3 server/ServerCore.cpp ${odb3_sources} ${odb3_headers} ${autogen_sources} ${autogen_headers} ${zone3_sources} ${zone3_headers}

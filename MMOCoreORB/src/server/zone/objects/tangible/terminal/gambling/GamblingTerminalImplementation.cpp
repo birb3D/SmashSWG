@@ -28,13 +28,15 @@ void GamblingTerminalImplementation::setEvent(GamblingEvent* event) {
 	this->event = event;
 }
 
+void GamblingTerminalImplementation::setBets(Vector<Reference<GamblingBet*> >* bets){
+	this->bets = *bets;
+}
+
 bool GamblingTerminalImplementation::invalidPosture(CreatureObject* player) {
 	if (player->isIncapacitated() || player->isInCombat() || player->isSwimming() || player->isRidingMount() || player->isDead() || player->isMeditating())
 		return true;
 	return false;
 }
-
-
 
 bool GamblingTerminalImplementation::checkJoin(CreatureObject* player) {
 	bool returnValue = true;

@@ -2577,10 +2577,21 @@ float GCWManagerImplementation::getGCWDiscount(CreatureObject* creature) {
 			discount -= loserBonus / 100.f;
 	}
 
-	if (creature->getFaction() == Factions::FACTIONIMPERIAL && racialPenaltyEnabled && getRacialPenalty(creature->getSpecies()) > 0)
+	if (creature->getFaction() == Factions::FACTIONIMPERIAL && racialPenaltyEnabled && getRacialPenalty(creature->getSpecies()) > 0) {
 		discount *= getRacialPenalty(creature->getSpecies());
+	}
 
 	return discount;
+}
+
+float GCWManagerImplementation::getBothanGCWDiscount(CreatureObject* creature) {
+	float bothanDiscount = 1.0f;
+
+	if (creature->getSpecies() == 5) {
+		bothanDiscount = 0.9;
+	}
+
+	return bothanDiscount;
 }
 
 int GCWManagerImplementation::isStrongholdCity(String& city) {
@@ -2634,6 +2645,48 @@ String GCWManagerImplementation::getCrackdownInfo(CreatureObject* player) const 
 	}
 }
 
+Logger localLog("Contraband");
+
+bool GCWManagerImplementation::shouldInitiateWildContrabandScan(CreatureObject* player) {
+	// Have they been scanned recently?
+	if( !player->checkCooldownRecovery("crackdown_scan") ) {
+		return false;
+	}
+	localLog.info("Scan: " + player->getDisplayedName() + " has an expired cooldown.", true);
+
+	// Are they in a building?
+	if( player->getParentID() != 0 && !player->isRidingMount() ) {
+		localLog.info("Scan: " + player->getDisplayedName() + " is inside.", true);
+		return false;
+	}
+
+	// Have they been online for at least 60 seconds?
+	if( player->getPlayerObject() != nullptr && player->getPlayerObject()->getSessionMiliSecs() < 60 * 1000) {
+		localLog.info("Scan: " + player->getDisplayedName() + " has just logged in.", true);
+		return false;
+	}
+
+	// Check that they are not dead, incapped, feigning death or in combat
+	if( player->isDead() || player->isIncapacitated() || player->isFeigningDeath() || player->isInCombat() ) {
+		localLog.info("Scan: " + player->getDisplayedName() + " has an unwanted state.", true);
+		return false;
+	}
+
+	// Are we allowed to spawn near them?
+	if( !zone->getPlanetManager()->isSpawningPermittedAt(player->getWorldPositionX(), player->getWorldPositionY())) {
+		localLog.info("Scan: " + player->getDisplayedName() + " is in a place that we can't spawn near.", true);
+		return false;
+	}
+
+	// Are they a privilaged player?
+	if( !crackdownScanPrivilegedPlayers && (player->getPlayerObject() != nullptr && player->getPlayerObject()->isPrivileged())) {
+		localLog.info("Scan: " + player->getDisplayedName() + " is a privilaged player.", true);
+		return false;
+	}
+
+	return true;
+}
+
 void GCWManagerImplementation::performCheckWildContrabandScanTask() {
 	if (!crackdownScansEnabled || planetsWithWildScans.find(zone->getZoneName()) == Vector<String>::npos) {
 		return;
@@ -2650,13 +2703,9 @@ void GCWManagerImplementation::performCheckWildContrabandScanTask() {
 		SceneObject* object = cast<SceneObject*>(closePlayers->get(playerIndex).get());
 		CreatureObject* player = object->asCreatureObject();
 
-		if (player->checkCooldownRecovery("crackdown_scan") && (player->getParentID() == 0 || player->isRidingMount()) && player->getPlayerObject() != nullptr &&
-			player->getPlayerObject()->getSessionMiliSecs() > 60 * 1000 && !player->isDead() && !player->isIncapacitated() && !player->isFeigningDeath() && !player->isInCombat() &&
-			zone->getPlanetManager()->isSpawningPermittedAt(player->getWorldPositionX(), player->getWorldPositionY())) {
-			if (crackdownScanPrivilegedPlayers || (player->getPlayerObject() != nullptr && !player->getPlayerObject()->isPrivileged())) {
-				WildContrabandScanSession* wildContrabandScanSession = new WildContrabandScanSession(player, getWinningFactionDifficultyScaling());
-				wildContrabandScanSession->initializeSession();
-			}
+		if( shouldInitiateWildContrabandScan(player) ){
+			WildContrabandScanSession* wildContrabandScanSession = new WildContrabandScanSession(player, getWinningFactionDifficultyScaling());
+			wildContrabandScanSession->initializeSession();
 		}
 	}
 

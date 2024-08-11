@@ -315,45 +315,47 @@ void GamblingManagerImplementation::refreshCrapsMenu(CreatureObject* player) {
 }
 
 void GamblingManagerImplementation::pullCrapsBets(CreatureObject* player) {
+	info("(Craps) Removing bets for pull");
 
-	if (player != nullptr) {
+	if( player == nullptr ) return;
 
+	ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+	if( terminal == nullptr || terminal->getState() >= 3 ) {
+		return;
+	}
 
-		ManagedReference<GamblingTerminal*> terminal = crapsGames.get(player);
+	int tempReward = 0;
+	Vector<Reference<GamblingBet*>> remainingBets;
 
-		if(terminal != nullptr && terminal->getState() >= 3)
-			return;
+	for (int i=0; i < terminal->getBets()->size(); ++i) {
+		GamblingBet *bet = terminal->getBets()->get(i);
 
-		auto bets = terminal->getBets();
-
-		int tempReward = 0;
-		String tempTarget;
-
-		for (int i=0; i < bets->size(); ++i) {
-
-			if(player != bets->get(i)->getPlayer())
-				continue;
-
-			tempTarget = bets->get(i)->getTarget();
-
-			if(terminal->getButton() >= 4) {
-				if(tempTarget == "pass" || tempTarget == "nopass")
-					continue;
-			}
-
-			tempReward += bets->get(i)->getAmount();
-
-			bets->remove(i);
-			i--;
+		if(player != bet->getPlayer()){
+			remainingBets.add(bet);
+			continue;
 		}
 
-		StringIdChatParameter textPlayer("gambling/default_interface","prose_payout");
-		textPlayer.setDI(tempReward);
-		player->sendSystemMessage(textPlayer);
+		if(terminal->getButton() >= 4) {
+			if(bet->getTarget() == "pass" || bet->getTarget() == "nopass"){
+				remainingBets.add(bet);
+				continue;
+			}
+		}
 
-		TransactionLog trx(TrxCode::GAMBLINGROULETTE, player, tempReward, true);
-		player->addCashCredits(tempReward, true);
+		tempReward += bet->getAmount();
 	}
+
+	Locker locker(terminal);
+	terminal->setBets(&remainingBets);
+
+	if( tempReward == 0 ) return;
+
+	StringIdChatParameter textPlayer("gambling/default_interface","prose_payout");
+	textPlayer.setDI(tempReward);
+	player->sendSystemMessage(textPlayer);
+
+	TransactionLog trx(TrxCode::GAMBLINGROULETTE, player, tempReward, true);
+	player->addCashCredits(tempReward, true);
 }
 
 void GamblingManagerImplementation::refreshSlotMenu(CreatureObject* player, GamblingTerminal* terminal) {
@@ -534,16 +536,51 @@ void GamblingManagerImplementation::bet(GamblingTerminal* terminal, CreatureObje
 				player->sendSystemMessage("You can only bet on the pass line when there is no button.");
 
 			} else if (terminal->getState() < 3 && ((terminal->getButton() >= 4 && target >= 2) || (terminal->getButton() < 4 && target < 17))){
-
 				Locker _locker(terminal);
-				{
-					TransactionLog trx(player, TrxCode::GAMBLINGCRAPS, amount, true);
-					player->subtractCashCredits(amount);
+
+				GamblingBet *existing = nullptr;
+				for (int i=0; i < terminal->getBets()->size(); ++i) {
+					GamblingBet *bet = terminal->getBets()->get(i);
+
+					// Ignore other player
+					if(player != bet->getPlayer()){
+						continue;
+					}
+
+					if(bet->getTarget() != craps.get(target)){
+						continue;
+					}
+
+					existing = bet;
 				}
-				terminal->getBets()->add(new GamblingBet(player, amount, craps.get(target)));
-				StringIdChatParameter textPlayer("gambling/default_interface","prose_bet_placed");
-				textPlayer.setDI(amount);
-				player->sendSystemMessage(textPlayer);
+
+				if( existing == nullptr ){
+					{
+						TransactionLog trx(player, TrxCode::GAMBLINGCRAPS, amount, true);
+						player->subtractCashCredits(amount);
+					}
+					terminal->getBets()->add(new GamblingBet(player, amount, craps.get(target)));
+
+					StringIdChatParameter textPlayer("gambling/default_interface","prose_bet_placed");
+					textPlayer.setDI(amount);
+					player->sendSystemMessage(textPlayer);
+				}else{
+					if( existing->getAmount() > terminal->getMaxBet()) {
+						StringIdChatParameter body("gambling/default_interface","bet_above_max");
+						body.setDI(terminal->getMaxBet());
+						player->sendSystemMessage(body);
+					}else{
+						{
+							TransactionLog trx(player, TrxCode::GAMBLINGCRAPS, amount, true);
+							player->subtractCashCredits(amount);
+						}
+						existing->setAmount(existing->getAmount() + amount);
+						
+						StringIdChatParameter textPlayer("gambling/default_interface","prose_bet_placed");
+						textPlayer.setDI(amount);
+						player->sendSystemMessage(textPlayer);
+					}
+				}
 			}
 			else if(terminal->getState() >= 3){
 				player->sendSystemMessage("You can't bet while the dice are rolling or during payouts.");
@@ -936,44 +973,37 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 				break;
 			}
 			case GamblingTerminal::CRAPS: {
-
 				VectorMap<ManagedReference<CreatureObject*>, int>* winnings = terminal->getWinnings();
-
 				winnings->removeAll();
 
-				auto bets = terminal->getBets();
-
-				bool remove = false;
-
-				int tempReward;
-				String tempTarget;
-
 				int total = terminal->getFirst() + terminal->getSecond();
+				info("(Craps) Removing bets for payouts");
 
 				// Button Not Established payouts
-				for (int i=0; i < bets->size(); ++i) {
-
-					tempTarget = bets->get(i)->getTarget();
+				Vector<Reference<GamblingBet*>> remainingBets;
+				for (int i=0; i < terminal->getBets()->size(); ++i) {
+					GamblingBet *bet = terminal->getBets()->get(i);
+					const String tempTarget = bet->getTarget();
 
 					// Initialize winnings for all players
-					if (!winnings->contains(bets->get(i)->getPlayer())) {
-						winnings->put(bets->get(i)->getPlayer(), 0);
+					if (!winnings->contains(bet->getPlayer())) {
+						winnings->put(bet->getPlayer(), 0);
 					}
 
-					tempReward = 0;
-					remove = false;
+					int tempReward = 0;
+					bool remove = false;
 
 					if(terminal->getButton() < 4) { // No Button (pass/nopass)
 
 						if(total == 11 || total == 7) {
 							if(tempTarget == "pass")
-								tempReward = bets->get(i)->getAmount();
+								tempReward = bet->getAmount();
 							else if(tempTarget == "nopass")
 								remove = true;
 						}
 						else if(total == 2 || total == 3) {
 							if(tempTarget == "nopass")
-								tempReward = bets->get(i)->getAmount();
+								tempReward = bet->getAmount();
 							else if(tempTarget == "pass")
 								remove = true;
 						}
@@ -983,12 +1013,12 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 						if(terminal->getButton() == total) { // Button hit
 							// Pass line
 							if(tempTarget == "pass") {
-								tempReward = bets->get(i)->getAmount();
+								tempReward = bet->getAmount();
 							}
 							else if(tempTarget == "odds") {
-								tempReward = bets->get(i)->getAmount() * 3; // 4 and 10
-								if(total == 5 || total == 9) tempReward = bets->get(i)->getAmount() * 5 / 2;
-								else if(total == 6 || total == 8) tempReward = bets->get(i)->getAmount() * 9 / 5;
+								tempReward = bet->getAmount() * 3; // 4 and 10
+								if(total == 5 || total == 9) tempReward = bet->getAmount() * 5 / 2;
+								else if(total == 6 || total == 8) tempReward = bet->getAmount() * 9 / 5;
 								remove = true;
 							}
 							else if(tempTarget == "nopass")
@@ -997,7 +1027,7 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 						else if(total == 7) {
 							// No Pass line
 							if(tempTarget == "nopass") {
-								tempReward = bets->get(i)->getAmount() * 2;
+								tempReward = bet->getAmount() * 2;
 							}
 							else if(tempTarget == "pass" || tempTarget == "hard4" || tempTarget == "hard6" || tempTarget == "hard8" || tempTarget == "hard10")
 								remove = true;
@@ -1006,48 +1036,48 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 
 						if(total == 4) {
 							if(tempTarget == "4")
-								tempReward = bets->get(i)->getAmount() * 9 / 5;
+								tempReward = bet->getAmount() * 9 / 5;
 							else if(tempTarget == "hard4") {
 								if(terminal->getFirst() == terminal->getSecond())
-									tempReward = bets->get(i)->getAmount() * 8;
+									tempReward = bet->getAmount() * 8;
 								else
 									remove = true;
 							}
 						}
 						else if(total == 5) {
 							if(tempTarget == "5")
-								tempReward = bets->get(i)->getAmount() * 7 / 5;
+								tempReward = bet->getAmount() * 7 / 5;
 						}
 						else if(total == 6) {
 							if(tempTarget == "6")
-								tempReward = bets->get(i)->getAmount() * 7 / 6;
+								tempReward = bet->getAmount() * 7 / 6;
 							else if(tempTarget == "hard6") {
 								if(terminal->getFirst() == terminal->getSecond())
-									tempReward = bets->get(i)->getAmount() * 10;
+									tempReward = bet->getAmount() * 10;
 								else
 									remove = true;
 							}
 						}
 						else if(total == 8) {
 							if(tempTarget == "8")
-								tempReward = bets->get(i)->getAmount() * 7 / 6;
+								tempReward = bet->getAmount() * 7 / 6;
 							else if(tempTarget == "hard8") {
 								if(terminal->getFirst() == terminal->getSecond())
-									tempReward = bets->get(i)->getAmount() * 10;
+									tempReward = bet->getAmount() * 10;
 								else
 									remove = true;
 							}
 						}
 						else if(total == 9) {
 							if(tempTarget == "9")
-								tempReward = bets->get(i)->getAmount() * 7 / 5;
+								tempReward = bet->getAmount() * 7 / 5;
 						}
 						else if(total == 10) {
 							if(tempTarget == "10")
-								tempReward = bets->get(i)->getAmount() * 9 / 5;
+								tempReward = bet->getAmount() * 9 / 5;
 							else if(tempTarget == "hard10") {
 								if(terminal->getFirst() == terminal->getSecond())
-									tempReward = bets->get(i)->getAmount() * 8;
+									tempReward = bet->getAmount() * 8;
 								else
 									remove = true;
 							}
@@ -1078,82 +1108,82 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 					// One roll bets
 					if(total == 2) {
 						if(tempTarget == "2") {
-							tempReward = bets->get(i)->getAmount() * 31;
+							tempReward = bet->getAmount() * 31;
 						}
 						else if(tempTarget == "craps") {
-							tempReward = bets->get(i)->getAmount() * 8;
+							tempReward = bet->getAmount() * 8;
 						}
 						else if(tempTarget == "hilo") {
-							tempReward = bets->get(i)->getAmount() * 16;
+							tempReward = bet->getAmount() * 16;
 						}
 						else if(tempTarget == "field") {
-							tempReward = bets->get(i)->getAmount() * 3;
+							tempReward = bet->getAmount() * 3;
 						}
 						else if(tempTarget == "horn") {
-							tempReward = bets->get(i)->getAmount() * 17 / 2;
+							tempReward = bet->getAmount() * 17 / 2;
 						}
 					}
 					else if(total == 12) {
 						if(tempTarget == "12") {
-							tempReward = bets->get(i)->getAmount() * 31;
+							tempReward = bet->getAmount() * 31;
 						}
 						else if(tempTarget == "craps") {
-							tempReward = bets->get(i)->getAmount() * 8;
+							tempReward = bet->getAmount() * 8;
 						}
 						else if(tempTarget == "hilo") {
-							tempReward = bets->get(i)->getAmount() * 16;
+							tempReward = bet->getAmount() * 16;
 						}
 						else if(tempTarget == "field") {
-							tempReward = bets->get(i)->getAmount() * 3;
+							tempReward = bet->getAmount() * 3;
 						}
 						else if(tempTarget == "horn") {
-							tempReward = bets->get(i)->getAmount() * 17 / 2;
+							tempReward = bet->getAmount() * 17 / 2;
 						}
 					}
 					else if(total == 3) {
 						if(tempTarget == "3") {
-							tempReward = bets->get(i)->getAmount() * 16;
+							tempReward = bet->getAmount() * 16;
 						}
 						else if(tempTarget == "craps") {
-							tempReward = bets->get(i)->getAmount() * 8;
+							tempReward = bet->getAmount() * 8;
 						}
 						else if(tempTarget == "field") {
-							tempReward = bets->get(i)->getAmount() * 2;
+							tempReward = bet->getAmount() * 2;
 						}
 						else if(tempTarget == "horn") {
-							tempReward = bets->get(i)->getAmount() * 19 / 4;
+							tempReward = bet->getAmount() * 19 / 4;
 						}
 					}
 					else if(total == 11) {
 						if(tempTarget == "11") {
-							tempReward = bets->get(i)->getAmount() * 16;
+							tempReward = bet->getAmount() * 16;
 						}
 						else if(tempTarget == "field") {
-							tempReward = bets->get(i)->getAmount() * 2;
+							tempReward = bet->getAmount() * 2;
 						}
 						else if(tempTarget == "horn") {
-							tempReward = bets->get(i)->getAmount() * 19 / 4;
+							tempReward = bet->getAmount() * 19 / 4;
 						}
 					}
 					else if(total == 4 || total == 9 || total == 10) {
 						if(tempTarget == "field") {
-							tempReward = bets->get(i)->getAmount() * 2;
+							tempReward = bet->getAmount() * 2;
 						}
 					}
 					else if(total == 7) {
 						if(tempTarget == "7") {
-							tempReward = bets->get(i)->getAmount() * 5;
+							tempReward = bet->getAmount() * 5;
 						}
 						else if(tempTarget == "lay4" || tempTarget == "lay10") {
-							tempReward = bets->get(i)->getAmount() * 3 / 2;
+							tempReward = bet->getAmount() * 3 / 2;
 							remove = true;
 						}
 						else if(tempTarget == "lay5" || tempTarget == "lay9") {
-							tempReward = bets->get(i)->getAmount() * 5 / 3;
+							tempReward = bet->getAmount() * 5 / 3;
 							remove = true;
 						}
 						else if(tempTarget == "lay6" || tempTarget == "lay8") {
-							tempReward = bets->get(i)->getAmount() * 11 / 6;
+							tempReward = bet->getAmount() * 11 / 6;
 							remove = true;
 						}
 					}
@@ -1164,20 +1194,18 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 
 
 					if(tempReward > 0) {
+						tempReward += winnings->get(bet->getPlayer());
+						winnings->drop(bet->getPlayer());
 
-						tempReward += winnings->get(bets->get(i)->getPlayer());
-						winnings->drop(bets->get(i)->getPlayer());
-
-						winnings->put(bets->get(i)->getPlayer(), tempReward);
+						winnings->put(bet->getPlayer(), tempReward);
 					}
 
-					if(remove) {
-						bets->remove(i);
-						i--;
+					if(!remove) {
+						remainingBets.add(bet);
 					}
-
 				}
 
+				terminal->setBets(&remainingBets);
 
 				// Handle button stuff
 				// No button established
