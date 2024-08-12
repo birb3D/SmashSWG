@@ -5,9 +5,38 @@ tailor_components = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{itemTemplate = "crystalline_clothing_treatment", weight = 3333333},
-		{itemTemplate = "heavy_duty_clasp", weight = 3333334},
-		{itemTemplate = "heavy_duty_leather", weight = 3333333}
+		{itemTemplate = "crystalline_clothing_treatment", weight = 2600000},
+		{itemTemplate = "heavy_duty_clasp", weight = 2600000},
+		{itemTemplate = "heavy_duty_leather", weight = 2600000},
+		--22% below this point
+		{itemTemplate = "fiberplast_panel", weight = 200000},
+		{itemTemplate = "synthetic_cloth", weight = 200000},
+		{itemTemplate = "reinforced_fiber_panel", weight = 200000},
+		--16% below this point
+		{itemTemplate = "strange_biologic_effect_controller", weight = 170000}, -- Weighted more heavily because only one for this class
+		{itemTemplate = "armor_segment_bone", weight = 65000},
+		{itemTemplate = "armor_segment_zam", weight = 65000},
+		{itemTemplate = "armor_segment_chitin", weight = 65000},
+		{itemTemplate = "armor_segment_padded", weight = 65000},
+		{itemTemplate = "armor_segment_ubese", weight = 65000},
+		{itemTemplate = "armor_segment_tantel", weight = 65000},
+		{itemTemplate = "strange_bio_component_food_light", weight = 65000},
+		{itemTemplate = "strange_bio_component_food_medium", weight = 65000},
+		{itemTemplate = "strange_bio_component_food_heavy", weight = 65000},
+		{itemTemplate = "strange_scope_weapon_advanced", weight = 65000},
+		{itemTemplate = "strange_sword_core_advanced", weight = 65000},
+		{itemTemplate = "strange_reinforcement_core_advanced", weight = 65000},
+		{itemTemplate = "strange_vibro_unit_advanced", weight = 65000},
+		{itemTemplate = "strange_stock_advanced", weight = 65000},
+		{itemTemplate = "strange_droid_combat_module_slow", weight = 65000},
+		{itemTemplate = "strange_droid_combat_module_fast", weight = 65000},
+		{itemTemplate = "strange_structure_fluidic_drilling_pumping_unit", weight = 65000},
+		{itemTemplate = "strange_structure_harvesting_mechanism", weight = 65000},
+		{itemTemplate = "strange_structure_heavy_harvesting_mechanism", weight = 65000},
+		{itemTemplate = "strange_structure_light_ore_mining_unit", weight = 65000},
+		{itemTemplate = "strange_structure_ore_mining_unit", weight = 65000},
+		{itemTemplate = "strange_structure_turbo_fluidic_drilling_pumping_unit", weight = 65000},
+
 	}
 }
 

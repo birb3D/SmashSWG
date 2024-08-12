@@ -59,8 +59,9 @@ public:
 
 		// target must be a creature
 		Reference<CreatureObject*> target = server->getZoneServer()->getObject(targetID, true).castTo<CreatureObject*>();
-		if (target == nullptr || !target->isCreature()) {
-			droid->showFlyText("npc_reaction/flytext", "confused", 204, 0, 0);  // "?!!?!?!"
+		//if (target == nullptr || !target->isCreature()) {
+		if (target == nullptr) {
+			droid->showFlyText("npc_reaction/flytext","confused", 204, 0, 0);  // "?!!?!?!"
 			owner->sendSystemMessage("@pet/droid_modules:invalid_trap_target"); // "That is not a valid target."
 			return INVALIDTARGET;
 		}
@@ -220,7 +221,7 @@ public:
 			message.setTT(target->getDisplayedName());
 
 			Reference<DroidTrapTask*> trapTask = new DroidTrapTask(owner, target, droid, buff, message, trapData->getPoolToDamage(), damage, hit);
-			droid->addPendingTask("throwtrap", trapTask, 2300);
+			droid->addPendingTask("throwtrap", trapTask, 1500);
 
 			return SUCCESS;
 

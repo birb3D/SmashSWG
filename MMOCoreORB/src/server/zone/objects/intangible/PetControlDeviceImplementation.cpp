@@ -442,6 +442,10 @@ void PetControlDeviceImplementation::spawnObject(CreatureObject* player) {
 		// Submit new skill mod task
 		Reference<Task*> droidSkillModTask = new DroidSkillModTask( droid, player );
 		droid->addPendingTask("droid_skill_mod", droidSkillModTask, 3000); // 3 sec
+
+		if((droid->getSpecies() == DroidObject::DZ70 || droid->getSpecies() == DroidObject::PROBOT) ) {
+			useRanged = true;
+		}
 	}
 
 	if (pet->isHelperDroidObject()) {
@@ -603,7 +607,7 @@ bool PetControlDeviceImplementation::growPet(CreatureObject* player, bool force,
 
 	Time currentTime;
 	uint32 timeDelta = currentTime.getTime() - lastGrowth.getTime();
-	int stagesToGrow = timeDelta / 43200; // 12 hour
+	int stagesToGrow = timeDelta / 21600; // 6 hour
 
 	if (adult)
 		stagesToGrow = 10;

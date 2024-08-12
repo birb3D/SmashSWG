@@ -1,10 +1,11 @@
 JediManager = require("managers.jedi.jedi_manager")
+local Logger = require("utils.logger")
 local ObjectManager = require("managers.object.object_manager")
 
 jediManagerName = "HologrindJediManager"
 
-NUMBEROFPROFESSIONSTOMASTER = 6
-MAXIMUMNUMBEROFPROFESSIONSTOSHOWWITHHOLOCRON = NUMBEROFPROFESSIONSTOMASTER - 2
+NUMBEROFPROFESSIONSTOMASTER = 8
+MAXIMUMNUMBEROFPROFESSIONSTOSHOWWITHHOLOCRON = 3
 
 HologrindJediManager = JediManager:new {
 	screenplayName = jediManagerName,
@@ -72,16 +73,63 @@ function HologrindJediManager:onPlayerCreated(pCreatureObject)
 	local skillList = self:getGrindableProfessionList()
 
 	local pGhost = CreatureObject(pCreatureObject):getPlayerObject()
-
 	if (pGhost == nil) then
 		return
 	end
 
 	for i = 1, NUMBEROFPROFESSIONSTOMASTER, 1 do
-		local numberOfSkillsInList = #skillList
-		local skillNumber = getRandomNumber(1, numberOfSkillsInList)
+		local skillNumber = 999
+		repeat 
+			skillNumber = getRandomNumber(1, #skillList)
+		until (skillList[skillNumber][2] ~= 0)
 		PlayerObject(pGhost):addHologrindProfession(skillList[skillNumber][2])
 		table.remove(skillList, skillNumber)
+	end
+end
+
+-- Check Hologrind professions and fix them for the player.
+-- @param pCreatureObject pointer to the creature object of the created player.
+function HologrindJediManager:checkProfessionList(pCreatureObject)
+	local pGhost = CreatureObject(pCreatureObject):getPlayerObject()
+	if (pGhost == nil) then
+		return
+	end
+
+	-- Create a list of unused skills to select from 
+	local skillRemaining = self:getGrindableProfessionList()
+
+	local professions = PlayerObject(pGhost):getHologrindProfessions()
+	for i = 1, #professions, 1 do
+		for j = 1, #skillRemaining, 1 do
+			if (professions[i] == skillRemaining[j][2]) then
+				table.remove(skillRemaining, j)
+				break
+			end
+		end
+	end
+
+	-- Loop over profession list and replace invalid ones
+	local skillList = self:getGrindableProfessionList()
+
+	for i = 1, #professions, 1 do
+		-- Check if it is a valid profession
+		local found = false
+		for j = 1, #skillList, 1 do
+			if (professions[i] == skillList[j][2]) then
+				found = true
+				break
+			end
+		end
+
+		-- Replace with one of the unused ones if it is not
+		if (found ~= true) then
+			print("Fixing invalid profession on character " .. PlayerObject(pGhost):getFirstname())
+			local skillNumber = 999
+			repeat 
+				skillNumber = getRandomNumber(1, #skillRemaining)
+			until (skillRemaining[skillNumber][2] ~= 0)
+			PlayerObject(pGhost):setHologrindProfession(i, skillRemaining[skillNumber][2])
+		end
 	end
 end
 
@@ -146,10 +194,10 @@ end
 -- Check if the player has mastered all hologrind professions and send sui window and award skills.
 -- @param pCreatureObject pointer to the creature object of the player to check the jedi progression on.
 function HologrindJediManager:checkIfProgressedToJedi(pCreatureObject)
-	if self:getNumberOfMasteredProfessions(pCreatureObject) >= NUMBEROFPROFESSIONSTOMASTER and not self:isJedi(pCreatureObject) then
-		self:sendSuiWindow(pCreatureObject)
-		self:awardJediStatusAndSkill(pCreatureObject)
-	end
+	-- if self:getNumberOfMasteredProfessions(pCreatureObject) >= NUMBEROFPROFESSIONSTOMASTER and not self:isJedi(pCreatureObject) then
+	-- 	self:sendSuiWindow(pCreatureObject)
+	-- 	self:awardJediStatusAndSkill(pCreatureObject)
+	-- end
 end
 
 -- Event handler for the BADGEAWARDED event.
@@ -180,6 +228,7 @@ function HologrindJediManager:onPlayerLoggedIn(pCreatureObject)
 		return
 	end
 
+	self:checkProfessionList(pCreatureObject)
 	self:checkIfProgressedToJedi(pCreatureObject)
 	self:registerObservers(pCreatureObject)
 end
@@ -216,6 +265,7 @@ function HologrindJediManager:sendHolocronMessage(pCreatureObject)
 			if not PlayerObject(pGhost):hasBadge(professions[i]) then
 				local professionText = self:getProfessionStringIdFromBadgeNumber(professions[i])
 				CreatureObject(pCreatureObject):sendSystemMessageWithTO("@jedi_spam:holocron_light_information", "@skl_n:" .. professionText)
+				return false;
 			end
 		end
 

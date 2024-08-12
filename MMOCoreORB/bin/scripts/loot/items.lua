@@ -9,7 +9,35 @@ JUNKJAWA = 64
 JUNKGUNGAN = 128
 JUNKCORSEC = 256
 
---items folder
+
+--custom loots
+includeFile("items/custom/fiberplast_panel.lua")
+includeFile("items/custom/synthetic_cloth.lua")
+includeFile("items/custom/reinforced_fiber_panel.lua")
+includeFile("items/custom/armor_segment_bone.lua")
+includeFile("items/custom/armor_segment_zam.lua")
+includeFile("items/custom/armor_segment_chitin.lua")
+includeFile("items/custom/armor_segment_padded.lua")
+includeFile("items/custom/armor_segment_ubese.lua")
+includeFile("items/custom/armor_segment_tantel.lua")
+includeFile("items/custom/strange_biologic_effect_controller.lua")
+includeFile("items/custom/strange_bio_component_food_light.lua")
+includeFile("items/custom/strange_bio_component_food_medium.lua")
+includeFile("items/custom/strange_bio_component_food_heavy.lua")
+includeFile("items/custom/strange_scope_weapon_advanced.lua")
+includeFile("items/custom/strange_reinforcement_core_advanced.lua")
+includeFile("items/custom/strange_sword_core_advanced.lua")
+includeFile("items/custom/strange_stock_advanced.lua")
+includeFile("items/custom/strange_vibro_unit_advanced.lua")
+includeFile("items/custom/strange_droid_combat_module_slow.lua")
+includeFile("items/custom/strange_droid_combat_module_fast.lua")
+includeFile("items/custom/strange_structure_fluidic_drilling_pumping_unit.lua")
+includeFile("items/custom/strange_structure_harvesting_mechanism.lua")
+includeFile("items/custom/strange_structure_heavy_harvesting_mechanism.lua")
+includeFile("items/custom/strange_structure_light_ore_mining_unit.lua")
+includeFile("items/custom/strange_structure_ore_mining_unit.lua")
+includeFile("items/custom/strange_structure_turbo_fluidic_drilling_pumping_unit.lua")
+
 includeFile("items/attachment_armor.lua")
 includeFile("items/attachment_clothing.lua")
 includeFile("items/balanced_feed_mechanism.lua")

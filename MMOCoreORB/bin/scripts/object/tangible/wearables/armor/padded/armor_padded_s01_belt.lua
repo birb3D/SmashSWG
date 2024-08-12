@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_padded_armor_padded_s01_belt = object_tangible_wearables_armor_padded_shared_armor_padded_s01_belt:new {
+	objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/bothan_male.iff",

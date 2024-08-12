@@ -76,7 +76,7 @@ object_weapon_ranged_creature_creature_spit_particle_beam = object_weapon_ranged
 	speedModifiers = { "unarmed_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "unarmed_damage" },
 	
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

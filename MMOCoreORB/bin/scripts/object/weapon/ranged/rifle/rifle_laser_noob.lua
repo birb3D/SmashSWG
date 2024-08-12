@@ -97,8 +97,8 @@ object_weapon_ranged_rifle_rifle_laser_noob = object_weapon_ranged_rifle_shared_
 	speedModifiers = { "rifle_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
-
+	damageModifiers = { "rifle_damage" },
+	
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
 	healthAttackCost = 12,

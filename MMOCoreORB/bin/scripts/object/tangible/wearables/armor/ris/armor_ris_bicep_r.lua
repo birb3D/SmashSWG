@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_ris_armor_ris_bicep_r = object_tangible_wearables_armor_ris_shared_armor_ris_bicep_r:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/bothan_male.iff",

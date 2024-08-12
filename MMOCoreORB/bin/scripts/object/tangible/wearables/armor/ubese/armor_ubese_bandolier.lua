@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_ubese_armor_ubese_bandolier = object_tangible_wearables_armor_ubese_shared_armor_ubese_bandolier:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 	gameObjectType = 259,
 

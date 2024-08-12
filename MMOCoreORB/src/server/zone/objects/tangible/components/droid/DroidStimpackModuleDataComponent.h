@@ -22,6 +22,7 @@ protected:
 	int capacity;
 	float speed;
 	int loaded;
+	bool active;
 public:
 	int rate;
 
@@ -36,6 +37,12 @@ public:
 	void fillAttributeList(AttributeListMessage* msg, CreatureObject* droid);
 
 	int getBatteryDrain();
+
+	int getHealTimeMS();
+
+	void discardStimpacks();
+
+	void deactivate();
 
 	String toString() const;
 
@@ -65,7 +72,9 @@ public:
 
 	StimPack* compatibleStimpack(float power);
 
-	StimPack* findStimPack();
+	StimPack* findStimPack(int maxUse = 35);
+	
+	bool isActive(){ return active; }
 };
 
 

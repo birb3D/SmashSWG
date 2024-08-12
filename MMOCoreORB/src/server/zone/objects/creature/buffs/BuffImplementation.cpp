@@ -11,6 +11,8 @@
 #include "server/zone/objects/creature/CreatureObject.h"
 #include "server/zone/packets/object/Buffs.h"
 #include "server/zone/managers/skill/SkillModManager.h"
+#include "server/zone/ZoneServer.h"
+#include "server/zone/managers/player/PlayerManager.h"
 
 void BuffImplementation::init() {
 	attributeModifiers.setNoDuplicateInsertPlan();
@@ -120,6 +122,8 @@ void BuffImplementation::activate(bool applyModifiers) {
 		if (!startSpam.isEmpty()) {
 			creo->sendStateCombatSpam(startSpam.getFile(), startSpam.getStringID(), spamColor, 0, broadcastSpam);
 		}
+
+		
 
 	} catch (const Exception& e) {
 		error(e.getMessage());
@@ -273,14 +277,25 @@ float BuffImplementation::getTimeLeft() const {
 
 void BuffImplementation::applyAttributeModifiers() {
 	ManagedReference<CreatureObject*> creo = creature.get();
-
-	if (creo == nullptr)
-		return;
+	if (creo == nullptr) return;
 
 	int size = attributeModifiers.size();
+	if (size <= 0) return;
 
-	if (size <= 0)
-		return;
+	if (creo->isPlayerCreature()) {
+    	ZoneServer* server = creo->getZoneServer();
+        if (server != nullptr) {
+            PlayerManager* pManager = server->getPlayerManager();
+            if (pManager != nullptr) {
+                creo->setLevel(pManager->calculatePlayerLevel(creo));
+            }
+        }
+
+		GroupObject* grp = creo->getGroup();
+        if (grp != nullptr){
+			grp->calcGroupLevel();
+		}
+    }
 
 	for (int i = 0; i < size; ++i) {
 		VectorMapEntry<uint8, int>* entry = &attributeModifiers.elementAt(i);
@@ -361,14 +376,25 @@ void BuffImplementation::applyStates() {
 
 void BuffImplementation::removeAttributeModifiers() {
 	ManagedReference<CreatureObject*> creo = creature.get();
-
-	if (creo == nullptr)
-		return;
+	if (creo == nullptr) return;
 
 	int size = attributeModifiers.size();
+	if (size <= 0) return;
 
-	if (size <= 0)
-		return;
+	if (creo->isPlayerCreature()) {
+    	ZoneServer* server = creo->getZoneServer();
+        if (server != nullptr) {
+            PlayerManager* pManager = server->getPlayerManager();
+            if (pManager != nullptr) {
+                creo->setLevel(pManager->calculatePlayerLevel(creo));
+            }
+        }
+
+		GroupObject* grp = creo->getGroup();
+        if (grp != nullptr){
+			grp->calcGroupLevel();
+		}
+    }
 
 	for (int i = 0; i < size; ++i) {
 		VectorMapEntry<uint8, int>* entry = &attributeModifiers.elementAt(i);

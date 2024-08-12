@@ -4,8 +4,8 @@ dantooine_destroy_missions = {
 	lairSpawns = {
 		{
 			lairTemplateName = "dantooine_bol_pigmy_neutral_small",
-			minDifficulty = 8,
-			maxDifficulty = 12,
+			minDifficulty = 24,
+			maxDifficulty = 28,
 			size = 25,
 		},
 		{

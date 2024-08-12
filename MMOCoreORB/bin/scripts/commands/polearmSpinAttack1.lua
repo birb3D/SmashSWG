@@ -54,6 +54,18 @@ PolearmSpinAttack1Command = {
 
 	areaAction = true,
 	areaRange = 16,
+	
+	stateEffects = {
+	  StateEffect( 
+		BLIND_EFFECT, 
+		{}, 
+		{ "blind_defense" }, 
+		{ "jedi_state_defense", "resistance_states" },
+		100, 
+		0, 
+		30 
+	  )
+	},
 
 	animation = "attack_high_left_light_2",
 

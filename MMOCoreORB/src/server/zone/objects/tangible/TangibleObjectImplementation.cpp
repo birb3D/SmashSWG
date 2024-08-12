@@ -862,6 +862,9 @@ void TangibleObjectImplementation::setCountdownTimer(unsigned int newUseCount, b
 }
 
 void TangibleObjectImplementation::setUseCount(uint32 newUseCount, bool notifyClient) {
+
+	if(useCount < 0) newUseCount = 0;
+
 	if (useCount == newUseCount)
 		return;
 
@@ -1334,13 +1337,13 @@ void TangibleObjectImplementation::repair(CreatureObject* player, RepairTool * r
 	}
 
 	/// Subtract battle fatigue
-	repairChance -= (player->getShockWounds() / 2);
+	//repairChance -= (player->getShockWounds() / 2);
 
 	/// Subtract complexity
 	repairChance -= (getComplexity() / 3);
 
 	/// 5% random failure
-	if (getMaxCondition() < 20 || roll < 5)
+	if (roll < 5)
 		repairChance = 0;
 
 	if (roll > 95)

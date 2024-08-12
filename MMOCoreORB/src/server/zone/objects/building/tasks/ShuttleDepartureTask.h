@@ -20,12 +20,14 @@ protected:
 	int landedTime; //In seconds
 	int landingTime; //How long the landing animation takes to complete in seconds.
 	int departedTime; //In seconds
+	int originalDepartedTime;
 	int shuttleType; // Type of Shuttle
 
 public:
 	ShuttleDepartureTask(CreatureObject* shuttle) : Task() {
 		shuttleObject = shuttle;
 		departedTime = 300;
+		originalDepartedTime = 300;
 		landingTime = 11;
 		landedTime = 120;
 		shuttleType = 0;
@@ -52,7 +54,9 @@ public:
 
 		if (strongReference->isStanding()) {
 			strongReference->setPosture(CreaturePosture::PRONE);
-			reschedule(getDepartedTime() * 1000);
+			departedTime = originalDepartedTime * ((60.0f + System::random(80.0f))/100.0f);
+			//departedTime = 60; // Test
+			reschedule(departedTime * 1000);
 		} else {
 			strongReference->setPosture(CreaturePosture::UPRIGHT);
 			reschedule(getLandedTime() * 1000);
@@ -149,6 +153,7 @@ public:
 
 	void setDepartedTime(int departed) {
 		departedTime = departed;
+		originalDepartedTime = departed;
 	}
 
 	void setShuttleType (int type) {

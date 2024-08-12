@@ -312,6 +312,11 @@ void ChatManagerImplementation::initiateRooms() {
 	guildRoom = createRoom("guild", systemRoom);
 	guildRoom->setPrivate();
 
+	generalRoom = createRoom("General", galaxyRoom);
+	generalRoom->setCanEnter(true);
+	generalRoom->setAllowSubrooms(true);
+	generalRoom->setTitle("Public chat for Smash SWG Server");
+
 	Reference<ChatRoom*> generalRoom = createRoom("Chat", galaxyRoom);
 	generalRoom->setCanEnter(true);
 	generalRoom->setAllowSubrooms(true);

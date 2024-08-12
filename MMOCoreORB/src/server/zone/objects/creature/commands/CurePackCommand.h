@@ -247,7 +247,7 @@ public:
 		}
 	}
 
-	void doAreaMedicActionTarget(CreatureObject* creature, CreatureObject* creatureTarget, PharmaceuticalObject* pharma) const {
+	void doAreaMedicActionTarget(CreatureObject* creature, CreatureObject* targetCreature, PharmaceuticalObject* pharma) const {
 		CurePack* curePack = nullptr;
 
 		if (pharma->isCurePack())
@@ -255,14 +255,22 @@ public:
 		else
 			return;
 
-		creatureTarget->healDot(state, curePack->calculatePower(creature));
+		targetCreature->healDot(state, curePack->calculatePower(creature));
 
-		sendCureMessage(creature, creatureTarget);
+		sendCureMessage(creature, targetCreature);
 
-		if (creatureTarget != creature && !creatureTarget->isPet())
-			awardXp(creature, "medical", 50); //No experience for healing yourself or pets.
+		// XP Checks
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
 
-		checkForTef(creature, creatureTarget);
+		if (targetCreature != creature && // Not Healing Self
+			!targetCreature->isPet() && // Not Healing Pet
+			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat))
+			{
+				awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
+		}
+
+		checkForTef(creature, targetCreature);
 	}
 
 	bool canPerformSkill(CreatureObject* creature, CreatureObject* creatureTarget, CurePack* curePack, int mindCostNew) const {
@@ -412,8 +420,16 @@ public:
 			curePack->decreaseUseCount();
 		}
 
-		if (targetCreature != creature && !targetCreature->isPet())
-			awardXp(creature, "medical", 50); //No experience for healing yourself or pets.
+		// XP Checks
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
+
+		if (targetCreature != creature && // Not Healing Self
+			!targetCreature->isPet() && // Not Healing Pet
+			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat))
+			{
+			awardXp(creature, "medical", 70); //No experience for healing yourself or pets.
+		}
 
 		if (curePack->isArea()) {
 			if (creature != targetCreature)

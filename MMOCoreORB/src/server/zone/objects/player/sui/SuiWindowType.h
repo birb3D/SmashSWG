@@ -157,6 +157,7 @@ public:
 		GAMBLING_ROULETTE                  = 261,
 		GAMBLING_SLOT                      = 262,
 		GAMBLING_SLOT_PAYOUT               = 263,
+		GAMBLING_CRAPS              	   = 264,
 
 		//Fishing 271 - 280
 		FISHING                            = 271,
@@ -270,6 +271,7 @@ public:
 		GOTO_LIST							= 1041,
 		FS_EXP_CONVERT						= 1042,
 		REPAIR_TOOL_DIALOG					= 1043,
+		DROID_DISCARD_STIMPACK			    = 1044,
 
 		//JTL
 		SHIP_TEXTURE_SELECT					= 1100,

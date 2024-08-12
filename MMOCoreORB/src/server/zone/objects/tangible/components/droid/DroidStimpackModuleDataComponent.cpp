@@ -9,12 +9,16 @@
 #include "server/zone/objects/tangible/pharmaceutical/StimPack.h"
 #include "server/zone/objects/creature/events/DroidStimpackTask.h"
 #include "server/zone/objects/creature/sui/LoadStimpackSuiCallback.h"
+#include "server/zone/objects/creature/sui/DiscardDroneStimpacksSuiCallback.h"
 #include "server/zone/objects/player/sui/listbox/SuiListBox.h"
+#include "server/zone/objects/player/sui/messagebox/SuiMessageBox.h"
 #include "server/zone/objects/player/PlayerObject.h"
 #include "server/zone/objects/intangible/PetControlDevice.h"
+#include "server/zone/objects/creature/events/DroidAutoHealTask.h"
 
 DroidStimpackModuleDataComponent::DroidStimpackModuleDataComponent() {
 	setLoggingName("DroidStimpackModule");
+	active = false;
 	speed = 0;
 	capacity = 0;
 	rate = 0;
@@ -117,6 +121,7 @@ void DroidStimpackModuleDataComponent::onCall() {
 	}
 
 	countUses();
+	deactivate();
 }
 
 StimPack* DroidStimpackModuleDataComponent::compatibleStimpack(float power) {
@@ -202,6 +207,7 @@ void DroidStimpackModuleDataComponent::countUses() {
 void DroidStimpackModuleDataComponent::onStore() {
 	// no-op
 	countUses();
+	deactivate();
 }
 
 /**
@@ -209,9 +215,11 @@ void DroidStimpackModuleDataComponent::onStore() {
  */
 void DroidStimpackModuleDataComponent::fillObjectMenuResponse(SceneObject* droidObject, ObjectMenuResponse* menuResponse, CreatureObject* player) {
 	menuResponse->addRadialMenuItem(REQUEST_STIMPACK, 3, "@pet/droid_modules:request_stimpack" );
-
-	if (player != nullptr && player->hasSkill("science_medic_ability_04"))
+	if (player != nullptr && player->hasSkill("science_medic_novice")){
+		menuResponse->addRadialMenuItemToRadialID(REQUEST_STIMPACK, AUTO_REPAIR_MODULE_TOGGLE, 3, "Toggle Auto Heal" );
 		menuResponse->addRadialMenuItemToRadialID(REQUEST_STIMPACK, LOAD_STIMPACK, 3, "@pet/droid_modules:load_stimpack" );
+	}
+	menuResponse->addRadialMenuItemToRadialID(REQUEST_STIMPACK, DISCARD_STIMPACK, 3, "Discard Stimpacks" );
 }
 
 void DroidStimpackModuleDataComponent::initialize(DroidObject* droid) {
@@ -228,8 +236,6 @@ void DroidStimpackModuleDataComponent::initialize(DroidObject* droid) {
 	if (satchel != nullptr) {
 		satchel->setContainerVolumeLimit(capacity);
 	}
-
-
 }
 
 int DroidStimpackModuleDataComponent::handleObjectMenuSelect(CreatureObject* player, byte selectedID, PetControlDevice* controller) {
@@ -253,17 +259,13 @@ int DroidStimpackModuleDataComponent::handleObjectMenuSelect(CreatureObject* pla
 
 		for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
 			ManagedReference<SceneObject*> item = inventory->getContainerObject(i);
-
-			if (!item->isPharmaceuticalObject())
-				continue;
+			if (!item->isPharmaceuticalObject()) continue;
 
 			// check it they have atleast 1 stim pack
 			PharmaceuticalObject* pharma = item.castTo<PharmaceuticalObject*>();
-
 			if (pharma->isStimPack()) {
 				StimPack* stim = cast<StimPack*>(pharma);
-
-				if (stim->isClassA()) {
+				if( std::min(player->getSkillMod("healing_ability"), 35) >= stim->getMedicineUseRequired() ){
 					foundStims += 1;
 				}
 			}
@@ -295,11 +297,69 @@ int DroidStimpackModuleDataComponent::handleObjectMenuSelect(CreatureObject* pla
 		}
 
 		// Submit stimpack task
-		Reference<Task*> task = new DroidStimpackTask( droid,player,controller->getCustomObjectName().toString() );
+		Reference<Task*> task = new DroidStimpackTask( droid, player, controller->getCustomObjectName().toString() );
 		droid->addPendingTask("droid_request_stimpack", task, 1); // rte determines when it will fire it
+	} else if (selectedID == AUTO_REPAIR_MODULE_TOGGLE ){
+		Locker dlock( droid, player );
+
+		if (active){
+			deactivate();
+			player->sendSystemMessage("@pet/droid_modules:autorepair_off");  // You turn off auto-repair
+		} else {
+			// Check droid states
+			if( droid->isDead() || droid->isIncapacitated() ){
+				return 0;
+			}
+
+			// Droid must have power
+			if( !droid->hasPower() ){
+				droid->showFlyText("npc_reaction/flytext","low_power", 204, 0, 0);  // "*Low Power*"
+				return 0;
+			}
+
+			// Ensure we don't accidentally have another task outstanding
+			deactivate();
+
+			// Submit repair task
+			Reference<Task*> task = new DroidAutoHealTask( this, std::min(player->getSkillMod("healing_ability"), 35), controller->getCustomObjectName().toString() );
+			droid->addPendingTask("droid_auto_heal", task, getHealTimeMS());
+			player->sendSystemMessage("@pet/droid_modules:autorepair_on");  // You turn on auto-repair
+			active = true;
+		}
+	} else if (selectedID == DISCARD_STIMPACK ) {
+		ManagedReference<SuiMessageBox*> suibox = new SuiMessageBox(player, SuiWindowType::DROID_DISCARD_STIMPACK);
+		suibox->setUsingObject(getDroidObject());
+		suibox->setPromptTitle("Stimpack Discard"); // Reward
+		suibox->setPromptText( "Are you sure you wish to discard the stored stimpacks? They will be destroyed!"); // The item you are selecting can only be selected as a reward item once for the the lifetime of your account. Are you sure you wish to continue selecting this item?
+		suibox->setCallback(new DiscardDroneStimpacksSuiCallback(getParent()->getZoneServer()));
+		suibox->setOkButton(true, "@yes");
+		suibox->setCancelButton(true, "@no");
+
+		player->getPlayerObject()->addSuiBox(suibox);
+		player->sendMessage(suibox->generateMessage());
 	}
 
 	return 0;
+}
+
+
+void DroidStimpackModuleDataComponent::deactivate() {
+	active = false;
+
+	ManagedReference<DroidObject*> droid = getDroidObject();
+	if( droid == nullptr ){
+		info( "Droid is null" );
+		return;
+	}
+
+	Locker dlock( droid );
+
+	// Cancel auto repair task
+	Task* task = droid->getPendingTask( "droid_auto_heal" );
+	if( task != nullptr ){
+		Core::getTaskManager()->cancelTask(task);
+		droid->removePendingTask( "droid_auto_heal" );
+	}
 }
 
 void DroidStimpackModuleDataComponent::sendLoadUI(CreatureObject* player) {
@@ -326,7 +386,7 @@ void DroidStimpackModuleDataComponent::sendLoadUI(CreatureObject* player) {
 		if (pharma->isStimPack()) {
 			StimPack* stim = cast<StimPack*>(pharma);
 
-			if (stim->isClassA()) {
+			if( std::min(player->getSkillMod("healing_ability"), 35) >= stim->getMedicineUseRequired() ) {
 				String name;
 
 				if (stim->getCustomObjectName().isEmpty()) {
@@ -346,16 +406,14 @@ void DroidStimpackModuleDataComponent::sendLoadUI(CreatureObject* player) {
 	player->sendMessage(loader->generateMessage());
 }
 
-StimPack* DroidStimpackModuleDataComponent::findStimPack() {
+StimPack* DroidStimpackModuleDataComponent::findStimPack(int maxUse) {
 	StimPack* pack = nullptr;
 	float biggest = 0;
 	DroidComponent* container = cast<DroidComponent*>(getParent());
-
 	if (container == nullptr)
 		return nullptr;
 
 	ManagedReference<SceneObject*> craftingComponents = container->getSlottedObject("crafted_components");
-
 	if (craftingComponents != nullptr) {
 		SceneObject* satchel = craftingComponents->getContainerObject(0);
 
@@ -369,7 +427,7 @@ StimPack* DroidStimpackModuleDataComponent::findStimPack() {
 				if (pharma->isStimPack() && !pharma->isPetStimPack() && !pharma->isDroidRepairKit()) {
 					StimPack* stim = cast<StimPack*>(pharma);
 
-					if (stim->getEffectiveness() > biggest) {
+					if (stim->getEffectiveness() > biggest && stim->getMedicineUseRequired() <= maxUse) {
 						biggest = stim->getEffectiveness();
 						pack = stim;
 					}
@@ -384,10 +442,7 @@ StimPack* DroidStimpackModuleDataComponent::findStimPack() {
 void DroidStimpackModuleDataComponent::handleInsertStimpack(CreatureObject* player, StimPack* pack) {
 	countUses();
 
-	if (player == nullptr)
-		return;
-
-	if (!player->hasSkill("science_medic_ability_04")) {
+	if (player == nullptr){
 		return;
 	}
 
@@ -401,7 +456,12 @@ void DroidStimpackModuleDataComponent::handleInsertStimpack(CreatureObject* play
 		return;
 	}
 
-	if (!pack->isClassA()) {
+	if( std::min(player->getSkillMod("healing_ability"), 35) < pack->getMedicineUseRequired() ){
+		player->sendSystemMessage("@pet/droid_modules:invalid_stimpack");
+		return;
+	}
+
+	if (pack->isClassD() || pack->isClassE()) {
 		player->sendSystemMessage("@pet/droid_modules:invalid_stimpack");
 		return;
 	}
@@ -413,25 +473,21 @@ void DroidStimpackModuleDataComponent::handleInsertStimpack(CreatureObject* play
 	// we have the player and the stim to add to ourselves.
 	// code should goes as follow, count total use of all stims, then deduct amount form capacity
 	DroidComponent* droidComponent = cast<DroidComponent*>(getParent());
-
 	if (droidComponent == nullptr) {
 		return;
 	}
 
 	ManagedReference<SceneObject*> craftingComponents = droidComponent->getSlottedObject("crafted_components");
-
 	if (craftingComponents == nullptr) {
 		return;
 	}
 
 	SceneObject* satchel = craftingComponents->getContainerObject(0);
-
 	if (satchel == nullptr) {
 		return;
 	}
 
 	int allowedAmount = capacity - loaded;
-
 	if (allowedAmount <= 0) {
 		player->sendSystemMessage("@pet/droid_modules:stimpack_capacity_full");
 		return;
@@ -440,8 +496,8 @@ void DroidStimpackModuleDataComponent::handleInsertStimpack(CreatureObject* play
 	Locker plocker(pack);
 
 	int amountOnStim = pack->getUseCount();
-	StimPack* targetStim = compatibleStimpack(pack->getEffectiveness());
 
+	StimPack* targetStim = compatibleStimpack(pack->getEffectiveness());
 	if (targetStim != nullptr) {
 		Locker tlocker(targetStim);
 
@@ -479,5 +535,33 @@ void DroidStimpackModuleDataComponent::handleInsertStimpack(CreatureObject* play
 }
 
 int DroidStimpackModuleDataComponent::getBatteryDrain() {
+	if( active ){
+		return 4;
+	}
 	return 0;
+}
+
+// 10 second minimum and 30 second maximum
+int DroidStimpackModuleDataComponent::getHealTimeMS() {
+	return (int)(10.0 + ((1.0 - (float)speed/60.0) * 20.0)) * 1000;
+}
+
+void DroidStimpackModuleDataComponent::discardStimpacks() {
+	ManagedReference<DroidObject*> droid = getDroidObject();
+	if (droid == nullptr) {
+		return;
+	}
+
+	DroidComponent* droidComponent = cast<DroidComponent*>(getParent());
+	if (droidComponent == nullptr) {
+		return;
+	}
+
+	ManagedReference<SceneObject*> craftingComponents = droidComponent->getSlottedObject("crafted_components");
+	if (craftingComponents != nullptr) {
+		SceneObject* satchel = craftingComponents->getContainerObject(0);
+		satchel->removeAllContainerObjects();
+	}
+
+	countUses();
 }

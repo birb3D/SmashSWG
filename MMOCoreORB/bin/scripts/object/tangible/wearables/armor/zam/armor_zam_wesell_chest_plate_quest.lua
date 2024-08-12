@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_zam_armor_zam_wesell_chest_plate_quest = object_tangible_wearables_armor_zam_shared_armor_zam_wesell_chest_plate_quest:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/bothan_male.iff",
@@ -98,7 +99,7 @@ object_tangible_wearables_armor_zam_armor_zam_wesell_chest_plate_quest = object_
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
 
-	maxCondition = 15000,
+	maxCondition = 25000,
 
 	kinetic = 10,
 	energy = 0,

@@ -95,8 +95,8 @@ object_weapon_melee_sword_crafted_saber_sword_lightsaber_training = object_weapo
 	speedModifiers = { "onehandlightsaber_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
-
+	damageModifiers = { "onehandlightsaber_damage" },
+	
 	defenderToughnessModifiers = { "lightsaber_toughness" },
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

@@ -66,7 +66,7 @@ object_weapon_ranged_droid_droid_probot_ranged = object_weapon_ranged_droid_shar
 
 	speedModifiers = { "rifle_speed" },
 
-	damageModifiers = { },
+	damageModifiers = { "rifle_damage" },
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
 	healthAttackCost = 0,

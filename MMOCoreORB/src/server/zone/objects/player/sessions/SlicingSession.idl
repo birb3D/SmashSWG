@@ -112,6 +112,10 @@ class SlicingSession extends Facade {
 	public native boolean hasWeaponUpgradeKit();
 
 	public native boolean hasArmorUpgradeKit();
+	
+	public native boolean canUseColorCrystal(TangibleObject object);
+	
+	public native boolean hasColorCrystal(boolean removeItem = true);
 
 	public native void useClampFromInventory(SlicingTool clamp);
 
@@ -120,6 +124,8 @@ class SlicingSession extends Facade {
 	private native void handleUseClamp();
 
 	private native void handleUseFlowAnalyzer();
+	
+	private native void handleUseColorCrystal(SuiListBox suiBox);
 
 	private native void handleSlice(SuiListBox suiBox);
 
@@ -128,6 +134,8 @@ class SlicingSession extends Facade {
 	private native void handleSliceDamage(byte percent);
 
 	private native void handleSliceSpeed(byte percent);
+	
+	private native void handleSliceHam(byte percent);
 
 	private native void handleArmorSlice();
 

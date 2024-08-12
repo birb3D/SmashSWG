@@ -30,6 +30,8 @@
 #include "server/zone/Zone.h"
 #include "server/zone/packets/scene/PlayClientEffectLocMessage.h"
 
+#include <iostream>
+
 void EntertainingSessionImplementation::doEntertainerPatronEffects() {
 	ManagedReference<CreatureObject*> creo = entertainer.get();
 
@@ -171,10 +173,13 @@ void EntertainingSessionImplementation::healWounds(CreatureObject* creature, flo
 
 	clocker.release();
 
-	if (entertainer->getGroup() != nullptr)
-		addHealingXpGroup(amountHealed);
-	else
-		addHealingXp(amountHealed);
+	if(amountHealed > 0) {
+
+		if(entertainer->getGroup() != nullptr)
+			addHealingXpGroup(amountHealed);
+		else
+			addHealingXp(amountHealed);
+	}
 
 }
 
@@ -183,7 +188,7 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 
 	ManagedReference<GroupObject*> group = entertainer->getGroup();
 	ManagedReference<PlayerManager*> playerManager = entertainer->getZoneServer()->getPlayerManager();
-
+	
 	for (int i = 0; i < group->getGroupSize(); ++i) {
 		try {
 			ManagedReference<CreatureObject *> groupMember = group->getGroupMember(i);
@@ -195,8 +200,10 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 					&& groupMember->hasSkill("social_entertainer_novice")) {
 					String healxptype("entertainer_healing");
 
+					int rewardxp = ceil(((float)xp) * 2.0f * 1.1f); // Group Bonus
+					
 					if (playerManager != nullptr)
-						playerManager->awardExperience(groupMember, healxptype, xp, true);
+						playerManager->awardExperience(groupMember, healxptype, rewardxp, true);
 				}
 			}
 		} catch (Exception& e) {
@@ -696,8 +703,8 @@ void EntertainingSessionImplementation::addEntertainerBuffDuration(CreatureObjec
 
 	buffDuration += duration;
 
-	if (buffDuration > (120.0f + (10.0f / 60.0f)) ) // 2 hrs 10 seconds
-		buffDuration = (120.0f + (10.0f / 60.0f)); // 2hrs 10 seconds
+	if (buffDuration > (180.0f + (10.0f / 60.0f)) ) // 3 hrs 10 seconds
+		buffDuration = (180.0f + (10.0f / 60.0f)); // 3hrs 10 seconds
 
 	setEntertainerBuffDuration(creature, performanceType, buffDuration);
 }
@@ -884,7 +891,7 @@ void EntertainingSessionImplementation::activateEntertainerBuff(CreatureObject* 
 		int campModTemp = 100;
 
 
-		float buffStrength = getEntertainerBuffStrength(creature, performanceType) / 100.0f;
+		float buffStrength = getEntertainerBuffStrength(creature, performanceType) / 200.0f;
 
 		if (buffStrength == 0)
 			return;
@@ -1079,6 +1086,8 @@ void EntertainingSessionImplementation::awardEntertainerExperience() {
 
 		if (healingXp > 0) {
 			String healxptype("entertainer_healing");
+			
+			healingXp = ceil(healingXp * 2);
 
 			if (playerManager != nullptr)
 				playerManager->awardExperience(player, healxptype, healingXp, true);

@@ -97,7 +97,7 @@ object_weapon_melee_sword_bestine_quest_sword = object_weapon_melee_sword_shared
 	speedModifiers = { "onehandmelee_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "onehandmelee_damage" },
 	
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

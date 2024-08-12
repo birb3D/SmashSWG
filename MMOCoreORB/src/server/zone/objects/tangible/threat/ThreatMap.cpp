@@ -92,7 +92,7 @@ void ThreatMap::addDamage(TangibleObject* target, uint32 damage, String xp) {
 	if (idx == -1) {
 		ThreatMapEntry entry;
 		entry.addDamage(xpToAward, damage);
-		entry.addAggro(1);
+		entry.addAggro(damage);
 
 		put(target, entry);
 		registerObserver(target);
@@ -100,7 +100,7 @@ void ThreatMap::addDamage(TangibleObject* target, uint32 damage, String xp) {
 	} else {
 		ThreatMapEntry* entry = &elementAt(idx).getValue();
 		entry->addDamage(xpToAward, damage);
-		entry->addAggro(1);
+		entry->addAggro(damage);
 	}
 }
 
@@ -516,13 +516,13 @@ void ThreatMap::addHeal(TangibleObject* target, int value) {
 	if (idx == -1) {
 		ThreatMapEntry entry;
 		entry.addHeal(value);
-		entry.addAggro(1);
+		entry.addAggro(value*6); // Heals Aggro 6x over damage
 		put(target, entry);
 		registerObserver(target);
 
 	} else {
 		ThreatMapEntry* entry = &elementAt(idx).getValue();
 		entry->addHeal(value);
-		entry->addAggro(1);
+		entry->addAggro(value*7);
 	}
 }

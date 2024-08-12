@@ -97,7 +97,7 @@ object_weapon_ranged_rifle_rifle_ewok_crossbow = object_weapon_ranged_rifle_shar
 	speedModifiers = { "rifle_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "rifle_damage" },
 	
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

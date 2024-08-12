@@ -97,7 +97,7 @@ object_weapon_melee_axe_axe_vibroaxe = object_weapon_melee_axe_shared_axe_vibroa
 	speedModifiers = { "twohandmelee_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "twohandmelee_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

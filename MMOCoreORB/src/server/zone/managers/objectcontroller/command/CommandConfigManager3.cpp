@@ -105,6 +105,7 @@
 #include "server/zone/objects/creature/commands/PauseMusicCommand.h"
 #include "server/zone/objects/creature/commands/PaWithdrawCommand.h"
 #include "server/zone/objects/creature/commands/PaymaintenanceCommand.h"
+#include "server/zone/objects/creature/commands/PaymaintenanceToCommand.h"
 #include "server/zone/objects/creature/commands/PeaceCommand.h"
 #include "server/zone/objects/creature/commands/PermissionListModifyCommand.h"
 #include "server/zone/objects/creature/commands/PistolMeleeDefense1Command.h"
@@ -405,6 +406,7 @@ void CommandConfigManager::registerCommands3() {
 	commandFactory.registerCommand<PauseMusicCommand>(String("pauseMusic").toLowerCase());
 	commandFactory.registerCommand<PaWithdrawCommand>(String("paWithdraw").toLowerCase());
 	commandFactory.registerCommand<PaymaintenanceCommand>(String("paymaintenance").toLowerCase());
+	commandFactory.registerCommand<PaymaintenanceToCommand>(String("paymaintenanceto").toLowerCase());
 	commandFactory.registerCommand<PeaceCommand>(String("peace").toLowerCase());
 	commandFactory.registerCommand<PermissionListModifyCommand>(String("permissionListModify").toLowerCase());
 	commandFactory.registerCommand<PistolMeleeDefense1Command>(String("pistolMeleeDefense1").toLowerCase());

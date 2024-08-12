@@ -759,7 +759,15 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 	int custpoints = int(crafter->getSkillMod(custskill));
 
 	// Determine the outcome of the craft, Amazing through Critical
-	assemblyResult = craftingManager->calculateAssemblySuccess(crafter, draftSchematic, craftingTool->getEffectiveness());
+	float stationOffset = 0.725f;
+	if( craftingStation != nullptr ){
+		if( craftingStation->getComplexityLevel() > 50 ){
+			stationOffset = (80.0 + (craftingStation->getEffectiveness()/2.0))/100.0;
+		}else{
+			stationOffset = 0.800f;
+		}
+	}
+	assemblyResult = craftingManager->calculateAssemblySuccess(crafter, draftSchematic, craftingTool->getEffectiveness(), stationOffset);
 
 	if (assemblyResult != CraftingManager::AMAZINGSUCCESS && craftingTool->getForceCriticalAssembly() > 0) {
 		assemblyResult = CraftingManager::AMAZINGSUCCESS;
@@ -866,6 +874,8 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 
 	addWeaponDots();
 
+
+
 	// Set default customization
 	SharedTangibleObjectTemplate* templateData = cast<SharedTangibleObjectTemplate*>(prototype->getObjectTemplate());
 
@@ -893,6 +903,24 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 	}
 
 	prototype->setComplexity(manufactureSchematic->getComplexity());
+
+	if(craftingValues->hasProperty("charges") && craftingValues->getCurrentValue("charges") < 0) {
+		craftingValues->setCurrentValue("charges", 1);
+		prototype->setUseCount(1, true);
+	}
+
+	if(craftingValues->hasProperty("charge") && craftingValues->getCurrentValue("charge") < 0) {
+		craftingValues->setCurrentValue("charge", 1);
+		prototype->setUseCount(1, true);
+	}
+
+	if(craftingValues->hasProperty("quantity") && craftingValues->getCurrentValue("quantity") < 0) {
+		craftingValues->setCurrentValue("quantity", 1);
+		prototype->setUseCount(1, true);
+	}
+
+	prototype->updateCraftingValues(craftingValues, false);
+
 
 	// Start DMSCO3 ***********************************************************
 	// Sends the updated values to the crafting screen
@@ -1387,7 +1415,7 @@ void CraftingSessionImplementation::createPrototype(int clientCounter, bool crea
 		} else {
 			// This is for practicing
 			startCreationTasks(manufactureSchematic->getComplexity() * 2, true);
-			xp = round(xp * 1.05f);
+			xp = round(xp * 1.10f);
 		}
 
 		Reference<PlayerManager*> playerManager = crafter->getZoneServer()->getPlayerManager();

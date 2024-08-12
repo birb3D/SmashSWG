@@ -95,7 +95,7 @@ object_weapon_melee_sword_crafted_saber_sword_lightsaber_one_handed_s11_gen2 = o
 	speedModifiers = { "onehandlightsaber_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "onehandlightsaber_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

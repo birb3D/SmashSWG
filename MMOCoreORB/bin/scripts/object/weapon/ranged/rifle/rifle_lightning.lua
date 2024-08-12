@@ -96,7 +96,7 @@ object_weapon_ranged_rifle_rifle_lightning = object_weapon_ranged_rifle_shared_r
 	speedModifiers = { "heavy_rifle_lightning_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "heavy_rifle_lightning_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

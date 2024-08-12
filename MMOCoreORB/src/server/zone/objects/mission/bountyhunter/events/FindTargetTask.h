@@ -213,6 +213,8 @@ class FindTargetTask : public Task, public Logger {
 
 		int time = 150 - checkedSkillMod;
 
+		time = time / 2;
+
 		return time + System::random(time / 2);
 	}
 

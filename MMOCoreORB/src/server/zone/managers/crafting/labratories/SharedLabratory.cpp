@@ -140,7 +140,7 @@ float SharedLabratory::getWeightedValue(ManufactureSchematic* manufactureSchemat
 
 	return weightedAverage;
 }
-int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchematic* draftSchematic, float effectiveness){
+int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchematic* draftSchematic, float effectiveness, float stationOffset){
 	// assemblyPoints is 0-12
 	/// City bonus should be 10
 	float cityBonus = player->getSkillMod("private_spec_assembly");
@@ -170,6 +170,9 @@ int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchema
 			toolModifier *= 1.0f + (craftbonus / 100.0f);
 		}
 	}
+
+	// Handle station quality
+	toolModifier *= stationOffset;
 
 	int luckRoll = System::random(100) + cityBonus;
 

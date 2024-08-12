@@ -97,7 +97,7 @@ object_weapon_melee_polearm_lance_controllerfp = object_weapon_melee_polearm_sha
 	speedModifiers = { "polearm_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "polearm_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

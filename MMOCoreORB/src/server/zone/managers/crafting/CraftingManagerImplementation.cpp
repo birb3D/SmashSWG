@@ -34,9 +34,9 @@ void CraftingManagerImplementation::sendResourceWeightsTo(CreatureObject* player
 	schematicMap->sendResourceWeightsTo(player, schematicID);
 }
 
-int CraftingManagerImplementation::calculateAssemblySuccess(CreatureObject* player,	DraftSchematic* draftSchematic, float effectiveness) {
+int CraftingManagerImplementation::calculateAssemblySuccess(CreatureObject* player,	DraftSchematic* draftSchematic, float effectiveness, float stationOffset) {
 	SharedLabratory* lab = labs.get(draftSchematic->getLabratory());
-	return lab->calculateAssemblySuccess(player,draftSchematic,effectiveness);
+	return lab->calculateAssemblySuccess(player,draftSchematic,effectiveness, stationOffset);
 }
 
 

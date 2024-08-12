@@ -44,8 +44,8 @@
 FireAcidSingle2Command = {
         name = "fireacidsingle2",
 
-	damageMultiplier = 8,
-	speedMultiplier = 4,
+	damageMultiplier = 4,
+	speedMultiplier = 2,
 	healthCostMultiplier = 2.0,
 	actionCostMultiplier = 0.5,
 	mindCostMultiplier = 0.5,

@@ -217,18 +217,22 @@ public:
 			}
 		}
 
+		//System::out << "MELEE CHECK\n";
 		if (creature->isKneeling() && weapon->isMeleeWeapon() && !(poolsToDamage == 0) && !weapon->isJediWeapon())
 			return NOKNEELING;
 
 		if (creature->isProne() && (weapon->isMeleeWeapon() || poolsToDamage == 0))
 			return NOPRONE;
 
+		//System::out << "TOO FAR CHECK\n";
 		if (!checkDistance(creature, targetObject, rangeToCheck))
 			return TOOFAR;
 
+		//System::out << "TOO CLOSE CHECK\n";
 		if (weapon->isRangedWeapon() && creature->isProne() && checkDistance(targetObject, creature, 7))
 			return TOOCLOSE;
 
+		//System::out << "LOS CHECK\n";
 		if (!CollisionManager::checkLineOfSight(creature, targetObject)) {
 			creature->sendSystemMessage("@cbt_spam:los_fail"); // "You lost sight of your target."
 			return GENERALERROR;
@@ -650,10 +654,13 @@ public:
 		case CommandEffect::STUN:
 			defender->setStunnedState(duration);
 			break;
-		case CommandEffect::KNOCKDOWN:
+		case CommandEffect::KNOCKDOWN: {
 			if (!defender->checkKnockdownRecovery()) {
-				if (defender->getPosture() != CreaturePosture::UPRIGHT)
-					defender->setPosture(CreaturePosture::UPRIGHT, false, false);
+				//if (defender->getPosture() != CreaturePosture::UPRIGHT)
+				//	defender->setPosture(CreaturePosture::UPRIGHT, false, false);
+				break;
+			}
+			if (defender->getPosture() == CreaturePosture::KNOCKEDDOWN) {
 				break;
 			}
 
@@ -665,17 +672,24 @@ public:
 			if (!defender->isDead() && !defender->isIncapacitated())
 				defender->setPosture(CreaturePosture::KNOCKEDDOWN, false, false);
 
-			defender->updateKnockdownRecovery();
-			defender->setPostureChangeDelay(5000);
+			int delay = 5000;
+			delay += System::random(5000);
+
+			defender->updateKnockdownRecovery(30000); // Can only knockdown same enemy every 30 seconds
+			defender->updatePostureChangeDelay(delay); // Knockdown lasts 5-10 seconds
 			defender->removeBuff(STRING_HASHCODE("burstrun"));
 			defender->removeBuff(STRING_HASHCODE("retreat"));
 			defender->sendSystemMessage("@cbt_spam:posture_knocked_down");
 			defender->sendStateCombatSpam("cbt_spam", "posture_knocked_down", 0, 0, false);
 			break;
-		case CommandEffect::POSTUREUP:
+		}
+		case CommandEffect::POSTUREUP: {
 			if (!defender->checkPostureUpRecovery()) {
-				if (defender->getPosture() != CreaturePosture::UPRIGHT)
-					defender->setPosture(CreaturePosture::UPRIGHT, false, false);
+				//if (defender->getPosture() != CreaturePosture::UPRIGHT)
+				//	defender->setPosture(CreaturePosture::UPRIGHT, false, false);
+				break;
+			}
+			if (defender->getPosture() == CreaturePosture::KNOCKEDDOWN) {
 				break;
 			}
 
@@ -694,15 +708,22 @@ public:
 				defender->sendStateCombatSpam("cbt_spam", "force_posture_change_0", 0, 0, false);
 			}
 
-			defender->updatePostureUpRecovery();
-			defender->setPostureChangeDelay(2500);
+			int delay = 1000;
+			delay += System::random(6000);
+
+			defender->updatePostureUpRecovery(5000); // Can posture change up every 5 seconds
+			defender->updatePostureChangeDelay(delay); // NPCs recover from posture change between 1 and 7 seconds
 			defender->removeBuff(STRING_HASHCODE("burstrun"));
 			defender->removeBuff(STRING_HASHCODE("retreat"));
 			break;
-		case CommandEffect::POSTUREDOWN:
+		}
+		case CommandEffect::POSTUREDOWN: {
 			if (!defender->checkPostureDownRecovery()) {
-				if (defender->getPosture() != CreaturePosture::UPRIGHT)
-					defender->setPosture(CreaturePosture::UPRIGHT, false, false);
+				//if (defender->getPosture() != CreaturePosture::UPRIGHT)
+				//	defender->setPosture(CreaturePosture::UPRIGHT, false, false);
+				break;
+			}
+			if (defender->getPosture() == CreaturePosture::KNOCKEDDOWN) {
 				break;
 			}
 
@@ -710,6 +731,8 @@ public:
 				defender->updateCooldownTimer("mount_dismount", 0);
 				defender->dismount();
 			}
+
+			int delay = 2500;
 
 			if (defender->getPosture() == CreaturePosture::UPRIGHT) {
 				defender->setPosture(CreaturePosture::CROUCHED, false, false);
@@ -719,13 +742,17 @@ public:
 				defender->setPosture(CreaturePosture::PRONE, false, false);
 				defender->sendSystemMessage("@cbt_spam:force_posture_change_2");
 				defender->sendStateCombatSpam("cbt_spam", "force_posture_change_2", 0, 0, false);
+				delay += 2500;
 			}
 
-			defender->updatePostureDownRecovery();
-			defender->setPostureChangeDelay(2500);
+			delay += System::random(5000);
+
+			defender->updatePostureDownRecovery(15000); // Can posture change up every 15 seconds
+			defender->updatePostureChangeDelay(delay); // NPCs recover from posture change between 2.5 and 10 seconds
 			defender->removeBuff(STRING_HASHCODE("burstrun"));
 			defender->removeBuff(STRING_HASHCODE("retreat"));
 			break;
+		}
 		case CommandEffect::NEXTATTACKDELAY:
 			defender->setNextAttackDelay(attacker, name, mod, duration);
 			break;

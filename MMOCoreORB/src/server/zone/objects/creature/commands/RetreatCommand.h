@@ -6,6 +6,7 @@
 #define RETREATCOMMAND_H_
 
 #include "SquadLeaderCommand.h"
+#include "server/zone/objects/creature/events/RetreatNotifyAvailableEvent.h"
 
 class RetreatCommand : public SquadLeaderCommand {
 public:
@@ -75,6 +76,11 @@ public:
 		if (!checkGroupLeader(player, group))
 			return GENERALERROR;
 
+		if (!creature->checkCooldownRecovery("retreat")) {
+			creature->sendSystemMessage("You are too strained from commanding your squad right now to order a retreat."); //You cannot burst run right now.
+			return false;
+		}
+
 		float groupBurstRunMod = (float) player->getSkillMod("group_burst_run");
 		int hamCost = (int) (100.0f * (1.0f - (groupBurstRunMod / 100.0f))) * calculateGroupModifier(group);
 
@@ -107,6 +113,13 @@ public:
  	 	 	creature->updateCooldownTimer("command_message", 30 * 1000);
 		}
 
+		int duration = 30;
+		int cooldown = 300;
+		creature->updateCooldownTimer("retreat", (cooldown + duration) * 1000);
+
+		Reference<RetreatNotifyAvailableEvent*> task = new RetreatNotifyAvailableEvent(player);
+		creature->addPendingTask("retreat_notify", task, (cooldown + duration) * 1000);
+
 		return SUCCESS;
 	}
 
@@ -125,28 +138,23 @@ public:
 		}
 
 		float groupRunMod = (float) player->getSkillMod("group_burst_run");
-
-		if (groupRunMod > 100.0f)
-			groupRunMod = 100.0f;
-
-		StringIdChatParameter startStringId("cbt_spam", "burstrun_start_single");
-		StringIdChatParameter endStringId("cbt_spam", "burstrun_stop_single");
+		if (groupRunMod > 100.0f) groupRunMod = 100.0f;
 
 		int duration = 30;
-
 		ManagedReference<Buff*> buff = new Buff(player, actionCRC, duration, BuffType::SKILL);
 
 		Locker locker(buff);
 
 		buff->setSpeedMultiplierMod(1.822f);
 		buff->setAccelerationMultiplierMod(1.822f);
+
+		StringIdChatParameter startStringId("cbt_spam", "burstrun_start_single");
 		buff->setStartMessage(startStringId);
+
+		StringIdChatParameter endStringId("cbt_spam", "burstrun_stop_single");
 		buff->setEndMessage(endStringId);
 
 		player->addBuff(buff);
-
-		player->updateCooldownTimer("retreat", 30000);
-
 	}
 
 };

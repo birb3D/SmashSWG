@@ -78,7 +78,7 @@ public:
 			if (targetCreature->isPet()) {
 				creature->sendSystemMessage("@trap/trap:sys_no_pets");
 				return GENERALERROR;
-			} else if (!targetCreature->isCreature()) {
+			} else if (targetCreature == nullptr) {
 				creature->sendSystemMessage("@trap/trap:sys_creatures_only");
 				return GENERALERROR;
 			}
@@ -127,7 +127,20 @@ public:
 				return GENERALERROR;
 			}
 
-			creature->addPendingTask("throwtrap", trapTask, 2000);
+			message.setTT(targetCreature->getDisplayedName());
+
+
+			Reference<ThrowTrapTask*> trapTask = new ThrowTrapTask(creature, targetCreature, buff, message, trapData->getPoolToDamage(), damage, hit);
+			creature->addPendingTask("throwtrap", trapTask, 2300);
+
+			//Reduce cost based upon player's strength, quickness, and focus if any are over 300
+			int healthCost = creature->calculateCostAdjustment(CreatureAttribute::STRENGTH, trapData->getHealthCost());
+			int actionCost = creature->calculateCostAdjustment(CreatureAttribute::QUICKNESS, trapData->getActionCost());
+			int mindCost = creature->calculateCostAdjustment(CreatureAttribute::FOCUS, trapData->getMindCost());
+
+			creature->inflictDamage(creature, CreatureAttribute::HEALTH, healthCost, false);
+			creature->inflictDamage(creature, CreatureAttribute::ACTION, actionCost, false);
+			creature->inflictDamage(creature, CreatureAttribute::MIND, mindCost, false);
 
 			return SUCCESS;
 		} catch (Exception& e) {
@@ -138,7 +151,7 @@ public:
 	}
 
 	float getCommandDuration(CreatureObject* object, const UnicodeString& arguments) const {
-		return defaultTime;
+		return 3; // Traps changed to 3 second combat queue time
 	}
 };
 

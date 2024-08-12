@@ -18,6 +18,7 @@
 #include "server/zone/objects/tangible/component/lightsaber/LightsaberCrystalComponent.h"
 #include "server/zone/packets/object/WeaponRanges.h"
 #include "server/zone/ZoneProcessServer.h"
+#include "server/zone/managers/combat/CombatManager.h"
 #include "server/zone/managers/player/PlayerMap.h"
 #include "server/chat/ChatManager.h"
 
@@ -35,6 +36,10 @@ void WeaponObjectImplementation::initializeTransientMembers() {
 
 	if(speedSlice > 1.0 || speedSlice < .5) {
 		speedSlice = 1;
+	}
+
+	if(hamSlice > 1.0 || hamSlice < .5) {
+		hamSlice = 1;
 	}
 }
 
@@ -575,24 +580,36 @@ float WeaponObjectImplementation::getDamageRadius(bool withPup) const {
 
 
 int WeaponObjectImplementation::getHealthAttackCost(bool withPup) const {
-	if (powerupObject != nullptr && withPup)
-		return healthAttackCost - (abs(healthAttackCost) * powerupObject->getPowerupStat("healthAttackCost"));
+	float hamCost = (float)healthAttackCost;
+	if (sliced)
+		hamCost = hamCost * hamSlice;
 
-	return healthAttackCost;
+	if (powerupObject != nullptr && withPup)
+		return (int)(hamCost - (abs(hamCost) * powerupObject->getPowerupStat("healthAttackCost")));
+
+	return (int)hamCost;
 }
 
 int WeaponObjectImplementation::getActionAttackCost(bool withPup) const {
-	if (powerupObject != nullptr && withPup)
-		return actionAttackCost - (abs(actionAttackCost) * powerupObject->getPowerupStat("actionAttackCost"));
+	float hamCost = (float)actionAttackCost;
+	if (sliced)
+		hamCost = hamCost * hamSlice;
 
-	return actionAttackCost;
+	if (powerupObject != nullptr && withPup)
+		return (int)(hamCost - (abs(hamCost) * powerupObject->getPowerupStat("actionAttackCost")));
+
+	return (int)hamCost;
 }
 
 int WeaponObjectImplementation::getMindAttackCost(bool withPup) const {
-	if (powerupObject != nullptr && withPup)
-		return mindAttackCost - (abs(mindAttackCost) * powerupObject->getPowerupStat("mindAttackCost"));
+	float hamCost = (float)mindAttackCost;
+	if (sliced)
+		hamCost = hamCost * hamSlice;
 
-	return mindAttackCost;
+	if (powerupObject != nullptr && withPup)
+		return (int)(hamCost - (abs(hamCost) * powerupObject->getPowerupStat("mindAttackCost")));
+
+	return (int)hamCost;
 }
 
 void WeaponObjectImplementation::updateCraftingValues(CraftingValues* values, bool firstUpdate) {
@@ -714,15 +731,15 @@ void WeaponObjectImplementation::decreasePowerupUses(CreatureObject* player) {
 String WeaponObjectImplementation::repairAttempt(int repairChance) {
 	String message = "@error_message:";
 
-	if(repairChance < 25) {
+	if(repairChance < 5) {
 		message += "sys_repair_failed";
 		setMaxCondition(1, true);
 		setConditionDamage(0, true);
-	} else if(repairChance < 50) {
+	} else if(repairChance < 35) {
 		message += "sys_repair_imperfect";
 		setMaxCondition(getMaxCondition() * .65f, true);
 		setConditionDamage(0, true);
-	} else if(repairChance < 75) {
+	} else if(repairChance < 80) {
 		setMaxCondition(getMaxCondition() * .80f, true);
 		setConditionDamage(0, true);
 		message += "sys_repair_slight";
@@ -740,14 +757,17 @@ void WeaponObjectImplementation::decay(CreatureObject* user) {
 		return;
 	}
 
-	int roll = System::random(100);
-	int chance = 5;
+	Locker locker(_this.getReferenceUnsafeStaticCast());
+
+	int roll = System::random(10000);
+	int chance = (int)(CombatManager::instance()->calculateWeaponAttackSpeed(user, _this.getReferenceUnsafeStaticCast(), 1.0f) * 2 * 100); // Chance is based off attack speed (faster weapons have faster speed
+	if(chance < 50) chance = 50; // Minimum 0.5% chance
 
 	if (hasPowerup())
-		chance += 10;
+		chance *= 2; // Powerups cause decay 2x as fast
 
 	if (roll < chance) {
-		Locker locker(_this.getReferenceUnsafeStaticCast());
+
 
 		if (isJediWeapon()) {
 			ManagedReference<SceneObject*> saberInv = getSlottedObject("saber_inv");
@@ -764,7 +784,8 @@ void WeaponObjectImplementation::decay(CreatureObject* user) {
 				}
 			}
 		} else {
-			inflictDamage(_this.getReferenceUnsafeStaticCast(), 0, 1, true, true);
+			const int decayAmount = 1 + System::random(2);
+			inflictDamage(_this.getReferenceUnsafeStaticCast(), 0, decayAmount, true, true);
 
 			if (((float)conditionDamage - 1 / (float)maxCondition < 0.75) && ((float)conditionDamage / (float)maxCondition > 0.75))
 				user->sendSystemMessage("@combat_effects:weapon_quarter");

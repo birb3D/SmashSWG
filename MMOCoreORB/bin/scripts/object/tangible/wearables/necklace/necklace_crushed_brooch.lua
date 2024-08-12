@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_necklace_necklace_crushed_brooch = object_tangible_wearables_necklace_shared_necklace_crushed_brooch:new {
+    
 	playerRaces = { "object/creature/player/bothan_male.iff",
 				"object/creature/player/bothan_female.iff",
 				"object/creature/player/human_male.iff",

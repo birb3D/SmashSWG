@@ -3,11 +3,12 @@
 		See file COPYING for copying conditions. */
 
 #include "DroidCraftingModuleDataComponent.h"
+#include "server/zone/objects/tangible/component/droid/DroidComponent.h"
 #include "server/zone/objects/tangible/tool/CraftingTool.h"
 #include "server/zone/ZoneServer.h"
 #include "templates/tangible/DroidCraftingModuleTemplate.h"
 
-DroidCraftingModuleDataComponent::DroidCraftingModuleDataComponent() : craftingType(0) {
+DroidCraftingModuleDataComponent::DroidCraftingModuleDataComponent() : craftingType(0), craftingBonus(0) {
 	setLoggingName("DroidCraftingModule");
 }
 
@@ -45,8 +46,24 @@ void DroidCraftingModuleDataComponent::initializeTransientMembers() {
 		return;
 	}
 
+	DroidComponent* droidComponent = cast<DroidComponent*>(getParent());
+	if (droidComponent == nullptr) {
+		info("droidComponent was null");
+		return;
+	}
+
+	if( droidComponent->hasKey( "mechanism_quality") ){
+		craftingBonus = droidComponent->getAttributeValue( "mechanism_quality");
+	}else{
+		info( "mechanism_quality attribute not found" );
+	}
+
 	craftingType = moduleTemplate->getCraftingType();
 	attributeListString = moduleTemplate->getAttributeListString();
+}
+
+void DroidCraftingModuleDataComponent::updateCraftingValues(CraftingValues* values, bool firstUpdate) {
+	craftingBonus = values->getCurrentValue("mechanism_quality");
 }
 
 void DroidCraftingModuleDataComponent::initialize(DroidObject* droid) {
@@ -54,7 +71,7 @@ void DroidCraftingModuleDataComponent::initialize(DroidObject* droid) {
 }
 
 void DroidCraftingModuleDataComponent::fillAttributeList(AttributeListMessage* alm, CreatureObject* droid) {
-	alm->insertAttribute(attributeListString, "Installed");
+	alm->insertAttribute(attributeListString, craftingBonus);
 }
 
 void DroidCraftingModuleDataComponent::fillObjectMenuResponse(SceneObject* droidObject, ObjectMenuResponse* menuResponse, CreatureObject* player) {
@@ -134,7 +151,7 @@ void DroidCraftingModuleDataComponent::onCall() {
 	if (craftingStation == nullptr) {
 		String stationTemplate = moduleTemplate->getCraftingStationTemplate();
 		craftingStation = (craftedModule->getZoneServer()->createObject(stationTemplate.hashCode(), 0)).castTo<CraftingStation*>();
-		craftingStation->setEffectiveness(25);
+		craftingStation->setEffectiveness(craftingBonus);
 	}
 }
 
@@ -143,5 +160,17 @@ void DroidCraftingModuleDataComponent::onStore() {
 }
 
 void DroidCraftingModuleDataComponent::copy(BaseDroidModuleComponent* other) {
-	// no Op when the new object is made, init transient is called so all info is set.
+	DroidCraftingModuleDataComponent* otherModule = cast<DroidCraftingModuleDataComponent*>(other);
+	if( otherModule == nullptr ){
+		return;
+	}
+
+	craftingBonus = otherModule->craftingBonus;
+
+	// Save stat in parent sceno
+	DroidComponent* droidComponent = cast<DroidComponent*>(getParent());
+	if (droidComponent == nullptr){
+		return;
+	}
+	droidComponent->addProperty("mechanism_quality", craftingBonus, 0, "exp_effectiveness");
 }

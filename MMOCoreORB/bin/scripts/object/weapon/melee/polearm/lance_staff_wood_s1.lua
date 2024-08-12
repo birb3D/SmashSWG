@@ -97,7 +97,7 @@ object_weapon_melee_polearm_lance_staff_wood_s1 = object_weapon_melee_polearm_sh
 	speedModifiers = { "polearm_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "polearm_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
@@ -115,10 +115,10 @@ object_weapon_melee_polearm_lance_staff_wood_s1 = object_weapon_melee_polearm_sh
 	maxRange = 5,
 	maxRangeAccuracy = 20,
 
-	minDamage = 35,
-	maxDamage = 80,
+	minDamage = 25,
+	maxDamage = 56,
 
-	attackSpeed = 4.75,
+	attackSpeed = 5.4,
 
 	woundsRatio = 5,
 

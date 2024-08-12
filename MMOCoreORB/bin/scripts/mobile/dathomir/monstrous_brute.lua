@@ -31,12 +31,12 @@ monstrous_brute = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "rancor_common", chance = 4000000},
-				{group = "armor_all", chance = 2000000},
-				{group = "weapons_all", chance = 2500000},
-				{group = "wearables_all", chance = 1500000}
+				{group = "rancor_common", chance = 9000000},
+				{group = "armor_all", chance = 400000},
+				{group = "weapons_all", chance = 400000},
+				{group = "wearables_all", chance = 200000}
 			},
-			lootChance = 2740000
+			lootChance = 1096000
 		}
 	},
 

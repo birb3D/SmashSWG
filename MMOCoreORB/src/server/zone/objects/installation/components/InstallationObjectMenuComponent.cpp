@@ -28,6 +28,7 @@ void InstallationObjectMenuComponent::fillObjectMenuResponse(SceneObject* sceneO
 	menuResponse->addRadialMenuItemToRadialID(118, 128, 3, "@player_structure:permission_destroy"); //Destroy Structure
 	menuResponse->addRadialMenuItemToRadialID(118, 124, 3, "@player_structure:management_status"); //Status
 	menuResponse->addRadialMenuItemToRadialID(118, 129, 3, "@player_structure:management_pay"); //Pay Maintenance
+	menuResponse->addRadialMenuItemToRadialID(118, 70, 3, "@player_structure:take_maintenance"); // Withdraw Maintenance
 	ManagedReference<SceneObject*> datapad = player->getSlottedObject("datapad");
 	if(datapad != nullptr) {
 		for (int i = 0; i < datapad->getContainerObjectsSize(); ++i) {
@@ -75,39 +76,34 @@ int InstallationObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneOb
 	case 124:
 		player->executeObjectControllerAction(0x13F7E585, installation->getObjectID(), ""); //structureStatus
 		break;
-
 	case 129:
 		player->executeObjectControllerAction(0xE7E35B30, installation->getObjectID(), ""); //payMaintenance
 		break;
-
 	case 128:
 		player->executeObjectControllerAction(0x18FC1726, installation->getObjectID(), ""); //destroyStructure command
 		break;
-
 	case 131:
 		structureManager->promptMaintenanceDroid(installation,player);
+		break;
+	case 70:
+		structureManager->promptWithdrawMaintenance(installation,player);
 		break;
 	case 50:
 		structureManager->promptNameStructure(player, installation, installation);
 		//player->executeObjectControllerAction(0xC367B461, installation->getObjectID(), ""); //nameStructure
 		break;
-
 	case 51:
 		//TODO: Move to structure manager.
 		if (!installation->isGeneratorObject()) {
 			installation->handleStructureAddEnergy(player);
 		}
 		break;
-
 	case 121:
 		installation->sendPermissionListTo(player, "ADMIN");
 		break;
-
 	case 123:
 		installation->sendPermissionListTo(player, "HOPPER");
 		break;
-
-
 	default:
 		break;
 	}

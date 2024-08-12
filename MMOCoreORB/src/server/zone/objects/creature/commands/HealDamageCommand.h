@@ -248,7 +248,7 @@ public:
 
 		CreatureObject* player = cast<CreatureObject*>(creature);
 
-		int amount = (int)round((float)power * 0.25f);
+		int amount = (int)round((float)power * 0.6f);
 
 		if (amount <= 0)
 			return;
@@ -300,8 +300,16 @@ public:
 
 			sendHealMessage(creature, targetCreature, healthHealed, actionHealed, mindHealed);
 
-			if (targetCreature != creature && !targetCreature->isPet())
+			// XP Checks
+			bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+			bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
+
+			if (targetCreature != creature && // Not Healing Self
+				!targetCreature->isPet() && // Not Healing Pet
+				(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat))
+				{
 				awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself or pets.
+			}
 
 			checkForTef(creature, targetCreature);
 		}
@@ -492,9 +500,17 @@ public:
 
 		Locker locker(stimPack);
 		stimPack->decreaseUseCount();
+		
+		// XP Checks
+		bool creatureRecentCombat = System::getTime() - creature->getLastCombat() < (2 * 60); //2 min
+		bool targetRecentCombat = System::getTime() - targetCreature->getLastCombat() < (2 * 60); //2 min
 
-		if (targetCreature != creature && !targetCreature->isPet())
+		if (targetCreature != creature && // Not Healing Self
+			!targetCreature->isPet() && // Not Healing Pet
+			(targetCreature->isInCombat() || creature->isInCombat() || creatureRecentCombat || targetRecentCombat))
+			{
 			awardXp(creature, "medical", (healthHealed + actionHealed)); //No experience for healing yourself.
+		}
 
 		if (targetCreature != creature)
 			clocker.release();

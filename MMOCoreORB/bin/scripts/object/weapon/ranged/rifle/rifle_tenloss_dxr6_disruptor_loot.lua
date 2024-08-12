@@ -98,7 +98,7 @@ object_weapon_ranged_rifle_rifle_tenloss_dxr6_disruptor_loot = object_weapon_ran
 	speedModifiers = { "rifle_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "rifle_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

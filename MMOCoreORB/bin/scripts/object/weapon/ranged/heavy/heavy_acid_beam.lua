@@ -104,7 +104,7 @@ object_weapon_ranged_heavy_heavy_acid_beam = object_weapon_ranged_heavy_shared_h
 	animationType = "acid_beam",
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "heavy_acid_beam_damage" },
 	healthAttackCost = 60,
 	actionAttackCost = 60,
 	mindAttackCost = 15,

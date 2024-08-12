@@ -98,7 +98,7 @@ object_weapon_ranged_pistol_pistol_cdef = object_weapon_ranged_pistol_shared_pis
 	speedModifiers = { "pistol_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "pistol_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
@@ -116,10 +116,10 @@ object_weapon_ranged_pistol_pistol_cdef = object_weapon_ranged_pistol_shared_pis
 	maxRange = 64,
 	maxRangeAccuracy = -80,
 
-	minDamage = 25,
-	maxDamage = 50,
+	minDamage = 17,
+	maxDamage = 35,
 
-	attackSpeed = 3.5,
+	attackSpeed = 3.2,
 
 	woundsRatio = 4,
 
@@ -128,8 +128,8 @@ object_weapon_ranged_pistol_pistol_cdef = object_weapon_ranged_pistol_shared_pis
 	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	experimentalGroupTitles = {"null", "null", "expDamage", "expDamage", "expDamage", "expDamage", "expEffeciency", "exp_durability", "null", "null", "null", "expRange", "expEffeciency", "expEffeciency", "expEffeciency"},
 	experimentalSubGroupTitles = {"null", "null", "mindamage", "maxdamage", "attackspeed", "woundchance", "roundsused", "hitpoints", "zerorangemod", "maxrangemod", "midrange", "midrangemod", "attackhealthcost", "attackactioncost", "attackmindcost"},
-	experimentalMin = {0, 0, 17, 35, 4.6, 4, 5, 750, 0, -80, 15, 35, 10, 22, 10},
-	experimentalMax = {0, 0, 32, 65, 3.2, 5, 20, 1500, 0, -80, 15, 65, 7, 15, 7},
+	experimentalMin = {0, 0, 17, 35, 3.5, 4, 5, 750, 0, -80, 15, 35, 10, 22, 10},
+	experimentalMax = {0, 0, 32, 65, 2.5, 5, 20, 1500, 0, -80, 15, 65, 7, 15, 7},
 	experimentalPrecision = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	experimentalCombineType = {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 }

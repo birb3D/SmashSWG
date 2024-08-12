@@ -650,6 +650,8 @@ void CreatureObjectImplementation::addMountedCombatSlow() {
 			oldSpeed = petManager->getMountedRunSpeed(parent);
 		}
 
+		newSpeed *= 1.2f; // 20% movement bonus when on a mount even when in combat
+
 		float magnitude = newSpeed / oldSpeed;
 
 		constexpr auto crc = "mounted_combat_slow"_hashCode;
@@ -761,6 +763,8 @@ void CreatureObjectImplementation::clearCombatState(bool removedefenders) {
 		dcreo3->close();
 
 		broadcastMessage(dcreo3, true);
+		
+		lastCombat = System::getTime();
 	}
 
 	clearQueueActions(true);
@@ -3768,7 +3772,7 @@ int CreatureObjectImplementation::handleObjectMenuSelect(CreatureObject* player,
 }
 
 float CreatureObjectImplementation::calculateCostAdjustment(uint8 stat, float baseCost) const {
-	float cost = baseCost - (((float)(this->getHAM(stat) - 300) / 1200.f) * baseCost);
+	float cost = baseCost - (((float)(this->getHAM(stat)) / 1700.f) * baseCost);
 
 	if (cost < 0)
 		cost = 0;

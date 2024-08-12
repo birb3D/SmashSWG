@@ -45,6 +45,16 @@ TauntCommand = {
 	name = "taunt",
 	combatSpam = "taunt",
 	effectString = "clienteffect/combat_special_attacker_taunt.cef",
+
+	damageMultiplier = 0,
+	speedMultiplier = 0.5,
+	healthCostMultiplier = 0,
+	actionCostMultiplier = 0,
+	mindCostMultiplier = 0,
+
+	areaAction = true,
+	areaRange = 20,
+	
 	poolsToDamage = NO_ATTRIBUTE,
 
 	range = 64

@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_earring_earring_s03 = object_tangible_wearables_earring_shared_earring_s03:new {
+    
 
 }
 

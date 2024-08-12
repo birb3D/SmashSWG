@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_mandalorian_armor_mandalorian_helmet = object_tangible_wearables_armor_mandalorian_shared_armor_mandalorian_helmet:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	certificationsRequired = { "combat_bountyhunter_master",

@@ -3,15 +3,15 @@ lowland_brackaset = Creature:new {
 	socialGroup = "brackaset",
 	faction = "",
 	mobType = MOB_HERBIVORE,
-	level = 10,
-	chanceHit = 0.28,
-	damageMin = 120,
-	damageMax = 130,
-	baseXp = 292,
-	baseHAM = 675,
-	baseHAMmax = 825,
+	level = 20,
+	chanceHit = 0.35,
+	damageMin = 170,
+	damageMax = 200,
+	baseXp = 2037,
+	baseHAM = 5200,
+	baseHAMmax = 6800,
 	armor = 0,
-	resists = {0,0,0,0,0,0,0,0,-1},
+	resists = {135,130,10,10,-1,-1,10,10,-1},
 	meatType = "meat_wild",
 	meatAmount = 75,
 	hideType = "hide_leathery",
@@ -36,7 +36,7 @@ lowland_brackaset = Creature:new {
 			groups = {
 				{group = "brackaset_common", chance = 10000000}
 			},
-			lootChance = 1200000
+			lootChance = 200000
 		}
 	},
 

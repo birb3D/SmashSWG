@@ -90,6 +90,7 @@
 #include "server/zone/objects/player/sui/callbacks/ConfirmVeteranRewardSuiCallback.h"
 #include "server/zone/objects/player/sui/callbacks/ConfirmDivorceSuiCallback.h"
 
+#include "server/zone/objects/guild/GuildObject.h"
 #include "server/zone/managers/stringid/StringIdManager.h"
 #include "server/zone/objects/creature/buffs/PowerBoostBuff.h"
 #include "server/zone/objects/creature/buffs/ForceWeakenDebuff.h"
@@ -1339,7 +1340,7 @@ void PlayerManagerImplementation::killPlayer(TangibleObject* attacker, CreatureO
 	player->sendSystemMessage(stringId);
 
 	player->updateTimeOfDeath();
-	player->clearBuffs(true, false);
+	//player->clearBuffs(true, false);
 
 	PlayerObject* ghost = player->getPlayerObject();
 
@@ -1780,12 +1781,19 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 	ManagedReference<SceneObject*> preDesignatedFacility = server->getObject(preDesignatedFacilityOid);
 
 	if (preDesignatedFacility == nullptr || preDesignatedFacility != cloner) {
-		player->addWounds(CreatureAttribute::HEALTH, 100, true, false);
-		player->addWounds(CreatureAttribute::ACTION, 100, true, false);
-		player->addWounds(CreatureAttribute::MIND, 100, true, false);
-		player->addShockWounds(100, true);
+		player->addWounds(CreatureAttribute::HEALTH, 200, true, false);
+		player->addWounds(CreatureAttribute::STRENGTH, 100, true, false);
+		player->addWounds(CreatureAttribute::CONSTITUTION, 100, true, false);
+		player->addWounds(CreatureAttribute::ACTION, 200, true, false);
+		player->addWounds(CreatureAttribute::QUICKNESS, 100, true, false);
+		player->addWounds(CreatureAttribute::STAMINA, 100, true, false);
+		player->addWounds(CreatureAttribute::MIND, 200, true, false);
+		player->addWounds(CreatureAttribute::FOCUS, 100, true, false);
+		player->addWounds(CreatureAttribute::WILLPOWER, 100, true, false);
+		player->addShockWounds(200, true);
 	}
 
+	player->clearBuffs(true, false);
 	if (ConfigManager::instance()->useCovertOvertSystem()) {
 		if ((player->getFactionStatus() == FactionStatus::OVERT) && !player->hasSkill("force_rank_light_novice") && !player->hasSkill("force_rank_dark_novice") && (cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_IMPERIAL) && (cbot->getFacilityType() != CloningBuildingObjectTemplate::FACTION_REBEL))
 			player->setFactionStatus(FactionStatus::COVERT);
@@ -1814,13 +1822,13 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 
 				if (obj->getOptionsBitmask() & OptionBitmask::INSURED) {
 					//1% Decay for insured items
-					obj->inflictDamage(obj, 0, 0.01 * obj->getMaxCondition(), true, true);
+					//obj->inflictDamage(obj, 0, 0.01 * obj->getMaxCondition(), true, true);
 					//Set uninsured
 					uint32 bitmask = obj->getOptionsBitmask() - OptionBitmask::INSURED;
 					obj->setOptionsBitmask(bitmask);
 				} else {
-					//5% Decay for uninsured items
-					obj->inflictDamage(obj, 0, 0.05 * obj->getMaxCondition(), true, true);
+					//10% Decay for uninsured items
+					obj->inflictDamage(obj, 0, 0.1 * obj->getMaxCondition(), true, true);
 				}
 
 				// Calculate condition percentage for decay report
@@ -1955,6 +1963,24 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 	}
 
 	Vector<uint64> playerList;
+
+	
+	// Loop through and Remove pets from the total damage pool for better XP calc
+	for (int b = 0; b < threatMap->size(); ++b) {
+		ThreatMapEntry* entry = &threatMap->elementAt(b).getValue();
+		CreatureObject* attacker = threatMap->elementAt(b).getKey();
+	
+		if (entry == nullptr || attacker == nullptr) {
+			continue;
+		}
+	
+		if (attacker->isPet()) {
+			for (int j = 0; j < entry->size(); ++j) {
+				uint32 damage = entry->elementAt(j).getValue();
+				totalDamage -= damage;
+			}
+		}
+	}
 
 	for (int i = 0; i < threatMap->size(); ++i) {
 		TangibleObject* attacker = threatMap->elementAt(i).getKey();
@@ -2109,26 +2135,46 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				trx.addState("combatGroupFactionPetLevel", group->getFactionPetLevel());
 			}
 
+			Locker crossLocker(attacker, destructedObject);
+			
+			uint32 totalPlayerDamage = 0;
+			for (int j = 0; j < entry->size(); ++j) {
+				uint32 damage = entry->elementAt(j).getValue();
+				totalPlayerDamage += damage;
+			}
+
 			for (int j = 0; j < entry->size(); ++j) {
 				uint32 damage = entry->elementAt(j).getValue();
 				String xpType = entry->elementAt(j).getKey();
 
 				float xpAmount = baseXp;
+				float bonusXp = baseXp * 0.13f; // 13% group xp minimum for hitting a creature
 				int playerLevel = calculatePlayerLevel(attackerCreo, xpType);
 
+				bonusXp *= (float) damage / totalPlayerDamage;
+				
 				xpAmount *= (float) damage / totalDamage;
+				//xpAmount = xpAmount / (float)didDamage;
+
+				xpAmount = Math::min(xpAmount + bonusXp, (float)baseXp);
 
 				//Cap xp based on level
 				xpAmount = Math::min(xpAmount, playerLevel * 300.f);
 
 				//Apply group bonus if in group
-				if (group != nullptr)
-					xpAmount *= groupExpMultiplier;
+				//if (group != nullptr)
+					//xpAmount *= groupExpMultiplier;
 
 				if (winningFaction != Factions::FACTIONNEUTRAL && winningFaction == attackerCreo->getFaction())
 					xpAmount *= gcwBonus;
 
-				// Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
+				// Slight lowering of combat xp
+				xpAmount *= 0.8f;
+				
+				if(totalPlayerDamage >= totalDamage)
+					xpAmount *= 1.25f;
+
+				//Jedi experience doesn't count towards combat experience, and is earned at 20% the rate of normal experience
 				if (xpType != "jedi_general")
 					combatXp += xpAmount;
 				else
@@ -2152,10 +2198,11 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 			//Calculate squad leader group size experience @ 10% person + combat experience which is 10% of the variable
 			float squadXp = (combatXp * 0.1f) + (combatXp * 0.1f * group->getGroupSize());
 
-			Vector3 pos(attacker->getWorldPosition());
+			//Vector3 pos(attacker->getWorldPosition());
 
 			crossLocker.release();
 
+			// Squad Leader XP
 			ManagedReference<CreatureObject*> groupLeader = group->getLeader();
 
 			if (groupLeader == nullptr || !groupLeader->isPlayerCreature())
@@ -2168,9 +2215,9 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 			//If he is a squad leader, and is in range of this player, then add the combat exp for him to use.
 			//Removed distance check to keep current functionality. Attacker was previously comparing its location to itself
-			if (groupLeader->hasSkill("outdoors_squadleader_novice")) {
-				int v = slExperience.get(groupLeader) + squadXp;
-				slExperience.put(groupLeader, v);
+			if (groupLeader->hasSkill("outdoors_squadleader_novice") && groupLeader->isInRange(destructedObject, 125.0f)) {
+				if(squadXp > slExperience.get(groupLeader))
+					slExperience.put(groupLeader, squadXp);
 			}
 		}
 	}
@@ -2188,7 +2235,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 
 		Locker clock(leader, destructedObject);
 
-		awardExperience(leader, "squadleader", entry->getValue() * 2.f);
+		awardExperience(leader, "squadleader", entry->getValue());
 	}
 
 	threatMap->removeAll();
@@ -2477,6 +2524,32 @@ void PlayerManagerImplementation::sendLoginMessage(CreatureObject* creature) {
 
 	ChatSystemMessage* csm = new ChatSystemMessage(UnicodeString(motd), ChatSystemMessage::DISPLAY_CHATONLY);
 	creature->sendMessage(csm);
+
+	//ManagedReference<SceneObject*> inventory = creature->getSlottedObject("inventory");
+
+	//if (inventory == nullptr)
+		//return;
+
+	for (int i = 0; i < creature->getSlottedObjectsSize(); ++i) {
+		ManagedReference<SceneObject*> item = creature->getSlottedObject(i);
+
+		if (item == nullptr || item->getObjectTemplate()->getFullTemplateString() != "object/weapon/melee/unarmed/unarmed_default_player.iff") {
+			continue;
+		}
+
+		WeaponObject* weapon = item.castTo<WeaponObject*>();
+		if(weapon == nullptr)
+			continue;
+
+		weapon->setHealthAttackCost(15);
+		weapon->setActionAttackCost(25);
+		weapon->setMindAttackCost(20);
+
+		weapon->setMinDamage(5);
+		weapon->setMaxDamage(35);
+
+		weapon->setAttackSpeed(3.5f);
+	}
 }
 
 void PlayerManagerImplementation::resendLoginMessageToAll() {
@@ -3419,7 +3492,10 @@ void PlayerManagerImplementation::startWatch(CreatureObject* creature, uint64 en
 	stringID.setTT(entertainerID);
 	creature->sendSystemMessage(stringID);
 
-	creature->info("started watching [" + entertainer->getCustomObjectName().toString() + "]");
+	//setEntertainerBuffDuration(PerformanceType::DANCE, 0.0f);
+	//setEntertainerBuffStrength(PerformanceType::DANCE, 0.0f);
+
+	//creature->info("started watching [" + entertainer->getCustomObjectName().toString() + "]");
 
 	creature->setWatchToID(entertainer->getObjectID());
 	//watchID =  entertainerID;
@@ -3554,7 +3630,7 @@ void PlayerManagerImplementation::startListen(CreatureObject* creature, uint64 e
 	//setEntertainerBuffDuration(PerformanceType::DANCE, 0.0f);
 	//setEntertainerBuffStrength(PerformanceType::DANCE, 0.0f);
 
-	creature->info("started listening to [" + entertainer->getCustomObjectName().toString() + "]");
+	//creature->info("started listening to [" + entertainer->getCustomObjectName().toString() + "]");
 
 	creature->setListenToID(entertainer->getObjectID());
 	//watchID =  entertainerID;
@@ -4155,51 +4231,56 @@ SortedVector<ManagedReference<SceneObject*> > PlayerManagerImplementation::getIn
 }
 
 int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player) {
-
-	ManagedReference<WeaponObject*> weapon = player->getWeapon();
-
-	if (weapon == nullptr) {
-		player->error("player with nullptr weapon");
-
-		return 0;
-	}
-
-	String weaponType = weapon->getWeaponType();
-	int skillMod = player->getSkillMod("private_" + weaponType + "_combat_difficulty");
-
-	if (player->getPlayerObject() != nullptr && player->getPlayerObject()->isJedi() && weapon->isJediWeapon())
-		skillMod += player->getSkillMod("private_jedi_difficulty");
-
-	int level = Math::min(25, skillMod / 100 + 1);
-
-	return level;
+	String xpType = "";
+	return calculatePlayerLevel(player, xpType);
 }
 
 int PlayerManagerImplementation::calculatePlayerLevel(CreatureObject* player, String& xpType) {
-	if (xpType.isEmpty() || xpType == "jedi_general")
-		return calculatePlayerLevel(player);
+	int skillMod = 0;
+	if (xpType.isEmpty() || xpType == "jedi_general"){
+		ManagedReference<WeaponObject*> weapon = player->getWeapon();
+		if (weapon == nullptr) {
+			player->error("player with nullptr weapon");
+			return 0;
+		}
 
-	String weaponType;
-	if (xpType.contains("onehand"))
-		weaponType = "onehandmelee";
-	else if (xpType.contains("polearm"))
-		weaponType = "polearm";
-	else if (xpType.contains("twohand"))
-		weaponType = "twohandmelee";
-	else if (xpType.contains("unarmed"))
-		weaponType = "unarmed";
-	else if (xpType.contains("carbine"))
-		weaponType = "carbine";
-	else if (xpType.contains("pistol"))
-		weaponType = "pistol";
-	else if (xpType.contains("rifle"))
-		weaponType = "rifle";
-	else
-		weaponType = "heavyweapon";
+		skillMod = player->getSkillMod("private_" + weapon->getWeaponType() + "_combat_difficulty");
+		if (player->getPlayerObject() != nullptr && player->getPlayerObject()->isJedi() && weapon->isJediWeapon()){
+			skillMod += player->getSkillMod("private_jedi_difficulty");
+		}
+	}else{ 
+		String weaponType;
+		if (xpType.contains("onehand")) {
+			weaponType = "onehandmelee";
+		} else if (xpType.contains("polearm")) {
+			weaponType = "polearm";
+		} else if (xpType.contains("twohand")) {
+			weaponType = "twohandmelee";
+		} else if (xpType.contains("unarmed")) {
+			weaponType = "unarmed";
+		} else if (xpType.contains("carbine")) {
+			weaponType = "carbine";
+		} else if (xpType.contains("pistol")) {
+			weaponType = "pistol";
+		} else if (xpType.contains("rifle")) {
+			weaponType = "rifle";
+		} else {
+			weaponType = "heavyweapon";
+		}
 
-	int level = Math::min(25, player->getSkillMod("private_" + weaponType + "_combat_difficulty") / 100 + 1);
+		skillMod = player->getSkillMod("private_" + weaponType + "_combat_difficulty");
+	}
+	
+	int level = (skillMod / 100);
+	level = floor((0.04f * level * level) + (0.25f * level) + 1);
 
-	return level;
+	float buffScale = 0.0;
+	for( int i = 0; i < 9; i++ ){
+		buffScale += ((float)player->getMaxHAM(i) / (float)(player->getBaseHAM(i) + player->getEncumbrance(i/3))) / 18.0;
+	}
+	buffScale = std::max(buffScale + 0.5f, 1.0f);
+
+	return (int)(level * buffScale);
 }
 
 CraftingStation* PlayerManagerImplementation::getNearbyCraftingStation(CreatureObject* player, int type) {
@@ -4726,6 +4807,7 @@ void PlayerManagerImplementation::fixBuffSkillMods(CreatureObject* player) {
 			player->updateGroupInviterID(grp->getLeader()->getObjectID());
 			GroupManager::instance()->joinGroup(player);
 		}
+
 	} catch (const Exception& e) {
 		error(e.getMessage());
 	}
@@ -6802,7 +6884,6 @@ void PlayerManagerImplementation::logOnlinePlayers(bool onlyWho) {
 			logClient["ip"] = client->getIPAddress();
 
 			Reference<CreatureObject*> creature = client->getPlayer();
-
 			if (creature != nullptr) {
 				countPlayers++;
 

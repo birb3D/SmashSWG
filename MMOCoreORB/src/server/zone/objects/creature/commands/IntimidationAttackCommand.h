@@ -24,7 +24,24 @@ public:
 		if (!creature->isAiAgent())
 			return GENERALERROR;
 
-		return doCombatAction(creature, target, arguments);
+		Reference<TangibleObject*> targetObject = server->getZoneServer()->getObject(target).castTo<TangibleObject*>();
+
+		if (targetObject == nullptr || !targetObject->isCreatureObject())
+			return INVALIDTARGET;
+
+		int res = doCombatAction(creature, target, arguments);
+
+		if (res == SUCCESS) {
+
+			// Add aggro with intimidate
+			CreatureObject* targetCreature = cast<CreatureObject*>(targetObject.get());
+			Locker clocker(targetCreature, creature);
+			if(targetCreature != nullptr && !targetObject->isPlayerCreature())
+				targetCreature->getThreatMap()->addAggro(creature, 6000);
+
+		}
+
+		return res;
 	}
 
 };

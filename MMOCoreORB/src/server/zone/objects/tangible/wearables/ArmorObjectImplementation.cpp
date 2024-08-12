@@ -410,11 +410,16 @@ void ArmorObjectImplementation::calculateSpecialProtection(CraftingValues* craft
 		String subtitle = getStringType(type);
 		float value = craftingValues->getCurrentValue(subtitle);
 
-		if (value != AttributesMap::VALUENOTFOUND) {
+		if (value != ValuesMap::VALUENOTFOUND) {
+			value += craftingValues->getCurrentValue("armor_effectiveness");
 			specialResists |= type;
 			setProtectionValue(type, value);
 		}
 	}
+
+	// Remove vulnerability flag for added special types from special segments
+	// so they can be experimented on
+	vulnerabilites &= ~specialResists;
 }
 
 String ArmorObjectImplementation::getStringType(int type) const {

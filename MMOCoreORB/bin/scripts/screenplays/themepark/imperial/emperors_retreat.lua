@@ -117,27 +117,27 @@ end
 function EmperorsRetreatScreenPlay:spawnMobiles()
 
 	-- Inside
-	local pNpc = spawnMobile("naboo", "royal_imperial_guard", 120, 11.2, 0.2, -31.5, 0, 1418874)
+	local pNpc = spawnMobile("naboo", "royal_imperial_guard", 300, 11.2, 0.2, -31.5, 0, 1418874)
 	self:setMoodString(pNpc, "npc_imperial")
 
-	pNpc = spawnMobile("naboo", "royal_imperial_guard", 120, 14.8, 0.2, -31.5, 0, 1418874)
+	pNpc = spawnMobile("naboo", "royal_imperial_guard", 300, 14.8, 0.2, -31.5, 0, 1418874)
 	self:setMoodString(pNpc, "npc_imperial")
 
-	pNpc = spawnMobile("naboo", "royal_imperial_guard", 120, 10.8, 20, -27.2, 180, 1418886)
+	pNpc = spawnMobile("naboo", "royal_imperial_guard", 300, 10.8, 20, -27.2, 180, 1418886)
 	self:setMoodString(pNpc, "npc_imperial")
 
-	pNpc = spawnMobile("naboo", "royal_imperial_guard", 120, 15.3, 20, -27.2, 180, 1418886)
+	pNpc = spawnMobile("naboo", "royal_imperial_guard", 300, 15.3, 20, -27.2, 180, 1418886)
 	self:setMoodString(pNpc, "npc_imperial")
 
-	pNpc = spawnMobile("naboo", "vrke", 120, 24.2, 0.2, -39.5, -25, 1418875)
+	pNpc = spawnMobile("naboo", "vrke", 300, 24.2, 0.2, -39.5, -25, 1418875)
 	self:setMoodString(pNpc, "npc_imperial")
 
-	pNpc = spawnMobile("naboo", "jace_yiaso", 120, -44.4, 0.2, -32.1, 14, 1418884)
+	pNpc = spawnMobile("naboo", "jace_yiaso", 300, -44.4, 0.2, -32.1, 14, 1418884)
 	self:setMoodString(pNpc, "npc_imperial")
 
-	spawnMobile("naboo", "ra7_bug_droid", 120, 4.0, 0.2, -45.7, 4, 1418876)
+	spawnMobile("naboo", "ra7_bug_droid", 300, 4.0, 0.2, -45.7, 4, 1418876)
 
-	pNpc = spawnMobile("naboo", "mouse_droid", 120, -52.15, 0.2, -23.82, -15, 1418884)
+	pNpc = spawnMobile("naboo", "mouse_droid", 300, -52.15, 0.2, -23.82, -15, 1418884)
 
 	if (pNpc ~= nil) then
 		writeData(SceneObject(pNpc):getObjectID() .. ":currentLoc", 1)
@@ -145,7 +145,7 @@ function EmperorsRetreatScreenPlay:spawnMobiles()
 		createEvent(1000, "EmperorsRetreatScreenPlay", "setupDroidPatrol", pNpc, "")
 	end
 
-	pNpc = spawnMobile("naboo", "mouse_droid", 120, 23.83, 0.2, -40.42, -25, 1418875)
+	pNpc = spawnMobile("naboo", "mouse_droid", 300, 23.83, 0.2, -40.42, -25, 1418875)
 
 	if (pNpc ~= nil) then
 		writeData(SceneObject(pNpc):getObjectID() .. ":currentLoc", 1)
@@ -153,7 +153,7 @@ function EmperorsRetreatScreenPlay:spawnMobiles()
 		createEvent(1000, "EmperorsRetreatScreenPlay", "setupDroidPatrol", pNpc, "")
 	end
 
-	pNpc = spawnMobile("naboo", "mouse_droid", 120, -45.79, 0.2, -12.5, -25, 1418879)
+	pNpc = spawnMobile("naboo", "mouse_droid", 300, -45.79, 0.2, -12.5, -25, 1418879)
 
 	if (pNpc ~= nil) then
 		writeData(SceneObject(pNpc):getObjectID() .. ":currentLoc", 1)
@@ -161,10 +161,10 @@ function EmperorsRetreatScreenPlay:spawnMobiles()
 		createEvent(1000, "EmperorsRetreatScreenPlay", "setupDroidPatrol", pNpc, "")
 	end
 
-	pNpc = spawnMobile("naboo", "stormtrooper", 120, -0.5, 0.2, -23.6, 76, 1418874)
+	pNpc = spawnMobile("naboo", "stormtrooper", 300, -0.5, 0.2, -23.6, 76, 1418874)
 	self:setMoodString(pNpc, "conversation")
 
-	pNpc = spawnMobile("naboo", "stormtrooper", 120, 0.7, 0.2, -23.5, -20, 1418874)
+	pNpc = spawnMobile("naboo", "stormtrooper", 300, 0.7, 0.2, -23.5, -20, 1418874)
 	self:setMoodString(pNpc, "conversation")
 
 	--Guard Towers

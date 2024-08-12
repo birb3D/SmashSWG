@@ -427,6 +427,8 @@ class PlayerObject extends IntangibleObject {
 	@local
 	public native PlayerObject asPlayerObject();
 
+	public native string getName();
+
 	public void setLogLevel(int newLevel) {
 		playerLogLevel = newLevel;
 	}
@@ -1706,6 +1708,10 @@ class PlayerObject extends IntangibleObject {
 	@read
 	public unsigned int getClientLastMovementStamp() {
 		return clientLastMovementStamp;
+	}
+
+	public void setHologrindProfession(unsigned int index, byte prof) {
+		hologrindProfessions.set(index, prof);
 	}
 
 	public void addHologrindProfession(byte prof) {

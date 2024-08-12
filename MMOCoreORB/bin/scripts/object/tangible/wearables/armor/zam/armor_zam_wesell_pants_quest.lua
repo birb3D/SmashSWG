@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_zam_armor_zam_wesell_pants_quest = object_tangible_wearables_armor_zam_shared_armor_zam_wesell_pants_quest:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/bothan_male.iff",

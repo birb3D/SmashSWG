@@ -97,7 +97,7 @@ object_weapon_melee_sword_sword_lightsaber_luke = object_weapon_melee_sword_shar
 	speedModifiers = { "onehandlightsaber_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "onehandlightsaber_damage" },
 	
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

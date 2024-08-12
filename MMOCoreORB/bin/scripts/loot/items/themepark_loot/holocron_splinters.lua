@@ -10,8 +10,8 @@ holocron_splinters = {
 	customizationStringNames = {},
 	customizationValues = {},
 	junkDealerTypeNeeded = JUNKJEDI,
-	junkMinValue = 30,
-	junkMaxValue = 70
+	junkMinValue = 1000,
+	junkMaxValue = 4000
 }
 
 addLootItemTemplate("holocron_splinters", holocron_splinters)

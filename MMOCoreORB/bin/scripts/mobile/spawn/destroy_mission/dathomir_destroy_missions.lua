@@ -4,14 +4,14 @@ dathomir_destroy_missions = {
 	lairSpawns = {
 		{
 			lairTemplateName = "dathomir_brackaset_pigmy_neutral_small",
-			minDifficulty = 8,
-			maxDifficulty = 12,
+			minDifficulty = 18,
+			maxDifficulty = 22,
 			size = 25,
 		},
 		{
 			lairTemplateName = "dathomir_kwi_lair_neutral_small",
-			minDifficulty = 8,
-			maxDifficulty = 12,
+			minDifficulty = 18,
+			maxDifficulty = 22,
 			size = 25,
 		},
 		{

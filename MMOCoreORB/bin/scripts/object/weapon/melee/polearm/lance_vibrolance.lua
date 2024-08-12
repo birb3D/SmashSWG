@@ -97,7 +97,7 @@ object_weapon_melee_polearm_lance_vibrolance = object_weapon_melee_polearm_share
 	speedModifiers = { "polearm_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "polearm_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
@@ -127,8 +127,8 @@ object_weapon_melee_polearm_lance_vibrolance = object_weapon_melee_polearm_share
 	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	experimentalGroupTitles = {"null", "null", "expDamage", "expDamage", "expDamage", "expDamage", "exp_durability", "expRange", "expRange", "null", "expRange", "null", "expEffeciency", "expEffeciency", "expEffeciency"},
 	experimentalSubGroupTitles = {"null", "null", "mindamage", "maxdamage", "attackspeed", "woundchance", "hitpoints", "zerorangemod", "maxrangemod", "midrange", "midrangemod", "maxrange", "attackhealthcost", "attackactioncost", "attackmindcost"},
-	experimentalMin = {0, 0, 42, 154, 5.9, 14, 750, -24, -24, 3, -24, 5, 59, 78, 29},
-	experimentalMax = {0, 0, 78, 286, 4, 26, 1500, 0, 0, 3, 0, 5, 32, 43, 15},
+	experimentalMin = {0, 0, 42, 170, 5.9, 14, 750, -24, -24, 3, -24, 5, 59, 78, 29},
+	experimentalMax = {0, 0, 78, 303, 3.8, 26, 1500, 0, 0, 3, 0, 5, 32, 43, 15},
 	experimentalPrecision = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	experimentalCombineType = {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 }

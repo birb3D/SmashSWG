@@ -110,6 +110,49 @@ String ResourceSpawnImplementation::getFamilyName() const {
    		return "";
 }
 
+size_t split(const String &txt, Vector<String> &strs, char ch){
+    size_t pos = txt.indexOf( ch );
+    size_t initialPos = 0;
+    strs.removeAll();
+
+    // Decompose statement
+    while( pos != std::string::npos ) {
+        const String temp = txt;
+
+        strs.add( temp.subString( initialPos, pos ) );
+        initialPos = pos + 1;
+
+        pos = txt.indexOf( ch, initialPos );
+    }
+
+    // Add the last one
+    const String temp = txt;
+    strs.add( temp.subString( initialPos, txt.length() ) );
+
+    return strs.size();
+}
+
+String ResourceSpawnImplementation::getFriendlyName() const {
+	String retVal = getFamilyName();
+
+	if(!isUnknownType()){
+		Vector<String> parts;
+		split(getFamilyName(), parts, ' ');
+		
+		String subType = getFinalClass();
+		for( int i = 0; i < parts.size(); i++ ){
+    		size_t pos = subType.indexOf( parts.get(i) );
+			if( pos != std::string::npos ){
+				subType = subType.subString(0, pos-1);
+				break;
+			}
+		}
+		retVal += " - " + subType;
+	}
+
+   	return retVal + " (" + getName() + ")";
+}
+
 String ResourceSpawnImplementation::getSurveyMissionSpawnFamilyName() const {
    	int offset = 3;
 
@@ -242,7 +285,7 @@ Reference<ResourceContainer*> ResourceSpawnImplementation::createResource(int un
    	if (units != 0)
    		newResource->setQuantity(units);
 
-   	newResource->setCustomObjectName(getFamilyName(), false);
+   	newResource->setCustomObjectName(getFriendlyName(), false);
 
    	++containerReferenceCount;
 

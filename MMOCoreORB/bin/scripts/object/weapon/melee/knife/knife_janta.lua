@@ -97,7 +97,7 @@ object_weapon_melee_knife_knife_janta = object_weapon_melee_knife_shared_knife_j
 	speedModifiers = { "onehandmelee_speed" },
 	
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "onehandmelee_damage" },
 	       
 	
 	-- The values below are the default values.  To be used for blue frog objects primarily

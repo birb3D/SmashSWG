@@ -95,7 +95,7 @@ object_weapon_melee_2h_sword_crafted_saber_sword_lightsaber_two_handed_s4 = obje
 	speedModifiers = { "twohandlightsaber_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "twohandlightsaber_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

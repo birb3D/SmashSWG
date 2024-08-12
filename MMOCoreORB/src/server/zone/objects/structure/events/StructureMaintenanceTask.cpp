@@ -71,24 +71,24 @@ void StructureMaintenanceTask::run() {
 	strongRef->updateStructureStatus();
 
 	//Calculate one week of maintenance +- any existing maintenance/decay.
-	int oneWeekMaintenance = 7 * 24 * strongRef->getMaintenanceRate() - strongRef->getSurplusMaintenance();
+	int oneDayMaintenance = 1 * 24 * strongRef->getMaintenanceRate() - strongRef->getSurplusMaintenance();
 
 	// add city tax to the week maintenance
 	ManagedReference<CityRegion*> city = strongRef->getCityRegion().get();
 	if(strongRef->isBuildingObject() && city != nullptr){
-		oneWeekMaintenance += city->getPropertyTax() / 100.0f * oneWeekMaintenance;
+		oneDayMaintenance += city->getPropertyTax() / 100.0f * oneDayMaintenance;
 	}
 
 	int uncondemnCost = -strongRef->getSurplusMaintenance();
 
 	if (uncondemnCost > 0)
-		oneWeekMaintenance += uncondemnCost;
+		oneDayMaintenance += uncondemnCost;
 
 	// Check if owner has money in the bank and structure not decaying.
-	if (oneWeekMaintenance > 0 && creditObj->getBankCredits() >= oneWeekMaintenance) {
+	if (oneDayMaintenance > 0 && creditObj->getBankCredits() >= oneDayMaintenance) {
 		//Withdraw 1 week maintenance from owner bank account and add to the structure
 		//maintenance pool.
-		strongRef->payMaintenance(oneWeekMaintenance, creditObj, false);
+		strongRef->payMaintenance(oneDayMaintenance, creditObj, false);
 
 		if (strongRef->isDecayed() && strongRef->isBuildingObject()) {
 			BuildingObject* building = strongRef.castTo<BuildingObject*>();

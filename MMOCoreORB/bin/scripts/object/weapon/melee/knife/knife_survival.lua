@@ -97,7 +97,7 @@ object_weapon_melee_knife_knife_survival = object_weapon_melee_knife_shared_knif
 	speedModifiers = { "onehandmelee_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "onehandmelee_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
@@ -115,10 +115,10 @@ object_weapon_melee_knife_knife_survival = object_weapon_melee_knife_shared_knif
 	maxRange = 4,
 	maxRangeAccuracy = 30,
 
-	minDamage = 20,
-	maxDamage = 40,
+	minDamage = 14,
+	maxDamage = 28,
 
-	attackSpeed = 3.25,
+	attackSpeed = 4.0,
 
 	woundsRatio = 8,
 

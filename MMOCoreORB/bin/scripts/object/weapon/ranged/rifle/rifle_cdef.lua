@@ -97,7 +97,7 @@ object_weapon_ranged_rifle_rifle_cdef = object_weapon_ranged_rifle_shared_rifle_
 	speedModifiers = { "rifle_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "rifle_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
@@ -116,9 +116,9 @@ object_weapon_ranged_rifle_rifle_cdef = object_weapon_ranged_rifle_shared_rifle_
 	maxRangeAccuracy = -80,
 
 	minDamage = 25,
-	maxDamage = 50,
+	maxDamage = 75,
 
-	attackSpeed = 3.5,
+	attackSpeed = 5.5,
 
 	woundsRatio = 4,
 
@@ -127,8 +127,8 @@ object_weapon_ranged_rifle_rifle_cdef = object_weapon_ranged_rifle_shared_rifle_
 	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	experimentalGroupTitles = {"null", "null", "expDamage", "expDamage", "expDamage", "expDamage", "expEffeciency", "exp_durability", "null", "null", "null", "expRange", "expEffeciency", "expEffeciency", "expEffeciency"},
 	experimentalSubGroupTitles = {"null", "null", "mindamage", "maxdamage", "attackspeed", "woundchance", "roundsused", "hitpoints", "zerorangemod", "maxrangemod", "midrange", "midrangemod", "attackhealthcost", "attackactioncost", "attackmindcost"},
-	experimentalMin = {0, 0, 17, 35, 4.6, 4, 5, 750, 0, -80, 35, 35, 10, 22, 10},
-	experimentalMax = {0, 0, 32, 65, 3.2, 5, 20, 1500, 0, -80, 35, 65, 7, 15, 7},
+	experimentalMin = {0, 0, 25, 78, 6.0, 4, 5, 750, 0, -80, 35, 35, 10, 22, 10},
+	experimentalMax = {0, 0, 46, 120, 4.5, 5, 20, 1500, 0, -80, 35, 65, 7, 15, 7},
 	experimentalPrecision = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	experimentalCombineType = {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 }

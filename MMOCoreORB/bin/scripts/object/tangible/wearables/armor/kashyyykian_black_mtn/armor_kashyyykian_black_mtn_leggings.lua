@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_kashyyykian_black_mtn_armor_kashyyykian_black_mtn_leggings = object_tangible_wearables_armor_kashyyykian_black_mtn_shared_armor_kashyyykian_black_mtn_leggings:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/wookiee_male.iff",

@@ -97,7 +97,7 @@ object_weapon_melee_axe_axe_heavy_duty = object_weapon_melee_axe_shared_axe_heav
 	speedModifiers = { "twohandmelee_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "twohandmelee_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
@@ -115,10 +115,10 @@ object_weapon_melee_axe_axe_heavy_duty = object_weapon_melee_axe_shared_axe_heav
 	maxRange = 5,
 	maxRangeAccuracy = 0,
 
-	minDamage = 35,
-	maxDamage = 140,
+	minDamage = 25,
+	maxDamage = 98,
 
-	attackSpeed = 5,
+	attackSpeed = 6.0,
 
 	woundsRatio = 15,
 

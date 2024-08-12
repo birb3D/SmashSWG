@@ -90,15 +90,23 @@ public:
 				resetStatus();
 
 				int ferocity = creature->getFerocity();
-				int aggroChance = System::random(20 - ferocity);
 
-				if (aggroChance == 0 && creature->isAiAgent()) {
-					AiAgent* agent = creature->asAiAgent();
+				// Always attack back if greater than or equal to 10 ferocity
+				if( ferocity >= 10 ){
+					CombatManager::instance()->startCombat(creature,player,true);
+					break;
+				}
 
-					if (agent != nullptr) {
-						Locker aLock(agent);
-						agent->addDefender(player);
-					}
+				// Handle ferocious creatures Ferocity * 10% chance 
+				if( ferocity >= 3 && System::random(10) < ferocity ) {
+					CombatManager::instance()->startCombat(creature,player,true);
+					break;
+				}
+
+				// If creature is vicious there is a 25% final chance it might attack
+				if( ferocity < 3 && creature->isVicious() && System::random(100) < 25 ){
+					CombatManager::instance()->startCombat(creature,player,true);
+					break;
 				}
 			}
 

@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_helmet_helmet_atat = object_tangible_wearables_helmet_shared_helmet_atat:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	faction = "Imperial",
 
 	playerRaces = { "object/creature/player/bothan_male.iff",

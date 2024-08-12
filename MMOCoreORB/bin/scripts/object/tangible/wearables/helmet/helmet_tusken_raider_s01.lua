@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_helmet_helmet_tusken_raider_s01 = object_tangible_wearables_helmet_shared_helmet_tusken_raider_s01:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	playerRaces = { "object/creature/player/human_male.iff",
 				"object/creature/player/human_female.iff",
 				"object/creature/player/zabrak_male.iff",

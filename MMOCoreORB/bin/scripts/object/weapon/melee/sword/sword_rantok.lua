@@ -97,7 +97,7 @@ object_weapon_melee_sword_sword_rantok = object_weapon_melee_sword_shared_sword_
 	speedModifiers = { "onehandmelee_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "onehandmelee_damage" },
 	
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

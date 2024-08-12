@@ -106,4 +106,9 @@ class CraftingStation extends ToolTangibleObject {
 	public CreatureObject getDroidParent() {
 		return droidParent;
 	}
+
+	@dirty
+	public int getEffectiveness() {
+		return effectiveness;
+	}
 }

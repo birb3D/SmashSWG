@@ -97,7 +97,7 @@ object_weapon_melee_polearm_lance_lightsaber_02 = object_weapon_melee_polearm_sh
 	speedModifiers = { "polearmlightsaber_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "polearmlightsaber_damage" },
 	
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

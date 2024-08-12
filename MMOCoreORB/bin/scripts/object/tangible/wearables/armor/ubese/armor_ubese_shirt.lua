@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_armor_ubese_armor_ubese_shirt = object_tangible_wearables_armor_ubese_shared_armor_ubese_shirt:new {
+    objectMenuComponent = "ArmorObjectMenuComponent",
 	templateType = ARMOROBJECT,
 
 	playerRaces = { "object/creature/player/bothan_male.iff",
