@@ -293,7 +293,7 @@ void BuffImplementation::applyAttributeModifiers() {
 
 		GroupObject* grp = creo->getGroup();
         if (grp != nullptr){
-			grp->calcGroupLevel();
+			grp->getGroupLevel();
 		}
     }
 
@@ -392,7 +392,7 @@ void BuffImplementation::removeAttributeModifiers() {
 
 		GroupObject* grp = creo->getGroup();
         if (grp != nullptr){
-			grp->calcGroupLevel();
+			grp->getGroupLevel();
 		}
     }
 

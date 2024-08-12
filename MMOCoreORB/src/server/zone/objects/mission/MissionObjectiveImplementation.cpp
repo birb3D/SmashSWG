@@ -315,19 +315,22 @@ void MissionObjectiveImplementation::awardReward() {
 
 	if (playerCount > players.size()) {
 		owner->sendSystemMessage("@mission/mission_generic:group_too_far"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
-		float bonus = 1.0f;
-		if (divisor > 1)
-			bonus = 1.1f;
-		
-		int dividedReward = mission->getRewardCredits() / Math::max(divisor, 1) * bonus;
-		int bonusCreds = mission->getBonusCredits();
-		int dividedBonus = 0;
+	}
+	
+	float bonus = 1.0f;
+	if (divisor > 1)
+		bonus = 1.1f;
+	
+	int dividedReward = mission->getRewardCredits() / Math::max(divisor, 1) * bonus;
+	int bonusCreds = mission->getBonusCredits();
+	int dividedBonus = 0;
 
-		bool anonymousPlayerBounties = ConfigManager::instance()->getBool("Core3.MissionManager.AnonymousBountyTerminals", false);
+	bool anonymousPlayerBounties = ConfigManager::instance()->getBool("Core3.MissionManager.AnonymousBountyTerminals", false);
 
-		if (anonymousPlayerBounties && bonusCreds > 0) {
-			trx.addState("missionBonusCredits", bonusCreds);
-			dividedBonus = bonusCreds / Math::max(divisor, 1);
+	if (anonymousPlayerBounties && bonusCreds > 0) {
+		trx.addState("missionBonusCredits", bonusCreds);
+		dividedBonus = bonusCreds / Math::max(divisor, 1);
+	}
 
 	if (expanded) {
 		trx.addState("missionExpanded", true);

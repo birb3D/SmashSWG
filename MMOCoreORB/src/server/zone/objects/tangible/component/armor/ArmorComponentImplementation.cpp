@@ -31,7 +31,7 @@ void ArmorComponentImplementation::updateCraftingValues(CraftingValues* values, 
 	}
 
 	int specialResists = values->getCurrentValue("armor_special_type");
-	if (specialResists != ValuesMap::VALUENOTFOUND) {
+	if (specialResists != AttributesMap::VALUENOTFOUND) {
 		const String expProp = "exp_resistance";
 		const float specialbase = values->getCurrentValue("armor_special_effectiveness");
 

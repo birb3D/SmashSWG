@@ -676,7 +676,7 @@ public:
 			delay += System::random(5000);
 
 			defender->updateKnockdownRecovery(30000); // Can only knockdown same enemy every 30 seconds
-			defender->updatePostureChangeDelay(delay); // Knockdown lasts 5-10 seconds
+			defender->setPostureChangeDelay(delay); // Knockdown lasts 5-10 seconds
 			defender->removeBuff(STRING_HASHCODE("burstrun"));
 			defender->removeBuff(STRING_HASHCODE("retreat"));
 			defender->sendSystemMessage("@cbt_spam:posture_knocked_down");
@@ -712,7 +712,7 @@ public:
 			delay += System::random(6000);
 
 			defender->updatePostureUpRecovery(5000); // Can posture change up every 5 seconds
-			defender->updatePostureChangeDelay(delay); // NPCs recover from posture change between 1 and 7 seconds
+			defender->setPostureChangeDelay(delay); // NPCs recover from posture change between 1 and 7 seconds
 			defender->removeBuff(STRING_HASHCODE("burstrun"));
 			defender->removeBuff(STRING_HASHCODE("retreat"));
 			break;
@@ -748,7 +748,7 @@ public:
 			delay += System::random(5000);
 
 			defender->updatePostureDownRecovery(15000); // Can posture change up every 15 seconds
-			defender->updatePostureChangeDelay(delay); // NPCs recover from posture change between 2.5 and 10 seconds
+			defender->setPostureChangeDelay(delay); // NPCs recover from posture change between 2.5 and 10 seconds
 			defender->removeBuff(STRING_HASHCODE("burstrun"));
 			defender->removeBuff(STRING_HASHCODE("retreat"));
 			break;

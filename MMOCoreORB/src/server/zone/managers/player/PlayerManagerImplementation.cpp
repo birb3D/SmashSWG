@@ -1968,7 +1968,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 	// Loop through and Remove pets from the total damage pool for better XP calc
 	for (int b = 0; b < threatMap->size(); ++b) {
 		ThreatMapEntry* entry = &threatMap->elementAt(b).getValue();
-		CreatureObject* attacker = threatMap->elementAt(b).getKey();
+		TangibleObject* attacker = threatMap->elementAt(b).getKey();
 	
 		if (entry == nullptr || attacker == nullptr) {
 			continue;
@@ -2135,7 +2135,6 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				trx.addState("combatGroupFactionPetLevel", group->getFactionPetLevel());
 			}
 
-			Locker crossLocker(attacker, destructedObject);
 			
 			uint32 totalPlayerDamage = 0;
 			for (int j = 0; j < entry->size(); ++j) {

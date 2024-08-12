@@ -2305,7 +2305,7 @@ float CombatManager::getDefenderToughnessModifier(CreatureObject* defender, int 
 */
 
 ArmorObject* CombatManager::getArmorObject(CreatureObject* defender, uint8 hitLocation) const {
-	Vector<ManagedReference<ArmorObject*>> armor = defender->getWearablesDeltaVector()->getArmorAtHitLocation(hitLocation);
+	Vector<ManagedReference<ArmorObject*>> armor = defender->getWearablesDeltaVector()->getArmorAtHitLocation(hitLocation, defender->getSpecies());
 
 	if (armor.isEmpty())
 		return nullptr;

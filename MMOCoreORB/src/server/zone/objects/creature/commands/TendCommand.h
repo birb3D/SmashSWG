@@ -270,7 +270,7 @@ public:
 			sendWoundMessage(creature, creatureTarget, attribute, healedWounds);
 
 			if (creatureTarget != creature && healedWounds > 0) {
-				awardXp(creature, "medical", round(healedWounds * 6f));
+				awardXp(creature, "medical", round(healedWounds * 6.0f));
 				creature->notifyObservers(ObserverEventType::ABILITYUSED, creatureTarget, STRING_HASHCODE("tendwound"));
 			}
 

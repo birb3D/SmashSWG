@@ -127,10 +127,7 @@ public:
 				return GENERALERROR;
 			}
 
-			message.setTT(targetCreature->getDisplayedName());
 
-
-			Reference<ThrowTrapTask*> trapTask = new ThrowTrapTask(creature, targetCreature, buff, message, trapData->getPoolToDamage(), damage, hit);
 			creature->addPendingTask("throwtrap", trapTask, 2300);
 
 			//Reduce cost based upon player's strength, quickness, and focus if any are over 300

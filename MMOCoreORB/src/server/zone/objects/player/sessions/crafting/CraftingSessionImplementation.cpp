@@ -904,6 +904,7 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 
 	prototype->setComplexity(manufactureSchematic->getComplexity());
 
+/*
 	if(craftingValues->hasProperty("charges") && craftingValues->getCurrentValue("charges") < 0) {
 		craftingValues->setCurrentValue("charges", 1);
 		prototype->setUseCount(1, true);
@@ -920,7 +921,7 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 	}
 
 	prototype->updateCraftingValues(craftingValues, false);
-
+*/
 
 	// Start DMSCO3 ***********************************************************
 	// Sends the updated values to the crafting screen
