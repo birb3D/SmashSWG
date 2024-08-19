@@ -1307,7 +1307,7 @@ float CombatManager::applyDamageModifiers(CreatureObject* attacker, WeaponObject
 
 		for (int i = 0; i < weaponDamageMods->size(); ++i) {
 			if(weapon->getWeaponType() == "unarmed")
-				damage += (attacker->getSkillMod(weaponDamageMods->get(i)) / 2);
+				damage += (attacker->getSkillMod(weaponDamageMods->get(i)) / 3);
 			else
 				damage += attacker->getSkillMod(weaponDamageMods->get(i));
 		}
