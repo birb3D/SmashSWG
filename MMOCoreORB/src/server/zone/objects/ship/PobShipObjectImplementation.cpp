@@ -268,14 +268,24 @@ void PobShipObjectImplementation::updatePlayersInShip(bool lightUpdate, bool sen
 }
 
 void PobShipObjectImplementation::sendTo(SceneObject* sceneO, bool doClose, bool forceLoadContainer) {
+	if (sceneO == nullptr) {
+		return;
+	}
+
 	// info(true) << "PobShipObjectImplementation::sendTo - " << getDisplayedName() << " sending to: " << sceneO->getDisplayedName();
 
-	CreatureObject* player = sceneO->asCreatureObject();
+	auto player = sceneO->asCreatureObject();
 
-	if (player == nullptr)
+	if (player == nullptr) {
 		return;
+	}
 
 	ShipObjectImplementation::sendTo(player, doClose, forceLoadContainer);
+
+	// Do not send the contents of the ships cells to the player unless it is launched
+	if (!isShipLaunched()) {
+		return;
+	}
 
 	auto closeObjects = player->getCloseObjects();
 
@@ -304,14 +314,22 @@ void PobShipObjectImplementation::sendTo(SceneObject* sceneO, bool doClose, bool
 }
 
 void PobShipObjectImplementation::sendContainerObjectsTo(SceneObject* sceneO, bool forceLoad) {
-	if (sceneO == nullptr)
+	if (sceneO == nullptr) {
 		return;
+	}
+
+	// Do not send the contents of the ships cells to the player unless it is launched
+	if (!isShipLaunched()) {
+		return;
+	}
 
 	auto player = sceneO->asCreatureObject();
 
 	if (player == nullptr) {
 		return;
 	}
+
+	auto playerId = player->getObjectID();
 
 	for (int i = 0; i < cells.size(); ++i) {
 		auto& cell = cells.get(i);
@@ -322,7 +340,7 @@ void PobShipObjectImplementation::sendContainerObjectsTo(SceneObject* sceneO, bo
 		for (int j = 0; j < cell->getContainerObjectsSize(); ++j) {
 			auto object = cell->getContainerObject(j);
 
-			if (object == nullptr) {
+			if (object == nullptr || object->getObjectID() == playerId) {
 				continue;
 			}
 

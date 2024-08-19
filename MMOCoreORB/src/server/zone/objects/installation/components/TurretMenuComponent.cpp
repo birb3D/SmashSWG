@@ -15,6 +15,7 @@
 #include "templates/faction/Factions.h"
 #include "server/zone/objects/player/PlayerObject.h"
 #include "server/zone/managers/collision/CollisionManager.h"
+#include "server/zone/managers/gcw/GCWManager.h"
 
 void TurretMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject, ObjectMenuResponse* menuResponse, CreatureObject* player) const {
 	if (sceneObject == nullptr || !sceneObject->isTurret() || sceneObject->getZone() == nullptr) {
@@ -22,6 +23,10 @@ void TurretMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject, Objec
 	}
 
 	if (player == nullptr || !player->isPlayerCreature() || player->isDead() || player->isIncapacitated()) {
+		return;
+	}
+
+	if (player->getFaction() == Factions::FACTIONNEUTRAL) {
 		return;
 	}
 
@@ -37,22 +42,47 @@ void TurretMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject, Objec
 		return;
 	}
 
+	// GCW Base Parent
+	auto baseParent = zoneServer->getObject(turret->getOwnerObjectID());
+
+	if (baseParent == nullptr || !baseParent->isBuildingObject()) {
+		return;
+	}
+
+	auto baseBuilding = cast<BuildingObject*>(baseParent.get());
+
+	if (baseBuilding == nullptr) {
+		return;
+	}
+
 	auto ghost = player->getPlayerObject();
 	bool isPrivileged = (ghost != nullptr && ghost->isPrivileged());
 
 	// Allow privileged access to the turret unless the player is the same faction
 	if (!isPrivileged) {
-		if (player->getFaction() != turret->getFaction()) {
+		bool similarStatus = (turret->getFactionStatus() <= player->getFactionStatus());
+
+		// Player is a lower faction status then the turret
+		if (!similarStatus) {
 			return;
 		}
 
-		// if turret is overt and player is not
-		if ((turret->getPvpStatusBitmask() & ObjectFlag::OVERT) && !(player->getPvpStatusBitmask() & ObjectFlag::OVERT)) {
+		// Player and turret are opposite faction
+		if (player->getFaction() != turret->getFaction()) {
+			// Player and turret are opposite faction but same faction status
+			if (similarStatus) {
+				menuResponse->addRadialMenuItem(RadialOptions::SERVER_MENU1, 3, "@player_structure:disarm_minefield"); // "Disarm Minefield"
+			}
+
 			return;
 		}
 	}
 
-	menuResponse->addRadialMenuItem(37, 3, "@player_structure:management_mine_inv"); // Mine Inventory
+	if (baseBuilding->getOwnerObjectID() == player->getObjectID()) {
+		menuResponse->addRadialMenuItem(RadialOptions::SERVER_MENU2, 3, "@player_structure:management_mine_inv"); // "Mine Inventory"
+	}
+
+	menuResponse->addRadialMenuItem(RadialOptions::SERVER_MENU3, 3, "@player_structure:mnu_donate_mines"); // "Donate Mines"
 }
 
 int TurretMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject, CreatureObject* player, byte selectedID) const {
@@ -66,9 +96,21 @@ int TurretMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject, Creatu
 		return 1;
 	}
 
+	auto zoneServer = sceneObject->getZoneServer();
+
+	if (zoneServer == nullptr) {
+		return 1;
+	}
+
 	ManagedReference<TurretObject*> turret = cast<TurretObject*>(sceneObject);
 
 	if (turret == nullptr) {
+		return 1;
+	}
+
+	auto gcwManager = zone->getGCWManager();
+
+	if (gcwManager == nullptr) {
 		return 1;
 	}
 
@@ -81,11 +123,47 @@ int TurretMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject, Creatu
 	}
 
 	auto ghost = player->getPlayerObject();
-	bool isPrivileged = (ghost != nullptr && ghost->isPrivileged());
+
+	if (ghost == nullptr) {
+		return 1;
+	}
+
+	bool isPrivileged = ghost->isPrivileged();
 
 	switch(selectedID) {
-		case 37: {
-			if (isPrivileged || turret->checkContainerPermission(player, ContainerPermissions::OPEN)) {
+		// Disarm Minefield
+		case RadialOptions::SERVER_MENU1: {
+			Reference<CreatureObject*> playerRef = player;
+			Reference<TurretObject*> turretRef = turret;
+
+			Core::getTaskManager()->executeTask([playerRef, turretRef]() {
+				if (playerRef == nullptr || turretRef == nullptr) {
+					return;
+				}
+
+				Locker locker(playerRef);
+
+				playerRef->executeObjectControllerAction(STRING_HASHCODE("defuseminefield"), turretRef->getObjectID(), "");
+			}, "DefuseMinefieldLambda");
+
+			break;
+		}
+		// Manage Mine Inventory
+		case RadialOptions::SERVER_MENU2: {
+			// GCW Base Parent
+			auto baseParent = zoneServer->getObject(turret->getOwnerObjectID());
+
+			if (baseParent == nullptr || !baseParent->isBuildingObject()) {
+				return 1;
+			}
+
+			auto baseBuilding = cast<BuildingObject*>(baseParent.get());
+
+			if (baseBuilding == nullptr) {
+				return 1;
+			}
+
+			if (isPrivileged || (baseBuilding->getOwnerObjectID() == player->getObjectID())) {
 				turret->sendWithoutParentTo(player);
 				turret->openContainerTo(player);
 				turret->notifyObservers(ObserverEventType::OPENCONTAINER, player);
@@ -93,6 +171,11 @@ int TurretMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject, Creatu
 				player->sendSystemMessage("@error_message:perm_no_open"); // You do not have permission to access this container
 			}
 
+			break;
+		}
+		// Donate Mines
+		case RadialOptions::SERVER_MENU3: {
+			gcwManager->sendSelectMineToDonate(turret, player);
 			break;
 		}
 		default:
