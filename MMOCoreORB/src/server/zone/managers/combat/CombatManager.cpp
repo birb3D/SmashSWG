@@ -2600,7 +2600,8 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 			int armorMit = hitList->getArmorMitigation();
 
 			armorMit += dmgAbsorbed;
-			hitList->setArmorMitigation(armorMit);
+			if(dmgAbsorbed > 0)
+				hitList->setArmorMitigation(armorMit);
 		}
 
 		// inflict condition damage
