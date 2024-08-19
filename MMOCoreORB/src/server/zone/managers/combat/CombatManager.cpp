@@ -2575,7 +2575,7 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 		Locker plocker(psg);
 
-		psg->inflictDamage(psg, 0, damage * 0.2, true, true);
+		psg->inflictDamage(psg, 0, damage * 0.05, true, true);
 	}
 
 	// Standard Armor
@@ -2605,7 +2605,10 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		// inflict condition damage
 		Locker alocker(armor);
 
-		armor->inflictDamage(armor, 0, damage * 0.2, true, true);
+		if(hitLocation == 1) // Body Armor should absorb more damage
+			armor->inflictDamage(armor, 0, dmgAbsorbed * 0.03, true, true);
+		else
+			armor->inflictDamage(armor, 0, dmgAbsorbed * 0.05, true, true);
 	}
 
 	return damage;
@@ -2774,7 +2777,7 @@ float CombatManager::doObjectDetonation(TangibleObject* attackerTanO, CreatureOb
 
 				Locker plocker(psgArmor, attackerTanO);
 
-				psgArmor->inflictDamage(psgArmor, 0, damage * 0.2, true, true);
+				psgArmor->inflictDamage(psgArmor, 0, damage * 0.05, true, true);
 			}
 
 			ManagedReference<ArmorObject*> armor = getArmorObject(defender, hitLocation);
@@ -2793,7 +2796,10 @@ float CombatManager::doObjectDetonation(TangibleObject* attackerTanO, CreatureOb
 				// inflict condition damage
 				Locker alocker(armor, attackerTanO);
 
-				armor->inflictDamage(armor, 0, damage * 0.2, true, true);
+				if(hitLocation == 1) // Body Armor should absorb more damage
+					armor->inflictDamage(armor, 0, dmgAbsorbed * 0.03, true, true);
+				else
+					armor->inflictDamage(armor, 0, dmgAbsorbed * 0.05, true, true);
 			}
 		}
 
