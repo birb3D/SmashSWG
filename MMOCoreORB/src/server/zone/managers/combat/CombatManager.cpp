@@ -1258,8 +1258,11 @@ int CombatManager::calculateDamageRange(TangibleObject* attacker, CreatureObject
 
 	// restrict damage if a player is not certified (don't worry about mobs)
 	if (attacker->isPlayerCreature() && !weapon->isCertifiedFor(cast<CreatureObject*>(attacker))) {
-		minDamage = 5;
-		maxDamage = 10;
+		minDamage = minDamage / 5;
+		maxDamage = maxDamage / 5;
+		if(minDamage < 5) minDamage = 5;
+		if(maxDamage < minDamage) maxDamage = minDamage;
+		if(maxDamage < 10) maxDamage = 10;
 	}
 
 	debug() << "attacker base damage is " << minDamage << "-" << maxDamage;
@@ -1303,7 +1306,10 @@ float CombatManager::applyDamageModifiers(CreatureObject* attacker, WeaponObject
 		const auto weaponDamageMods = weapon->getDamageModifiers();
 
 		for (int i = 0; i < weaponDamageMods->size(); ++i) {
-			damage += attacker->getSkillMod(weaponDamageMods->get(i));
+			if(weapon->getWeaponType() == "unarmed")
+				damage += (attacker->getSkillMod(weaponDamageMods->get(i)) / 2);
+			else
+				damage += attacker->getSkillMod(weaponDamageMods->get(i));
 		}
 
 		int attackType = weapon->getAttackType();
