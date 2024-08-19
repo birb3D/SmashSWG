@@ -623,7 +623,7 @@ int CombatManager::tanoTargetCombatAction(TangibleObject* attacker, WeaponObject
 		break;
 	case BLOCK:
 		doBlock(attacker, weapon, defenderObject, damage);
-		damageMultiplier = 0.5f;
+		damageMultiplier = 0.25f;
 		break;
 	case DODGE:
 		doDodge(attacker, weapon, defenderObject, damage);
