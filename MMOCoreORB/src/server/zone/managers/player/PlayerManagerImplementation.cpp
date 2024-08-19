@@ -2147,7 +2147,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				String xpType = entry->elementAt(j).getKey();
 
 				float xpAmount = baseXp;
-				float bonusXp = baseXp * 0.13f; // 13% group xp minimum for hitting a creature
+				float bonusXp = baseXp * 0.15f; // 13% group xp minimum for hitting a creature
 				int playerLevel = calculatePlayerLevel(attackerCreo, xpType);
 
 				bonusXp *= (float) damage / totalPlayerDamage;
