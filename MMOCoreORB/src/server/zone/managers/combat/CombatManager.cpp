@@ -1497,6 +1497,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 		defender->inflictDamage(attacker, CreatureAttribute::HEALTH, (int)healthDamage, true, xpType, true, true);
 
 		poolsToWound.add(CreatureAttribute::HEALTH);
+		poolsToWound.add(CreatureAttribute::HEALTH);
+		poolsToWound.add(CreatureAttribute::STRENGTH);
+		poolsToWound.add(CreatureAttribute::CONSTITUTION);
 	}
 
 	if (actionDamaged) {
@@ -1532,6 +1535,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 		defender->inflictDamage(attacker, CreatureAttribute::ACTION, (int)actionDamage, true, xpType, true, true);
 
 		poolsToWound.add(CreatureAttribute::ACTION);
+		poolsToWound.add(CreatureAttribute::ACTION);
+		poolsToWound.add(CreatureAttribute::QUICKNESS);
+		poolsToWound.add(CreatureAttribute::STAMINA);
 	}
 
 	if (mindDamaged) {
@@ -1566,6 +1572,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 		defender->inflictDamage(attacker, CreatureAttribute::MIND, (int)mindDamage, true, xpType, true, true);
 
 		poolsToWound.add(CreatureAttribute::MIND);
+		poolsToWound.add(CreatureAttribute::MIND);
+		poolsToWound.add(CreatureAttribute::FOCUS);
+		poolsToWound.add(CreatureAttribute::WILLPOWER);
 	}
 
 	if (numSpillOverPools > 0) {
@@ -1691,20 +1700,12 @@ void CombatManager::woundCreatureTarget(CreatureObject* defender, WeaponObject* 
 		int poolToWound = poolsToWound.get(System::random(poolsToWound.size() - 1));
 		int woundAmount = System::random(10);
 		defender->addWounds(poolToWound, woundAmount, true);
-		woundAmount = System::random(5); // Less amount for secondary stats
-		defender->addWounds(poolToWound + 1, 1, true);
-		woundAmount = System::random(5); // Less amount for secondary stats
-		defender->addWounds(poolToWound + 2, 1, true);
 	}
 
 	if (System::random(100) < ratio) {
 		int poolToWound = poolsToWound.get(System::random(poolsToWound.size() - 1));
 		int woundAmount = System::random(10);
 		defender->addWounds(poolToWound, woundAmount, true);
-		woundAmount = System::random(5); // Less amount for secondary stats
-		defender->addWounds(poolToWound + 1, 1, true);
-		woundAmount = System::random(5); // Less amount for secondary stats
-		defender->addWounds(poolToWound + 2, 1, true);
 	}
 }
 
