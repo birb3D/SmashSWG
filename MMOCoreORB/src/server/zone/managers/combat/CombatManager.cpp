@@ -1686,10 +1686,24 @@ void CombatManager::woundCreatureTarget(CreatureObject* defender, WeaponObject* 
 
 	float ratio = weapon->getWoundsRatio();
 
+	// Two pools to wound. Two Chances.
+	if (poolsToWound.size() > 0 && System::random(100) < ratio) {
+		int poolToWound = poolsToWound.get(System::random(poolsToWound.size() - 1));
+		int woundAmount = System::random(10);
+		defender->addWounds(poolToWound, woundAmount, true);
+		woundAmount = System::random(5); // Less amount for secondary stats
+		defender->addWounds(poolToWound + 1, 1, true);
+		woundAmount = System::random(5); // Less amount for secondary stats
+		defender->addWounds(poolToWound + 2, 1, true);
+	}
+
 	if (System::random(100) < ratio) {
 		int poolToWound = poolsToWound.get(System::random(poolsToWound.size() - 1));
-		defender->addWounds(poolToWound, 1, true);
+		int woundAmount = System::random(10);
+		defender->addWounds(poolToWound, woundAmount, true);
+		woundAmount = System::random(5); // Less amount for secondary stats
 		defender->addWounds(poolToWound + 1, 1, true);
+		woundAmount = System::random(5); // Less amount for secondary stats
 		defender->addWounds(poolToWound + 2, 1, true);
 	}
 }
