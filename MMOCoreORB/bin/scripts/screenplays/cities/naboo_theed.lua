@@ -156,6 +156,25 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"trainer_scout",0,-5986.5,6,4232.79,104,0, ""},
 		{"trainer_scout",0,-4796,6,4103,240,0, ""},
 		{"trainer_unarmed",0,-5649,6,4206,0,0, ""},
+		
+		--Cantina
+		{"businessman",0,6.4, -0.9, -8.9,115,91, "conversation"},
+		{"businessman",0,7.6, -0.9, -10.3,-35,91, "conversation"},
+		{"noble",0,17.6, -0.9, 2.3,32,91, "nervous"},
+		{"bounty_hunter",0,18.6, -0.9, 3.3,-145,91, "nervous"},
+		{"commoner_old",0,19.6, -0.9, 2.3,-70,91, "worried"},
+		{"pilot",0,6.4, -0.9, 8.9,34,91, "worried"},
+		{"sullustan_male",0,7.6, -0.9, 10.3,215,91, "nervous"},
+		{"patron",60,16.2,-0.9,-5.6,320,91, "npc_sitting_chair"},
+		{"patron",60,26.1,-0.9,-8.2,317,91, "nervous"},
+		{"patron_chiss",60,3.62,-0.894992,-4.77,184.005,91, "sad"},
+		{"patron_chiss",60,1.74,-0.894992,-4.91,95.0028,91, "npc_consoling"},
+		{"patron_devaronian",60,21.4,-0.9,5.4,161,91, "worried"},
+		{"patron_ishitib",60,22.3,-0.9,3.1,339,91, "nervous"},
+		{"patron_ithorian",60,14.3,-0.9,4.3,51,91, "npc_sitting_chair"},
+		{"patron_klaatu",60,15,-0.9,6.9,139,91, "happy"},
+		{"patron_nikto",60,23.4,-0.9,4.8,272,91, "worried"},
+		{"patron_quarren",60,17.5,-0.9,7.7,226,91, "npc_sitting_chair"},
 
 		--Hotel
 		{"businessman",60,15.5641,1.28309,-2.37071,135.005,1677395, "worried"},
