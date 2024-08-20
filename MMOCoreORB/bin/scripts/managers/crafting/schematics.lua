@@ -1165,6 +1165,7 @@ schematics = {
 	{path="object/draft_schematic/weapon/baton_gaderiffi.iff"},
 	{path="object/draft_schematic/weapon/battleaxe.iff"},
 	{path="object/draft_schematic/weapon/knuckler_vibro.iff"},
+	{path="object/draft_schematic/weapon/blastglove.iff"},
 	{path="object/draft_schematic/weapon/sword_curved.iff"},
 	{path="object/draft_schematic/weapon/component/sword_core_advanced.iff"},
 	{path="object/draft_schematic/weapon/component/reinforcement_core_advanced.iff"},

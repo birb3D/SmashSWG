@@ -41,10 +41,40 @@
 --this exception also makes it possible to release a modified version 
 
 
+object_draft_schematic_weapon_blastglove = object_draft_schematic_weapon_shared_blastglove:new {
 
---Children folder includes
+   templateType = DRAFTSCHEMATIC,
 
--- Server Objects
-includeFile("weapon/melee/special/blacksun_razor.lua")
-includeFile("weapon/melee/special/vibroknuckler.lua")
-includeFile("weapon/melee/special/blastglove.lua")
+   customObjectName = "Blast Glove",
+
+   craftingToolTab = 1, -- (See DraftSchematicObjectTemplate.h)
+   complexity = 15, 
+   size = 1, 
+   factoryCrateType = "object/factory/factory_crate_weapon.iff",
+   
+   xpType = "crafting_general", 
+   xp = 65, 
+
+   assemblySkill = "general_assembly", 
+   experimentingSkill = "general_experimentation", 
+   customizationSkill = "clothing_customization", 
+
+   customizationOptions = {},
+   customizationStringNames = {},
+   customizationDefaults = {},
+
+   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
+   ingredientTitleNames = {"grip_unit", "strike_face", "vibro_unit_and_power_cell_brackets", "power_cell_socket"},
+   ingredientSlotType = {0, 0, 0, 0},
+   resourceTypes = {"metal_ferrous", "copper", "metal_nonferrous", "petrochem_inert_polymer"},
+   resourceQuantities = {12, 8, 8, 4},
+   contribution = {100, 100, 100, 100},
+
+
+   targetTemplate = "object/weapon/melee/special/blastglove.iff",
+
+   additionalTemplates = {
+             }
+
+}
+ObjectTemplates:addTemplate(object_draft_schematic_weapon_blastglove, "object/draft_schematic/weapon/blastglove.iff")

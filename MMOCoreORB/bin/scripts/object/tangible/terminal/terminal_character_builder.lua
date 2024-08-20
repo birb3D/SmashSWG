@@ -4333,6 +4333,7 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 				"Unarmed",
 				{
 					"Vibro Knuckler", "object/weapon/melee/special/vibroknuckler.iff",
+					"Blast Glove", "object/weapon/melee/special/blastglove.iff",
 				--		"A Blacksun Razor Knuckler", "object/weapon/melee/special/blacksun_razor.iff"
 				}
 			},

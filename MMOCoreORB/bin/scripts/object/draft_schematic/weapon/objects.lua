@@ -1119,6 +1119,14 @@ object_draft_schematic_weapon_shared_knuckler_vibro = SharedDraftSchematicObject
 
 ObjectTemplates:addClientTemplate(object_draft_schematic_weapon_shared_knuckler_vibro, "object/draft_schematic/weapon/shared_knuckler_vibro.iff")
 
+
+object_draft_schematic_weapon_shared_blastglove = SharedDraftSchematicObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/weapon/shared_blastglove.iff"
+}
+
+ObjectTemplates:addClientTemplate(object_draft_schematic_weapon_shared_blastglove, "object/draft_schematic/weapon/shared_blastglove.iff")
+
+
 object_draft_schematic_weapon_shared_lance_nightsister = SharedDraftSchematicObjectTemplate:new {
 	clientTemplateFileName = "object/draft_schematic/weapon/shared_lance_nightsister.iff"
 	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
