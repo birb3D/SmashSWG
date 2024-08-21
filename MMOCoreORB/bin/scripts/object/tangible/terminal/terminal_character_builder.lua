@@ -4344,6 +4344,18 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 			--	"Dark Jedi Holocron (gift)", "object/tangible/jedi/no_drop_jedi_holocron_dark.iff",
 			--	"Light Jedi Holocron (gift)", "object/tangible/jedi/no_drop_jedi_holocron_light.iff"
 			--}
+			"Slicing Testing",
+			{
+				"Precision Laser Knife", "object/tangible/slicing/slicing_laser_knife.iff",
+				"Flow Analyzer", "object/tangible/slicing/slicing_flow_analyzer.iff",
+				"Molecular Clamp", "object/tangible/slicing/slicing_molecular_clamp.iff",
+				"WUK", "object/tangible/slicing/slicing_weapon_upgrade_kit.iff",
+				"AUK", "object/tangible/slicing/slicing_armor_upgrade_kit.iff",
+			},
+			"Armor Testing",
+			{
+				"Strange Bone Seg", "object/tangible/component/armor/armor_segment_bone_advanced.iff",
+			},
 			"Village Testing (Temporary)",
 			{
 				"Resources",

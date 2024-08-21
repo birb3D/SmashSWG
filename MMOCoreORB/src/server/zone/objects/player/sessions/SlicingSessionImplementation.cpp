@@ -602,11 +602,11 @@ void SlicingSessionImplementation::handleUseColorCrystal(SuiListBox* suiBox) {
 		else if(weaponType < 4) weapon->setDamageType(SharedWeaponObjectTemplate::COLD);
 		else if(weaponType < 5) weapon->setDamageType(SharedWeaponObjectTemplate::ACID);
 		else weapon->setDamageType(SharedWeaponObjectTemplate::ELECTRICITY);
-
-		//handleWeaponSlice();
-		weapon->setSliced(true);
-
-		playerManager->awardExperience(player, "slicing", 750, true); // Weapon Slice XP
+		
+		handleWeaponSlice();
+		//weapon->setSliced(true);
+		
+		playerManager->awardExperience(player, "slicing", 1250, true); // Weapon Slice XP
 
 		player->sendSystemMessage("Something inside the weapon fundamentally changes. You have somehow altered the very fabric of reality.");
 
