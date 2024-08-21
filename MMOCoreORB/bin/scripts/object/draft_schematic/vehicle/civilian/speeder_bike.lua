@@ -56,9 +56,9 @@ object_draft_schematic_vehicle_civilian_speeder_bike = object_draft_schematic_ve
 	xpType = "crafting_general", 
 	xp = 1600, 
 
-	assemblySkill = "general_assembly", 
-	experimentingSkill = "general_experimentation", 
-	customizationSkill = "clothing_customization", 
+	assemblySkill = "droid_assembly",
+	experimentingSkill = "droid_experimentation",
+	customizationSkill = "droid_customization",
 
 	customizationOptions = {},
 	customizationStringNames = {},
