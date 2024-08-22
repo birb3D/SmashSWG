@@ -4352,10 +4352,6 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 				"WUK", "object/tangible/slicing/slicing_weapon_upgrade_kit.iff",
 				"AUK", "object/tangible/slicing/slicing_armor_upgrade_kit.iff",
 			},
-			"Armor Testing",
-			{
-				"Strange Bone Seg", "object/tangible/component/armor/armor_segment_bone_advanced.iff",
-			},
 			"Village Testing (Temporary)",
 			{
 				"Resources",
