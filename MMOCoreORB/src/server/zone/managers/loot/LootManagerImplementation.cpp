@@ -297,8 +297,22 @@ void LootManagerImplementation::setJunkValue(TangibleObject* prototype, const Lo
 }
 
 int LootManagerImplementation::calculateLootCredits(int level) {
-	int maxcredits = (int) round((.02f * level * level) + (6 * level) + 120);
-	int mincredits = (int) round((((float) maxcredits) * .5f) + (2.0f * level));
+	
+	int roll = System::random(100000);
+	
+	int mincredits = 5;
+	int maxcredits = (int) ((5 * level) + 20);
+	
+	if(roll < 50) // 0.05% chance of huge credits
+	{
+		mincredits = 10000; // we want the number to be big
+		maxcredits = (int) ((50 * level) + 10000);
+	}
+	else if (roll < 10000) // 10% for good credits
+	{
+		mincredits = 100; 
+		maxcredits = (int) ((10 * level) + 100);
+	}
 
 	int credits = mincredits + System::random(maxcredits - mincredits);
 
