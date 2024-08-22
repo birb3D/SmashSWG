@@ -58,7 +58,7 @@ option(LOGIN_SERVER_EXTRA_PORTS "Enables login server with extra ports config" O
 option(ENABLE_ASAN "Enables address sanitizer compiling" OFF)
 option(ENABLE_TSAN "Enables thread sanitizer compiling" OFF)
 option(ENABLE_UBSAN "Enables undefined behavior sanitizer compiling" OFF)
-option(ENABLE_NATIVE "Enables -march=native compiler option" ON)
+option(ENABLE_NATIVE "Enables -march=native compiler option" OFF)
 option(ENABLE_OMIT_FRAMEPOINTER "Enables -fno-omit-frame-pointer compiler option" ON)
 option(ENABLE_ERROR_ON_WARNINGS "Enables -Werror compiler option" ON)
 option(ENABLE_REST_SERVER "Enables REST API Server" OFF)
