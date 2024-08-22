@@ -297,7 +297,7 @@ void LootManagerImplementation::setJunkValue(TangibleObject* prototype, const Lo
 }
 
 int LootManagerImplementation::calculateLootCredits(int level) {
-	int maxcredits = (int) round((.03f * level * level) + (3 * level) + 50);
+	int maxcredits = (int) round((.02f * level * level) + (6 * level) + 120);
 	int mincredits = (int) round((((float) maxcredits) * .5f) + (2.0f * level));
 
 	int credits = mincredits + System::random(maxcredits - mincredits);
@@ -631,6 +631,14 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 		trx.abort() << "Empty loot collection.";
 		trx.discard();
 		return false;
+	}
+	
+	int roll = System::random(10000);
+	if(roll < 200) { // 2% Chance for three items
+		createLootFromCollection(trx, container, lootCollection, creature->getLevel());
+	}
+	if(roll < 1000) { // 10% Chance for two items
+		createLootFromCollection(trx, container, lootCollection, creature->getLevel());
 	}
 
 	return createLootFromCollection(trx, container, lootCollection, creature->getLevel());

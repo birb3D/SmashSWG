@@ -5,6 +5,14 @@ tailor_components = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
+
+		{itemTemplate = "strange_armor_segment_bone", weight = 2000000},
+		{itemTemplate = "strange_armor_segment_zam", weight = 2000000},
+		{itemTemplate = "strange_armor_segment_chitin", weight = 2000000},
+		{itemTemplate = "strange_armor_segment_padded", weight = 2000000},
+		{itemTemplate = "strange_armor_segment_ubese", weight = 2000000},
+	
+		--[[
 		{itemTemplate = "crystalline_clothing_treatment", weight = 2600000},
 		{itemTemplate = "heavy_duty_clasp", weight = 2600000},
 		{itemTemplate = "heavy_duty_leather", weight = 2600000},
@@ -14,12 +22,12 @@ tailor_components = {
 		{itemTemplate = "reinforced_fiber_panel", weight = 200000},
 		--16% below this point
 		{itemTemplate = "strange_biologic_effect_controller", weight = 170000}, -- Weighted more heavily because only one for this class
-		{itemTemplate = "armor_segment_bone", weight = 65000},
-		{itemTemplate = "armor_segment_zam", weight = 65000},
-		{itemTemplate = "armor_segment_chitin", weight = 65000},
-		{itemTemplate = "armor_segment_padded", weight = 65000},
-		{itemTemplate = "armor_segment_ubese", weight = 65000},
-		{itemTemplate = "armor_segment_tantel", weight = 65000},
+		{itemTemplate = "strange_armor_segment_bone", weight = 65000},
+		{itemTemplate = "strange_armor_segment_zam", weight = 65000},
+		{itemTemplate = "strange_armor_segment_chitin", weight = 65000},
+		{itemTemplate = "strange_armor_segment_padded", weight = 65000},
+		{itemTemplate = "strange_armor_segment_ubese", weight = 65000},
+		{itemTemplate = "strange_armor_segment_tantel", weight = 65000},
 		{itemTemplate = "strange_bio_component_food_light", weight = 65000},
 		{itemTemplate = "strange_bio_component_food_medium", weight = 65000},
 		{itemTemplate = "strange_bio_component_food_heavy", weight = 65000},
@@ -36,7 +44,7 @@ tailor_components = {
 		{itemTemplate = "strange_structure_light_ore_mining_unit", weight = 65000},
 		{itemTemplate = "strange_structure_ore_mining_unit", weight = 65000},
 		{itemTemplate = "strange_structure_turbo_fluidic_drilling_pumping_unit", weight = 65000},
-
+	]]--
 	}
 }
 
