@@ -625,6 +625,7 @@ schematics = {
 	{path="object/draft_schematic/food/additive/additive_medium.iff"},
 	{path="object/draft_schematic/food/dish_soypro.iff"},
 	{path="object/draft_schematic/food/dessert_air_cake.iff"},
+	{path="object/draft_schematic/food/dessert_cheesecake.iff"},
 	{path="object/draft_schematic/food/dessert_almond_kwevvu_crisp_munchies.iff"},
 	{path="object/draft_schematic/food/dessert_blap_biscuit.iff"},
 	{path="object/draft_schematic/food/drink_alcohol.iff"},
