@@ -818,20 +818,23 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 		return;
 	}
 
-	float density = resourceSpawn->getDensityAt(droidZone->getZoneName(), droid->getPositionX(), droid->getPositionY());
+	//float density = resourceSpawn->getDensityAt(droidZone->getZoneName(), droid->getPositionX(), droid->getPositionY());
 
 	String creatureHealth = "";
 
-	if (density > 0.75f) {
+	if (roll < 50) { // 0.05% chance of BIG BOI HARVEST
+		quantityExtracted = int(quantityExtracted * 200f);
+		creatureHealth = "creature_quality_jackpot";
+	} else if (roll < 10000) { // 10% fat boi
 		quantityExtracted = int(quantityExtracted * 1.25f);
 		creatureHealth = "creature_quality_fat";
-	} else if (density > 0.50f) {
+	} else if (roll < 40000) { // 40% Medium
 		quantityExtracted = int(quantityExtracted * 1.00f);
 		creatureHealth = "creature_quality_medium";
-	} else if (density > 0.25f) {
+	} else if (roll > 80000) { // 80% scrawny
 		quantityExtracted = int(quantityExtracted * 0.75f);
 		creatureHealth = "creature_quality_scrawny";
-	} else {
+	} else { // 20% skinny
 		quantityExtracted = int(quantityExtracted * 0.50f);
 		creatureHealth = "creature_quality_skinny";
 	}
@@ -989,20 +992,24 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 		return;
 	}
 
-	float density = resourceSpawn->getDensityAt(player->getZone()->getZoneName(), player->getPositionX(), player->getPositionY());
-
+	//float density = resourceSpawn->getDensityAt(player->getZone()->getZoneName(), player->getPositionX(), player->getPositionY());
+	
+	int roll = System::random(100000);
 	String creatureHealth = "";
 
-	if (density > 0.75f) {
+	if (roll < 50) { // 0.05% chance of BIG BOI HARVEST
+		quantityExtracted = int(quantityExtracted * 200f);
+		creatureHealth = "creature_quality_jackpot";
+	} else if (roll < 10000) { // 10% fat boi
 		quantityExtracted = int(quantityExtracted * 1.25f);
 		creatureHealth = "creature_quality_fat";
-	} else if (density > 0.50f) {
+	} else if (roll < 40000) { // 40% Medium
 		quantityExtracted = int(quantityExtracted * 1.00f);
 		creatureHealth = "creature_quality_medium";
-	} else if (density > 0.25f) {
+	} else if (roll > 80000) { // 80% scrawny
 		quantityExtracted = int(quantityExtracted * 0.75f);
 		creatureHealth = "creature_quality_scrawny";
-	} else {
+	} else { // 20% skinny
 		quantityExtracted = int(quantityExtracted * 0.50f);
 		creatureHealth = "creature_quality_skinny";
 	}
