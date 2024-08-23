@@ -46,6 +46,7 @@
 includeFile("tangible/food/crafted/additive/serverobjects.lua")
 
 -- Server Objects
+includeFile("tangible/food/crafted/dessert_cheesecake.lua")
 includeFile("tangible/food/crafted/dessert_air_cake.lua")
 includeFile("tangible/food/crafted/dessert_almond_kwevvu_crisp_munchies.lua")
 includeFile("tangible/food/crafted/dessert_bantha_butter.lua")
