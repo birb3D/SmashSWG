@@ -2342,6 +2342,65 @@ object_tangible_food_crafted_shared_dish_crispic = SharedTangibleObjectTemplate:
 
 ObjectTemplates:addClientTemplate(object_tangible_food_crafted_shared_dish_crispic, "object/tangible/food/crafted/shared_dish_crispic.iff")
 
+object_tangible_food_crafted_shared_dish_sushi = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/food/crafted/shared_dish_sushi.iff"
+	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
+--[[
+	appearanceFilename = "appearance/edb_dish_crispic.apt",
+	arrangementDescriptorFilename = "",
+
+	certificationsRequired = {},
+	clearFloraRadius = 0,
+	clientDataFile = "",
+	clientGameObjectType = 8202,
+	collisionActionBlockFlags = 0,
+	collisionActionFlags = 51,
+	collisionActionPassFlags = 1,
+	collisionMaterialBlockFlags = 0,
+	collisionMaterialFlags = 1,
+	collisionMaterialPassFlags = 0,
+	containerType = 0,
+	containerVolumeLimit = 1,
+	customizationVariableMapping = {},
+
+	detailedDescription = "@food_detail:crispic",
+
+	gameObjectType = 8202,
+
+	locationReservationRadius = 0,
+	lookAtText = "@food_lookat:crispic",
+
+	noBuildRadius = 0,
+
+	objectName = "@food_name:crispic",
+	onlyVisibleInTools = 0,
+
+	paletteColorCustomizationVariables = {},
+	portalLayoutFilename = "",
+
+	rangedIntCustomizationVariables = {},
+
+	scale = 1,
+	scaleThresholdBeforeExtentTest = 0.5,
+	sendToClient = 1,
+	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
+	snapToTerrain = 1,
+	socketDestinations = {},
+	structureFootprintFileName = "",
+	surfaceType = 0,
+
+	targetable = 1,
+	totalCellNumber = 0,
+
+	useStructureFootprintOutline = 0,
+
+	clientObjectCRC = 1201766714,
+	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/food/base/shared_base_crafted_food.iff", "object/tangible/food/base/shared_dish_base.iff"}
+]]
+}
+
+ObjectTemplates:addClientTemplate(object_tangible_food_crafted_shared_dish_sushi, "object/tangible/food/crafted/shared_dish_sushi.iff")
+
 object_tangible_food_crafted_shared_dish_dustcrepe = SharedTangibleObjectTemplate:new {
 	clientTemplateFileName = "object/tangible/food/crafted/shared_dish_dustcrepe.iff"
 	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
