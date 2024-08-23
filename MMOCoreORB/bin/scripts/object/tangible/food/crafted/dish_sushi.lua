@@ -48,7 +48,7 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 	filling = 10,
 	nutrition = 10,
 
-	effectType = 2,
+	effectType = 1,
 
 	fillingMin = 17,
 	fillingMax = 10,
