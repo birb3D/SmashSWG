@@ -4309,7 +4309,7 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 					--		"E11 Rifle", "object/weapon/ranged/rifle/rifle_e11.iff",
 					--		"An Ewok Crossbow", "object/weapon/ranged/rifle/rifle_ewok_crossbow.iff",
 					"Jawa Ion Rifle", "object/weapon/ranged/rifle/rifle_jawa_ion.iff",
-					--		"Laser Rifle", "object/weapon/ranged/rifle/rifle_laser.iff",
+							"Laser Rifle", "object/weapon/ranged/rifle/rifle_laser.iff",
 					--		"Laser Rifle (noob)", "object/weapon/ranged/rifle/rifle_laser_noob.iff",
 					--		"Lithitanium Rifle", "object/weapon/ranged/rifle/rifle_victor_tusken.iff",
 					--		"SG82 Rifle", "object/weapon/ranged/rifle/rifle_sg82.iff",
