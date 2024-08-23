@@ -824,7 +824,7 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 	String creatureHealth = "";
 
 	if (roll < 50) { // 0.05% chance of BIG BOI HARVEST
-		quantityExtracted = int(quantityExtracted * 200f);
+		quantityExtracted = int(quantityExtracted * 200);
 		creatureHealth = "creature_quality_jackpot";
 	} else if (roll < 10000) { // 10% fat boi
 		quantityExtracted = int(quantityExtracted * 1.25f);
@@ -999,7 +999,7 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 	String creatureHealth = "";
 
 	if (roll < 50) { // 0.05% chance of BIG BOI HARVEST
-		quantityExtracted = int(quantityExtracted * 200f);
+		quantityExtracted = int(quantityExtracted * 200);
 		creatureHealth = "creature_quality_jackpot";
 	} else if (roll < 10000) { // 10% fat boi
 		quantityExtracted = int(quantityExtracted * 1.25f);
