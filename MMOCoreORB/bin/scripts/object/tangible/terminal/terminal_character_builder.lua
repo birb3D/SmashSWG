@@ -4351,6 +4351,11 @@ object_tangible_terminal_terminal_character_builder = object_tangible_terminal_s
 				"Molecular Clamp", "object/tangible/slicing/slicing_molecular_clamp.iff",
 				"WUK", "object/tangible/slicing/slicing_weapon_upgrade_kit.iff",
 				"AUK", "object/tangible/slicing/slicing_armor_upgrade_kit.iff",
+				"Color Crystals", "color_crystals",
+			},
+			"Armor Testing",
+			{
+				"Tailor Components Loot Drop", "tailor_components",
 			},
 			"Village Testing (Temporary)",
 			{
