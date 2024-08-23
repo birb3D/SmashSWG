@@ -50,14 +50,14 @@ object_tangible_food_crafted_dessert_cheesecake = object_tangible_food_crafted_s
 
 	effectType = 2,
 
-	fillingMin = 11,
+	fillingMin = 20,
 	fillingMax = 7,
-	flavorMin = 720,
+	flavorMin = 420,
 	flavorMax = 1440,
-	nutritionMin = 15,
-	nutritionMax = 25,
-	quantityMin = 6,
-	quantityMax = 10,
+	nutritionMin = 5,
+	nutritionMax = 55,
+	quantityMin = 3,
+	quantityMax = 8,
 
 	modifiers = { "surveying", 0 },
 
