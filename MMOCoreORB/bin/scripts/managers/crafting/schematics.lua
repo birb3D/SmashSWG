@@ -274,6 +274,7 @@ schematics = {
 	{path="object/draft_schematic/food/component/ingredient_ball_of_dough.iff"},
 	{path="object/draft_schematic/food/dish_rations.iff"},
 	{path="object/draft_schematic/food/dish_crispic.iff"},
+	{path="object/draft_schematic/food/dish_sushi.iff"},
 	{path="object/draft_schematic/food/drink_caf.iff"},
 	{path="object/draft_schematic/clothing/component/clothing_metal_fasteners.iff"},
 	{path="object/draft_schematic/clothing/clothing_boots_casual_04.iff"},
