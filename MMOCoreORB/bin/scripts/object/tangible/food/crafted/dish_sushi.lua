@@ -63,8 +63,8 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 
 	modifiers = { "constitution", 0, "stamina", 0 },
 
-	buffName = "food.constitution",
-	buffCRC = 0,
+	buffName = "food.drink_breath_of_heaven",
+	buffCRC = 0xF87AA911,
 	speciesRestriction = "",
 
 
