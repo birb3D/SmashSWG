@@ -820,6 +820,7 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 
 	//float density = resourceSpawn->getDensityAt(droidZone->getZoneName(), droid->getPositionX(), droid->getPositionY());
 
+	int roll = System::random(100000);
 	String creatureHealth = "";
 
 	if (roll < 50) { // 0.05% chance of BIG BOI HARVEST
