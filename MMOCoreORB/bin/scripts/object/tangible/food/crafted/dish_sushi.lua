@@ -63,7 +63,7 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 
 	modifiers = { "constitution", 0, "stamina", 0 },
 
-	buffName = "food.constitution",
+	buffName = "food.dessert_bofa_treat",
 	buffCRC = 0,
 	speciesRestriction = "",
 
