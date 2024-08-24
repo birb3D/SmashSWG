@@ -118,7 +118,8 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"npc_10", "patrolNpc", 69, 28, -4568, 100, 0, "conversation", false},
 		
 		--Cantina
-		{"cantina", "r3", 3.5, -0.894992 , 7.2, 100, 8105496, "", false},
+		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, 8105496, "", false},
+		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 8105496, "", false},
 	},
 
 	patrolPoints = {
@@ -142,7 +143,8 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		npc_9 = {{-357, 28, -4267, 0, true}, {-410, 28, -4238, 0, true}, {-396, 28, -4209, 0, true}},
 		npc_10 = {{69, 28, -4568, 0, false}, {43, 28, -4551, 0, true}, {0, 28, -4518, 0, false}, {43, 28, -4551, 0, true}},
 		
-		cantina_1 = {{3.5, -0.894992 , 7.2, 8105496, false}, {16, -0.894992 , 0, 8105496, true}, {5, -0.894992 , -7, 8105496, false}, {16, -0.894992 , 0, 8105496, true}},
+		cantina_1 = {{7, -0.894992 , 7.2, 8105496, false}, {16, -0.894992 , 0, 8105496, false}, {5, -0.894992 , -7, 8105496, false}, {19, -0.894992 , 0, 8105496, false}},
+		cantina_2 = {{5, -0.894992 , -9, 8105496, false}, {3, -0.894992 , -6, 8105496, false}, {12, -0.894992 , -6, 8105496, false}, {10, -0.894992 , -11, 8105496, false}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
