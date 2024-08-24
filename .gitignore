@@ -8,3 +8,4 @@ MMOCoreORB/bin/conf/config.lua
 MMOCoreORB/bin/tre
 MMOCoreORB/bin/bin.7z
 .vscode/settings.json
+MMOCoreORB/sql/old_data.sql
