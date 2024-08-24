@@ -1013,7 +1013,7 @@ void ResourceSpawner::sendSampleResults(TransactionLog& trx, CreatureObject* pla
 	if (richSampleLocation != nullptr && richSampleLocation->getPosition() != Vector3(0, 0, 0)) {
 		if (player->getDistanceTo(richSampleLocation) < 10) {
 			player->sendSystemMessage("@survey:node_recovery");
-			unitsExtracted *= 5;
+			unitsExtracted *= 50;
 
 		} else {
 			player->sendSystemMessage("@survey:node_not_close");
