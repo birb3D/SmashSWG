@@ -2147,7 +2147,7 @@ object_draft_schematic_food_shared_dish_sausage = SharedDraftSchematicObjectTemp
 ]]
 }
 
-ObjectTemplates:addClientTemplate(object_draft_schematic_food_shared_dish_sausage, "object/draft_schematic/food/shared_dish_sausageiff")
+ObjectTemplates:addClientTemplate(object_draft_schematic_food_shared_dish_sausage, "object/draft_schematic/food/shared_dish_sausage.iff")
 
 object_draft_schematic_food_shared_dish_dustcrepe = SharedDraftSchematicObjectTemplate:new {
 	clientTemplateFileName = "object/draft_schematic/food/shared_dish_dustcrepe.iff"
