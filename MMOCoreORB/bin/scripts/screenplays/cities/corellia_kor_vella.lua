@@ -309,23 +309,47 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		{"farmer_rancher", 60, 21.6, 1.28, 10.04, 180, 3005671, ""},
 
 		--Cantina
-		{"comm_operator", 400, 48.13, 0.1, 2.47, 292, 3005397, ""},
-		{"artisan", 60, 34.4, 0.1, -8.04, 0, 3005398, ""},
-		{"mercenary", 300, 34.4, 0.1, -6.9, 180, 3005398, ""},
-		{"trainer_entertainer", 1, 26.2, -0.9, 10.25, 260, 3005399, ""},
-		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 3005400, ""},
-		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 3005400, ""},
-		{"brawler", 60, 22.6, -0.9, 19.6, 0, 3005401, ""},
-		{"commoner", 60, 21.5, -0.9, 20.7, 135, 3005401, ""},
-		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 3005401, ""},
-		{"farmer", 60, 10.9, -0.9, -13.9, 180, 3005402, ""},
-		{"mercenary", 300, 10.9, -0.9, -15.0, 0, 3005402, ""},
-		{"brawler", 60, -2.4, -0.9, 24.5, 180, 3005405, ""},
-		{"shadowy_figure", 60, -2.4, -0.9, 23.4, 0, 3005405, ""},
-		{"commoner_tatooine", 300, -25.7, -0.5, 10.5, 0, 3005409, ""},
-		{"bounty_hunter", 60, -25.7, -0.5, 11.5, 180, 3005409, ""},
-		{"commoner_naboo", 300, -45.2, 0.1, -20.7, 180, 3005411, ""},
-		{"commoner", 60, -45.2, 0.1, -21.7, 0, 3005411, ""},
+		-- one guy at the entrance
+		{"comm_operator", 400, 48.13, 0.1, 2.47, 202, 3005397, "calm"},
+		-- Entrance walk way closet to bar 2 people talking 
+		{"artisan", 60, 34.4, 0.1, -8.04, 0, 3005398, "worried"},
+		{"mercenary", 300, 34.4, 0.1, -6.9, 180, 3005398, "angry"},
+		-- Corner Music Guys By Door
+		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,3005399, "themepark_music_3"},
+		{"figrin_dan",60,25.69,-0.894992,9.4,-40,3005399, "themepark_music_3"},
+	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,3005399, "themepark_music_1"},
+		-- 4 commoners standing next to bar right front 
+		{"commoner_naboo",60,3.11,0,5.4,161.005,3005399, "bored"},
+		{"commoner_naboo",60,1.11,0,5.4,330.024,3005399, "npc_standing_drinking"},
+		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3005399, "npc_standing_drinking"},
+		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3005399, "npc_standing_drinking"},
+		-- 4 commoners standing next to bar right front 
+		{"commoner_naboo",60,3.11,0,5.4,161.005,3005399, "bored"},
+		{"commoner_naboo",60,1.11,0,5.4,330.024,3005399, "npc_standing_drinking"},
+		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3005399, "npc_standing_drinking"},
+		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3005399, "npc_standing_drinking"},
+        -- Far right cell nearest to door trainer_entertainer 
+		{"trainer_entertainer", 1, 15, -0.9, 20, 170, 3005401, "happy"},
+		-- Far left cell nearest to door 2 people talking
+		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 3005400, "conversation"},
+		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 3005400, "conversation"},
+		-- 3 people talking far right cell closest to the door
+		{"brawler", 60, 22.6, -0.9, 19.6, 0, 3005401, "npc_consoling"},
+		{"commoner", 60, 21.5, -0.9, 20.7, 135, 3005401, "sad"},
+		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 3005401, "npc_consoling"},
+		-- far left middle cell 2 guys talking around the corner
+		{"farmer", 60, 10.9, -0.9, -13.9, 180, 3005402, "conversation"},
+		{"mercenary", 300, 10.9, -0.9, -15.0, 0, 3005402, "conversation"},
+		-- 2 people talking far right rear corner cell
+		{"brawler", 60, -2.4, -0.9, 24.5, 180, 3005405, "conversation"},
+		{"shadowy_figure", 60, -2.4, -0.9, 23.4, 0, 3005405, "conversation"},
+		-- 2 people talking far right back behind bar
+		{"commoner_tatooine", 300, -25.7, -0.5, 10.5, 0, 3005409, "conversation"},
+		{"bounty_hunter", 60, -25.7, -0.5, 11.5, 180, 3005409, "conversation"},
+		-- 2 people talking very left back behind the bar
+		{"commoner_naboo", 300, -45.2, 0.1, -20.7, 180, 3005411, "conversation"},
+		{"commoner", 60, -45.2, 0.1, -21.7, 0, 3005411, "conversation"},
+		
 
 		--Guild Hall (-3435,3196, ""},
 		{"trainer_tailor", 0, 11, 1.1, -14, 0, 2955415, ""},

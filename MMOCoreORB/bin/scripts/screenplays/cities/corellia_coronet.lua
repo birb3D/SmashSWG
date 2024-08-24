@@ -220,11 +220,10 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		-- Two dudes at entrance
 		{"artisan", 60, 34.4, 0.1, -8.04, 0, 8105495, ""},
 		{"pilot", 300, 34.4, 0.1, -6.9, 180, 8105495, ""},
-		-- 3 People Talking
+		-- 3 People Talking far left side of bar center aisle 
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,8105496, "conversation"},
 		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,8105496, "conversation"},
 		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,8105496, "conversation"},
-
 		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,8105496, "conversation"},
 		-- Two people talking
 		{"businessman",60,-7.91375,-0.894992,-4.88587,179.995,8105496, "conversation"},
@@ -239,7 +238,7 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,8105496, "themepark_music_3"},
 		{"figrin_dan",60,25.69,-0.894992,9.4,-40,8105496, "themepark_music_3"},
 	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,8105496, "themepark_music_1"},
-		-- Around Bar
+		-- 4 people around bar right front side
 	    {"commoner_naboo",60,3.11,0,5.4,161.005,8105496, "bored"},
 		{"commoner_naboo",60,1.11,0,5.4,330.024,8105496, "npc_standing_drinking"},
 		{"commoner_naboo",60,-3.11,0,5.4,16.6733,8105496, "npc_standing_drinking"},
