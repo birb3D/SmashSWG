@@ -101,20 +101,27 @@ CorelliaBelaVistalScreenPlay = CityScreenPlay:new {
 		{"surgical_droid_21b",60,3.1,0.1,11.5,0,2365903, "neutral"},
 
 		--Cantina
-		{"noble", 60, 5.80982, -0.894992, -5.41349, 248.205, 3375355, ""},
-		{"businessman", 60, -10.2935, -0.895782, 7.13264, 339.313, 3375355, ""},
-
-
+		-- noble left side corner
+		{"noble", 60, 5.80982, -0.894992, -5.41349, 248.205, 3375355, "worried"},
+		-- businessman far right corner of bar
+		{"businessman", 60, -10.2935, -0.895782, 7.13264, 339.313, 3375355, "angry"},
+		-- 4 commoners standing next to bar right front 
 		{"commoner_naboo",60,3.11,0,5.4,161.005,3375355, "bored"},
 		{"commoner_naboo",60,1.11,0,5.4,330.024,3375355, "npc_standing_drinking"},
 		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3375355, "npc_standing_drinking"},
-		{"commoner_naboo",60,16.1,-0.9,4.1,340,3375355, "conversation"},
 		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3375355, "npc_standing_drinking"},
+		-- commoner standing in the middle of the floor near entrance
+		{"commoner_naboo",60,16.1,-0.9,4.1,340,3375355, "conversation"},
+		-- 2 Commoners on the left side of the bar
 		{"commoner_tatooine",60,1.99,-0.894992,-8.44,325.01,3375355, "conversation"},
 		{"commoner_tatooine",60,1.19,-0.894992,-7.63,152.004,3375355, "conversation"},
-
+		-- 2 patron_chiss left side against the bar
 		{"patron_chiss",60,3.62,-0.894992,-4.77,184.005,3375355, "sad"},
 		{"patron_chiss",60,1.74,-0.894992,-4.91,95.0028,3375355, "npc_consoling"},
+		-- 3 music guys by the door 
+		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,3375355, "themepark_music_3"},
+		{"figrin_dan",60,25.69,-0.894992,9.4,-40,3375355, "themepark_music_3"},
+	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,3375355, "themepark_music_1"},
 
 
 		--Guild Hall 6857 -5783
