@@ -221,9 +221,9 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"businessman",60,0.978477,-0.894992,21.4841,311.517,8105500, ""},
 		{"rebel_recruiter",60,-28.3633,-0.894984,0.335875,171.796,8105504, ""},
 		{"patron",60,-4.11,-0.894992,5.4,26.8951,8105496, "happy"},
-		{"doikk_nats",60,24.32,-0.894992,6.47,224.0013,8105496, "themepark_music_3"},
-		{"figrin_dan",60,25.69,-0.894992,4.4,130.0015,8105496, "themepark_music_3"},
-		{"nalan_cheel",60,22.54,-0.894992,7.13,118.0011,8105496, "themepark_music_1"},
+		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,8105496, "themepark_music_3"},
+		{"figrin_dan",60,25.69,-0.894992,9.4,210.0015,8105496, "themepark_music_3"},
+		{"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,8105496, "themepark_music_1"},
 
 		-- Guild Hall -243 -4389
 		{"trainer_brawler",0,-11,1.13306,-14,0,1855508, ""},
