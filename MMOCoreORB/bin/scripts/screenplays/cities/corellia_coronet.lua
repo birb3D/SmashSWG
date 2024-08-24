@@ -119,7 +119,14 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		
 		--Cantina
 		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, 8105496, "", false},
-		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 8105496, "", false},
+		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 8105496, "playful", false},
+		{"cantina_3", "patrolNpc", -5.11,-0.894992,6.8, 300, 8105496, "conversation", false},
+		{"cantina_4", "patrolNpc", -7.2,-0.894992,-6, 300, 8105496, "conversation", false},
+		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 8105496, "happy", false},
+		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 8105496, "happy", false},
+		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 8105494, "playful", false},
+		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 8105494, "playful", false},
+		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 8105494, "playful", false},
 	},
 
 	patrolPoints = {
@@ -144,7 +151,15 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		npc_10 = {{69, 28, -4568, 0, false}, {43, 28, -4551, 0, true}, {0, 28, -4518, 0, false}, {43, 28, -4551, 0, true}},
 		
 		cantina_1 = {{7, -0.894992 , 7.2, 8105496, false}, {16, -0.894992 , 0, 8105496, false}, {5, -0.894992 , -7, 8105496, false}, {16, -0.894992 , 0, 8105496, false}},
-		cantina_2 = {{5, -0.894992 , -9, 8105496, false}, {3, -0.894992 , -6, 8105496, false}, {12, -0.894992 , -6, 8105496, false}, {10, -0.894992 , -11, 8105496, false}},
+		cantina_2 = {{5, -0.894992 , -9, 8105496, false}, {3, -0.894992 , -5.4, 8105496, false}, {12, -0.894992 , -6, 8105496, false}, {10, -0.894992 , -11, 8105496, false}},
+		cantina_3 = {{-5.11,-0.894992,5, 8105496, false}, {-5.11,-0.894992,6.4, 8105496, false}, {0,-0.894992,6.4, 8105496, false}, {0,-0.894992,5, 8105496, 8105496, true}, {-1.51,-0.894992,6.4, 8105496, false}, {-7.11,-0.894992,6.4, 8105496, false}},
+		cantina_4 = {{-7.2,-0.894992,-5, 8105496, false}, {-7.2,-0.894992,-6.4, 8105496, false}, {-4.3,-0.894992,-6.4, 8105496, false}, {-4.3,-0.894992,-5, 8105496, 8105496, false}, {-4.3,-0.894992,-6.4, 8105496, false}, {-7.2,-0.894992,-6.4, 8105496, false}, {-8.2,-0.894992,-11.4, 8105496, false}},
+		cantina_5 = {{23.32,-0.894992,10.47, 8105496, false}, {21,-0.894992,-8.47, 8105496, false}, {20, -0.894992 , -1.4, 8105496, true}},
+		cantina_6 = {{-2.11,-0.894992,7, 8105496, true}, {23,-0.894992,11, 8105496, false}, {19.5, -0.9, 18.7, 8105498, false}},
+		cantina_7 = {{39.13, 0.1, 1.27, 8105494, true}, {14, -0.894992 , 0, 8105496, false}},
+		cantina_8 = {{42.73, 0.1, 2.47, 8105494, true}, {14.3, -0.894992 , 2, 8105496, false}},
+		cantina_9 = {{41.73, 0.1, 0, 8105494, true}, {14, -0.894992 , -1.2, 8105496, false}},
+
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
@@ -218,8 +233,8 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 
 		-- Cantina
 		-- Two dudes at entrance
-		{"artisan", 60, 34.4, 0.1, -8.04, 0, 8105495, ""},
-		{"pilot", 300, 34.4, 0.1, -6.9, 180, 8105495, ""},
+		{"artisan", 60, 34.4, 0.1, -9.04, 0, 8105495, ""},
+		{"pilot", 300, 34.4, 0.1, -7.9, 180, 8105495, ""},
 		-- 3 People Talking far left side of bar center aisle 
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,8105496, "conversation"},
 		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,8105496, "conversation"},
