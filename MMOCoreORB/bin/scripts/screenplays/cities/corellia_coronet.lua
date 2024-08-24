@@ -116,6 +116,9 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"npc_8", "patrolNpc", -350, 28, -4287, 88, 0, "", false},
 		{"npc_9", "patrolNpc", -357, 28, -4267, 39, 0, "", false},
 		{"npc_10", "patrolNpc", 69, 28, -4568, 100, 0, "conversation", false},
+		
+		--Cantina
+		{"cantina", "r3", 3.5, -0.894992 , 7.2, 100, 8105496, "", false},
 	},
 
 	patrolPoints = {
@@ -138,6 +141,8 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		npc_8 = {{-350, 28, -4287, 0, false}, {-343, 28, -4302, 0, false}, {-328, 28, -4322, 0, true}, {-426, 28, -4423, 0, false}, {-328, 28, -4322, 0, true}},
 		npc_9 = {{-357, 28, -4267, 0, true}, {-410, 28, -4238, 0, true}, {-396, 28, -4209, 0, true}},
 		npc_10 = {{69, 28, -4568, 0, false}, {43, 28, -4551, 0, true}, {0, 28, -4518, 0, false}, {43, 28, -4551, 0, true}},
+		
+		cantina_1 = {{3.5, -0.894992 , 7.2, 8105496, false}, {16, -0.894992 , 0, 8105496, true}, {5, -0.894992 , -7, 8105496, false}, {16, -0.894992 , 0, 8105496, true}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
@@ -225,7 +230,7 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,8105496, "conversation"},
 		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,8105496, "conversation"},
 		{"mercenary",300,-5.02826,-0.894991,-21.3375,60.6357,8105501, "calm"},
-		{"businessman",60,0.978477,-0.894992,21.4841,311.517,8105500, ""},
+		{"businessman",60,0.978477,-0.894992,21.4841,131,8105500, ""},
 		{"rebel_recruiter",60,-28.3633,-0.894984,0.335875,171.796,8105504, ""},
 		{"patron",60,-4.11,-0.894992,5.4,26.8951,8105496, "happy"},
 		-- Corner Music Guys By Door
