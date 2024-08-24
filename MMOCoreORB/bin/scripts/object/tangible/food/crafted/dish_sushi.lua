@@ -52,10 +52,8 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 
 	fillingMin = 17,
 	fillingMax = 10,
-
 	flavorMin = 540,
 	flavorMax = 2080,
-
 	nutritionMin = 400,
 	nutritionMax = 800,
 	quantityMin = 6,
@@ -63,8 +61,8 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 
 	modifiers = { "constitution", 0, "stamina", 0 },
 
-	buffName = "food.drink_breath_of_heaven",
-	buffCRC = 0xF87AA911,
+	buffName = "food.dish_vercupti_of_agazza_boleruuee",
+	buffCRC = 0x50AFB0A1,
 	speciesRestriction = "",
 
 
