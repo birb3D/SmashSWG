@@ -224,35 +224,37 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,8105496, "conversation"},
 		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,8105496, "conversation"},
 		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,8105496, "conversation"},
-		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,8105496, "conversation"},
-		-- Two people talking
+		-- Two people talking far left next to bar
 		{"businessman",60,-7.91375,-0.894992,-4.88587,179.995,8105496, "conversation"},
 		{"corellia_times_reporter",300,-7.91375,-0.894992,-5.88587,0,8105496, "conversation"},
-		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,8105496, "conversation"},
+		-- 2 people talking front right center right of bar
+		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,8105496, "conversation"},
 		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,8105496, "conversation"},
-		{"mercenary",300,-5.02826,-0.894991,-21.3375,-20,8105501, "calm"},
-		{"businessman",60,0.978477,-0.894992,21.4841,311.517,8105500, ""},
-		{"rebel_recruiter",60,-28.3633,-0.894984,0.335875,171.796,8105504, ""},
-		{"patron",60,-4.11,-0.894992,5.4,26.8951,8105496, "happy"},
 		-- Corner Music Guys By Door
 		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,8105496, "themepark_music_3"},
 		{"figrin_dan",60,25.69,-0.894992,9.4,-40,8105496, "themepark_music_3"},
 	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,8105496, "themepark_music_1"},
-		-- 4 people around bar right front side
+		-- 5 people around bar right front side to center back
 	    {"commoner_naboo",60,3.11,0,5.4,161.005,8105496, "bored"},
 		{"commoner_naboo",60,1.11,0,5.4,330.024,8105496, "npc_standing_drinking"},
 		{"commoner_naboo",60,-3.11,0,5.4,16.6733,8105496, "npc_standing_drinking"},
-		{"commoner_naboo",60,16.1,-0.9,4.1,340,8105496, "conversation"},
 		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,8105496, "npc_standing_drinking"},
+		{"patron",60,-4.11,-0.894992,5.4,26.8951,8105496, "happy"},
+		-- one person center front bar slightly to the right
+		{"commoner_naboo",60,16.1,-0.9,4.1,340,8105496, "conversation"},
+		-- 2 people talking left center of bar
 		{"commoner_tatooine",60,1.99,-0.894992,-8.44,325.01,8105496, "conversation"},
 		{"commoner_tatooine",60,1.19,-0.894992,-7.63,152.004,8105496, "conversation"},
-		-- 3 people first room on right
-		{"brawler", 60, 22.6, -0.9, 19.6, 0, 8105498, ""},
-		{"commoner", 60, 21.5, -0.9, 20.7, 135, 8105498, ""},
-		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 8105498, ""},
-
-
-
+		-- 3 people far right room nearest to door
+		{"brawler", 60, 22.6, -0.9, 19.6, 0, 8105498, "conversation"},
+		{"commoner", 60, 21.5, -0.9, 20.7, 135, 8105498, "conversation"},
+		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 8105498, "happy"},
+		--1 person far right middle cell
+		{"businessman",60,0.978477,-0.894992,21.4841,311.517,8105500, "angry"},
+		-- 1 person far left back cell 
+		{"mercenary",300,-5.02826,-0.894991,-21.3375,-20,8105501, "calm"},
+		--junk dealer in back question mark?
+		{"rebel_recruiter",60,-28.3633,-0.894984,0.335875,171.796,8105504, "happy"},
 
 
 		-- Guild Hall -243 -4389

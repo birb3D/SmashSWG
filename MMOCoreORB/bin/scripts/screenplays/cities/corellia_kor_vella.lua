@@ -328,11 +328,11 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		{"commoner_naboo",60,1.11,0,5.4,330.024,3005399, "npc_standing_drinking"},
 		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3005399, "npc_standing_drinking"},
 		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3005399, "npc_standing_drinking"},
-        -- Far right cell nearest to door trainer_entertainer 
-		{"trainer_entertainer", 1, 15, -0.9, 20, 170, 3005401, "happy"},
 		-- Far left cell nearest to door 2 people talking
 		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 3005400, "conversation"},
 		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 3005400, "conversation"},
+        -- Far right cell nearest to door trainer_entertainer 
+		{"trainer_entertainer", 1, 15, -0.9, 20, 170, 3005401, "happy"},
 		-- 3 people talking far right cell closest to the door
 		{"brawler", 60, 22.6, -0.9, 19.6, 0, 3005401, "npc_consoling"},
 		{"commoner", 60, 21.5, -0.9, 20.7, 135, 3005401, "sad"},
