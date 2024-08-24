@@ -323,11 +323,6 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		{"commoner_naboo",60,1.11,0,5.4,330.024,3005399, "npc_standing_drinking"},
 		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3005399, "npc_standing_drinking"},
 		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3005399, "npc_standing_drinking"},
-		-- 4 commoners standing next to bar right front 
-		{"commoner_naboo",60,3.11,0,5.4,161.005,3005399, "bored"},
-		{"commoner_naboo",60,1.11,0,5.4,330.024,3005399, "npc_standing_drinking"},
-		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3005399, "npc_standing_drinking"},
-		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3005399, "npc_standing_drinking"},
 		-- 3 People Talking far left side of bar center aisle 
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,3005399, "conversation"},
 		{"pilot",60,4.71201,-0.894992,-9.83418,360.011,3005399, "conversation"},
