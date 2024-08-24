@@ -223,7 +223,27 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"patron",60,-4.11,-0.894992,5.4,26.8951,8105496, "happy"},
 		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,8105496, "themepark_music_3"},
 		{"figrin_dan",60,25.69,-0.894992,9.4,210.0015,8105496, "themepark_music_3"},
-		{"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,8105496, "themepark_music_1"},
+	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,8105496, "themepark_music_1"},
+
+
+		{"commoner_naboo",60,3.11,0,5.4,161.005,8105496, "bored"},
+		{"commoner_naboo",60,1.11,0,5.4,330.024,8105496, "npc_standing_drinking"},
+		{"commoner_naboo",60,-3.11,0,5.4,16.6733,8105496, "npc_standing_drinking"},
+		{"commoner_naboo",60,16.1,-0.9,4.1,340,8105496, "conversation"},
+		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,8105496, "npc_standing_drinking"},
+		{"commoner_tatooine",60,1.99,-0.894992,-8.44,325.01,8105496, "conversation"},
+		{"commoner_tatooine",60,1.19,-0.894992,-7.63,152.004,8105496, "conversation"},
+
+
+
+
+		{"doikk_nats",60,2.32,-0.894992,-16.47,44.0013,8105499, "themepark_music_3"},
+		{"figrin_dan",60,3.69,-0.894992,-14.4,50.0015,8105499, "themepark_music_3"},
+		{"nalan_cheel",60,0.54,-0.894992,-17.13,38.0011,8105499, "themepark_music_1"},
+		{"tech_mor",60,4.11,-0.894992,-17.07,45.0013,8105499, "themepark_music_2"},
+		{"tedn_dahai",60,1.29,-0.894992,-15.18,70.0021,8105499, "themepark_music_3"},
+
+
 
 		-- Guild Hall -243 -4389
 		{"trainer_brawler",0,-11,1.13306,-14,0,1855508, ""},

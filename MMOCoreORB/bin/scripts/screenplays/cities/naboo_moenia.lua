@@ -98,6 +98,15 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"rebel_recruiter",0,-29,-0.89,-1.2,74,119, ""},
 		{"informant_npc_lvl_2",0,-2.2226,-0.894992,5.90785,90,111, ""},
 
+		{"dorn_gestros",60,-6.00754,-0.894992,-5.35219,231.068,111, "calm"},
+		{"medic",60,12.1732,-0.894991,3.93609,180.003,111, "conversation"},
+		{"sullustan_male",300,12.1732,-0.894992,2.93609,360.011,111, "conversation"},
+		{"bounty_hunter",300,2.1656,-0.894992,-15.9672,360.011,114, "calm"},
+		{"contractor",60,2.1656,-0.894992,-14.9672,180.001,114, "conversation"},
+		{"commoner_tatooine",60,-20.6545,-0.894989,25.0112,0,120, "conversation"},
+		{"noble",300,-20.6545,-0.894989,26.0112,180.01,120, "conversation"},
+		{"da_la_socuna",60,-29.7168,-0.519991,7.77728,54.7476,121, "conversation"},
+
 		--Hotel
 		{"bartender",60,20.2,1.6,12.3,-180,1717470, "conversation"},
 

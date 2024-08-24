@@ -104,6 +104,19 @@ CorelliaBelaVistalScreenPlay = CityScreenPlay:new {
 		{"noble", 60, 5.80982, -0.894992, -5.41349, 248.205, 3375355, ""},
 		{"businessman", 60, -10.2935, -0.895782, 7.13264, 339.313, 3375355, ""},
 
+
+		{"commoner_naboo",60,3.11,0,5.4,161.005,3375355, "bored"},
+		{"commoner_naboo",60,1.11,0,5.4,330.024,3375355, "npc_standing_drinking"},
+		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3375355, "npc_standing_drinking"},
+		{"commoner_naboo",60,16.1,-0.9,4.1,340,3375355, "conversation"},
+		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3375355, "npc_standing_drinking"},
+		{"commoner_tatooine",60,1.99,-0.894992,-8.44,325.01,3375355, "conversation"},
+		{"commoner_tatooine",60,1.19,-0.894992,-7.63,152.004,3375355, "conversation"},
+
+		{"patron_chiss",60,3.62,-0.894992,-4.77,184.005,3375355, "sad"},
+		{"patron_chiss",60,1.74,-0.894992,-4.91,95.0028,3375355, "npc_consoling"},
+
+
 		--Guild Hall 6857 -5783
 		{"businessman", 60, 3.32, 1.13306, -8.49, 228.007, 2365769, ""},
 		{"brawler", 300, -14.01, 1.13306, -8.53, 120.004, 2365770, ""},
