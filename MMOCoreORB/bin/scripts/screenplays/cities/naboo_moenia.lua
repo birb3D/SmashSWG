@@ -95,16 +95,34 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"junk_dealer", 0, 4810.44, 4.17, -4663.38, 112, 0, ""},
 
 		--Cantina
-		{"rebel_recruiter",0,-29,-0.89,-1.2,74,119, ""},
 		{"informant_npc_lvl_2",0,-2.2226,-0.894992,5.90785,90,111, ""},
-
+		-- 1 person far left side of the bar in the back
 		{"dorn_gestros",60,-6.00754,-0.894992,-5.35219,231.068,111, "calm"},
+		-- 2 people talking in front of the bar slightly right
 		{"medic",60,12.1732,-0.894991,3.93609,180.003,111, "conversation"},
 		{"sullustan_male",300,12.1732,-0.894992,2.93609,360.011,111, "conversation"},
+		-- 4 commoners standing next to bar right front 
+		{"farmer_rancher",60,3.11,0,5.4,161.005,111, "bored"},
+		{"artisan",60,1.11,0,5.4,330.024,111, "npc_standing_drinking"},
+		{"info_broker",60,-3.11,0,5.4,16.6733,111, "npc_standing_drinking"},
+		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,111, "npc_standing_drinking"},
+		-- Corner Music Guys By Door
+		{"doikk_nats",60,20.32,-0.894992,3.47,200.0013,111, "themepark_music_3"},
+		{"figrin_dan",60,21.69,-0.894992,0.4,-40,111, "themepark_music_3"},
+	    {"nalan_cheel",60,18.54,-0.894992,-2.13,130.0011,111, "themepark_music_1"},
+		-- 5 people around bar right front side to center back
+	    {"commoner_naboo",60,3.11,0,5.4,161.005,111, "bored"},
+		{"commoner_naboo",60,1.11,0,5.4,330.024,111, "npc_standing_drinking"},
+		{"commoner_naboo",60,-3.11,0,5.4,16.6733,111, "npc_standing_drinking"},
+		-- 2 people talking left middle cell
 		{"bounty_hunter",300,2.1656,-0.894992,-15.9672,360.011,114, "calm"},
 		{"contractor",60,2.1656,-0.894992,-14.9672,180.001,114, "conversation"},
+		-- Borvo's Guard in right room just behind bar
+		{"rebel_recruiter",0,-29,-0.89,-1.2,74,119, ""},
+		-- 2 people talking in right room just behind the bar
 		{"commoner_tatooine",60,-20.6545,-0.894989,25.0112,0,120, "conversation"},
 		{"noble",300,-20.6545,-0.894989,26.0112,180.01,120, "conversation"},
+		-- Pilot trainer very last roomn in the right behind the bar
 		{"da_la_socuna",60,-29.7168,-0.519991,7.77728,54.7476,121, "conversation"},
 
 		--Hotel
