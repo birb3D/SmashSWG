@@ -178,7 +178,6 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		starport_walk_3 = {{-4.61669,0.639424,50.7263,1855675, false}, {-54, 28, -4697, 0, false}, {-40, 28, -4723, 0, false}},
 		starport_walk_4 = {{-0.61669,0.639424,50.7263,1855675, false}, {-56, 28, -4698, 0, false}, {-40, 28, -4724, 0, false}},
 
-		37.163,0.639417,40.7061,180.01,1855678
 
 	},
 
