@@ -112,11 +112,14 @@ TatooineMosEisleyScreenPlay = CityScreenPlay:new {
 		{"guillo_parootchie", 0, 3528.1, 5.0, -4799.4, 172, 0, ""},
 
 		--Cantina
-		{"commoner_old",60,36,0.1,0.7,310,1082876, "npc_sitting_chair"},
+		-- 3 people sitting together in left corner just before entering bar
 		{"commoner_tatooine",60,29.6,0.1,-7.4,71,1082876, "npc_sitting_chair"},
 		{"commoner_tatooine",60,30.9,0.1,-8.8,10,1082876, "npc_sitting_chair"},
 		{"commoner_tatooine",60,29.4,0.1,-6.1,107,1082876, "npc_sitting_chair"},
+		-- 2 people sitting facing main entrance to bar
+		{"commoner_old",60,36,0.1,0.7,310,1082876, "npc_sitting_chair"},
 		{"commoner_tatooine",60,35.7,0.1,3.1,180,1082876, "npc_sitting_table"},
+		
 		{"businessman",60,10.65,-0.894992,1.91,330,1082877, "npc_standing_drinking"},
 		{"businessman",60,-4.11,-0.894992,5.4,26.8951,1082877, "happy"},
 		{"chadra_fan_female",60,10.43,-0.894992,-1.47,123.102,1082877, "worried"},
