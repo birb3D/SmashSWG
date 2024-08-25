@@ -192,7 +192,7 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"patron",60,-4.11,-0.894992,5.4,26.8951,1256058, "happy"},
 		-- 2 people talking front right center right of bar
 		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,1256058, "conversation"},
-		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,1256058, "conversation"},*
+		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,1256058, "conversation"},
 		-- Corner Music Guys By Door
 		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,1256058, "themepark_music_3"},
 		{"figrin_dan",60,25.69,-0.894992,9.4,-40,1256058, "themepark_music_3"},
