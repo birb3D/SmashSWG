@@ -31,6 +31,17 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"npc_1", "patrolNpc", 4795, 4, -4722, 45, 0, "", false},
 		{"npc_2", "patrolNpc", 4825, 4, -4679, 180, 0, "", false},
 		{"npc_3", "patrolNpc", 4852, 4, -4677, 255, 0, "", false},
+
+		--Cantina
+		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, 111, "", false},
+		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 111, "playful", false},
+		{"cantina_3", "surgical_1", -5.11,-0.894992,6.8, 300, 111, "conversation", false},
+		{"cantina_4", "patrolNpc", -7.2,-0.894992,-6, 300, 111, "conversation", false},
+		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 111, "happy", false},
+		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 111, "happy", false},
+		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 109, "playful", false},
+		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 109, "playful", false},
+		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 109, "playful", false},
 	},
 
 	patrolPoints = {
@@ -38,6 +49,16 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		npc_1 = {{4795, 4, -4722, 0, true}, {4770, 4, -4731, 0, true}, {4759, 4, -4750, 0, true},  {4751, 4, -4730, 0, true}},
 		npc_2 = {{4825, 4, -4679, 0, true}, {4819, 4, -4658, 0, true}, {4831, 4, -4669, 0, true}, {4831, 4, -4649, 0, true}},
 		npc_3 = {{4852, 4, -4677, 0, true}, {4849, 4, -4711, 0, true}, {4840, 4, -4699, 0, true}, {4846, 4, -4672, 0, true}},
+
+		cantina_1 = {{7, -0.894992 , 7.2, 111, false}, {16, -0.894992 , 0, 111, false}, {5, -0.894992 , -7, 111, false}, {16, -0.894992 , 0, 111, false}},
+		cantina_2 = {{5, -0.894992 , -9, 111, false}, {3, -0.894992 , -5.4, 111, false}, {12, -0.894992 , -6, 111, false}, {10, -0.894992 , -11, 111, false}},
+		cantina_3 = {{-5.11,-0.894992,5, 111, false}, {-5.11,-0.894992,6.4, 111, false}, {0,-0.894992,6.4, 111, false}, {0,-0.894992,5, 111, 111, true}, {-1.51,-0.894992,6.4, 111, false}, {-7.11,-0.894992,6.4, 111, false}},
+		cantina_4 = {{-7.2,-0.894992,-5, 111, false}, {-7.2,-0.894992,-6.4, 111, false}, {-4.3,-0.894992,-6.4, 111, false}, {-4.3,-0.894992,-5, 111, 111, false}, {-4.3,-0.894992,-6.4, 111, false}, {-7.2,-0.894992,-6.4, 111, false}, {-8.2,-0.894992,-11.4, 111, false}},
+		cantina_5 = {{23.32,-0.894992,10.47, 111, false}, {21,-0.894992,-8.47, 111, false}, {20, -0.894992 , -1.4, 111, true}},
+		cantina_6 = {{-2.11,-0.894992,7, 111, true}, {23,-0.894992,11, 111, false}, {19.5, -0.9, 18.7, 8105498, false}},
+		cantina_7 = {{16, -0.894992 , 0, 111, false}, {39.13, 0.1, 1.27, 109, true}},
+		cantina_8 = {{16.3, -0.894992 , 2, 111, false}, {42.73, 0.1, 2.47, 109, true}},
+		cantina_9 = {{16, -0.894992 , -1.2, 111, false}, {41.73, 0.1, 0, 109, true}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_naboo", "commoner_old"},
@@ -95,6 +116,9 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"junk_dealer", 0, 4810.44, 4.17, -4663.38, 112, 0, ""},
 
 		--Cantina
+		-- 3 people sitting together in left corner just before entering bar
+		{"commoner_tatooine",60,30.9,0.1,-8.8,10,110, "npc_sitting_chair"},
+		{"commoner_tatooine",60,29.4,0.1,-6.1,107,110, "npc_sitting_chair"},
 		{"informant_npc_lvl_2",0,-2.2226,-0.894992,5.90785,90,111, "happy"},
 		-- 1 person far left side of the bar in the back
 		{"dorn_gestros",60,-6.00754,-0.894992,-5.35219,231.068,111, "calm"},
