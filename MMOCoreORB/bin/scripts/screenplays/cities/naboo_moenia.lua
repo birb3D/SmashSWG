@@ -138,6 +138,9 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,111, "conversation"},
 		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,111, "conversation"},
 		{"entertainer",300,4.71201,-0.894992,-8.73417,180.01,111, "conversation"},
+		-- 2 patron_chiss left side against the bar
+		{"patron_chiss",60,3.62,-0.894992,-4.77,184.005,111, "sad"},
+		{"patron_chiss",60,1.74,-0.894992,-4.91,95.0028,111, "npc_consoling"},
 		-- Far left cell nearest to door 2 people talking
 		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 112, "conversation"},
 		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 112, "conversation"},
