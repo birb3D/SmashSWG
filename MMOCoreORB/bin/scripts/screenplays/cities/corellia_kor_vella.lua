@@ -326,7 +326,7 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		-- 3 People Talking far left side of bar center aisle 
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,3005399, "conversation"},
 		{"pilot",60,4.71201,-0.894992,-9.83418,360.011,3005399, "conversation"},
-		{"ithorian_female",300,4.71201,-0.894992,-8.73417,180.01,3005399, "conversation"},
+		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,3005399, "conversation"},
 		-- Far left cell nearest to door 2 people talking
 		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 3005400, "conversation"},
 		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 3005400, "conversation"},
