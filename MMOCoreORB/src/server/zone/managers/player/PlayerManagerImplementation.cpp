@@ -4912,8 +4912,10 @@ bool PlayerManagerImplementation::offerTeaching(CreatureObject* teacher, Creatur
 	String sklname = sidman->getStringId(String("@skl_n:" + skill->getSkillName()).hashCode()).toString();
 	String expname = sidman->getStringId(String("@exp_n:" + skill->getXpType()).hashCode()).toString();
 
+	int money = floor(skill->getMoneyRequired() / 5.0f);
+
 	StringBuffer prompt;
-	prompt << teacher->getDisplayedName()
+	prompt << "[" << money << "cr] " << teacher->getDisplayedName()
 															<< " has offered to teach you " << sklname << " (" << skill->getXpCost()
 															<< " " << expname  << " experience cost).";
 
@@ -4956,6 +4958,17 @@ bool PlayerManagerImplementation::acceptTeachingOffer(CreatureObject* teacher, C
 		return false;
 	}
 
+	// get student money
+	int moneyRequired = floor(skill->getMoneyRequired() / 5.0f);
+	int currentMoney = student->getCashCredits();
+
+	if(currentMoney < moneyRequired) // has enough credits?
+	{
+		student->sendSystemMessage("@gambling/default_interface:player_broke");
+		teacher->sendSystemMessage("@teaching:teaching_failed"); //Teaching failed.
+		return false;
+	}
+
 	if (teacher->hasSkill(skill->getSkillName()) && skillManager->awardSkill(skill->getSkillName(), student, true, false, false)) {
 		StringIdChatParameter params("teaching", "student_skill_learned"); //You learn %TO from %TT.
 		params.setTO("@skl_n:" + skill->getSkillName());
@@ -4965,6 +4978,9 @@ bool PlayerManagerImplementation::acceptTeachingOffer(CreatureObject* teacher, C
 		params.setStringId("teaching", "teacher_skill_learned"); //%TT learns %TO from you.
 		params.setTT(student->getDisplayedName());
 		teacher->sendSystemMessage(params);
+
+		// Remove money
+		student->subtractCashCredits(moneyRequired);
 
 		if (skillManager->isApprenticeshipEnabled() && !skill->getSkillName().endsWith("novice")) {
 			int exp = 10 + (skill->getTotalChildren() * 10);
