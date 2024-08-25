@@ -221,8 +221,8 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"brawler",60,16.2045,2.25,19.3968,135.003,1855477, "conversation"},
 		{"chiss_female",300,17.3045,2.25,19.3968,180.006,1855477, "conversation"},
 		{"commoner_naboo",60,17.3045,2.25,18.2968,360.011,1855477, "conversation"},
-		{"ral_mundi",60,-138.975,28,-4718.86, 180, 0, ""},
-		{"tarth_jaxx",60,-137.3, 28, -4717.8, 180, 0, ""},
+		--{"ral_mundi",60,-138.975,28,-4718.86, 180, 0, ""},
+		--{"tarth_jaxx",60,-137.3, 28, -4717.8, 180, 0, ""},
 
 		-- Hotel
 		{"corellia_times_investigator",60,7.44572,1.00001,-8.00652,0,1855548, "conversation"},
