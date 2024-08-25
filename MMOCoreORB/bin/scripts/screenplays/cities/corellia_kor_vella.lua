@@ -125,6 +125,17 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		{"npc_9", "patrolNpc", -3378, 86, 3173, 240, 0, "", false},
 		{"npc_10", "patrolNpc", -3351, 86, 3303, 24, 0, "", false},
 		{"npc_11", "patrolNpc", -3572, 70, 3208, 214, 0, "", false},
+
+		--Cantina
+		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, 3005399, "", false},
+		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 3005399, "playful", false},
+		{"cantina_3", "patrolNpc", -5.11,-0.894992,6.8, 300, 3005399, "conversation", false},
+		{"cantina_4", "patrolNpc", -7.2,-0.894992,-6, 300, 3005399, "conversation", false},
+		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 3005399, "happy", false},
+		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 3005399, "happy", false},
+		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 3005397, "playful", false},
+		--{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 3005397, "playful", false},
+		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 3005397, "playful", false},
 	},
 
 	patrolPoints = {
@@ -151,6 +162,16 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		npc_9 = {{-3378, 86, 3173, 0, true}, {-3388, 86, 3163, 0, true}, {-3279, 86, 3114, 0, false}, {-3364, 86, 3151, 0, true}},
 		npc_10 = {{-3351, 86, 3303, 0, true}, {-3367, 86, 3296, 0, true}, {-3354, 86, 3294, 0, true}, {-3343, 86, 3308, 0, true}, {-3350, 86, 3307, 0, true}},
 		npc_11 = {{ -3572, 70, 3208, 0, true}, {-3548, 70, 3219, 0, true}, {-3528, 70, 3233, 0, true}},
+
+		cantina_1 = {{7, -0.894992 , 7.2, 3005399, false}, {16, -0.894992 , 0, 3005399, false}, {5, -0.894992 , -7, 3005399, false}, {16, -0.894992 , 0, 3005399, false}},
+		cantina_2 = {{5, -0.894992 , -9, 3005399, false}, {3, -0.894992 , -5.4, 3005399, false}, {12, -0.894992 , -6, 3005399, false}, {10, -0.894992 , -11, 3005399, false}},
+		cantina_3 = {{-5.11,-0.894992,5, 3005399, false}, {-5.11,-0.894992,6.4, 3005399, false}, {0,-0.894992,6.4, 3005399, false}, {0,-0.894992,5, 3005399, 3005399, true}, {-1.51,-0.894992,6.4, 3005399, false}, {-7.11,-0.894992,6.4, 3005399, false}},
+		cantina_4 = {{-7.2,-0.894992,-5, 3005399, false}, {-7.2,-0.894992,-6.4, 3005399, false}, {-4.3,-0.894992,-6.4, 3005399, false}, {-4.3,-0.894992,-5, 3005399, 3005399, false}, {-4.3,-0.894992,-6.4, 3005399, false}, {-7.2,-0.894992,-6.4, 3005399, false}, {-8.2,-0.894992,-11.4, 3005399, false}},
+		cantina_5 = {{23.32,-0.894992,10.47, 3005399, false}, {21,-0.894992,-8.47, 3005399, false}, {20, -0.894992 , -1.4, 3005399, true}},
+		cantina_6 = {{-2.11,-0.894992,7, 3005399, true}, {23,-0.894992,11, 3005399, false}, {19.5, -0.9, 18.7, 3005401, false}},
+		cantina_7 = {{39.13, 0.1, 1.27, 3005397, true}, {14, -0.894992 , 0, 3005399, false}},
+		cantina_8 = {{42.73, 0.1, 2.47, 3005397, true}, {14.3, -0.894992 , 2, 3005399, false}},
+		cantina_9 = {{41.73, 0.1, 0, 3005397, true}, {14, -0.894992 , -1.2, 3005399, false}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
@@ -327,6 +348,12 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,3005399, "conversation"},
 		{"pilot",60,4.71201,-0.894992,-9.83418,360.011,3005399, "conversation"},
 		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,3005399, "conversation"},
+		-- 2 patron_chiss left side against the bar
+		{"patron_chiss",60,3.62,-0.894992,-4.77,184.005,3005399, "sad"},
+		{"patron_chiss",60,1.74,-0.894992,-4.91,95.0028,3005399, "npc_consoling"},
+		-- 2 people talking front right center right of bar
+		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,3005399, "conversation"},
+		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,3005399, "conversation"},
 		-- Far left cell nearest to door 2 people talking
 		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 3005400, "conversation"},
 		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 3005400, "conversation"},
