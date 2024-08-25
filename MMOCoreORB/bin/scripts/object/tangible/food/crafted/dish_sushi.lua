@@ -50,19 +50,19 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 
 	effectType = 1,
 
-	fillingMin = 17,
-	fillingMax = 10,
+	fillingMin = 50,
+	fillingMax = 20,
 	flavorMin = 540,
 	flavorMax = 2080,
 	nutritionMin = 400,
 	nutritionMax = 800,
-	quantityMin = 6,
-	quantityMax = 10,
+	quantityMin = 2,
+	quantityMax = 6,
 
 	modifiers = { "constitution", 0, "stamina", 0 },
 
-	buffName = "food.dish_vercupti_of_agazza_boleruuee",
-	buffCRC = 0x50AFB0A1,
+	buffName = "food.dish_sushi",
+	buffCRC = 0xFD179243,
 	speciesRestriction = "",
 
 

@@ -48,27 +48,27 @@ object_draft_schematic_food_dish_sausage = object_draft_schematic_food_shared_di
    customObjectName = "Kamino Rolls",
 
    craftingToolTab = 4, -- (See DraftSchematicObjectTemplate.h)
-   complexity = 3, 
+   complexity = 6, 
    size = 1, 
    factoryCrateType = "object/factory/factory_crate_food.iff",
    
-   xpType = "crafting_general", 
-   xp = 50, 
+   xpType = "crafting_food_general", 
+   xp = 120, 
 
-   assemblySkill = "general_assembly", 
-   experimentingSkill = "general_experimentation", 
-   customizationSkill = "clothing_customization", 
+   assemblySkill = "food_assembly", 
+   experimentingSkill = "food_experimentation", 
+   customizationSkill = "food_customization", 
 
    customizationOptions = {},
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
-   ingredientTitleNames = {"flaky_crust", "meaty_core", "additive"},
-   ingredientSlotType = {0, 0, 3},
-   resourceTypes = {"cereal", "meat", "object/tangible/food/crafted/additive/shared_additive_light.iff"},
-   resourceQuantities = {15, 10, 1},
-   contribution = {100, 100, 100},
+   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
+   ingredientTitleNames = {"tough_meat", "hide_strips", "carbosyrup", "additive"},
+   ingredientSlotType = {0, 0, 1, 3},
+   resourceTypes = { "meat_carnivore", "hide_leathery", "object/tangible/component/food/shared_ingredient_carbosyrup.iff", "object/tangible/food/crafted/additive/shared_additive_light.iff"},
+   resourceQuantities = {20, 4, 1, 1},
+   contribution = {100, 100, 100, 100},
 
 
    targetTemplate = "object/tangible/food/crafted/dish_sausage.iff",

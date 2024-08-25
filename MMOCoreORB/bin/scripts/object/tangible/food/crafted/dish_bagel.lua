@@ -50,21 +50,19 @@ object_tangible_food_crafted_dish_bagel = object_tangible_food_crafted_shared_di
 
 	effectType = 1,
 
-	fillingMin = 17,
-	fillingMax = 10,
-
+	fillingMin = 50,
+	fillingMax = 20,
 	flavorMin = 540,
 	flavorMax = 2080,
-
-	nutritionMin = 400,
-	nutritionMax = 800,
-	quantityMin = 6,
-	quantityMax = 10,
+	nutritionMin = 200,
+	nutritionMax = 500,
+	quantityMin = 2,
+	quantityMax = 6,
 
 	modifiers = { "constitution", 0, "stamina", 0 },
 
-	buffName = "food.drink_breath_of_heaven",
-	buffCRC = 0xF87AA911,
+	buffName = "food.dish_bagel",
+	buffCRC = 0xFD179243,
 	speciesRestriction = "",
 
 

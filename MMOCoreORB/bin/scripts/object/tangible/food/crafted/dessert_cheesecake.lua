@@ -54,15 +54,15 @@ object_tangible_food_crafted_dessert_cheesecake = object_tangible_food_crafted_s
 	fillingMax = 7,
 	flavorMin = 420,
 	flavorMax = 1440,
-	nutritionMin = 5,
-	nutritionMax = 55,
-	quantityMin = 3,
-	quantityMax = 8,
+	nutritionMin = 50,
+	nutritionMax = 150,
+	quantityMin = 2,
+	quantityMax = 5,
 
 	modifiers = { "surveying", 0 },
 
-	buffName = "food.drink_vasarian_brandy",
-	buffCRC = 0,
+	buffName = "food.dessert_cheesecake",
+	buffCRC = 0x7E4BED62,
 	speciesRestriction = "",
 
 	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2},

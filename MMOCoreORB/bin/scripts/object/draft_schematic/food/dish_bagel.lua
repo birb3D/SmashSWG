@@ -48,27 +48,27 @@ object_draft_schematic_food_dish_bagel = object_draft_schematic_food_shared_dish
    customObjectName = "Kamino Rolls",
 
    craftingToolTab = 4, -- (See DraftSchematicObjectTemplate.h)
-   complexity = 3, 
+   complexity = 11, 
    size = 1, 
    factoryCrateType = "object/factory/factory_crate_food.iff",
    
-   xpType = "crafting_general", 
-   xp = 50, 
+   xpType = "crafting_food_general", 
+   xp = 180, 
 
-   assemblySkill = "general_assembly", 
-   experimentingSkill = "general_experimentation", 
-   customizationSkill = "clothing_customization", 
+   assemblySkill = "food_assembly", 
+   experimentingSkill = "food_experimentation", 
+   customizationSkill = "food_customization", 
 
    customizationOptions = {},
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
-   ingredientTitleNames = {"flaky_crust", "meaty_core", "additive"},
-   ingredientSlotType = {0, 0, 3},
-   resourceTypes = {"cereal", "meat", "object/tangible/food/crafted/additive/shared_additive_light.iff"},
-   resourceQuantities = {15, 10, 1},
-   contribution = {100, 100, 100},
+   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
+   ingredientTitleNames = {"protein_source", "vegetable_mash", "exotic_spices", "dough", "additive"},
+   ingredientSlotType = {0, 0, 0, 1, 3},
+   resourceTypes = {"meat", "vegetable", "petrochem_inert_lubricating_oil", "object/tangible/component/food/shared_ingredient_ball_of_dough.iff", "object/tangible/food/crafted/additive/shared_additive_medium.iff"},
+   resourceQuantities = {24, 14, 12, 1, 1},
+   contribution = {100, 100, 100, 100, 100},
 
 
    targetTemplate = "object/tangible/food/crafted/dish_bagel.iff",

@@ -146,7 +146,7 @@ int ConsumableImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 		return 0;
 	}
 
-	if (player->hasBuff(buffCRC) && (!isAttributeEffect() || isForagedFood())) {
+	if (player->hasBuff(buffCRC)) {
 		player->sendSystemMessage("@combat_effects:already_affected"); //You are already under the influence of that food. Eating more won't enhance the effect.
 		return 0;
 	}
@@ -337,6 +337,9 @@ int ConsumableImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 		break;
 	}
 	case EFFECT_BARTENDER_DRINK:
+			player->addWounds(CreatureAttribute::HEALTH, System::random(5), true);
+			player->addWounds(CreatureAttribute::ACTION, System::random(5), true);
+			player->addWounds(CreatureAttribute::MIND, System::random(5), true);
 		break;
 	default:
 		break;
