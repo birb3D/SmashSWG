@@ -101,6 +101,11 @@ CorelliaBelaVistalScreenPlay = CityScreenPlay:new {
 		{"surgical_droid_21b",60,3.1,0.1,11.5,0,2365903, "neutral"},
 
 		--Cantina
+		-- one guy at the entrance
+		{"comm_operator", 400, 48.13, 0.1, 2.47, 202, 3375353, "calm"},
+		-- Entrance walk way closet to bar 2 people talking 
+		{"artisan", 60, 34.4, 0.1, -8.04, 0, 3375354, "worried"},
+		{"mercenary", 300, 34.4, 0.1, -6.9, 180, 3375354, "angry"},
 		-- noble left side front corner of bar
 		{"noble", 60, 5.80982, -0.894992, -5.41349, 248.205, 3375355, "worried"},
 		-- businessman far right corner of bar
@@ -122,6 +127,19 @@ CorelliaBelaVistalScreenPlay = CityScreenPlay:new {
 		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,3375355, "themepark_music_3"},
 		{"figrin_dan",60,25.69,-0.894992,9.4,-40,3375355, "themepark_music_3"},
 	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,3375355, "themepark_music_1"},
+		-- Far left cell nearest to door 2 people talking
+		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 3375356, "conversation"},
+		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 3375356, "conversation"},
+		-- 3 people talking far right cell closest to the door
+		{"brawler", 60, 22.6, -0.9, 19.6, 0, 3375357, "npc_consoling"},
+		{"commoner", 60, 21.5, -0.9, 20.7, 135, 3375357, "sad"},
+		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 3375357, "npc_consoling"},
+		-- far left middle cell 2 guys talking around the corner
+		{"farmer", 60, 10.9, -0.9, -13.9, 180, 3375358, "conversation"},
+		{"mercenary", 300, 10.9, -0.9, -15.0, 0, 3375358, "conversation"},
+		-- 2 people talking far right rear corner cell
+		{"brawler", 60, -2.4, -0.9, 24.5, 180, 3375355, "conversation"},
+		{"shadowy_figure", 60, -2.4, -0.9, 23.4, 0, 3375361, "conversation"},
 
 
 		--Guild Hall 6857 -5783

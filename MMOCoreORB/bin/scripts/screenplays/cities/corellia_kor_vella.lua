@@ -331,7 +331,7 @@ CorelliaKorVellaScreenPlay = CityScreenPlay:new {
 		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 3005400, "conversation"},
 		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 3005400, "conversation"},
         -- Far right cell nearest to door trainer_entertainer 
-		{"trainer_entertainer", 1, 18, -0.9, 24.5, 170, 3005401, "happy"},
+		{"trainer_entertainer", 1, 18, -0.9, 23.5, 170, 3005401, "happy"},
 		-- 3 people talking far right cell closest to the door
 		{"brawler", 60, 22.6, -0.9, 19.6, 0, 3005401, "npc_consoling"},
 		{"commoner", 60, 21.5, -0.9, 20.7, 135, 3005401, "sad"},
