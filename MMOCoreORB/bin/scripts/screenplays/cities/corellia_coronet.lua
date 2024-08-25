@@ -125,7 +125,7 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 8105496, "happy", false},
 		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 8105496, "happy", false},
 		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 8105494, "playful", false},
-		--{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 8105494, "playful", false},
+		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 8105494, "playful", false},
 		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 8105494, "playful", false},
 		
 		
@@ -170,7 +170,7 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		cantina_5 = {{23.32,-0.894992,10.47, 8105496, false}, {21,-0.894992,-8.47, 8105496, false}, {20, -0.894992 , -1.4, 8105496, true}},
 		cantina_6 = {{-2.11,-0.894992,7, 8105496, true}, {23,-0.894992,11, 8105496, false}, {19.5, -0.9, 18.7, 8105498, false}},
 		cantina_7 = {{39.13, 0.1, 1.27, 8105494, true}, {14, -0.894992 , 0, 8105496, false}},
-		cantina_8 = {{42.73, 0.1, 2.47, 8105494, true}, {14.3, -0.894992 , 2, 8105496, false}},
+		cantina_8 = {{14.3, -0.894992 , 2, 8105496, false}, {42.73, 0.1, 2.47, 8105494, true}},
 		cantina_9 = {{41.73, 0.1, 0, 8105494, true}, {14, -0.894992 , -1.2, 8105496, false}},
 		
 		starport_walk_1 = {{-4.61669,0.639424,50.7263,1855675, false}, {-54, 28, -4697, 0, false}, {-40, 28, -4721, 0, false}},

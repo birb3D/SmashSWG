@@ -61,6 +61,16 @@ TatooineMosEisleyScreenPlay = CityScreenPlay:new {
 		{"npc_4", "patrolNpc", 3559, 4, -4725, 194, 0, "", false},
 		{"npc_5", "patrolNpc", 3513, 4, -4725, 293, 0, "", false},
 		{"npc_6", "patrolNpc", 3458, 4, -4890, 312, 0, "", false},
+
+		--Starport
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 0, 1106372, "playful", false},
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,51.7263, 0, 1106372, "playful", false},
+		{"starport_walk_3", "r3", -4.61669,0.639424,52.7263, 0, 1106372, "playful", false},
+		{"starport_walk_3", "patrolNpc", -4.61669,0.639424,53.7263, 0, 1106372, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,50.7263, 0, 1106372, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,51.7263, 0, 1106372, "playful", false},
+		{"starport_walk_4", "patrolNpc", -0.61669,0.639424,52.7263, 0, 1106372, "playful", false},
+		{"starport_walk_4", "surgical_droid_21b", -0.61669,0.639424,53.7263, 0, 1106372, "playful", false},
 	},
 
 	patrolPoints = {
@@ -80,6 +90,11 @@ TatooineMosEisleyScreenPlay = CityScreenPlay:new {
 		npc_4 = {{3559, 4, -4725, 0, true}, {3556, 5, -4757, 0, false}, {3556, 5, -4744, 0, true}, {3545, 5, -4729, 0, true}},
 		npc_5 = {{3513, 4, -4725, 0, false}, {3494, 5, -4724, 0, true}, {3467, 5, -4739, 0, false}, {3494, 5, -4724, 0, true}},
 		npc_6 = {{3458, 4, -4890, 0, false}, {3436, 5, -4903, 0, true}, {3454, 5, -4917, 0, true}},
+
+		starport_walk_1 = {{-4.61669,0.639424,50.7263, 1106372, false}, {3609, 5, -4755, 0, false}, {3628, 5, -4789, 0, false}},
+		starport_walk_2 = {{-0.61669,0.639424,50.7263, 1106372, false}, {3610, 5, -4753, 0, false}, {3628, 5, -4787, 0, false}},
+		starport_walk_3 = {{-4.61669,0.639424,50.7263, 1106372, false}, {3608, 5, -4750, 0, false}, {3628, 5, -4785, 0, false}},
+		starport_walk_4 = {{-0.61669,0.639424,50.7263, 1106372, false}, {3612, 5, -4757, 0, false}, {3628, 5, -4783, 0, false}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old", "commoner_tatooine"},
