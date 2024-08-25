@@ -260,6 +260,9 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		-- 2 people talking left center of bar
 		{"commoner_tatooine",60,1.99,-0.894992,-8.44,325.01,8105496, "conversation"},
 		{"commoner_tatooine",60,1.19,-0.894992,-7.63,152.004,8105496, "conversation"},
+		-- Far left cell nearest to door 2 people talking
+		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 8105497, "conversation"},
+		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 8105497, "conversation"},
 		-- 3 people far right room nearest to door
 		{"brawler", 60, 22.6, -0.9, 19.6, 0, 8105498, "conversation"},
 		{"commoner", 60, 21.5, -0.9, 20.7, 135, 8105498, "conversation"},

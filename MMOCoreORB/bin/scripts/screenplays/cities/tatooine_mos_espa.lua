@@ -201,6 +201,9 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,1256058, "conversation"},
 		{"noble",60,4.71201,-0.894992,-9.83418,360.011,1256058, "conversation"},
 		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,1256058, "conversation"},
+		-- Far left cell nearest to door 2 people talking
+		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 1256059, "conversation"},
+		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 1256059, "conversation"},
 		-- 3 people far right room nearest to door
 		{"brawler", 60, 22.6, -0.9, 19.6, 0, 1256060, "conversation"},
 		{"commoner", 60, 21.5, -0.9, 20.7, 135, 1256060, "conversation"},

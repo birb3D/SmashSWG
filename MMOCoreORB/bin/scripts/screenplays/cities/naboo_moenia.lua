@@ -95,7 +95,7 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"junk_dealer", 0, 4810.44, 4.17, -4663.38, 112, 0, ""},
 
 		--Cantina
-		{"informant_npc_lvl_2",0,-2.2226,-0.894992,5.90785,90,111, ""},
+		{"informant_npc_lvl_2",0,-2.2226,-0.894992,5.90785,90,111, "happy"},
 		-- 1 person far left side of the bar in the back
 		{"dorn_gestros",60,-6.00754,-0.894992,-5.35219,231.068,111, "calm"},
 		-- 2 people talking in front of the bar slightly right
@@ -107,18 +107,29 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"info_broker",60,-3.11,0,5.4,16.6733,111, "npc_standing_drinking"},
 		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,111, "npc_standing_drinking"},
 		-- Corner Music Guys By Door
-		{"doikk_nats",60,20.32,-0.894992,3.47,200.0013,111, "themepark_music_3"},
+		{"doikk_nats",60,20.32,-0.894992,2.47,200.0013,111, "themepark_music_3"},
 		{"figrin_dan",60,21.69,-0.894992,0.4,-40,111, "themepark_music_3"},
-	    {"nalan_cheel",60,18.54,-0.894992,-2.13,130.0011,111, "themepark_music_1"},
-		-- 5 people around bar right front side to center back
-	    {"commoner_naboo",60,3.11,0,5.4,161.005,111, "bored"},
-		{"commoner_naboo",60,1.11,0,5.4,330.024,111, "npc_standing_drinking"},
-		{"commoner_naboo",60,-3.11,0,5.4,16.6733,111, "npc_standing_drinking"},
+	    {"nalan_cheel",60,19.54,-0.894992,-1.13,40.0011,111, "themepark_music_1"},
+		-- 3 People Talking far left side of bar center aisle 
+		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,111, "conversation"},
+		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,111, "conversation"},
+		{"entertainer",300,4.71201,-0.894992,-8.73417,180.01,111, "conversation"},
+		-- Far left cell nearest to door 2 people talking
+		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 112, "conversation"},
+		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 112, "conversation"},
+		-- 3 people talking far right cell closest to the door
+		{"brawler", 60, 22.6, -0.9, 19.6, 0, 113, "npc_consoling"},
+		{"commoner", 60, 21.5, -0.9, 20.7, 135, 113, "sad"},
+		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 113, "npc_consoling"},
 		-- 2 people talking left middle cell
 		{"bounty_hunter",300,2.1656,-0.894992,-15.9672,360.011,114, "calm"},
 		{"contractor",60,2.1656,-0.894992,-14.9672,180.001,114, "conversation"},
+		--1 person far right middle cell
+		{"businessman",60,0.978477,-0.894992,21.4841,311.517,115, "angry"},
+		-- 1 person far left back cell 
+		{"mercenary",300,-5.02826,-0.894991,-21.3375,-20,116, "calm"},
 		-- Borvo's Guard in right room just behind bar
-		{"rebel_recruiter",0,-29,-0.89,-1.2,74,119, ""},
+		{"rebel_recruiter",0,-29,-0.89,-1.2,74,119, "npc_standing_drinking"},
 		-- 2 people talking in right room just behind the bar
 		{"commoner_tatooine",60,-20.6545,-0.894989,25.0112,0,120, "conversation"},
 		{"noble",300,-20.6545,-0.894989,26.0112,180.01,120, "conversation"},
