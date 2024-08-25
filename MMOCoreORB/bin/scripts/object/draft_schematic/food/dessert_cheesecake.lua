@@ -53,7 +53,7 @@ object_draft_schematic_food_dessert_cheesecake = object_draft_schematic_food_sha
    factoryCrateType = "object/factory/factory_crate_food.iff",
    
    xpType = "crafting_food_general", 
-   xp = 80, 
+   xp = 320, 
 
    assemblySkill = "food_assembly", 
    experimentingSkill = "food_experimentation", 
@@ -63,12 +63,12 @@ object_draft_schematic_food_dessert_cheesecake = object_draft_schematic_food_sha
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
-   ingredientTitleNames = {"carbosyrup", "dough", "fruit_core", "additive"},
-   ingredientSlotType = {1, 1, 0, 3},
-   resourceTypes = {"object/tangible/component/food/shared_ingredient_carbosyrup.iff", "object/tangible/component/food/shared_ingredient_ball_of_dough.iff", "fruit", "object/tangible/food/crafted/additive/shared_additive_light.iff"},
-   resourceQuantities = {1, 1, 20, 1},
-   contribution = {100, 100, 100, 100},
+   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
+   ingredientTitleNames = {"sweet_cake_mix", "carbosyrup", "dough", "fruit", "additive"},
+   ingredientSlotType = {1, 1, 1, 0, 3},
+   resourceTypes = {"object/tangible/food/crafted/shared_dessert_sweet_cake_mix.iff", "object/tangible/component/food/shared_ingredient_carbosyrup.iff", "object/tangible/component/food/shared_ingredient_ball_of_dough.iff", "fruit_berries", "object/tangible/food/crafted/additive/shared_additive_light.iff"},
+   resourceQuantities = {1, 1, 1, 20, 1},
+   contribution = {100, 100, 100, 100, 100},
 
 
    targetTemplate = "object/tangible/food/crafted/dessert_cheesecake.iff",

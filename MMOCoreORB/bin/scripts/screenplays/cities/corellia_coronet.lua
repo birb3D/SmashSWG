@@ -125,8 +125,21 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 8105496, "happy", false},
 		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 8105496, "happy", false},
 		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 8105494, "playful", false},
-		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 8105494, "playful", false},
+		--{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 8105494, "playful", false},
 		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 8105494, "playful", false},
+		
+		
+		--Starport
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 40, 1855675, "playful", false},
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,51.7263, 40, 1855675, "playful", false},
+		{"starport_walk_3", "r3", -4.61669,0.639424,52.7263, 40, 1855675, "playful", false},
+		{"starport_walk_3", "patrolNpc", -4.61669,0.639424,53.7263, 40, 1855675, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,50.7263, 40, 1855675, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,51.7263, 40, 1855675, "playful", false},
+		{"starport_walk_4", "patrolNpc", -0.61669,0.639424,52.7263, 40, 1855675, "playful", false},
+		{"starport_walk_4", "surgical_droid_21b", -0.61669,0.639424,53.7263, 40, 1855675, "playful", false},
+		
+
 	},
 
 	patrolPoints = {
@@ -159,6 +172,13 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		cantina_7 = {{39.13, 0.1, 1.27, 8105494, true}, {14, -0.894992 , 0, 8105496, false}},
 		cantina_8 = {{42.73, 0.1, 2.47, 8105494, true}, {14.3, -0.894992 , 2, 8105496, false}},
 		cantina_9 = {{41.73, 0.1, 0, 8105494, true}, {14, -0.894992 , -1.2, 8105496, false}},
+		
+		starport_walk_1 = {{-4.61669,0.639424,50.7263,1855675, false}, {-54, 28, -4697, 0, false}, {-40, 28, -4721, 0, false}},
+		starport_walk_2 = {{-0.61669,0.639424,50.7263,1855675, false}, {-56, 28, -4696, 0, false}, {-40, 28, -4722, 0, false}},
+		starport_walk_3 = {{-4.61669,0.639424,50.7263,1855675, false}, {-54, 28, -4697, 0, false}, {-40, 28, -4723, 0, false}},
+		starport_walk_4 = {{-0.61669,0.639424,50.7263,1855675, false}, {-56, 28, -4698, 0, false}, {-40, 28, -4724, 0, false}},
+
+		37.163,0.639417,40.7061,180.01,1855678
 
 	},
 
@@ -223,6 +243,16 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"commoner_naboo",60,17.3045,2.25,18.2968,360.011,1855477, "conversation"},
 		--{"ral_mundi",60,-138.975,28,-4718.86, 180, 0, ""},
 		--{"tarth_jaxx",60,-137.3, 28, -4717.8, 180, 0, ""},
+		
+		{"chiss_male", 360, 27.69, 28, -4675.96, 180, 0, ""},
+		{"corellia_times_reporter", 360, 27.9, 28, -4691.68, 180, 0, ""},
+		{"medic", 360, -43.6, 28, -4701.08, 150, 0, ""},
+		{"ithorian_male", 360, -49, 28, -4692, 0, 0, ""},
+		{"sullustan_male", 360, -49, 28, -4690.9, 180, 0, ""},
+		{"bounty_hunter", 360, -40, 28, -4724, 181, 0, ""},
+		{"agriculturalist", 360, -40, 28, -4723, 180, 0, ""},
+		{"artisan", 360, -40.1, 28, -4722.2, 179, 0, "conversation"},
+		{"entertainer", 360, -39.95, 28, -4720.9, 180, 0, ""},
 
 		-- Hotel
 		{"corellia_times_investigator",60,7.44572,1.00001,-8.00652,0,1855548, "conversation"},

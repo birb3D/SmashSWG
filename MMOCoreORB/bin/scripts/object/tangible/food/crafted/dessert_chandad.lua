@@ -62,7 +62,7 @@ object_tangible_food_crafted_dessert_chandad = object_tangible_food_crafted_shar
 	modifiers = { "surveying", 0 },
 
 	buffName = "food.dessert_chandad",
-	buffCRC = 0,
+	buffCRC = 0x7E4BED62,
 	speciesRestriction = "",
 
 	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2},
