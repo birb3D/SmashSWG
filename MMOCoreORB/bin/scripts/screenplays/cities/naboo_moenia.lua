@@ -35,7 +35,7 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		--Cantina
 		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, 111, "", false},
 		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 111, "playful", false},
-		{"cantina_3", "surgical_1", -5.11,-0.894992,6.8, 300, 111, "conversation", false},
+		{"cantina_3", "surgical_droid_21b", -5.11,-0.894992,6.8, 300, 111, "conversation", false},
 		{"cantina_4", "patrolNpc", -7.2,-0.894992,-6, 300, 111, "conversation", false},
 		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 111, "happy", false},
 		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 111, "happy", false},
