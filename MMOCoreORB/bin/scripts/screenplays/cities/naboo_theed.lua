@@ -52,13 +52,13 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 
 		--Starport
 		{"starport_walk_1", "patrolNpc",-30,0.7,-72.2,50,1692102, "playful", false},
-		{"starport_walk_1", "patrolNpc", -31,0.7,-72.2,50,1692102, "playful", false},
+		{"starport_walk_2", "patrolNpc", -31.5,0.7,-69.2,50,1692102, "playful", false},
 		{"starport_walk_3", "r3", 30,0.7,-72.2,50,1692103, "playful", false},
-		{"starport_walk_3", "patrolNpc", 31,0.7,-72.2,50,1692103, "playful", false},
-		{"starport_walk_2", "patrolNpc", -32,0.7,-71.2,50,1692102, "playful", false},
-		{"starport_walk_2", "patrolNpc", -33,0.7,-71.2,50,1692102, "playful", false},
-		{"starport_walk_4", "patrolNpc", 32,0.7,-71.2,50,1692103, "playful", false},
-		{"starport_walk_4", "surgical_droid_21b", 33,0.7,-71.2,50,1692103, "playful", false},
+		{"starport_walk_4", "patrolNpc", 30,0.7,-72.2,50,1692103, "playful", false},
+		{"starport_walk_5", "patrolNpc", -32,0.7,-71.2,50,1692102, "playful", false},
+		{"starport_walk_6", "patrolNpc", -34,0.7,-71.2,50,1692102, "playful", false},
+		{"starport_walk_7", "patrolNpc", 32,0.7,-71.2,50,1692103, "playful", false},
+		{"starport_walk_8", "surgical_droid_21b", 33,0.7,-69.2,50,1692103, "playful", false},
 
 	},
 
@@ -84,10 +84,14 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		cantina_4 = {{-7.2,-0.894992,-5, 91, false}, {-7.2,-0.894992,-6.4, 91, false}, {-4.3,-0.894992,-6.4, 91, false}, {-4.3,-0.894992,-5, 91, false}, {-4.3,-0.894992,-6.4, 91, false}, {-7.2,-0.894992,-6.4, 91, false}, {-8.2,-0.894992,-11.4, 91, false}},
 		cantina_5 = {{23.32,-0.894992,10.47, 91, false}, {21,-0.894992,-8.47, 91, false}, {20, -0.894992, -1.4, 91, true}},
 
-		starport_walk_1 = {{-30,0.7,-72.2,50,1692101, false}, {-2.8622,7.9418,10.8957,1692104, false}},
-		starport_walk_2 = {{-31,0.7,-71.2,50,1692101, false}, {-4.8622,7.9418,10.8957,1692104, false}},
-		starport_walk_3 = {{30,0.7,-72.2,50,1692101, false}, {-6.8622,7.9418,10.8957,1692104, false}},
-		starport_walk_4 = {{31,0.7,-71.2,50,1692101, false}, {-8.8622,7.9418,10.8957,1692104, false}},
+		starport_walk_1 = {{-30,0.7,-72.2,50,1692101, false}, {-8.8622,7.9418,-41.8957,1692104, false}, {-11.8622,7.9418,8.8957,1692104, false}},
+		starport_walk_2 = {{-34,0.7,-71.2,50,1692101, false}, {8.8622,7.9418,-40.8957,1692104, false}, {-11.8622,7.9418,7.8957,1692104, false}},
+		starport_walk_3 = {{30,0.7,-72.2,50,1692101, false}, {12.8622,7.9418,-42.8957,1692104, false}, {-11.8622,7.9418,6.8957,1692104, false}},
+		starport_walk_4 = {{33,0.7,-69.2,50,1692101, false}, {-12.8622,7.9418,-39.8957,1692104, false}, {-11.8622,7.9418,5.8957,1692104, false}},
+		starport_walk_5 = {{-30,0.7,-72.2,50,1692101, false}, {-10.8622,7.9418,-38.8957,1692104, false}, {-11.8622,7.9418,4.8957,1692104, false}},
+		starport_walk_6 = {{-34,0.7,-71.2,50,1692101, false}, {14.8622,7.9418,-41.8957,1692104, false}, {-11.8622,7.9418,3.8957,1692104, false}},
+		starport_walk_7 = {{30,0.7,-72.2,50,1692101, false}, {-14.8622,7.9418,-42.8957,1692104, false}, {-11.8622,7.9418,2.8957,1692104, false}},
+		starport_walk_8 = {{33,0.7,-69.2,50,1692101, false}, {10.8622,7.9418,-40.8957,1692104, false}, {-11.8622,7.9418,1.8957,1692104, false}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_naboo", "commoner_old"},
