@@ -93,7 +93,7 @@ CorelliaDoabaGuerfelScreenPlay = CityScreenPlay:new {
 		starport_walk_2 = {{-0.61669,0.639424,50.7263,9665356, false}, {3331,308,5618, 0, false}, {3368,308,5619, 0, false}},
 		starport_walk_3 = {{-4.61669,0.639424,50.7263,9665356, false}, {3331,308,5616, 0, false}, {3366,308,5619, 0, false}},
 		starport_walk_4 = {{-0.61669,0.639424,50.7263,9665356, false}, {3331,308,5614, 0, false}, {3363,308,5619, 0, false}},
-	}
+	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
 	stationaryNpcs = {"artisan", "bodyguard", "bothan_diplomat", "bounty_hunter", "businessman", "commoner_technician", "contractor", "entertainer", "explorer", "farmer", "farmer_rancher", "fringer", "gambler", "info_broker", "medic", "mercenary", "miner", "noble", "official", "pilot", "rancher", "scientist", "slicer"},

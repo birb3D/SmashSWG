@@ -41,7 +41,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"npc_10", "patrolNpc", -4829, 6, 4113, 0, 0, "", false},
 		{"npc_11", "patrolNpc", -4956, 6, 4205, 106, 0, "", false},
 		{"npc_12", "patrolNpc", -4904, 6, 4201, 110, 0, "conversation", false},
-		{"npc_13", "patrolNpc", -4889.4, 6, 4081.8, 0, 0, "conversation", false}
+		{"npc_13", "patrolNpc", -4889.4, 6, 4081.8, 0, 0, "conversation", false},
 
 		--Cantina
 		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, "", false},
