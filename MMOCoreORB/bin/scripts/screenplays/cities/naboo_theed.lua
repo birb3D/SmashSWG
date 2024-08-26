@@ -63,7 +63,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"starport_walk_6", "patrolNpc", -34,0.7,-71.2,50,1692102, "playful", false},
 		{"starport_walk_7", "patrolNpc", 32,0.7,-71.2,50,1692103, "playful", false},
 		{"starport_walk_8", "surgical_droid_21b", 33,0.7,-69.2,50,1692103, "playful", false},
-		{"starport walk_9", "cll8_binary_load_lifter", 12.8622,7.9418,-39.8957,1692104, false},
+		{"starport_walk_9", "cll8_binary_load_lifter", 12.8622,7.9418,-39.8957,1692104, false},
 
 	},
 
