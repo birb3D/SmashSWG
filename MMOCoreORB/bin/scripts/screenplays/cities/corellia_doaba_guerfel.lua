@@ -42,6 +42,28 @@ CorelliaDoabaGuerfelScreenPlay = CityScreenPlay:new {
 		{"npc_6", "patrolNpc", 3103, 300, 5164, 50, 0, "", false},
 		{"npc_7", "patrolNpc", 3202, 290, 5034, 29, 0, "", false},
 		{"npc_8", "patrolNpc", 3162, 290, 4966, 255, 0, "", false},
+
+		--Cantina
+		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, 3075429, "", false},
+		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 3075429, "playful", false},
+		{"cantina_3", "patrolNpc", -5.11,-0.894992,6.8, 300, 3075429, "conversation", false},
+		{"cantina_4", "patrolNpc", -7.2,-0.894992,-6, 300, 3075429, "conversation", false},
+		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 3075429, "happy", false},
+		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 3075429, "happy", false},
+		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 3075427, "playful", false},
+		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 3075429, "playful", false},
+		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 3075427, "playful", false},
+		
+		
+		--Starport
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 40, 9665356, "playful", false},
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,51.7263, 40, 9665356, "playful", false},
+		{"starport_walk_3", "r3", -4.61669,0.639424,52.7263, 40, 9665356, "playful", false},
+		{"starport_walk_3", "patrolNpc", -4.61669,0.639424,53.7263, 40, 9665356, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,50.7263, 40, 9665356, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,51.7263, 40, 9665356, "playful", false},
+		{"starport_walk_4", "patrolNpc", -0.61669,0.639424,52.7263, 40, 9665356, "playful", false},
+		{"starport_walk_4", "surgical_droid_21b", -0.61669,0.639424,53.7263, 40, 9665356, "playful", false},
 	},
 
 	patrolPoints = {
@@ -56,7 +78,22 @@ CorelliaDoabaGuerfelScreenPlay = CityScreenPlay:new {
 		npc_6 = {{3103, 300, 5164, 0, true}, {3119, 300, 5139, 0, true}, {3103, 300, 5135, 0, true}, {3115, 300, 5146, 0, true}, {3119, 300, 5163, 0, true}},
 		npc_7 = {{3202, 290, 5034, 0, true}, {3184, 290, 5030, 0, true}, {3209, 290, 5051, 0, true}},
 		npc_8 = {{3162, 290, 4966, 0, false}, {3144, 290, 4979, 0, true}, {3119, 284, 4994, 0, true}, {3152, 290, 4988, 0, true}},
-	},
+
+		cantina_1 = {{7, -0.894992 , 7.2, 3075429, false}, {16, -0.894992 , 0, 3075429, false}, {5, -0.894992 , -7, 3075429, false}, {16, -0.894992 , 0, 3075429, false}},
+		cantina_2 = {{5, -0.894992 , -9, 3075429, false}, {3, -0.894992 , -5.4, 3075429, false}, {12, -0.894992 , -6, 3075429, false}, {10, -0.894992 , -11, 3075429, false}},
+		cantina_3 = {{-5.11,-0.894992,5, 3075429, false}, {-5.11,-0.894992,6.4, 3075429, false}, {0,-0.894992,6.4, 3075429, false}, {0,-0.894992,5, 3075429, 3075429, true}, {-1.51,-0.894992,6.4, 3075429, false}, {-7.11,-0.894992,6.4, 3075429, false}},
+		cantina_4 = {{-7.2,-0.894992,-5, 3075429, false}, {-7.2,-0.894992,-6.4, 3075429, false}, {-4.3,-0.894992,-6.4, 3075429, false}, {-4.3,-0.894992,-5, 3075429, 3075429, false}, {-4.3,-0.894992,-6.4, 3075429, false}, {-7.2,-0.894992,-6.4, 3075429, false}, {-8.2,-0.894992,-11.4, 3075429, false}},
+		cantina_5 = {{23.32,-0.894992,10.47, 3075429, false}, {21,-0.894992,-8.47, 3075429, false}, {20, -0.894992 , -1.4, 3075429, true}},
+		cantina_6 = {{-2.11,-0.894992,7, 3075429, true}, {23,-0.894992,11, 3075429, false}, {19.5, -0.9, 18.7, 8105498, false}},
+		cantina_7 = {{39.13, 0.1, 1.27, 3075427, true}, {14, -0.894992 , 0, 3075429, false}},
+		cantina_8 = {{14.3, -0.894992 , 2, 3075429, false}, {42.73, 0.1, 2.47, 3075427, true}},
+		cantina_9 = {{41.73, 0.1, 0, 3075427, true}, {14, -0.894992 , -1.2, 3075429, false}},
+		
+		starport_walk_1 = {{-4.61669,0.639424,50.7263,9665356, false}, {3331,308,5620, 0, false}, {3371,308,5619, 0, false}},
+		starport_walk_2 = {{-0.61669,0.639424,50.7263,9665356, false}, {3331,308,5618, 0, false}, {3368,308,5619, 0, false}},
+		starport_walk_3 = {{-4.61669,0.639424,50.7263,9665356, false}, {3331,308,5616, 0, false}, {3366,308,5619, 0, false}},
+		starport_walk_4 = {{-0.61669,0.639424,50.7263,9665356, false}, {3331,308,5614, 0, false}, {3363,308,5619, 0, false}},
+	}
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
 	stationaryNpcs = {"artisan", "bodyguard", "bothan_diplomat", "bounty_hunter", "businessman", "commoner_technician", "contractor", "entertainer", "explorer", "farmer", "farmer_rancher", "fringer", "gambler", "info_broker", "medic", "mercenary", "miner", "noble", "official", "pilot", "rancher", "scientist", "slicer"},
@@ -143,13 +180,17 @@ CorelliaDoabaGuerfelScreenPlay = CityScreenPlay:new {
 		{"comm_operator",400,-13,0.2,-7.7,60,4345354, "npc_imperial"},
 
 		--Cantina
+		-- 2 people talking near at back door cell
 		{"noble",60,-42.098,0.105009,-23.0786,180.012,3075441, "conversation"},
 		{"mercenary",300,-42.098,0.105009,-24.1786,0,3075441, "nervous"},
+
 		{"corellia_times_reporter",300,21.878,-0.894997,-15.7126,0,3075430, "conversation"},
 		{"patron_ithorian",300,40.8822,0.104999,2.22818,0,3075427, "conversation"},
+		-- 2 people talking near front right of the bar 
 		{"commoner_naboo",300,8.35364,-0.894992,6.38149,360.011,3075429, "conversation"},
-		{"entertainer",60,21.878,-0.894997,-14.6126,179.999,3075430, "entertained"},
 		{"farmer_rancher",60,8.35364,-0.894992,7.38149,179.999,3075429, "conversation"},
+		{"entertainer",60,21.878,-0.894997,-14.6126,179.999,3075430, "entertained"},
+
 		{"contractor",60,40.8822,0.104999,3.32819,180.003,3075427, "worried"},
 
 		--Guild Hall 3122 5268
