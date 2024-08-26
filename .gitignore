@@ -9,3 +9,5 @@ MMOCoreORB/bin/tre
 MMOCoreORB/bin/bin.7z
 .vscode/settings.json
 MMOCoreORB/sql/old_data.sql
+MMOCoreORB/.vs
+MMOCoreORB/bin/scripts.7z
