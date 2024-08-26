@@ -76,8 +76,8 @@ void CraftingMissionObjectiveImplementation::updateMissionStatus(CreatureObject*
 				
 				// Award XP 
 				int xp = mission->getRewardCredits() * 2 * float(player->getSkillMod("general_assembly") / 100.0f + 0.02f); // The 0.02f ensures you get XP even if you have dropped Novice Scout for some crazy reason...
-				xp = MIN(834, xp); // Cap at 2,502XP (10 high paying missions to earn a novice box of an advanced profession)
-				player->getZoneServer()->getPlayerManager()->awardExperience(player, "crafting_general", xp, true, 1); // The system multiplies the XP value by 3
+				if(xp > 834) xp = 834; 
+				player->getZoneServer()->getPlayerManager()->awardExperience(player, "crafting_general", xp, true, 1); 
 			}
 		}
 		break;
