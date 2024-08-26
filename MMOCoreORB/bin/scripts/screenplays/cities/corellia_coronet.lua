@@ -177,8 +177,6 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		starport_walk_2 = {{-0.61669,0.639424,50.7263,1855675, false}, {-56, 28, -4696, 0, false}, {-40, 28, -4722, 0, false}},
 		starport_walk_3 = {{-4.61669,0.639424,50.7263,1855675, false}, {-54, 28, -4697, 0, false}, {-40, 28, -4723, 0, false}},
 		starport_walk_4 = {{-0.61669,0.639424,50.7263,1855675, false}, {-56, 28, -4698, 0, false}, {-40, 28, -4724, 0, false}},
-
-
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
@@ -261,14 +259,14 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{"entertainer",300,24.3471,1.28309,8.93357,360.011,1855549, "conversation"},
 
 		-- Cantina
-		-- Two dudes at entrance
+		-- 2 people at entrance
 		{"artisan", 60, 34.4, 0.1, -9.04, 0, 8105495, ""},
 		{"pilot", 300, 34.4, 0.1, -7.9, 180, 8105495, ""},
 		-- 3 People Talking far left side of bar center aisle 
 		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,8105496, "conversation"},
 		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,8105496, "conversation"},
 		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,8105496, "conversation"},
-		-- Two people talking far left next to bar
+		-- 2 people talking far left next to bar
 		{"businessman",60,-7.91375,-0.894992,-4.88587,179.995,8105496, "conversation"},
 		{"corellia_times_reporter",300,-7.91375,-0.894992,-5.88587,0,8105496, "conversation"},
 		-- 2 people talking front right center right of bar
