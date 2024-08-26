@@ -42,6 +42,16 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 109, "playful", false},
 		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 109, "playful", false},
 		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 109, "playful", false},
+
+		--Starport
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 40, 4215410, "playful", false},
+		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,51.7263, 40, 4215410, "playful", false},
+		{"starport_walk_3", "r3", -4.61669,0.639424,52.7263, 40, 4215410, "playful", false},
+		{"starport_walk_3", "patrolNpc", -4.61669,0.639424,53.7263, 40, 4215410, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,50.7263, 40, 4215410, "playful", false},
+		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,51.7263, 40, 4215410, "playful", false},
+		{"starport_walk_4", "patrolNpc", -0.61669,0.639424,52.7263, 40, 4215410, "playful", false},
+		{"starport_walk_4", "surgical_droid_21b", -0.61669,0.639424,53.7263, 40, 4215410, "playful", false},
 	},
 
 	patrolPoints = {
@@ -59,6 +69,11 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		cantina_7 = {{16, -0.894992 , 0, 111, true}, {17, -0.894992 , 0, 111, false}, {39.13, 0.1, 1.27, 109, true}},
 		cantina_8 = {{16.3, -0.894992 , 2, 111, true}, {17.3, -0.894992 , 2, 111, false}, {42.73, 0.1, 2.47, 109, true}},
 		cantina_9 = {{23, -0.894992 , -1.2, 111, false}, {41.73, 0.1, 0, 109, true}},
+
+		starport_walk_1 = {{-4.61669,0.639424,50.7263,4215410, false}, {4709,5,-4692, false}, {4709,5,-4654, false}},
+		starport_walk_2 = {{-0.61669,0.639424,50.7263,4215410, false}, {4709,5,-4692, false}, {4709,5,-4651, false}},
+		starport_walk_3 = {{-4.61669,0.639424,50.7263,4215410, false}, {4709,5,-4692, false}, {4709,5,-4648, false}},
+		starport_walk_4 = {{-0.61669,0.639424,50.7263,4215410, false}, {4709,5,-4692, false}, {4709,5,-4645, false}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_naboo", "commoner_old"},
