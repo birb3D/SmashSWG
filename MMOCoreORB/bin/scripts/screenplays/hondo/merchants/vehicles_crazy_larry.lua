@@ -14,20 +14,15 @@ CrazyLarry = ScreenPlay:new {
 	},
 	goods = {
 		{optName="kit", cost=1500, itemName="Customization Kit", items={"object/tangible/item/vehicle_customization.iff"}}, 
-		{optName="x31", cost=12000, itemName="x31 Landspeeder", items={"object/tangible/deed/vehicle_deed/landspeeder_x31_deed.iff"}},
-		{optName="x34", cost=24000, itemName="x34 Landspeeder", items={"object/tangible/deed/vehicle_deed/landspeeder_x34_deed.iff"}}, 
 		{optName="speederbike", cost=28000, itemName="Speederbike", items={"object/tangible/deed/vehicle_deed/speederbike_deed.iff"}},
 		{optName="swoop", cost=45000, itemName="Swoop Bike", items={"object/tangible/deed/vehicle_deed/speederbike_swoop_deed.iff"}},
-		{optName="flash", cost=125000, itemName="Flash Landspeeder", items={"object/tangible/deed/vehicle_deed/speederbike_flash_deed.iff"}},
-		{optName="av21", cost=355000, itemName="AV21 Landspeeder", items={"object/tangible/deed/vehicle_deed/landspeeder_av21_deed.iff"}},
 	},
 }
 
 
 registerScreenPlay("CrazyLarry", true)
-
 function CrazyLarry:start() 
-	spawnMobile("tatooine", "crazylarry", 1, -2811.26, 5, 2161.16, 316, 0)
+	spawnMobile("tatooine", "crazylarry", 1, 14.5, -0.9, 20.7, 135, 1082879) -- mos eisley cantina
 end
 
 crazylarry_convo_handler = Object:new {

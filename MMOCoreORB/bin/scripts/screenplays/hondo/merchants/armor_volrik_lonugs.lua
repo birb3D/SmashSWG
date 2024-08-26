@@ -49,7 +49,7 @@ VolrikLonugsSP = ScreenPlay:new {
 registerScreenPlay("VolrikLonugsSP", true)
 
 function VolrikLonugsSP:start() 
-	spawnMobile("tatooine", "volrik_lonugs", 1, -14.99, 1.13, -0.46, 83, 1256020 ) -- Mos Espa waypoint -3072 2056
+	spawnMobile("naboo", "volrik_lonugs", 1, -5000, 6, 4262, 180, 0) -- naboo near bazaar terminals
 end
 
 volriklonugs_convo_handler = Object:new {
