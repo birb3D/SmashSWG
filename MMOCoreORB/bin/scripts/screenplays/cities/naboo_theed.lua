@@ -49,6 +49,10 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"cantina_3", "patrolNpc", -5.11,-0.894992,6.8, 300, 91, "conversation", false},
 		{"cantina_4", "patrolNpc", -7.2,-0.894992,-6, 300, 91, "conversation", false},
 		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 91, "happy", false},
+		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 91, "happy", false},
+		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 89, "playful", false},
+		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 91, "playful", false},
+		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 89, "playful", false},
 
 		--Starport
 		{"starport_walk_1", "patrolNpc",-30,0.7,-72.2,50,1692102, "playful", false},
@@ -83,6 +87,11 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		cantina_3 = {{-5.11,-0.894992,5, 91, false}, {-5.11,-0.894992,6.4, 91, false}, {0,-0.894992,6.4, 91, false}, {0,-0.894992,5, 91, true}, {-1.51,-0.894992,6.4, 91, false}, {-7.11,-0.894992,6.4, false}},
 		cantina_4 = {{-7.2,-0.894992,-5, 91, false}, {-7.2,-0.894992,-6.4, 91, false}, {-4.3,-0.894992,-6.4, 91, false}, {-4.3,-0.894992,-5, 91, false}, {-4.3,-0.894992,-6.4, 91, false}, {-7.2,-0.894992,-6.4, 91, false}, {-8.2,-0.894992,-11.4, 91, false}},
 		cantina_5 = {{23.32,-0.894992,10.47, 91, false}, {21,-0.894992,-8.47, 91, false}, {20, -0.894992, -1.4, 91, true}},
+		cantina_6 = {{-2.11,-0.894992,7, 91, true}, {23,-0.894992,11, 91, false}, {19.5, -0.9, 18.7, 93, false}},
+		cantina_7 = {{39.13, 0.1, 1.27, 89, true}, {14, -0.894992 , 0, 91, false}},
+		cantina_8 = {{14.3, -0.894992 , 2, 91, false}, {42.73, 0.1, 2.47, 89, true}},
+		cantina_9 = {{41.73, 0.1, 0, 89, true}, {14, -0.894992 , -1.2, 91, false}},
+		
 
 		starport_walk_1 = {{-30,0.7,-72.2,50,1692101, false}, {-8.8622,7.9418,-41.8957,1692104, false}, {-11.8622,7.9418,8.8957,1692104, false}},
 		starport_walk_2 = {{-34,0.7,-71.2,50,1692101, false}, {8.8622,7.9418,-40.8957,1692104, false}, {-11.8622,7.9418,7.8957,1692104, false}},
@@ -190,6 +199,11 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"trainer_unarmed",0,-5649,6,4206,0,0, ""},
 		
 		--Cantina
+		-- one guy at the entrance
+		{"comm_operator", 400, 48.13, 0.1, 2.47, 202, 89, "calm"},
+		-- Entrance walk way closet to bar 2 people talking 
+		{"artisan", 60, 34.4, 0.1, -8.04, 0, 90, "worried"},
+		{"mercenary", 300, 34.4, 0.1, -6.9, 180, 90, "angry"},
 		{"businessman",0,6.4, -0.9, -8.9,115,91, "conversation"},
 		{"businessman",0,7.6, -0.9, -10.3,-35,91, "conversation"},
 		{"noble",0,17.6, -0.9, 2.3,32,91, "nervous"},
@@ -217,11 +231,17 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"commoner_naboo",60,-3.11,0,5.4,16.6733,91, "npc_standing_drinking"},
 		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,91, "npc_standing_drinking"},
 		{"patron",60,-4.11,-0.894992,5.4,26.8951,91, "happy"},
+		-- Far left cell nearest to door 2 people talking
+		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 92, "conversation"},
+		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 92, "conversation"},
 		-- 3 people far right room nearest to door
 		{"brawler", 60, 22.6, -0.9, 19.6, 0, 93, "npc_consoling"},
 		{"commoner", 60, 21.5, -0.9, 20.7, 135, 93, "sad"},
 		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 93, "npc_consoling"},
-		-- 1 person far left back cell 
+		-- far left middle cell 2 guys talking around the corner
+		{"farmer", 60, 10.9, -0.9, -13.9, 180, 94, "conversation"},
+		{"mercenary", 300, 10.9, -0.9, -15.0, 0, 94, "conversation"},
+		-- 1 person far left back cell nearest to back door
 		{"noble",60,-42.098,0.105009,-23.0786,180.012,103, "conversation"},
 		{"mercenary",300,-42.098,0.105009,-24.1786,0,103, "nervous"},
 		
