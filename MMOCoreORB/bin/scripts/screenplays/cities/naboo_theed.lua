@@ -43,6 +43,16 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"npc_12", "patrolNpc", -4904, 6, 4201, 110, 0, "conversation", false},
 		{"npc_13", "patrolNpc", -4889.4, 6, 4081.8, 0, 0, "conversation", false}
 
+		--Starport
+		{"starport_walk_1", "patrolNpc",-30,0.7,-72.2,50,1692102, "playful", false},
+		{"starport_walk_1", "patrolNpc", -31,0.7,-72.2,50,1692102, "playful", false},
+		{"starport_walk_3", "r3", 30,0.7,-72.2,50,1692103, "playful", false},
+		{"starport_walk_3", "patrolNpc", 31,0.7,-72.2,50,1692103, "playful", false},
+		{"starport_walk_2", "patrolNpc", -32,0.7,-71.2,50,1692102, "playful", false},
+		{"starport_walk_2", "patrolNpc", -33,0.7,-71.2,50,1692102, "playful", false},
+		{"starport_walk_4", "patrolNpc", 32,0.7,-71.2,50,1692103, "playful", false},
+		{"starport_walk_4", "surgical_droid_21b", 33,0.7,-71.2,50,1692103, "playful", false},
+
 	},
 
 	patrolPoints = {
@@ -60,6 +70,11 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		npc_11 = {{-4956, 6, 4205, 0, true}, {-4883, 6, 4170, 0, true}},
 		npc_12 = {{-4902, 6, 4199, 0, true}, {-4933, 6, 4227, 0, true}},
 		npc_13 = {{-4889.4, 6, 4081.8, 0, false}, {-4880, 6, 4083, 0, true}, {-4844, 6, 4118, 0, false}, {-4845, 6, 4155, 0, false}, {-4844, 6, 4118, 0, true}},
+
+		starport_walk_1 = {{-30,0.7,-72.2,50,1692101, false}, {-2.8622,7.9418,10.8957,1692104, false}},
+		starport_walk_2 = {{-31,0.7,-71.2,50,1692101, false}, {-4.8622,7.9418,10.8957.,1692104, false}},
+		starport_walk_3 = {{30,0.7,-72.2,50,1692101, false}, {-6.8622,7.9418,10.8957,1692104, false}},
+		starport_walk_4 = {{31,0.7,-71.2,50,1692101, false}, {-8.8622,7.9418,10.8957,1692104, false}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_naboo", "commoner_old"},
