@@ -63,6 +63,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"starport_walk_6", "patrolNpc", -34,0.7,-71.2,50,1692102, "playful", false},
 		{"starport_walk_7", "patrolNpc", 32,0.7,-71.2,50,1692103, "playful", false},
 		{"starport_walk_8", "surgical_droid_21b", 33,0.7,-69.2,50,1692103, "playful", false},
+		{"starport walk_9", "cll8_binary_load_lifter", 12.8622,7.9418,-39.8957,1692104, false},
 
 	},
 
@@ -101,6 +102,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		starport_walk_6 = {{-34,0.7,-71.2,50,1692101, false}, {14.8622,7.9418,-41.8957,1692104, false}, {-11.8622,7.9418,3.8957,1692104, false}},
 		starport_walk_7 = {{30,0.7,-72.2,50,1692101, false}, {-14.8622,7.9418,-42.8957,1692104, false}, {-11.8622,7.9418,2.8957,1692104, false}},
 		starport_walk_8 = {{33,0.7,-69.2,50,1692101, false}, {10.8622,7.9418,-40.8957,1692104, false}, {-11.8622,7.9418,1.8957,1692104, false}},
+		starport_walk_9 = {{12.8622,7.9418,-39.8957,1692104, false}, {12.8622,7.9418,15 false}},
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_naboo", "commoner_old"},
