@@ -11,7 +11,7 @@ VolrikLonugsSP = ScreenPlay:new {
 		{name="townsperson", npcStanding=-9000, priceAdjust=12}, -- Adjust price only
 	},
 	goods = {
-		{optName="armor_human", cost=10000, itemName="Humanoids - Bone Armor Suit", items={
+		{optName="armor_human", cost=2000, itemName="Humanoids - Bone Armor Suit", items={
 			"object/tangible/wearables/armor/bone/armor_bone_s01_bicep_l.iff",
 			"object/tangible/wearables/armor/bone/armor_bone_s01_bicep_r.iff",
 			"object/tangible/wearables/armor/bone/armor_bone_s01_boots.iff",
@@ -23,14 +23,14 @@ VolrikLonugsSP = ScreenPlay:new {
 			"object/tangible/wearables/armor/bone/armor_bone_s01_leggings.iff",
 			}
 		}, 
-		{optName="armor_wookiee", cost=10000, itemName="Wookiees - Black Mountain Suit", items={
+		{optName="armor_wookiee", cost=4000, itemName="Wookiees - Black Mountain Suit", items={
 			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bracer_l.iff",
 			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bracer_r.iff",
 			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_chest_plate.iff",
 			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_leggings.iff",
 			}
 		},
-		{optName="armor_ithorian", cost=10000, itemName="Ithorians - Defender Suit", items={
+		{optName="armor_ithorian", cost=2000, itemName="Ithorians - Defender Suit", items={
 			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_bicep_l.iff",
 			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_bicep_r.iff",
 			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_boots.iff",

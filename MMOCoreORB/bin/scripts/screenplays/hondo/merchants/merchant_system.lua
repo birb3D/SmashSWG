@@ -141,7 +141,11 @@ function MerchantSystem:completeSale(pObject, creature, relationsTable, goodsTab
 			creature:subtractCashCredits(chargePlayer)
 			-- Grant items
 			for ic = 1, #goodsTable[gtlc].items , 1 do
-				local pItem = giveItem(pInventory, goodsTable[gtlc].items[ic], -1)
+				if(string.find(goodsTable[gtlc].items[ic], '.iff', 1, true) == false) then
+					createLoot(pInventory, goodsTable[gtlc].items[ic], 1, true)
+				else
+					local pItem = giveItem(pInventory, goodsTable[gtlc].items[ic], -1)
+				end if
 			end
 		else 
 			creature:sendSystemMessage("Transaction Failed. System error in price calculation.")
