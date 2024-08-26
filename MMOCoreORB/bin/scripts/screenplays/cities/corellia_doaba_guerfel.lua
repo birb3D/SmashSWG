@@ -180,18 +180,43 @@ CorelliaDoabaGuerfelScreenPlay = CityScreenPlay:new {
 		{"comm_operator",400,-13,0.2,-7.7,60,4345354, "npc_imperial"},
 
 		--Cantina
-		-- 2 people talking near at back door cell
-		{"noble",60,-42.098,0.105009,-23.0786,180.012,3075441, "conversation"},
-		{"mercenary",300,-42.098,0.105009,-24.1786,0,3075441, "nervous"},
-
-		{"corellia_times_reporter",300,21.878,-0.894997,-15.7126,0,3075430, "conversation"},
+		-- two people talking near front door 
 		{"patron_ithorian",300,40.8822,0.104999,2.22818,0,3075427, "conversation"},
+		{"contractor",60,40.8822,0.104999,3.32819,180.003,3075427, "worried"},
 		-- 2 people talking near front right of the bar 
 		{"commoner_naboo",300,8.35364,-0.894992,6.38149,360.011,3075429, "conversation"},
 		{"farmer_rancher",60,8.35364,-0.894992,7.38149,179.999,3075429, "conversation"},
+		-- 3 People Talking far left side of bar center aisle 
+		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,3075429, "conversation"},
+		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,3075429, "conversation"},
+		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,3075429, "conversation"},
+		-- Two people talking far left next to bar
+		{"businessman",60,-7.91375,-0.894992,-4.88587,179.995,3075429, "conversation"},
+		{"corellia_times_reporter",300,-7.91375,-0.894992,-5.88587,0,3075429, "conversation"},
+		-- 2 people talking front right center right of bar
+		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,3075429, "conversation"},
+		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,3075429, "conversation"},
+		-- Corner Music Guys By Door
+		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,3075429, "themepark_music_3"},
+		{"figrin_dan",60,25.69,-0.894992,9.4,-40,3075429, "themepark_music_3"},
+	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,3075429, "themepark_music_1"},
+		-- 5 people around bar right front side to center back
+	    {"commoner_naboo",60,3.11,0,5.4,161.005,3075429, "bored"},
+		{"commoner_naboo",60,1.11,0,5.4,330.024,3075429, "npc_standing_drinking"},
+		{"commoner_naboo",60,-3.11,0,5.4,16.6733,3075429, "npc_standing_drinking"},
+		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,3075429, "npc_standing_drinking"},
+		{"patron",60,-4.11,-0.894992,5.4,26.8951,3075429, "happy"},
+		--two people taling far left cell nearest to bar entrance
+		{"corellia_times_reporter",300,21.878,-0.894997,-15.7126,0,3075430, "conversation"},
 		{"entertainer",60,21.878,-0.894997,-14.6126,179.999,3075430, "entertained"},
+		-- 3 people talking far right cell closest to the door
+		{"brawler", 60, 22.6, -0.9, 19.6, 0, 3075431, "npc_consoling"},
+		{"commoner", 60, 21.5, -0.9, 20.7, 135, 3075431, "sad"},
+		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 3075431, "npc_consoling"},
+		-- 2 people talking at back door cell
+		{"noble",60,-42.098,0.105009,-23.0786,180.012,3075441, "conversation"},
+		{"mercenary",300,-42.098,0.105009,-24.1786,0,3075441, "nervous"},
 
-		{"contractor",60,40.8822,0.104999,3.32819,180.003,3075427, "worried"},
 
 		--Guild Hall 3122 5268
 		{"trainer_architect", 0,11,1.13306,-14,0,3075412, ""},
