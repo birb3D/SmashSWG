@@ -51,7 +51,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 91, "happy", false},
 		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 91, "happy", false},
 		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 89, "playful", false},
-		{"cantina_8", "patrolNpc", 42.73, 0.1, 2.47, 200, 91, "playful", false},
+		{"cantina_8", "patrolNpc", 14.3, -0.894992, 2, 200, 91, "playful", false},
 		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 89, "playful", false},
 
 		--Starport
