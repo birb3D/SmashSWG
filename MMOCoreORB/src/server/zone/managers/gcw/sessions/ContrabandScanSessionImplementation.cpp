@@ -441,6 +441,46 @@ void ContrabandScanSessionImplementation::sendContrabandFineSuiWindow(Zone* zone
 	player->sendMessage(suiContrabandFine->generateMessage());
 }
 
+
+bool ContrabandScanSessionImplementation::checkAndUseScannerJammer(CreatureObject* player) {
+
+	if (player == nullptr)
+		return false;
+
+	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+
+	if (inventory == nullptr)
+		return false;
+
+	Locker inventoryLocker(inventory);
+
+	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
+		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
+
+		if (sceno->getObjectTemplate()->getFullTemplateString() == "object/tangible/component/item/scanner_jammer.iff") { // Scanner Jammer
+
+			player->sendSystemMessage("Your Phantom SRS Jammer beeped!");
+			bool removeItem = false;
+			int roll = System::random(100);
+
+			if(roll < 20)
+				removeItem = true;
+
+			if(removeItem) {
+				Locker locker(sceno);
+				sceno->destroyObjectFromWorld(true);
+				sceno->destroyObjectFromDatabase(true);
+
+				player->sendSystemMessage("Oh No!! Phantom SRS Jammer beeped, fizzled,  and crumbled to dust!! Nothing lasts forever!!");
+			}
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
 void ContrabandScanSessionImplementation::performScan(Zone* zone, AiAgent* scanner, CreatureObject* player) {
 	if (zone == nullptr || scanner == nullptr || player == nullptr) {
 		scanState = FINISHED;
@@ -453,7 +493,7 @@ void ContrabandScanSessionImplementation::performScan(Zone* zone, AiAgent* scann
 
 		if (gcwManager != nullptr) {
 			numberOfContrabandItems = gcwManager->countContrabandItems(player);
-		}
+		} 
 
 		if (numberOfContrabandItems > 0 && !smugglerAvoidedScan) {
 			sendScannerChatMessage(zone, scanner, player, "fined_imperial", "fined_rebel");
@@ -559,6 +599,15 @@ void ContrabandScanSessionImplementation::checkPlayerFactionRank(Zone* zone, AiA
 			player->info("Contraband scan avoided due to faction rank.");
 			scanState = FINISHED;
 		}
+	} else if(checkAndUseScannerJammer(player)) {
+		sendPersonalizedScannerChatMessage(zone, scanner, player, "sorry_sir_name", "sorry_sir_name");
+		sendSystemMessage(scanner, player, "probe_scan_done");
+
+		scanner->doAnimation("wave_on_directing");
+		moveAlongMessage(scanner);
+
+		player->info("Contraband scan avoided due to faction rank.");
+		scanState = FINISHED;
 	} else if (player->getFaction() != Factions::FACTIONNEUTRAL) {
 		if (playerStatus == FactionStatus::OVERT || (System::random(100) < detectionChance && !smugglerAvoidedScan)) {
 			if (player->getFactionRank() < RECOGNIZEDFACTIONRANK) {

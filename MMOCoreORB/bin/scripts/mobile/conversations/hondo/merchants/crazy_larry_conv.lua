@@ -13,7 +13,7 @@ crazylarry_template = ConvoTemplate:new {
 crazylarry_start = ConvoScreen:new {
   id = "start",
   leftDialog = "",
-  customDialogText = "Welcome to Crazy Larry's Landspeeders! I'm Crazy Larry!",
+  customDialogText = "Welcome to Crazy Larry's Emporn... Empor... SHOP! I'm Crazy Larry!",
   stopConversation = "false",
   options = {
   	{"Yeah, I know your name Larry...", "banter1"},
@@ -47,7 +47,7 @@ crazylarry_template:addScreen(crazylarry_confirm_purchase);
 crazylarry_bye = ConvoScreen:new {
   id = "bye",
   leftDialog = "",
-  customDialogText = "Swoop... it even sounds fast!",
+  customDialogText = "I swear it's in good condition!",
   stopConversation = "true",
   options = {
   }
@@ -118,8 +118,8 @@ crazylarry_banter1 = ConvoScreen:new {
   stopConversation = "false",
   options = {
 	{"You sell fish tanks, right?", "banter2"},
-	{"I need a new vehicle", "shop"},
-	{"Have any paint for a vehicle?", "shop"}
+	{"What are you selling?", "shop"},
+	{"Wadya buying? Wadya selling?", "shop"}
   }
 }
 crazylarry_template:addScreen(crazylarry_banter1);
@@ -128,7 +128,7 @@ crazylarry_template:addScreen(crazylarry_banter1);
 crazylarry_banter2 = ConvoScreen:new {
   id = "banter2",
   leftDialog = "",
-  customDialogText = "Oh yeah, lots of them! Boats and innertubes too! *gives you a dissapproving blank stare* I take it your here to buy a vehicle?",
+  customDialogText = "I just found some sweet new jammers (shhh... don't tell anyone) and some other... less reuptable goods.",
   stopConversation = "false",
   options = {
 	{"You're the man to see!", "banter3"}
@@ -140,7 +140,7 @@ crazylarry_template:addScreen(crazylarry_banter2);
 crazylarry_banter3 = ConvoScreen:new {
   id = "banter3",
   leftDialog = "",
-  customDialogText = "I guess that is what I am these days... Ah well, I make more selling these things than I ever did racing them. ",
+  customDialogText = "I guess that is what I am these days... Ah well, business is good! So, wadya say? ",
   stopConversation = "false",
   options = {
 	{"Want to join us on our next job?", "banter4"},
@@ -153,7 +153,7 @@ crazylarry_template:addScreen(crazylarry_banter3);
 crazylarry_banter4 = ConvoScreen:new {
   id = "banter4",
   leftDialog = "",
-  customDialogText = "I dunno... since we left Nym's and started our own thing here, you guys have done great with the pirating without me. I'm happy enough just fixing and selling vehicles.",
+  customDialogText = "I dunno... since we left Nym's and started our own thing here, you guys have done great with the pirating without me. I'm happy enough just finding... goodies.",
   stopConversation = "false",
   options = {
 	{"Alright, old man. Let's see what you've got then.", "shop"}

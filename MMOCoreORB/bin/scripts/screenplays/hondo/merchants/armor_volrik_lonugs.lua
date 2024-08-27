@@ -11,37 +11,9 @@ VolrikLonugsSP = ScreenPlay:new {
 		{name="townsperson", npcStanding=-9000, priceAdjust=12}, -- Adjust price only
 	},
 	goods = {
-		{optName="armor_human", cost=10000, itemName="Humanoids - Bone Armor Suit", items={
-			"object/tangible/wearables/armor/bone/armor_bone_s01_bicep_l.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_bicep_r.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_boots.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_bracer_l.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_bracer_r.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_chest_plate.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_gloves.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_helmet.iff",
-			"object/tangible/wearables/armor/bone/armor_bone_s01_leggings.iff",
-			}
-		}, 
-		{optName="armor_wookiee", cost=10000, itemName="Wookiees - Black Mountain Suit", items={
-			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bracer_l.iff",
-			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_bracer_r.iff",
-			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_chest_plate.iff",
-			"object/tangible/wearables/armor/kashyyykian_black_mtn/armor_kashyyykian_black_mtn_leggings.iff",
-			}
-		},
-		{optName="armor_ithorian", cost=10000, itemName="Ithorians - Defender Suit", items={
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_bicep_l.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_bicep_r.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_boots.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_bracer_l.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_bracer_r.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_chest_plate.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_gloves.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_helmet.iff",
-			"object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_leggings.iff",
-			}
-		}, 
+		{optName="vendor_loot", cost=1000, itemName="Some Stuff I Found", items={"vendor_loot"}}, 
+		{optName="vendor_gear", cost=3500, itemName="Some Random Gear", items={"vendor_gear"}}, 
+		{optName="vendor_tapes", cost=10000, itemName="An Armor/Clothing Attachment", items={"all_attachments"}}, 
 	},
 }
 
@@ -49,7 +21,7 @@ VolrikLonugsSP = ScreenPlay:new {
 registerScreenPlay("VolrikLonugsSP", true)
 
 function VolrikLonugsSP:start() 
-	spawnMobile("naboo", "volrik_lonugs", 1, -5000, 6, 4262, 180, 0) -- naboo near bazaar terminals
+	spawnMobile("naboo", "volrik_lonugs", 1, -5002, 6, 4262, 135, 0) -- naboo near bazaar terminals
 end
 
 volriklonugs_convo_handler = Object:new {

@@ -13,11 +13,11 @@ volriklonugs_template = ConvoTemplate:new {
 volriklonugs_start = ConvoScreen:new {
   id = "start",
   leftDialog = "",
-  customDialogText = "In the market for a suit of armor are ya?",
+  customDialogText = "In the market for gear are ya?",
   stopConversation = "false",
   options = {
   	{"That's right.", "shop"},
-  	{"Is this the only place I can get armor?", "help1"},
+  	{"Is this the only place I can get gear?", "help1"},
     {"Nope", "nope"}
   }
 }
@@ -27,7 +27,7 @@ volriklonugs_template:addScreen(volriklonugs_start);
 volriklonugs_shop = ConvoScreen:new {
   id = "shop",
   leftDialog = "",
-  customDialogText = "I've got some basic designs that will fit anyone and generally be better than nothing. Pretty cheap too. The boss has been too busy training new crafters to make anything else. Stats are 24/24/12/4 Kinetic, Energy, Electricity, Acid on each suit.",
+  customDialogText = "Honestly, it's a grab bag. You might get something useful, you might not. Who knows. Wanna buy?",
   stopConversation = "false",
   options = { 
   }
@@ -119,7 +119,7 @@ volriklonugs_help1 = ConvoScreen:new {
   customDialogText = "The Empire will happily suit you up if you join them. Bet them Rebels would too. Otherwise, ya might need to get some second hand stuff, if you catch my meaning, or get someone on your crew to craft some for ya. There are some merchants on other planets of course, but that's dangerous stuff I don't know much about...",
   stopConversation = "false",
   options = {
-	{"Really? No one else sells armor on Tatooine?", "help1a"},
+	{"Really? No one else sells gear?", "help1a"},
 	{"OK, show me what you've got.", "shop"},
 	{"I see. Well, thanks for the tips.", "bye"}
   }
@@ -130,7 +130,7 @@ volriklonugs_template:addScreen(volriklonugs_help1);
 volriklonugs_help1a = ConvoScreen:new {
   id = "help1a",
   leftDialog = "",
-  customDialogText = "*cough* There is no finer establishment for armor than our own! You certainly cannot gain access to more advanced armor sets by befriending the likes of Jabba the Hutt or other galactic factions. *wink*",
+  customDialogText = "*cough* There is no finer establishment for gear than our own!",
   stopConversation = "false",
   options = {
 	{"OK, show me what you've got.", "shop"},

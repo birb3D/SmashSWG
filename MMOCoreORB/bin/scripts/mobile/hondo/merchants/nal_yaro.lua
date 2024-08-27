@@ -1,6 +1,6 @@
 nal_yaro = Creature:new {
 	objectName = "@mob/creature_names:commoner",
-	customName = "Nal Yaro (Armor Merchant)",
+	customName = "Nal Yaro (Creature Merchant)",
 	socialGroup = "jabba",
 	pvpFaction = "townsperson",
 	faction = "jabba",

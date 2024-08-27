@@ -140,6 +140,45 @@ float SharedLabratory::getWeightedValue(ManufactureSchematic* manufactureSchemat
 
 	return weightedAverage;
 }
+
+bool SharedLabratory::checkAndUseHackingChip(CreatureObject* player) {
+
+	if (player == nullptr)
+		return false;
+
+	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+
+	if (inventory == nullptr)
+		return false;
+
+	Locker inventoryLocker(inventory);
+
+	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
+		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
+
+		if (sceno->getObjectTemplate()->getFullTemplateString() == "object/tangible/component/item/craft_hack.iff") { // Craft Hack
+
+			player->sendSystemMessage("Your Cr.4.ft Hacking Chip beeped! Looks like it prevented a bad craft!");
+			bool removeItem = false;
+			int roll = System::random(100);
+
+			if(roll < 20)
+				removeItem = true;
+
+			if(removeItem) {
+				Locker locker(sceno);
+				sceno->destroyObjectFromWorld(true);
+				sceno->destroyObjectFromDatabase(true);
+
+				player->sendSystemMessage("Oh No!! Your Cr.4.ft Hacking Chip beeped, fizzled,  and crumbled to dust!! Nothing lasts forever!!");
+			}
+			return true;
+		}
+	}
+
+	return false;
+}
+
 int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchematic* draftSchematic, float effectiveness, float stationOffset){
 	// assemblyPoints is 0-12
 	/// City bonus should be 10
@@ -182,8 +221,15 @@ int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchema
 	if(luckRoll < (5 - craftbonus - failMitigate))
 		luckRoll -= System::random(100);
 
-	//if(luckRoll < 5)
-	//	return CRITICALFAILURE;
+	if(luckRoll < 5) {
+
+		// Hacking Chip
+		if(checkAndUseHackingChip(player))
+			return CraftingManager::AMAZINGSUCCESS;
+
+		return CraftingManager::CRITICALFAILURE;
+
+	}
 
 	luckRoll += System::random(player->getSkillMod("luck") + player->getSkillMod("force_luck"));
 
@@ -194,6 +240,10 @@ int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchema
 
 	if (assemblyRoll > 60)
 		return CraftingManager::GOODSUCCESS;
+
+	// Hacking Chip
+	if (assemblyRoll < 60 && checkAndUseHackingChip(player))
+		return CraftingManager::AMAZINGSUCCESS;
 
 	if (assemblyRoll > 50)
 		return CraftingManager::MODERATESUCCESS;

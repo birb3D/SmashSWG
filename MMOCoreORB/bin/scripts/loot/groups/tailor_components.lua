@@ -5,14 +5,14 @@ tailor_components = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-
+	--[[
 		{itemTemplate = "strange_armor_segment_bone", weight = 2000000},
 		{itemTemplate = "strange_armor_segment_zam", weight = 2000000},
 		{itemTemplate = "strange_armor_segment_chitin", weight = 2000000},
 		{itemTemplate = "strange_armor_segment_padded", weight = 2000000},
 		{itemTemplate = "strange_armor_segment_ubese", weight = 2000000},
-	
-		--[[
+	]]
+
 		{itemTemplate = "crystalline_clothing_treatment", weight = 2600000},
 		{itemTemplate = "heavy_duty_clasp", weight = 2600000},
 		{itemTemplate = "heavy_duty_leather", weight = 2600000},
@@ -44,7 +44,7 @@ tailor_components = {
 		{itemTemplate = "strange_structure_light_ore_mining_unit", weight = 65000},
 		{itemTemplate = "strange_structure_ore_mining_unit", weight = 65000},
 		{itemTemplate = "strange_structure_turbo_fluidic_drilling_pumping_unit", weight = 65000},
-	]]--
+
 	}
 }
 
