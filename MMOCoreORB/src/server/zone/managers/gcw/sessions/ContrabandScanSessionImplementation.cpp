@@ -457,9 +457,7 @@ bool ContrabandScanSessionImplementation::checkAndUseScannerJammer(CreatureObjec
 	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
 		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
 
-		uint32 objType = sceno->getGameObjectType();
-
-		if (objType == 895412) { // Scanner Jammer
+		if (sceno->getObjectTemplate()->getFullTemplateString() == "object/tangible/component/item/scanner_jammer.iff") { // Scanner Jammer
 
 			player->sendSystemMessage("Your Phantom SRS Jammer beeped!");
 			bool removeItem = false;

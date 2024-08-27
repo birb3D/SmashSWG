@@ -156,9 +156,7 @@ bool SharedLabratory::checkAndUseHackingChip(CreatureObject* player) {
 	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
 		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
 
-		uint32 objType = sceno->getGameObjectType();
-
-		if (objType == 664449) { // Hacking chip
+		if (sceno->getObjectTemplate()->getFullTemplateString() == "object/tangible/component/item/craft_hack.iff") { // Craft Hack
 
 			player->sendSystemMessage("Your Cr.4.ft Hacking Chip beeped! Looks like it prevented a bad craft!");
 			bool removeItem = false;
