@@ -15,6 +15,8 @@ CrazyLarry = ScreenPlay:new {
 	goods = {
 		{optName="vendor_loot", cost=1000, itemName="Some Stuff I Found", items={"vendor_loot"}}, 
 		{optName="vendor_strange", cost=5000, itemName="Random Strange Items", items={"strange_items"}}, 
+		{optName="item_craft_hack", cost=10000, itemName="Cr.4.ft Hacking Chip", items={"object/tangible/component/item/craft_hack.iff"}},
+		{optName="item_scanner_jammer", cost=10000, itemName="Phantom SRS Jammer", items={"object/tangible/component/item/scanner_jammer.iff"}},
 	},
 }
 
