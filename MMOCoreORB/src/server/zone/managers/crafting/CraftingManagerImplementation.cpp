@@ -65,6 +65,8 @@ int CraftingManagerImplementation::calculateExperimentationSuccess(CreatureObjec
 
 	float cityBonus = player->getSkillMod("private_spec_experimentation");
 
+	SharedLabratory* lab = labs.get(draftSchematic->getLabratory());
+
 	int experimentationSkill = player->getSkillMod(draftSchematic->getExperimentationSkill());
 	int forceSkill = player->getSkillMod("force_experimentation");
 	experimentationSkill += forceSkill;
@@ -102,8 +104,14 @@ int CraftingManagerImplementation::calculateExperimentationSuccess(CreatureObjec
 	if(luckRoll < (5 - expbonus - failMitigate))
 		luckRoll -= System::random(100);
 
-	//if(luckRoll < 5)
-	//	return CRITICALFAILURE;
+	if(luckRoll < 5) {
+
+		// Hacking Chip
+		if(lab->checkAndUseHackingChip(player))
+			return AMAZINGSUCCESS;
+
+		return CRITICALFAILURE;
+	}
 
 	luckRoll += System::random(player->getSkillMod("luck") + player->getSkillMod("force_luck"));
 
@@ -121,6 +129,10 @@ int CraftingManagerImplementation::calculateExperimentationSuccess(CreatureObjec
 
 	if (experimentRoll > 40)
 		return SUCCESS;
+
+	// Hacking Chip
+	if (experimentRoll < 40 && lab->checkAndUseHackingChip(player))
+		return AMAZINGSUCCESS;
 
 	if (experimentRoll > 30)
 		return MARGINALSUCCESS;

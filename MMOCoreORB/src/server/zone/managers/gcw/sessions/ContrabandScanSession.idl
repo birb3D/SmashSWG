@@ -117,6 +117,7 @@ class ContrabandScanSession extends Facade {
 	private native void reactOnJediMindTrick(Zone zone, AiAgent scanner, CreatureObject player);
 	private native void jediMindTrickResult(Zone zone, AiAgent scanner, CreatureObject player);
 	private native void jediDetect(Zone zone, AiAgent scanner, CreatureObject player);
+	private native boolean checkAndUseScannerJammer(CreatureObject player);
 	private native void performScan(Zone zone, AiAgent scanner, CreatureObject player);
 	private native void checkIfPlayerHasReturned(Zone zone, AiAgent scanner, CreatureObject player);
 	private native boolean isDarkJedi(CreatureObject player);

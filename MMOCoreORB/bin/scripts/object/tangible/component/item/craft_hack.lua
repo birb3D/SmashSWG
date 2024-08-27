@@ -42,7 +42,7 @@
 
 
 object_tangible_component_item_craft_hack = object_tangible_component_item_shared_craft_hack:new {
-
+	gameObjectType = 664449
 }
 
 ObjectTemplates:addTemplate(object_tangible_component_item_craft_hack, "object/tangible/component/item/craft_hack.iff")

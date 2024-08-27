@@ -42,7 +42,7 @@
 
 
 object_tangible_component_item_scanner_jammer = object_tangible_component_item_shared_scanner_jammer:new {
-
+	gameObjectType = 895412
 
 }
 
