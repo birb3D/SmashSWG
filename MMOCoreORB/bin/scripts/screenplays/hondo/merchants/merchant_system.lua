@@ -122,8 +122,8 @@ end
 function MerchantSystem:completeSale(pObject, creature, relationsTable, goodsTable)
 	local gtlc = MerchantSystem:getSelectedLineNum(pObject)
 	gtlc = tonumber(gtlc)
-	local credits = creature:getCashCredits()
-	local pInventory = creature:getSlottedObject("inventory")
+	local credits = CreatureObject(pObject):getCashCredits()
+	local pInventory = CreatureObject(pObject):getSlottedObject("inventory")
 	local inventory = LuaSceneObject(pInventory)
 	local numberOfItems = inventory:getContainerObjectsSize()
 	local freeSpace = 80 - numberOfItems
@@ -141,11 +141,11 @@ function MerchantSystem:completeSale(pObject, creature, relationsTable, goodsTab
 			creature:subtractCashCredits(chargePlayer)
 			-- Grant items
 			for ic = 1, #goodsTable[gtlc].items , 1 do
-				if(string.find(goodsTable[gtlc].items[ic], '.iff', 1, true) == false) then
-					createLoot(pInventory, goodsTable[gtlc].items[ic], 1, true)
+				if (string.find(goodsTable[gtlc].items[ic], 'iff') == nil) then
+					local pItem = createLoot(pInventory, goodsTable[gtlc].items[ic], 1, true)
 				else
 					local pItem = giveItem(pInventory, goodsTable[gtlc].items[ic], -1)
-				end if
+				end
 			end
 		else 
 			creature:sendSystemMessage("Transaction Failed. System error in price calculation.")

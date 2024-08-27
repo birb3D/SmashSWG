@@ -159,6 +159,124 @@ object_tangible_component_item_shared_electronic_energy_distributor = SharedTang
 
 ObjectTemplates:addClientTemplate(object_tangible_component_item_shared_electronic_energy_distributor, "object/tangible/component/item/shared_electronic_energy_distributor.iff")
 
+object_tangible_component_item_shared_craft_hack = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/component/item/shared_craft_hack.iff"
+	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
+--[[
+	appearanceFilename = "appearance/eqp_comp_electronic_power_unit.apt",
+	arrangementDescriptorFilename = "",
+
+	certificationsRequired = {},
+	clearFloraRadius = 0,
+	clientDataFile = "",
+	clientGameObjectType = 262149,
+	collisionActionBlockFlags = 0,
+	collisionActionFlags = 51,
+	collisionActionPassFlags = 1,
+	collisionMaterialBlockFlags = 0,
+	collisionMaterialFlags = 1,
+	collisionMaterialPassFlags = 0,
+	containerType = 0,
+	containerVolumeLimit = 1,
+	customizationVariableMapping = {},
+
+	detailedDescription = "@craft_item_ingredients_d:craft_hack",
+
+	gameObjectType = 262149,
+
+	locationReservationRadius = 0,
+	lookAtText = "@weapon_lookat:craft_hack",
+
+	noBuildRadius = 0,
+
+	objectName = "@craft_item_ingredients_n:craft_hack",
+	onlyVisibleInTools = 0,
+
+	paletteColorCustomizationVariables = {},
+	portalLayoutFilename = "",
+
+	rangedIntCustomizationVariables = {},
+
+	scale = 1,
+	scaleThresholdBeforeExtentTest = 0.5,
+	sendToClient = 1,
+	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
+	snapToTerrain = 1,
+	socketDestinations = {},
+	structureFootprintFileName = "",
+	surfaceType = 0,
+
+	targetable = 1,
+	totalCellNumber = 0,
+
+	useStructureFootprintOutline = 0,
+
+	clientObjectCRC = 1024745663,
+	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/component/base/shared_base_component.iff", "object/tangible/component/base/shared_base_electronic_component.iff"}
+]]
+}
+
+ObjectTemplates:addClientTemplate(object_tangible_component_item_shared_craft_hack, "object/tangible/component/item/shared_craft_hack.iff")
+
+object_tangible_component_item_shared_scanner_jammer = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/component/item/shared_scanner_jammer.iff"
+	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
+--[[
+	appearanceFilename = "appearance/eqp_comp_electronic_power_unit.apt",
+	arrangementDescriptorFilename = "",
+
+	certificationsRequired = {},
+	clearFloraRadius = 0,
+	clientDataFile = "",
+	clientGameObjectType = 262149,
+	collisionActionBlockFlags = 0,
+	collisionActionFlags = 51,
+	collisionActionPassFlags = 1,
+	collisionMaterialBlockFlags = 0,
+	collisionMaterialFlags = 1,
+	collisionMaterialPassFlags = 0,
+	containerType = 0,
+	containerVolumeLimit = 1,
+	customizationVariableMapping = {},
+
+	detailedDescription = "@craft_item_ingredients_d:scanner_jammer",
+
+	gameObjectType = 262149,
+
+	locationReservationRadius = 0,
+	lookAtText = "@weapon_lookat:scanner_jammer",
+
+	noBuildRadius = 0,
+
+	objectName = "@craft_item_ingredients_n:scanner_jammer",
+	onlyVisibleInTools = 0,
+
+	paletteColorCustomizationVariables = {},
+	portalLayoutFilename = "",
+
+	rangedIntCustomizationVariables = {},
+
+	scale = 1,
+	scaleThresholdBeforeExtentTest = 0.5,
+	sendToClient = 1,
+	slotDescriptorFilename = "abstract/slot/descriptor/tangible.iff",
+	snapToTerrain = 1,
+	socketDestinations = {},
+	structureFootprintFileName = "",
+	surfaceType = 0,
+
+	targetable = 1,
+	totalCellNumber = 0,
+
+	useStructureFootprintOutline = 0,
+
+	clientObjectCRC = 1024745663,
+	derivedFromTemplates = {"object/object/base/shared_base_object.iff", "object/tangible/base/shared_tangible_base.iff", "object/tangible/base/shared_tangible_craftable.iff", "object/tangible/component/base/shared_base_component.iff", "object/tangible/component/base/shared_base_electronic_component.iff"}
+]]
+}
+
+ObjectTemplates:addClientTemplate(object_tangible_component_item_shared_scanner_jammer, "object/tangible/component/item/shared_scanner_jammer.iff")
+
 object_tangible_component_item_shared_electronic_power_conditioner = SharedTangibleObjectTemplate:new {
 	clientTemplateFileName = "object/tangible/component/item/shared_electronic_power_conditioner.iff"
 	--Data below here is deprecated and loaded from the tres, keeping for easy lookups

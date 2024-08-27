@@ -13,7 +13,7 @@ nalyaro_template = ConvoTemplate:new {
 nalyaro_start = ConvoScreen:new {
   id = "start",
   leftDialog = "",
-  customDialogText = "I ain't got time for chatter. Do you wanna buy some armor or not?",
+  customDialogText = "I ain't got time for chatter. Do you wanna buy some stuff or not?",
   stopConversation = "false",
   options = {
   	{"Sure thing, boss.", "shop"},
@@ -26,7 +26,7 @@ nalyaro_template:addScreen(nalyaro_start);
 nalyaro_shop = ConvoScreen:new {
   id = "shop",
   leftDialog = "",
-  customDialogText = "This stuff is almost top of the line. 50% resists to everything except them laser swords, which ya never see nomore nohow. Can slice'm real good too.", 
+  customDialogText = "People bring me the dead creatures they kill. I get the most out of it. You buy it.", 
   stopConversation = "false",
   options = { 
   }

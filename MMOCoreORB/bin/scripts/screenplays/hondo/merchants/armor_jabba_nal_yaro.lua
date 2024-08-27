@@ -13,37 +13,8 @@ NalYaroSP = ScreenPlay:new {
 		{name="hutt", npcStanding=-200, priceAdjust=10}, -- Enemy
 	},
 	goods = {
-		{optName="armor_human", cost=45000, itemName="Humanoids - Composite Armor Suit", items={
-			"object/tangible/wearables/armor/composite/armor_composite_bicep_l.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_bicep_r.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_boots.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_bracer_l.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_bracer_r.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_chest_plate.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_gloves.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_helmet.iff",
-			"object/tangible/wearables/armor/composite/armor_composite_leggings.iff"
-			}
-		}, 
-		{optName="armor_wookiee", cost=45000, itemName="Wookiees - Black Mountain Suit", items={
-			"object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bracer_l.iff",
-			"object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_bracer_r.iff",
-			"object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_chest_plate.iff",
-			"object/tangible/wearables/armor/kashyyykian_ceremonial/armor_kashyyykian_ceremonial_leggings.iff"
-			}
-		},
-		{optName="armor_ithorian", cost=45000, itemName="Ithorians - Defender Suit", items={
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_bicep_l.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_bicep_r.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_boots.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_bracer_l.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_bracer_r.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_chest_plate.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_gloves.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_helmet.iff",
-			"object/tangible/wearables/armor/ithorian_guardian/ith_armor_s02_leggings.iff"
-			}
-		}, 
+		{optName="vendor_loot", cost=1000, itemName="Some Stuff I Found", items={"vendor_loot"}}, 
+		{optName="vendor_creature", cost=3000, itemName="Some Creature Stuff", items={"vendor_creature"}}, 
 	},
 }
 
@@ -51,7 +22,7 @@ NalYaroSP = ScreenPlay:new {
 registerScreenPlay("NalYaroSP", true)
 
 function NalYaroSP:start() 
-	spawnMobile("tatooine", "nal_yaro", 1, -27.21, -0.89, 1.99, 101, 1134568) -- Wayfar waypoint -5199 -6571
+	spawnMobile("tatooine", "nal_yaro", 1, 3431, 5, -4883, 92, 0) -- Wayfar waypoint -5199 -6571
 end
 
 nalyaro_convo_handler = Object:new {

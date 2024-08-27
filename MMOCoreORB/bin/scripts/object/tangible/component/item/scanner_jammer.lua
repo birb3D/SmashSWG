@@ -41,17 +41,9 @@
 --this exception also makes it possible to release a modified version 
 
 
+object_tangible_component_item_scanner_jammer = object_tangible_component_item_shared_scanner_jammer:new {
 
---Children folder includes
-includeFile("tangible/component/item/quest_item/serverobjects.lua")
 
--- Server Objects
-includeFile("tangible/component/item/electronic_control_unit.lua")
-includeFile("tangible/component/item/electronic_energy_distributor.lua")
-includeFile("tangible/component/item/electronic_power_conditioner.lua")
-includeFile("tangible/component/item/scanner_jammer.lua")
-includeFile("tangible/component/item/craft_hack.lua")
-includeFile("tangible/component/item/electronics_gp_module.lua")
-includeFile("tangible/component/item/electronics_memory_module.lua")
-includeFile("tangible/component/item/large_sensor_package.lua")
-includeFile("tangible/component/item/micro_sensor_suite.lua")
+}
+
+ObjectTemplates:addTemplate(object_tangible_component_item_scanner_jammer, "object/tangible/component/item/scanner_jammer.iff")

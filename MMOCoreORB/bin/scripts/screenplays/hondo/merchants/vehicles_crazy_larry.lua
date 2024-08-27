@@ -13,9 +13,8 @@ CrazyLarry = ScreenPlay:new {
 		{name="canyon_corsair", npcStanding=-1000, priceAdjust=20}  -- Enemy
 	},
 	goods = {
-		{optName="gamba", cost=500, itemName="Customization Kit", items={"color_crystals"}}, 
-		{optName="speederbike", cost=28000, itemName="Speederbike", items={"object/tangible/deed/vehicle_deed/speederbike_deed.iff"}},
-		{optName="swoop", cost=45000, itemName="Swoop Bike", items={"object/tangible/deed/vehicle_deed/speederbike_swoop_deed.iff"}},
+		{optName="vendor_loot", cost=1000, itemName="Some Stuff I Found", items={"vendor_loot"}}, 
+		{optName="vendor_strange", cost=5000, itemName="Random Strange Items", items={"strange_items"}}, 
 	},
 }
 

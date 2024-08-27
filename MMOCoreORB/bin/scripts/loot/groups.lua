@@ -23,6 +23,11 @@ includeFile("groups/sith_shadow_encounter_datapad.lua")
 includeFile("groups/sith_shadow_intro_theater_datapad.lua")
 includeFile("groups/skill_buffs.lua")
 includeFile("groups/tailor_components.lua")
+includeFile("groups/all_attachments.lua")
+includeFile("groups/strange_items.lua")
+includeFile("groups/vendor_creature.lua")
+includeFile("groups/vendor_gear.lua")
+includeFile("groups/vendor_loot.lua")
 includeFile("groups/treasure_map_group.lua")
 
 -- armor sub-folder
