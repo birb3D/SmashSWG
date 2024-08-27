@@ -7,7 +7,7 @@ local ObjectManager = require("managers.object.object_manager")
 NalYaroSP = ScreenPlay:new {
 	numberOfActs = 1, 	
 	relations = { 
-		{name="jabba", npcStanding=3500, priceAdjust=5}, -- Friend
+		--{name="jabba", npcStanding=50, priceAdjust=5}, -- Friend
 		{name="borvo", npcStanding=-4000, priceAdjust=5}, -- Enemy
 		{name="valarian", npcStanding=-200, priceAdjust=10}, -- Enemy
 		{name="hutt", npcStanding=-200, priceAdjust=10}, -- Enemy

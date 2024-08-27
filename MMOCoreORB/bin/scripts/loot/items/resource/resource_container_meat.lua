@@ -6,7 +6,7 @@ resource_container_meat = {
 	customObjectName = "",
 	directObjectTemplate = "object/resource_container/simple.iff",
 	craftingValues = {
-		{"quantity",5,50,0, true},
+		{"quantity",50,300,0, true},
 	},
 	customizationStringNames = {},
 	customizationValues = {}

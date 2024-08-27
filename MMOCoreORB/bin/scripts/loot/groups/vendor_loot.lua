@@ -9,7 +9,7 @@ vendor_loot = {
 		{groupTemplate = "tailor_components", weight = 2500000}, 
 
 		{groupTemplate = "strange_items", weight = 500000}, 
-		{groupTemplate = "all_attachments", weight = 500000}, -
+		{groupTemplate = "all_attachments", weight = 500000},
 		{groupTemplate = "looted_container", weight = 500000}, 
 		{groupTemplate = "vendor_creature", weight = 500000}, 
 		{groupTemplate = "vendor_gear", weight = 500000}, 
