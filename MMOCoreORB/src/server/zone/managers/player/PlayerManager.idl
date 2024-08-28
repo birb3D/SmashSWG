@@ -81,6 +81,8 @@ class PlayerManager extends Observer implements Logger {
 	protected int performanceDuration;
 	protected int medicalDuration;
 
+	protected boolean galaxyWideGrouping = false;
+
 	protected int baseStoredCreaturePets;
 	protected int baseStoredFactionPets;
 	protected int baseStoredDroids;

@@ -242,6 +242,8 @@ void PlayerManagerImplementation::loadLuaConfig() {
 	performanceDuration = lua->getGlobalInt("performanceDuration");
 	medicalDuration = lua->getGlobalInt("medicalDuration");
 
+	galaxyWideGrouping = lua->getGlobalBoolean("galaxyWideGrouping");
+
 	groupExpMultiplier = lua->getGlobalFloat("groupExpMultiplier");
 
 	globalExpMultiplier = lua->getGlobalFloat("globalExpMultiplier");
