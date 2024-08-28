@@ -105,6 +105,14 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"npc_walk_34", "patrolNpc", -5118, 6, 4199,300,0, "happy", false},
 		{"npc_walk_35", "r2", -5115, 6, 4195,300,0, "happy", false},
 		{"npc_walk_36", "r4", -5122, 6, 4233,300,0, "happy", false},
+		{"npc_walk_37", "patrolNpc", -5145, 6, 4267,300,0, "happy", false},
+		{"npc_walk_38", "patrolNpc", -5139, 6, 4261,300,0, "happy", false},
+		{"npc_walk_39", "patrolNpc", -5071, 6, 4251,300,0, "happy", false},
+		{"npc_walk_40", "patrolNpc", -5069, 6, 4249,300,0, "happy", false},
+		{"npc_walk_41", "patrolNpc", -5108, 6, 4186,300,0, "happy", false},
+		{"npc_walk_42", "protocol_droid_3po_red", -5008, 6, 4165,300,0, "happy", false},
+		{"npc_walk_43", "surgical_droid_21b", -5093, 6, 4209,300,0, "happy", false},
+
 	},
 
 	patrolPoints = {
@@ -182,6 +190,13 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		npc_walk_34 = { {-5118, 6, 4199, 0, false}, {-5129, 6, 4236, 0, false}, {-5123, 6, 4289, 0, false}, {-5120, 6, 4332, 0, false}, {-5102, 6, 4277, 0, false}, {-5084, 6, 4224, 0, false} },
 		npc_walk_35 = { {-5115, 6, 4195, 0, false}, {-5127, 6, 4234, 0, false}, {-5121, 6, 4287, 0, false}, {-5118, 6, 4330, 0, false}, {-5100, 6, 4275, 0, false}, {-5082, 6, 4222, 0, false} },
 		npc_walk_36 = { {-5122, 6, 4233, 0, false}, {-5076, 6, 4292, 0, false}, {-5027, 6, 4224, 0, false}, {-5077, 6, 4178, 0, false}, {-5060, 6, 4160, 0, false}, {-5070, 6, 4150, 0, false} },
+		npc_walk_37 = { {-5145, 6, 4267, 0, false}, {-5199, 6, 4199, 0, false}, {-5223, 6, 4215, 0, false}, {-5245, 6, 4233, 0, false}, {-5178, 6, 4316, 0, false} },
+		npc_walk_38 = { {-5139, 6, 4261, 0, false}, {-5191, 6, 4192, 0, false}, {-5225, 6, 4217, 0, false}, {-5249, 6, 4236, 0, false}, {-5174, 6, 4322, 0, false} },
+		npc_walk_39 = { {-5071, 6, 4251, 0, false}, {-5036, 6, 4216, 0, false}, {-4984, 6, 4214, 0, false}, {-4938, 6, 4184, 0, false}, {-4886, 6, 4137, 0, false}, {-4938, 6, 4184, 0, false} },
+		npc_walk_40 = { {-5069, 6, 4249, 0, false}, {-5034, 6, 4214, 0, false}, {-4982, 6, 4212, 0, false}, {-4936, 6, 4182, 0, false}, {-4884, 6, 4135, 0, false}, {-4936, 6, 4182, 0, false} },
+		npc_walk_41 = { {-5108, 6, 4186, 0, false}, {-5049, 6, 4219, 0, false}, {-5090, 6, 4254, 0, false}, {-5126, 6, 4236, 0, false}, {-5093, 6, 4209, 0, false} },
+		npc_walk_42 = { {-5008, 6, 4165, 0, false}, {-5134, 6, 4203, 0, false}, {-5108, 6, 4186, 0, false}, {-5064, 6, 4164, 0, false} },
+		npc_walk_43 = { {-5093, 6, 4209, 0, false}, {-5110, 6, 4192, 0, false}, {-5074, 6, 4140, 0, false}, {-5008, 6, 4165, 0, false} },
 
 	},
 
