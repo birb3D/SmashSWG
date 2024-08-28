@@ -1,6 +1,6 @@
 volrik_lonugs = Creature:new {
 	objectName = "@mob/creature_names:commoner",
-	customName = "Volrik Lonugs (Armor Merchant)",
+	customName = "Volrik Lonugs (Gear Merchant)",
 	socialGroup = "townsperson",
 	pvpFaction = "townsperson",
 	faction = "townsperson",

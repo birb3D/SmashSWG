@@ -21,7 +21,7 @@ VolrikLonugsSP = ScreenPlay:new {
 registerScreenPlay("VolrikLonugsSP", true)
 
 function VolrikLonugsSP:start() 
-	spawnMobile("naboo", "volrik_lonugs", 1, -5002, 6, 4262, 135, 0) -- naboo near bazaar terminals
+	spawnMobile("naboo", "volrik_lonugs", 1, -5003, 6, 4263, 135, 0) -- naboo near bazaar terminals
 end
 
 volriklonugs_convo_handler = Object:new {
