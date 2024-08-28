@@ -146,6 +146,8 @@ function MerchantSystem:completeSale(pObject, creature, relationsTable, goodsTab
 				else
 					local pItem = giveItem(pInventory, goodsTable[gtlc].items[ic], -1)
 				end
+
+				creature:sendSystemMessage(SceneObject(pItem):getCustomObjectName() .. " has been added to your inventory.")
 			end
 		else 
 			creature:sendSystemMessage("Transaction Failed. System error in price calculation.")
