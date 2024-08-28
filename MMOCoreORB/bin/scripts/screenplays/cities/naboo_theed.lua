@@ -297,8 +297,8 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 
 		--Band Outside
 		{"doikk_nats",60,-4827,6,4085,-25.0013,0, "themepark_music_3"},
-		{"figrin_dan",60,-4827,6,4085,-85,0, "themepark_music_3"},
-	    {"nalan_cheel",60,-4828,6,4082,175.0011,0, "themepark_music_1"},
+		{"figrin_dan",60,-4825,6,4087,-85,0, "themepark_music_3"},
+	    {"nalan_cheel",60,-4829,6,4083,345.0011,0, "themepark_music_1"},
 
 		--Band Observers Outside
 		{"sullustan_male",	60,	-4832,	6,	4091,	35,		0, "happy"},
