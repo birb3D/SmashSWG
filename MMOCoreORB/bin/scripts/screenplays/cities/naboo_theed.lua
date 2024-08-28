@@ -68,10 +68,10 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"starport_walk_11", "eg6_power_droid", 12.8622,7.9418,20,0,1692104, "", false},
 
 		--Outside Pathing NPC's
-		{"npc_walk_1", "patrolNpc", -5110,6,4192,15,0, "playful", false},
-		{"npc_walk_2", "patrolNpc", -4992,6,4072,300,0, "conversation", false},
+		{"npc_walk_1", "patrolNpc", -5110,6,4192,0,0, "playful", false},
+		{"npc_walk_2", "patrolNpc", -5012,6,4249,0,0, "conversation", false},
 		{"npc_walk_3", "protocol_droid_3po_silver", -4855,6,4166,300,0, "", false},
-		{"npc_walk_4", "patrolNpc", -5012,6,4249,300,0, "happy", false},
+		{"npc_walk_4", "patrolNpc", -5006,6,4085,300,0, "happy", false},
         {"npc_walk_5", "patrolNpc", -4875, 6, 4067, 300, 0, "happy", false},
         {"npc_walk_6", "surgical_droid_21b", -4873, 6, 4069, 300, 0, "", false},
 		{"npc_walk_7", "patrolNpc", -4912,6,4067,300,0, "", false},
@@ -139,10 +139,10 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		starport_walk_10 = {{-17,7.9418,20,1692104, false}, {-17.8622,7.9418,-40,1692104, false}, {17.8622,7.9418,-40,1692104, false}, {17,7.9418,20,1692104, false}},
 		starport_walk_11 = {{15,7.9418,20,1692104, false}, {15.8622,7.9418,-37,1692104, false}, {-15.8622,7.9418,-37,1692104, false}, {-15.8622,7.9418,20,1692104, false}},
 
-		npc_walk_1 = {{-5110,6,4192,0, true}, {-4835,6,4084,0, false}},
-		npc_walk_2 = {{-4992,6,4072,0, true}, {0,16.4,0.3,1.8,1697360, false}},
-		npc_walk_3 = {{-4855,6,4166,0, true}, {23,-0.894992,13,91, false}},
-		npc_walk_4 = {{-5012,6,4249,0, true}, {-4830,6,4105,0, false}},
+	    npc_walk_1 = {{-5110,6,4192,0, false}, {-5064,6,4164,0, false}, {-15.8,0.3,8.7,1697364, false}, {-5037,6,4223,0, false}, {-5071,6,4217,0, false}},
+		npc_walk_2 = {{-5012,6,4249,0, false}, {-4914,6,4182,0, false}, {-4853,6,4164,0, false}, {-4987,6,4186,0, false}, {-4914,6,4182,0, false},
+		npc_walk_3 = {{-4855,6,4166,0, false}, {-4914,6,4182,0, false}, {-4971,6,4201,0, false}, {-5039,6,4233,0, false}, {-5129,6,4287,0, false}, {23,-0.894992,13,91, false}, {-5129,6,4287,0, false}, {-5039,6,4233,0, false}{-4971,6,4201,0, false}, {-4914,6,4182,0, false}},
+		npc_walk_4 = {{-5006,6,4085, false}, {-5052,6,4140,0, false}, {-5064,6,4164,0, false}, {-5082,6,4212,0, false}, {-5078,6,4296,0, false}, {-5082,6,4212,0, false}, {-5064,6,4164,0, false}},
 		npc_walk_5 = { {-4875, 6, 4067, 0, false}, {-4909, 6, 4092, 0, false}, {-4959, 6, 4117, 0, false}, {-4936, 6, 4149, 0, false}},
 		npc_walk_6 = { {-4933, 6, 4070, 0, false}, {-4909, 6, 4092, 0, false}, {-4959, 6, 4117, 0, false}, {-4936, 6, 4149, 0, false}, {-4871, 6, 4185, 0, false} },
 		npc_walk_7 = { {-4875, 6, 4067, 0, false}, {-4909, 6, 4092, 0, false}, {-4933, 6, 4070, 0, false}, {-4936, 6, 4149, 0, false}, {-4871, 6, 4185, 0, false}, {-4922, 6, 4092, 0, false} },
@@ -154,7 +154,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		npc_walk_13 = { {-4824, 6, 4096, 0, false}, {-4835, 6, 4084, 0, false}, {-4833, 6, 4105, 0, false}, {-4955, 6, 4120, 0, false}, {-4953, 6, 4123, 0, false}, {-4935, 6, 4147, 0, false} },
 		npc_walk_14 = { {-4875, 6, 4067, 0, false}, {-4909, 6, 4092, 0, false}, {-4922, 6, 4092, 0, false}, {-4824, 6, 4096, 0, false} },
 		npc_walk_15 = { {-4909, 6, 4092, 0, false}, {-4959, 6, 4117, 0, false}, {-4936, 6, 4149, 0, false}, {-4922, 6, 4092, 0, false}, {-4824, 6, 4096, 0, false} },
-		npc_walk_16 = { {-4909, 6, 4092, 0, false}, {-4959, 6, 4117, 0, false}, {-4936, 6, 4149, 0, false}, {-4922, 6, 4092, 0, false}, {-4824, 6, 4096, 0, false}, {-4835, 6, 4084, 0, false} },
+		npc_walk_16 = { {-4909, 6, 4092, 0, false}, {-4959, 6, 4117, 0, false}, {-4936, 6, 4149, 0, false}, {-4922, 6, 4092, 0, false}, {-2.2,0.7,-69.4 1692101, false}, {-25.0,0.7,-70.5,1692102, false}},
 		npc_walk_17 = { {-4875, 6, 4067, 0, false}, {-4909, 6, 4092, 0, false}, {-4959, 6, 4117, 0, false}, {-4936, 6, 4149, 0, false}, {-4871, 6, 4185, 0, false} },
 		npc_walk_18 = { {-4909, 6, 4092, 0, false}, {-4959, 6, 4117, 0, false}, {-4936, 6, 4149, 0, false}, {-4922, 6, 4092, 0, false}, {-4824, 6, 4096, 0, false} },
 		npc_walk_19 = { {-4824, 6, 4096, 0, false}, {-4835, 6, 4084, 0, false}, {-4833, 6, 4105, 0, false}, {-4955, 6, 4120, 0, false} },
@@ -266,12 +266,12 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"trainer_unarmed",0,-5649,6,4206,0,0, ""},
 
 		--Band Outside
-		{"doikk_nats",60,-4824,6,4084,20.0013,0, "themepark_music_3"},
+		{"doikk_nats",60,-4827,6,4085,-25.0013,0, "themepark_music_3"},
 		{"figrin_dan",60,-4827,6,4085,-85,0, "themepark_music_3"},
-	    {"nalan_cheel",60,-4828,6,4084,355.0011,0, "themepark_music_1"},
+	    {"nalan_cheel",60,-4828,6,4082,175.0011,0, "themepark_music_1"},
 
 		--Band Observers Outside
-		{"sullustan_male",	60,	-4832,	6,	4091,	125,		0, "happy"},
+		{"sullustan_male",	60,	-4832,	6,	4091,	35,		0, "happy"},
 		{"patron_chiss",	60,	-4829,	6,	4095,	164.005,	0, "playful"},
 		{"patron_chiss",	60,	 4826,	6,	4090,	95.0028,	0, "happy"},
 		
