@@ -203,6 +203,16 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"trainer_scout",0,-5986.5,6,4232.79,104,0, ""},
 		{"trainer_scout",0,-4796,6,4103,240,0, ""},
 		{"trainer_unarmed",0,-5649,6,4206,0,0, ""},
+
+		--Band Outside
+		{"doikk_nats",60,-4824,6,4084,20.0013,0, "themepark_music_3"},
+		{"figrin_dan",60,-4824,6,4086,-40,0, "themepark_music_3"},
+	    {"nalan_cheel",60,-4826,6,4081,175.0011,0, "themepark_music_1"},
+
+		--Band Observers Outside
+		{"sullustan_male",-4832.6,0,4091,215,0, "happy"},
+		{"patron_chiss",60,-4829,6,4095,184.005,0, "playful"},
+		{"patron_chiss",60,4826,6,4090,95.0028,0, "happy"},
 		
 		--Cantina
 		-- one guy at the entrance
@@ -210,6 +220,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		-- Entrance walk way closet to bar 2 people talking 
 		{"artisan", 60, 34.4, 0.1, -8.04, 0, 90, "worried"},
 		{"mercenary", 300, 34.4, 0.1, -6.9, 180, 90, "angry"},
+
 		{"businessman",0,6.4, -0.9, -8.9,115,91, "conversation"},
 		{"businessman",0,7.6, -0.9, -10.3,-35,91, "conversation"},
 		{"noble",0,17.6, -0.9, 2.3,32,91, "nervous"},
