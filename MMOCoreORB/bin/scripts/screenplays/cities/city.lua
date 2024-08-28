@@ -12,6 +12,9 @@ CityScreenPlay = ScreenPlay:new {
 	patrolMobiles = {},
 	patrolPoints = {},
 
+	crowdMobiles = {},
+	crowdPoints = {},
+
 	stationaryCommoners = {},
 	stationaryNpcs = {},
 	stationaryMobiles = {},
@@ -129,6 +132,9 @@ function CityScreenPlay:spawnPatrolMobiles()
 		for i = 1, #self.patrolMobiles do
 			self:spawnPatrol(i)
 		end
+		for i = 1, #self.crowdMobiles do
+			self:spawnCrowd(i)
+		end
 	end
 end
 
@@ -183,6 +189,49 @@ function CityScreenPlay:spawnPatrol(num)
 	end
 end
 
+
+function CityScreenPlay:spawnCrowd(num)
+	local crowdTable = self.crowdMobiles
+
+	if num <= 0 or num > #crowdTable then
+		return
+	end
+
+	local patrol = crowdTable[num]
+	local startingPoint = getRandomNumber(#self.crowdPoints)
+	local template = patrol[1]
+	local pMobile = nil
+	local mood = patrol[2]
+
+	if (template == "patrolNpc") then
+		local patrolNpcs = self.patrolNpcs
+		local templateNum = getRandomNumber(#patrolNpcs)
+
+		template = patrolNpcs[templateNum]
+	end
+
+	local startingLocation = self.crowdPoints[startingPoint]
+
+	--{planet, template, respawn, x, z, y, direction, cell}
+	local pMobile = spawnMobile(self.planet, template, 0, startingLocation[1] + math.random(), startingLocation[2], startingLocation[3] + math.random(), getRandomNumber(360), patrol[4])
+
+
+	if (pMobile ~= nil and startingPoint ~= nil) then
+		if mood ~= "" then
+			self:setMoodString(pMobile, mood)
+		end
+		local pOid = SceneObject(pMobile):getObjectID()
+
+		writeData(pOid .. ":crowdNumber", num)
+
+		CreatureObject(pMobile):setPvpStatusBitmask(0)
+
+		createEvent(10000, self.screenplayName, "setupCrowdPatrol", pMobile, num)
+		writeData(pOid .. ":nextCrowdPoint", getRandomNumber(#self.crowdPoints))
+		writeData(pOid .. ":currentCrowdPoint", startingPoint)
+	end
+end
+
 function CityScreenPlay:setupMobilePatrol(pMobile, num)
 	if (pMobile == nil) then
 		return
@@ -198,6 +247,18 @@ function CityScreenPlay:setupMobilePatrol(pMobile, num)
 		createEvent(getRandomNumber(40, 60) * 1000, self.screenplayName, "mobilePatrol", pMobile, '')
 		createObserver(DESTINATIONREACHED, self.screenplayName, "mobileDestinationReached", pMobile)
 	end
+end
+
+function CityScreenPlay:setupCrowdPatrol(pMobile, num)
+	if (pMobile == nil) then
+		return
+	end
+
+	CreatureObject(pMobile):setPvpStatusBitmask(0)
+	AiAgent(pMobile):addObjectFlag(AI_STATIONARY)
+
+	createEvent(getRandomNumber(40, 60) * 1000, self.screenplayName, "crowdPatrol", pMobile, '')
+	createObserver(DESTINATIONREACHED, self.screenplayName, "crowdDestinationReached", pMobile)
 end
 
 function CityScreenPlay:onDespawnPatrol(pMobile)
@@ -255,6 +316,16 @@ function CityScreenPlay:mobileDestinationReached(pMobile)
 	return 0
 end
 
+function CityScreenPlay:crowdDestinationReached(pMobile)
+	if (pMobile == nil) then
+		return 0
+	end
+
+	createEvent(3000, self.screenplayName, "crowdPatrol", pMobile, "")
+
+	return 0
+end
+
 function CityScreenPlay:mobilePatrol(pMobile)
 	if (pMobile == nil or CreatureObject(pMobile):isDead()) then
 		return
@@ -281,6 +352,34 @@ function CityScreenPlay:mobilePatrol(pMobile)
 	end
 
 	AiAgent(pMobile):setNextPosition(nextPoint[1], nextPoint[2], nextPoint[3], nextPoint[4])
+end
+
+function CityScreenPlay:crowdPatrol(pMobile)
+	if (pMobile == nil or CreatureObject(pMobile):isDead()) then
+		return
+	end
+
+	local pOid = SceneObject(pMobile):getObjectID()
+
+	if (AiAgent(pMobile):isInCombat()) then
+		createEvent(25 * 1000, self.screenplayName, "crowdPatrol", pMobile, "")
+	end
+
+	local pointSets = self.crowdPoints
+	local currentLoc = readData(pOid .. ":currentCrowdPoint")
+	local nextLoc= readData(pOid .. ":nextCrowdPoint")
+
+	local newLocation = getRandomNumber(#pointSets)
+
+	writeData(pOid .. ":nextCrowdPoint", newLocation)
+	writeData(pOid .. ":currentCrowdPoint", nextLoc)
+
+	local nextPoint = pointSets[newLocation]
+
+	AiAgent(pMobile):setNextPosition(nextPoint[1] + math.random(), nextPoint[2], nextPoint[3] + math.random(), nextPoint[4])
+
+	-- Fall back for 30-40 seconds of not reaching a destination, get a new one
+	createEvent(getRandomNumber(30, 40) * 1000, self.screenplayName, "crowdPatrol", pMobile, '')
 end
 
 function CityScreenPlay:spawnStationaryMobiles()
