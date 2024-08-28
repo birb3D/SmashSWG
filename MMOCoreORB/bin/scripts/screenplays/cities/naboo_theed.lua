@@ -70,7 +70,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		--Outside Pathing NPC's
 		{"npc_walk_1", "patrolNpc", -5110,6,4192,0,0, "playful", false},
 		{"npc_walk_2", "patrolNpc", -5012,6,4249,0,0, "conversation", false},
-		{"npc_walk_3", "protocol_droid_3po_silver", -4855,6,4166,300,0, "", false},
+		{"npc_walk_3", "patrolNpc", -4855,6,4166,300,0, "", false},
 		{"npc_walk_4", "patrolNpc", -5006,6,4085,300,0, "happy", false},
         {"npc_walk_5", "patrolNpc", -4875, 6, 4067, 300, 0, "happy", false},
         {"npc_walk_6", "surgical_droid_21b", -4873, 6, 4069, 300, 0, "", false},
@@ -101,7 +101,7 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{"npc_walk_30", "eg6_power_droid", -5067, 6, 4204,300,0, "happy", false},
 		{"npc_walk_31", "patrolNpc", -5126, 6, 4236,300,0, "happy", false},
 		{"npc_walk_32", "eg6_power_droid", -5132, 6, 4344,300,0, "happy", false},
-		{"npc_walk_33", "protocol_droid_3po", -5136, 6, 4339,300,0, "", false},
+		{"npc_walk_33", "r3", -5136, 6, 4339,300,0, "", false},
 		{"npc_walk_34", "patrolNpc", -5118, 6, 4199,300,0, "happy", false},
 		{"npc_walk_35", "r2", -5115, 6, 4195,300,0, "happy", false},
 		{"npc_walk_36", "r4", -5122, 6, 4233,300,0, "happy", false},
@@ -459,8 +459,8 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 
 		--Band Outside
 		{"doikk_nats",60,-4827,6,4085,-25.0013,0, "themepark_music_3"},
-		{"figrin_dan",60,-4827,6,4085,-85,0, "themepark_music_3"},
-	    {"nalan_cheel",60,-4828,6,4082,175.0011,0, "themepark_music_1"},
+		{"figrin_dan",60,-4825,6,4087,-85,0, "themepark_music_3"},
+	    {"nalan_cheel",60,-4829,6,4083,345.0011,0, "themepark_music_1"},
 
 		--Band Observers Outside
 		{"sullustan_male",	60,	-4832,	6,	4091,	35,		0, "happy"},
