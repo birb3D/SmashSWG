@@ -19,6 +19,7 @@ U8L7SP = ScreenPlay:new {
 		{optName="rifle", cost=350, itemName="CDEF Rifle", items={"object/weapon/ranged/rifle/rifle_cdef.iff"}},
 		{optName="staff", cost=300, itemName="Wood Staff", items={"object/weapon/melee/polearm/lance_staff_wood_s1.iff"}},
 		{optName="axe", cost=300, itemName="Heavy Duty Axe", items={"object/weapon/melee/axe/axe_heavy_duty.iff"}},
+		{optName="slitherhorn", cost=300, itemName="Slitherhorn (instrument)", items={"object/tangible/instrument/slitherhorn.iff"}},
 	},
 }
 

@@ -117,7 +117,7 @@ u8l7_template:addScreen(u8l7_insufficient_funds);
 u8l7_help1 = ConvoScreen:new {
   id = "help1",
   leftDialog = "",
-  customDialogText = "It looks to me, that you are a member of that... group of adventuring entrepreneurs who recently relocated here from Lok. The generousity and hard work of your group has really made a positive impact here in Mos Espa. In fact, the crime rate has declined so much that the Imperial presence has dimimished significantly beyond their garrison on the ourskirts of town. You'll find many comforts and facilities are available to you here in Mos Eisley",
+  customDialogText = "It looks to me, that you are a member of that... group of adventuring entrepreneurs who recently relocated here from Lok. The generousity and hard work of your group has really made a positive impact here in Mos Eisley. In fact, the crime rate has declined so much that the Imperial presence has dimimished significantly beyond their garrison on the ourskirts of town. You'll find many comforts and facilities are available to you here in Mos Eisley",
   stopConversation = "false",
   options = {
 	{"Are there other helpers like you?", "help1a"},
