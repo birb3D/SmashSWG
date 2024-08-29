@@ -178,7 +178,7 @@ crowdPoints = {
 		{"noble",60,5.94117,-0.894992,20.6966,0,8145382, "conversation"},
 		{"shadowy_figure",300,4.84117,-0.894992,21.7966,135.006,8145382, "angry"},
 		{"businessman",60,-12.2,-0.9,-20.1,-85,8145383, "npc_consoling"},
-		{"vixur_webb", 60, -13.2, -0.9, -20.2, 22, 8145383, "npc_sitting_chair"}
+		{"vixur_webb", 60, -13.2, -0.9, -20.2, 22, 8145383, "npc_sitting_chair"},
 		{"entertainer",60,-5.72977,-0.894994,22.9507,180.008,8145384, "conversation"},
 		{"entertainer",60,-6.82977,-0.894994,22.9507,135.007,8145384, "conversation"},
 		
