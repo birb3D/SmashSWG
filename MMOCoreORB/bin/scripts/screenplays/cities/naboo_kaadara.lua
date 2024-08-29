@@ -69,6 +69,17 @@ NabooKaadaraScreenPlay = CityScreenPlay:new {
 		{"npc_1", "patrolNpc", 5236, -192, 6759, 87, 0, "", false},
 		{"npc_2", "patrolNpc", 5180.9, -192, 6782.7, 45, 0, "", false},
 
+		--Cantina
+		{"cantina_1", "r3", 6.0, -0.894992 , 7.2, 100, 64, "", false},
+		{"cantina_2", "patrolNpc", 8, -0.894992 , -8.7, 100, 64, "playful", false},
+		{"cantina_3", "patrolNpc", -5.11,-0.894992,6.8, 300, 64, "conversation", false},
+		{"cantina_4", "patrolNpc", -7.2,-0.894992,-6, 300, 64, "conversation", false},
+		{"cantina_5", "patrolNpc", 21.32,-0.894992,10.47, 300, 64, "happy", false},
+		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 64, "happy", false},
+		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 62, "playful", false},
+		{"cantina_8", "patrolNpc", 14.3, -0.894992, 2, 200, 64, "playful", false},
+		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 62, "playful", false},
+
 		--Starport
 		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 40, 1741539, "playful", false},
 		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,51.7263, 40, 1741539, "playful", false},
@@ -87,6 +98,16 @@ NabooKaadaraScreenPlay = CityScreenPlay:new {
 
 		npc_1 = {{5236, -192, 6759, 0, true}, {5255, -192, 6755, 0, true}, {5242, -192, 6721, 0, true}, {5230, -192, 6719, 0, true}, {5224,  -192, 6749, 0, true}},
 		npc_2 = {{5180.9, -192, 6782.7, 0, true}, {5160, -192, 6758, 0, true}, {5163, -192, 6769, 0, true}, {5182, -192, 6789, 0, true}},
+
+		cantina_1 = {{7, -0.894992 , 7.2, 64, false}, {16, -0.894992 , 0, 64, false}, {5, -0.894992 , -7, 64, false}, {16, -0.894992 , 0, 64, false}},
+		cantina_2 = {{5, -0.894992 , -9, 64, false}, {3, -0.894992 , -5.4, 64, false}, {12, -0.894992 , -6, 64, false}, {10, -0.894992 , -11, 64, false}},
+		cantina_3 = {{-5.11,-0.894992,5, 64, false}, {-5.11,-0.894992,6.4, 64, false}, {0,-0.894992,6.4, 64, false}, {0,-0.894992,5, 64, 64, true}, {-1.51,-0.894992,6.4, 64, false}, {-7.11,-0.894992,6.4, 64, false}},
+		cantina_4 = {{-7.2,-0.894992,-5, 64, false}, {-7.2,-0.894992,-6.4, 64, false}, {-4.3,-0.894992,-6.4, 64, false}, {-4.3,-0.894992,-5, 64, 64, false}, {-4.3,-0.894992,-6.4, 64, false}, {-7.2,-0.894992,-6.4, 64, false}, {-8.2,-0.894992,-11.4, 64, false}},
+		cantina_5 = {{23.32,-0.894992,10.47, 64, false}, {21,-0.894992,-8.47, 64, false}, {20, -0.894992 , -1.4, 64, true}},
+		cantina_6 = {{-2.11,-0.894992,7, 64, true}, {23,-0.894992,11, 64, false}, {19.5, -0.9, 18.7, 66, false}},
+		cantina_7 = {{39.13, 0.1, 1.27, 62, true}, {14, -0.894992 , 0, 64, false}},
+		cantina_8 = {{14.3, -0.894992, 2, 64, false}, {42.73, 0.1, 2.47, 62, true}},
+		cantina_9 = {{41.73, 0.1, 0, 62, true}, {14, -0.894992 , -1.2, 64, false}},
 
 		starport_walk_1 = {{-4.61669,0.639424,50.7263,1741539, false}, {5294, -192, 6710, 0, false}, {5306, -192, 6674, 0, false}},
 		starport_walk_2 = {{-0.61669,0.639424,50.7263,1741539, false}, {5296, -192, 6708, 0, false}, {5306, -192, 6672, 0, false}},
@@ -192,35 +213,34 @@ NabooKaadaraScreenPlay = CityScreenPlay:new {
 		{ "patrolNpc", "happy"},
 	},
 
-	controlPoints = {	
-		{5196, 	-191, 		6672, 	0 },
-		{5187, 	-191, 		6688, 	0 },
-		{5180, 	-191, 		6683, 	0 },
-		{5174, 	-191, 		6676, 	0 },
-		{5184, 	-191, 		6649, 	0 },
-		{5126, 	-191, 		6706, 	0 },
-		{5082, 	-191, 		6705, 	0 },
-		{5072, 	-191, 		6714, 	0 },
-		{5077, 	-191, 		6658, 	0 },
-		{4979, 	-191, 		6778, 	0 },
-		{5035, 	-191, 		6717, 	0 },
-		{5084, 	-191, 		6806, 	0 },
-		{5114, 	-191, 		6764, 	0 },
-		{48.13, -0.894, 	-1.47,  	 62 },
-		{-3.25,  0.639424,  51.72,  1741539 },
-		{-15.43, 0.26,       1.33,  1741443 },
-		{5281, 	-191, 		6765, 	0 },
-		{5160, 	-191, 		6743, 	0 },
-		{5141, 	-191, 		6763, 	0 },
-		{5340, 	-191, 		6723, 	0 },
-		{5386, 	-191, 		6715, 	0 },
-		{5386, 	-191, 		6666, 	0 },
-		{5363, 	-191, 		6589, 	0 },
-		{5305, 	-191, 		6586, 	0 },
-		{5223, 	-191, 		6598, 	0 },
-		{5167, 	-191, 		6658, 	0 },
-		{5085, 	-191, 		6665, 	0 },
-		{5133, 	-191, 		6619, 	0 },
+	crowdPoints = {	
+		{5196, 	-192, 		6672, 	0 },
+		{5187, 	-192, 		6688, 	0 },
+		{5180, 	-192, 		6683, 	0 },
+		{5174, 	-192, 		6676, 	0 },
+		{5184, 	-192, 		6649, 	0 },
+		{5126, 	-192, 		6706, 	0 },
+		{5082, 	-192, 		6705, 	0 },
+		{5072, 	-192, 		6714, 	0 },
+		{5077, 	-192, 		6658, 	0 },
+		{4979, 	-192, 		6778, 	0 },
+		{5035, 	-192, 		6717, 	0 },
+		{5084, 	-192, 		6806, 	0 },
+		{5114, 	-192, 		6764, 	0 },
+		{5281, 	-192, 		6765, 	0 },
+		{5160, 	-192, 		6743, 	0 },
+		{5141, 	-192, 		6763, 	0 },
+		{5340, 	-192, 		6723, 	0 },
+		{5386, 	-192, 		6715, 	0 },
+		{5386, 	-192, 		6666, 	0 },
+		{5363, 	-192, 		6589, 	0 },
+		{5305, 	-192, 		6586, 	0 },
+		{5223, 	-192, 		6598, 	0 },
+		{5167, 	-192, 		6658, 	0 },
+		{5085, 	-192, 		6665, 	0 },
+		{5133, 	-192, 		6619, 	0 },
+		{4944, 	-192, 		6759, 	0 },
+		{5010, 	-192, 		6664, 	0 },
 	},	
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_naboo", "commoner_old"},
@@ -251,6 +271,51 @@ NabooKaadaraScreenPlay = CityScreenPlay:new {
 		{"info_broker",60,-2.1,1.0,12.6,90,1741477, "happy"},
 		{"contractor",60,4.0,1.0,4.3,-165,1741477, "npc_accusing"},
 		{"bartender", 1, 19.5, 1.6, 12.6, 180, 1741478, ""},
+
+		-- Cantina
+		-- 2 people at entrance
+		{"artisan", 60, 34.4, 0.1, -9.04, 0, 63, ""},
+		{"pilot", 300, 34.4, 0.1, -7.9, 180, 63, ""},
+		-- 3 People Talking far left side of bar center aisle 
+		{"bounty_hunter",300,3.61201,-0.894992,-8.73417,135.006,64, "conversation"},
+		{"farmer_rancher",60,4.71201,-0.894992,-9.83418,360.011,64, "conversation"},
+		{"ithorian_male",300,4.71201,-0.894992,-8.73417,180.01,64, "conversation"},
+		-- 2 people talking far left next to bar
+		{"businessman",60,-7.91375,-0.894992,-4.88587,179.995,64, "conversation"},
+		{"corellia_times_reporter",300,-7.91375,-0.894992,-5.88587,0,64, "conversation"},
+		-- 2 people talking front right center right of bar
+		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,64, "conversation"},
+		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,64, "conversation"},
+		-- Corner Music Guys By Door
+		{"doikk_nats",60,24.32,-0.894992,11.47,200.0013,64, "themepark_music_3"},
+		{"figrin_dan",60,25.69,-0.894992,9.4,-40,64, "themepark_music_3"},
+	    {"nalan_cheel",60,22.54,-0.894992,12.13,130.0011,64, "themepark_music_1"},
+		-- 5 people around bar right front side to center back
+	    {"commoner_naboo",60,3.11,0,5.4,161.005,64, "bored"},
+		{"commoner_naboo",60,1.11,0,5.4,330.024,64, "npc_standing_drinking"},
+		{"commoner_naboo",60,-3.11,0,5.4,16.6733,64, "npc_standing_drinking"},
+		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,64, "npc_standing_drinking"},
+		{"patron",60,-4.11,-0.894992,5.4,26.8951,64, "happy"},
+		-- one person center front bar slightly to the right
+		{"commoner_naboo",60,16.1,-0.9,4.1,340,64, "conversation"},
+		-- 2 people talking left center of bar
+		{"commoner_tatooine",60,1.99,-0.894992,-8.44,325.01,64, "conversation"},
+		{"commoner_tatooine",60,1.19,-0.894992,-7.63,152.004,64, "conversation"},
+		-- Far left cell nearest to door 2 people talking
+		{"corellia_times_investigator", 300, 20.6, -0.9, -18.6, 180, 65, "conversation"},
+		{"commoner_technician", 300, 20.6, -0.9, -19.6, 0, 65, "conversation"},
+		-- 3 people far right room nearest to door
+		{"brawler", 60, 22.6, -0.9, 19.6, 0, 66, "conversation"},
+		{"commoner", 60, 21.5, -0.9, 20.7, 135, 66, "conversation"},
+		{"farmer_rancher", 300, 22.6, -0.9, 20.7, 180, 66, "happy"},
+		--1 person far right middle cell
+		{"businessman",60,0.978477,-0.894992,21.4841,311.517,68, "angry"},
+		-- 1 person far left back cell 
+		{"mercenary",300,-5.02826,-0.894991,-21.3375,-20,69, "calm"},
+		--junk dealer in back question mark?
+		{"rebel_recruiter",60,-28.3633,-0.894984,0.335875,171.796,72, "happy"},
+
+
 
 		--starport interior
 		{"chassis_dealer",60,6.3,0.6,65.8,-60,1741539, "neutral"},

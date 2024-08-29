@@ -141,11 +141,16 @@ function MerchantSystem:completeSale(pObject, creature, relationsTable, goodsTab
 			creature:subtractCashCredits(chargePlayer)
 			-- Grant items
 			for ic = 1, #goodsTable[gtlc].items , 1 do
+				local pItem = nil
 				if (string.find(goodsTable[gtlc].items[ic], 'iff') == nil) then
-					local pItem = createLoot(pInventory, goodsTable[gtlc].items[ic], getRandomNumber(100), false)
+					pItem = createLoot(pInventory, goodsTable[gtlc].items[ic], getRandomNumber(100), false)
 				else
-					local pItem = giveItem(pInventory, goodsTable[gtlc].items[ic], -1)
+					pItem = giveItem(pInventory, goodsTable[gtlc].items[ic], -1)
 				end
+				local sceneObj = getSceneObject(pItem)
+				local objectName = SceneObject(sceneObj):getDisplayedName()
+
+				creature:sendSystemMessage("Purchase Complete! " .. objectName .. " has been added to your inventory.")
 			end
 		else 
 			creature:sendSystemMessage("Transaction Failed. System error in price calculation.")

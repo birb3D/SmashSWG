@@ -231,7 +231,7 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"jawa_thief", "happy"},
 	},
 
-	controlPoints = {	
+	crowdPoints = {	
 		{-2952, 	5, 		2201, 	0 },
 		{-2913, 	5, 		2147, 	0 },
 		{-2949, 	5, 		-2074, 	0 },
@@ -245,7 +245,6 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{-3065, 	5, 		2137, 	0 },
 		{-3050, 	5, 		2226, 	0 },
 		{-2805, 	5, 		2239, 	0 },
-		{48.13, -0.894,     -1.47,  1256056 },
 		{-3.25,  0.639424,  51.72,  1261655 },
 		{-2888, 	5, 		2262, 	0 },
 		{-2871, 	5, 		2279, 	0 },
