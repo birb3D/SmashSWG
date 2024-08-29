@@ -368,7 +368,9 @@ void GroupObjectImplementation::makeLeader(CreatureObject* newLeader) {
 	message.setStringId("group", "new_leader"); // %TU is now the group leader.
 
 	String firstNameLeader = newLeader->getFirstName();
-	bool galaxyWide = ConfigManager::instance()->getBool("Core3.PlayerManager.GalaxyWideGrouping", false);
+	//bool galaxyWide = ConfigManager::instance()->getBool("Core3.PlayerManager.GalaxyWideGrouping", false);
+	bool galaxyWide = true;
+
 
 	if (galaxyWide) {
 		message.setTU(newLeader->getDisplayedName());
