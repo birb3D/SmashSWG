@@ -23,7 +23,7 @@ CrazyLarry = ScreenPlay:new {
 
 registerScreenPlay("CrazyLarry", true)
 function CrazyLarry:start() 
-	spawnMobile("tatooine", "crazylarry", 1, 14.5, -0.9, 20.7, 135, 1082879) -- mos eisley cantina
+	spawnMobile("tatooine", "crazylarry", 1, 14.5, -0.9, 20.7, 135, 1256060) -- mos espa cantina
 end
 
 crazylarry_convo_handler = Object:new {
