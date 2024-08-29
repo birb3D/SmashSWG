@@ -16,7 +16,7 @@ WorldBossSpawner = ScreenPlay:new {
 		{template = "acklay_boss", name = "Corrupted Acklay"}, 
 		{template = "rancor_boss", name = "Corrupted Rancor"},
 		--{template = "wampa_boss", name = "Corrupted Wampa"},
-		{template = "kkorrwrot_boss", name = "Corrupted Geonosian"},
+		--{template = "kkorrwrot_boss", name = "Corrupted Geonosian"},
 		--{template = "deathsting_boss", name = "Corrupted Deathsting"},
 	},
 
@@ -144,8 +144,8 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 				end
 			end
 
-			CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incomming Transmission> \n\n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone) 
-			CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incomming Transmission> \n\n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone)
+			CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission> \n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3])) 
+			CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission> \n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3]))
 		end
 
 end
@@ -181,8 +181,8 @@ function WorldBossSpawner:despawnBoss(pBoss)
 	local zone = self:getBossZone(pBoss)
 
 	if (bossName ~= nil and zone ~= nil) then
-		CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incomming Transmission> \n\n \\#ffff99" .. bossName .. " \\#ffccff has gone back into hiding on " .. zone) 
-		CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incomming Transmission> \n\n \\#ffff99" .. bossName .. " \\#ffccff has gone back into hiding on " .. zone)
+		CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission> \n\n \\#ffff99" .. bossName .. " \\#ffccff has gone back into hiding on " .. zone) 
+		CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission> \n\n \\#ffff99" .. bossName .. " \\#ffccff has gone back into hiding on " .. zone)
 	end
 
 	for i = 1, self.bossesToSpawn, 1 do
