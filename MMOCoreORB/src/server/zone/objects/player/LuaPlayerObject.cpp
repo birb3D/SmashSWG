@@ -19,6 +19,7 @@
 #include "server/zone/objects/player/sui/listbox/SuiListBox.h"
 #include "server/zone/objects/player/sui/callbacks/EnclaveCouncilRankSuiCallback.h"
 #include "server/zone/managers/stringid/StringIdManager.h"
+#include "server/chat/ChatManager.h"
 
 #include <iostream>
 
