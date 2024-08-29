@@ -4,13 +4,13 @@ includeFile("events/world_boss_spt.lua")
 WorldBossSpawner = ScreenPlay:new {
 
 	numberOfActs = 1,
-	bossesToSpawn = 3,
-	initSpawnTimer = 60,
+	bossesToSpawn = 1,
+	initSpawnTimer = 3600,
 	numReferencePoints = 29,
-	secondsToDespawn = 18000, 
-	secondsToRespawn = 21600, 
+	secondsToDespawn = 7200, 
+	secondsToRespawn = 14400, 
 	maxRadius = 2000,
-	randomVariance = 1800,
+	randomVariance = 60,
 
 	bossMobileTemplates =  {
 		{template = "acklay_boss", name = "Corrupted Acklay"}, 
