@@ -69,15 +69,15 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"npc_10", "patrolNpc", -2770, 5, 2245, 214, 0, "", false},
 		{"npc_11", "patrolNpc", -2731, 5, 2226, 196, 0, "", false},
 
-		--Starport
-		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 40, 1261655, "playful", false},
-		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,51.7263, 40, 1261655, "playful", false},
-		{"starport_walk_3", "r3", -4.61669,0.639424,52.7263, 40, 1261655, "playful", false},
-		{"starport_walk_3", "patrolNpc", -4.61669,0.639424,53.7263, 40, 1261655, "playful", false},
-		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,50.7263, 40, 1261655, "playful", false},
-		{"starport_walk_2", "patrolNpc", -0.61669,0.639424,51.7263, 40, 1261655, "playful", false},
-		{"starport_walk_4", "patrolNpc", -0.61669,0.639424,52.7263, 40, 1261655, "playful", false},
-		{"starport_walk_4", "surgical_droid_21b", -0.61669,0.639424,53.7263, 40, 1261655, "playful", false},
+			--Starport
+			{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 0, 1261655, "playful", false},
+			{"starport_walk_2", "patrolNpc", -5.61669,0.639424,51.7263, 0, 1261655, "playful", false},
+			{"starport_walk_3", "r3",        -3.61669,0.639424,52.7263, 0, 1261655, "playful", false},
+			{"starport_walk_4", "patrolNpc", -2.61669,0.639424,53.7263, 0, 1261655, "playful", false},
+			{"starport_walk_5", "patrolNpc", -6.61669,0.639424,49.7263, 0, 1261655, "playful", false},
+			{"starport_walk_6", "patrolNpc", -0.61669,0.639424,47.7263, 0, 1261655, "playful", false},
+			{"starport_walk_7", "patrolNpc", -1.61669,0.639424,52.7263, 0, 1261655, "playful", false},
+			{"starport_walk_8", "surgical_droid_21b", 1.61669,0.639424,54.7263, 0, 1261655, "playful", false},
 	},
 
 	patrolPoints = {
@@ -106,10 +106,14 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		npc_10 = {{-2770, 5, 2245, 0, true}, {-2732, 5, 2254, 0, true}, {-2754, 5, 2219, 0, true}, {-2766, 5, 2281, 0, true}},
 		npc_11 = {{-2731, 5, 2226, 0, true}, {-2693, 5, 2264, 0, true}, {-2729, 5, 2263, 0, true}, {-2705, 5, 2240, 0, true}},
 
-		starport_walk_1 = {{-4.61669,0.639424,50.7263,1261655, false}, {-2809, 5, 2123, 0, false}, {-2813, 5, 2085, 0, false}},
-		starport_walk_2 = {{-0.61669,0.639424,50.7263,1261655, false}, {-2807, 5, 2125, 0, false}, {-2813, 5, 2087, 0, false}},
-		starport_walk_3 = {{-4.61669,0.639424,50.7263,1261655, false}, {-2805, 5, 2123, 0, false}, {-2813, 5, 2889, 0, false}},
-		starport_walk_4 = {{-0.61669,0.639424,50.7263,1261655, false}, {-2811, 5, 2125, 0, false}, {-2813, 5, 2891, 0, false}},
+		starport_walk_1 = {{-4.61669,0.639424,50.7263, 1261655, false}, {3609, 5, -4758, 0, false}, {3625, 5, -4789, 0, false}},
+		starport_walk_2 = {{-5.61669,0.639424,51.7263, 1261655, false}, {3607, 5, -4753, 0, false}, {3630, 5, -4785, 0, false}},
+		starport_walk_3 = {{-3.61669,0.639424,52.7263, 1261655, false}, {3612, 5, -4750, 0, false}, {3627, 5, -4781, 0, false}},
+		starport_walk_4 = {{-2.61669,0.639424,53.7263, 1261655, false}, {3615, 5, -4761, 0, false}, {3632, 5, -4778, 0, false}},
+		starport_walk_5 = {{-6.61669,0.639424,49.7263, 1261655, false}, {3608, 5, -4745, 0, false}, {3628, 5, -4775, 0, false}},
+		starport_walk_6 = {{-0.61669,0.639424,47.7263, 1261655, false}, {3613, 5, -4765, 0, false}, {3624, 5, -4772, 0, false}},
+		starport_walk_7 = {{-1.61669,0.639424,52.7263, 1261655, false}, {3605, 5, -4763, 0, false}, {3628, 5, -4769, 0, false}},
+		starport_walk_8 = {{1.61669,0.639424,54.7263, 1261655, false},  {3612, 5, -4757, 0, false}, {3625, 5, -4767, 0, false}},
 	},
 	
 	crowdMobiles = {
