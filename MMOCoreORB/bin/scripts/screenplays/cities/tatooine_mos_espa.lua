@@ -78,7 +78,7 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"cantina_6", "patrolNpc", -4.11,-0.894992,7, 300, 1256058, "happy", false},
 		{"cantina_7", "patrolNpc", 40.13, 0.1, 1.47, 300, 8105494, "playful", false},
 		{"cantina_8", "patrolNpc", 14.3, -0.894992, 2, 200, 1256058, "playful", false},
-		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 8105494, "playful", false},
+		{"cantina_9", "patrolNpc", 41.73, 0.1, 0, 40, 1256056, "playful", false},
 
 		--Starport
 		{"starport_walk_1", "patrolNpc", -4.61669,0.639424,50.7263, 0, 1261655, "playful", false},
