@@ -317,11 +317,6 @@ void ChatManagerImplementation::initiateRooms() {
 	generalRoom->setAllowSubrooms(true);
 	generalRoom->setTitle("Public chat for Smash SWG Server");
 
-	Reference<ChatRoom*> generalRoom = createRoom("Chat", galaxyRoom);
-	generalRoom->setCanEnter(true);
-	generalRoom->setAllowSubrooms(true);
-	generalRoom->setTitle("public chat for this server, can create rooms here");
-
 	auctionRoom = createRoom("Auction", galaxyRoom);
 	auctionRoom->setCanEnter(true);
 	auctionRoom->setChatRoomType(ChatRoom::AUCTION);
