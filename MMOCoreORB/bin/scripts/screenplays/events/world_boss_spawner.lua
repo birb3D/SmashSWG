@@ -5,7 +5,7 @@ WorldBossSpawner = ScreenPlay:new {
 
 	numberOfActs = 1,
 	bossesToSpawn = 3,
-	initSpawnTimer = 900,
+	initSpawnTimer = 60,
 	numReferencePoints = 29,
 	secondsToDespawn = 18000, 
 	secondsToRespawn = 21600, 
@@ -15,9 +15,9 @@ WorldBossSpawner = ScreenPlay:new {
 	bossMobileTemplates =  {
 		{template = "acklay_boss", name = "Corrupted Acklay"}, 
 		{template = "rancor_boss", name = "Corrupted Rancor"},
-		{template = "wampa_boss", name = "Corrupted Wampa"},
+		--{template = "wampa_boss", name = "Corrupted Wampa"},
 		{template = "kkorrwrot_boss", name = "Corrupted Geonosian"},
-		{template = "deathsting_boss", name = "Corrupted Deathsting"},
+		--{template = "deathsting_boss", name = "Corrupted Deathsting"},
 	},
 
 	screenplayName = "WorldBossSpawner",

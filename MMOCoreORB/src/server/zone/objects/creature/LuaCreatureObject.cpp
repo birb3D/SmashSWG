@@ -20,6 +20,7 @@
 #include "server/zone/objects/transaction/TransactionLog.h"
 #include "server/zone/Zone.h"
 #include "server/zone/managers/combat/CombatManager.h"
+#include "server/chat/ChatManager.h"
 
 const char LuaCreatureObject::className[] = "LuaCreatureObject";
 
@@ -159,6 +160,8 @@ Luna<LuaCreatureObject>::RegType LuaCreatureObject::Register[] = {
 		{ "attemptPeace", &LuaCreatureObject::attemptPeace },
 		{ "forcePeace", &LuaCreatureObject::forcePeace },
 		{ "isPilotingShip", &LuaCreatureObject::isPilotingShip },
+		{ "broadcastToServer", &LuaCreatureObject::broadcastToServer },
+		{ "broadcastToDiscord", &LuaCreatureObject::broadcastToDiscord },
 		{ 0, 0 }
 };
 
@@ -1321,3 +1324,17 @@ int LuaCreatureObject::isPilotingShip(lua_State* L) {
 
 	return 1;
 }
+
+int LuaCreatureObject::broadcastToServer(lua_State* L) {
+	String message = lua_tostring(L, -1);
+	ZoneServer* zServ = realObject->getZoneServer();
+	zServ->getChatManager()->broadcastGalaxy(nullptr, message);
+	return 1;
+}
+
+int LuaCreatureObject::broadcastToDiscord(lua_State* L) {
+	String message = lua_tostring(L, -1);
+	ZoneServer* zServ = realObject->getZoneServer();
+	zServ->getChatManager()->handleGeneralDiscordChat(nullptr, message);
+	return 1;
+} 

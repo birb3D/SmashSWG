@@ -26,7 +26,7 @@ rancor_boss = Creature:new {
 	diet = CARNIVORE,
 	scale = 1.5,
 
-	templates = {"object/mobile/wod_mutant_rancor_boss.iff"},
+	templates = {"object/mobile/rancor.iff"},
 	lootGroups = {
 		{
 	        groups = {

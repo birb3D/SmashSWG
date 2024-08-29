@@ -26,7 +26,7 @@ acklay_boss = Creature:new {
 	diet = CARNIVORE,
 	scale = 1.5,
 
-	templates = {"object/mobile/mutant_acklay.iff"},
+	templates = {"object/mobile/acklay_hue.iff"},
 	lootGroups = {
 		{
 	        groups = {

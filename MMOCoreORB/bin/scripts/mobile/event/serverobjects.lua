@@ -7,10 +7,10 @@ includeFile("event/life_day/tebeurra.lua")
 
 --World Boss
 includeFile("event/custom/big_game_hunter.lua")
-includeFile("event/world_boss/deathsting_boss.lua")
+--includeFile("event/world_boss/deathsting_boss.lua")
 includeFile("event/world_boss/acklay_boss.lua")
 includeFile("event/world_boss/rancor_boss.lua")
-includeFile("event/world_boss/wampa_boss.lua")
+--includeFile("event/world_boss/wampa_boss.lua")
 includeFile("event/world_boss/geonosian_boss.lua")
 
 
