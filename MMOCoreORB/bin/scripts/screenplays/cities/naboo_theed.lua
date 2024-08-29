@@ -348,7 +348,8 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		{-5077, 	6, 		4298, 	0 },
 		{-5120, 	6, 		4333, 	0 },
 		{48.13, 	0.1, 	0.47, 	89 },
-		{0.2, 		0.7,	-69.4, 	1692101},
+		{-2.2,		0.7,   -68.4, 	1692101},
+		{-25.0,		0.7,	-70.5,	1692102},
 		{17.4, 		0.3, 	0.8, 	1697360},
     	{-16.8, 	0.3, 	9.7, 	1697364},
 		{-4909, 	6, 		4092, 	0},
@@ -473,7 +474,6 @@ NabooTheedScreenPlay = CityScreenPlay:new {
 		-- Entrance walk way closet to bar 2 people talking 
 		{"artisan", 60, 34.4, 0.1, -8.04, 0, 90, "worried"},
 		{"mercenary", 300, 34.4, 0.1, -6.9, 180, 90, "angry"},
-
 		{"businessman",0,6.4, -0.9, -8.9,115,91, "conversation"},
 		{"businessman",0,7.6, -0.9, -10.3,-35,91, "conversation"},
 		{"noble",0,17.6, -0.9, 2.3,32,91, "nervous"},
