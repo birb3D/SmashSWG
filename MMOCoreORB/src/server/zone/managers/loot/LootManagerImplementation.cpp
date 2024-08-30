@@ -19,6 +19,7 @@
 #include "server/zone/managers/resource/ResourceManager.h"
 #include "server/zone/Zone.h"
 #include "templates/params/creature/CreatureAttribute.h"
+#include "server/zone/objects/tangible/threat/ThreatMap.h"
 
 // #define DEBUG_LOOT_MAN
 
@@ -635,6 +636,43 @@ String LootManagerImplementation::getRandomLootableMod(uint32 sceneObjectType) {
 
 bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* container, AiAgent* creature) {
 	auto lootCollection = creature->getLootGroups();
+
+	// World Boss Loot System (World bosses are level 500)
+	int creatureLevel = creature->getLevel();
+	//Rare Loot System
+	if (creatureLevel >= 500){
+		ThreatMap* threatMap = creature->getThreatMap();
+
+		if (threatMap != nullptr && threatMap->size() > 0) {
+			for (int i = 0; i < threatMap->size(); ++i) {
+				TangibleObject* threatTano = threatMap->elementAt(i).getKey();
+
+				if (threatTano == nullptr) {
+					continue;
+				}
+
+				if (threatTano->isPlayerCreature()) {
+					CreatureObject* player = cast<CreatureObject*>(threatTano);
+
+					ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+
+					createLootFromCollection(trx, inventory, lootCollection, creature->getLevel());
+
+					player->sendSystemMessage("YOU GOT BOSS LOOT!");
+				}
+			}
+		}
+
+		/*
+		if (System::random(100) < 2) { //2% Rare Loot System
+			createLoot(container, "rarelootsystem", creatureLevel, false);
+			creature->playEffect("clienteffect/rare_loot.cef", "");
+			creature->showFlyText("Rare", "Loot", 0, 255, 0);
+		}*/
+	}
+
+
+
 
 	if (lootCollection == nullptr) {
 		trx.abort() << "No lootCollection.";
