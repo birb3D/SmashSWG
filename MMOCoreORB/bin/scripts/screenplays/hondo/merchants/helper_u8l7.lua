@@ -27,7 +27,7 @@ U8L7SP = ScreenPlay:new {
 registerScreenPlay("U8L7SP", true)
 
 function U8L7SP:start() 
-	spawnMobile("tatooine", "u8l7", 1, 3524, 5, -4800, 123, 0) -- mos eisley outside cantina
+	spawnMobile("tatooine", "u8l7", 1, -2907.07,5,2130.14, 75, 0) -- mos espa outside starport
 end
 
 u8l7_convo_handler = Object:new {
