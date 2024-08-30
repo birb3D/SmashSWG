@@ -395,6 +395,8 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"trainer_artisan",0,-0.0885271,1.13306,-14.0283,2,1256011, ""},
 
 		--Cantina
+		-- one guy at the entrance
+		{"comm_operator", 400, 48.13, 0.1, 2.47, 202, 1256056, "calm"},
 		{"artisan", 60, 34.4, 0.1, -9.04, 0, 1256057, "sad"},
 		{"pilot", 300, 34.4, 0.1, -7.9, 180, 1256057, "npc_consoling"},
 		-- 1 person far left side next to bar
@@ -408,6 +410,9 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"commoner_naboo",60,-3.11,0,5.4,16.6733,1256058, "npc_standing_drinking"},
 		{"commoner_tatooine",60,4.11,-0.894992,5.4,158.443,1256058, "npc_standing_drinking"},
 		{"patron",60,-4.11,-0.894992,5.4,26.8951,1256058, "happy"},
+		-- 2 patron_chiss left side against the bar
+		{"patron_chiss",60,3.62,-0.894992,-4.77,184.005,1256058, "sad"},
+		{"patron_chiss",60,1.74,-0.894992,-4.91,95.0028,1256058, "npc_consoling"},
 		-- 2 people talking front right center right of bar
 		{"info_broker",300,2.80432,-0.894991,10.6543,180.012,1256058, "conversation"},
 		{"entertainer",60,2.80432,-0.894991,9.55434,360.011,1256058, "conversation"},
@@ -429,6 +434,9 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		-- 2 people talking left middle cell
 		{"bounty_hunter",300,2.1656,-0.894992,-15.9672,360.011,1256061, "calm"},
 		{"contractor",60,2.1656,-0.894992,-14.9672,180.001,1256061, "conversation"},
+		-- far left middle cell 2 guys talking around the corner
+		{"farmer", 60, 10.9, -0.9, -13.9, 180, 1256061, "conversation"},
+		{"mercenary", 300, 10.9, -0.9, -15.0, 0, 1256061, "conversation"},
 		--junk dealer far left cell in back
 		{"junk_dealer",300,-5.02826,-0.894991,-21.3375,-20, 1256063, "worried"},
 		-- 2 people talking far right said behind bar back room

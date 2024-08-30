@@ -1,6 +1,6 @@
-acklay_boss = Creature:new {
-	customName = "Corrupted Acklay",
-	socialGroup = "geonosian_creature",
+droideka_boss = Creature:new {
+	objectName = "M1r.d3r Experimental Attack Droid",
+	socialGroup = "droideka",
 	faction = "",
 	level = 500,
 	chanceHit = 70.0,
@@ -15,40 +15,34 @@ acklay_boss = Creature:new {
 	baseHAM = 1680000,
 	baseHAMmax = 1950000,]]--
 	armor = 3,
-	resists = {40,35,0,30,30,0,30,30,-1},
-	meatType = "meat_carnivore",
-	meatAmount = 1000,
-	hideType = "hide_bristley",
-	hideAmount = 950,
-	boneType = "bone_mammal",
-	boneAmount = 905,
+	resists = {40,40,30,0,30,0,30,-1,20},
+	meatType = "",
+	meatAmount = 0,
+	hideType = "",
+	hideAmount = 0,
+	boneType = "",
+	boneAmount = 0,
 	milk = 0,
 	tamingChance = 0,
-	ferocity = 30,
+	ferocity = 0,
 	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
 	creatureBitmask = PACK + KILLER + STALKER,
 	optionsBitmask = AIENABLED,
 	diet = CARNIVORE,
-	scale = 1.5,
+	scale = 3.0,
 
-	templates = {"object/mobile/acklay_hue.iff"},
+	templates = {"object/mobile/droideka.iff"},
 	lootGroups = {
 		{
-	        groups = {
-				{group = "junk", chance = 10000000},
-			},
-			lootChance = 10000000
-		},
-		{
 			groups = {
-				{group = "junk", chance = 10000000}
-			},
-			lootChance = 10000000
-		},
-
+				{group = "lok_droid_tier_1", chance = 10000000}
+			}
+		}
 	},
-	weapons = {},
 	conversationTemplate = "",
+	weapons = {},
+	defaultWeapon = "object/weapon/ranged/droid/droid_droideka_ranged.iff",
+	defaultAttack = "attack",
 	attacks = {
 		{"creatureareacombo","stateAccuracyBonus=100"},
 		{"creatureareaknockdown","stateAccuracyBonus=100"},
@@ -56,4 +50,4 @@ acklay_boss = Creature:new {
 	}
 }
 
-CreatureTemplates:addCreatureTemplate(acklay_boss, "acklay_boss")
+CreatureTemplates:addCreatureTemplate(droideka_boss, "droideka_boss")

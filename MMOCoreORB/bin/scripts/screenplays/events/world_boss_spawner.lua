@@ -5,16 +5,18 @@ WorldBossSpawner = ScreenPlay:new {
 
 	numberOfActs = 1,
 	bossesToSpawn = 1,
-	initSpawnTimer = 3600,
+	initSpawnTimer = 60, -- 3600
 	numReferencePoints = 29,
 	secondsToDespawn = 7200, 
-	secondsToRespawn = 14400, 
+	secondsToRespawn = 100, -- 14400
 	maxRadius = 2000,
 	randomVariance = 60,
 
 	bossMobileTemplates =  {
 		{template = "acklay_boss", name = "Corrupted Acklay"}, 
 		{template = "rancor_boss", name = "Corrupted Rancor"},
+		{template = "tusken_raider_boss", name = "Corrupted Tusken Raider King"},
+		{template = "droideka_boss", name = "M1r.d3r Experimental Attack Droid"},
 		--{template = "wampa_boss", name = "Corrupted Wampa"},
 		--{template = "kkorrwrot_boss", name = "Corrupted Geonosian"},
 		--{template = "deathsting_boss", name = "Corrupted Deathsting"},
