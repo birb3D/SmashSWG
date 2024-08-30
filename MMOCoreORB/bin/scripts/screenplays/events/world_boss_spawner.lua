@@ -1,9 +1,6 @@
 local ObjectManager = require("managers.object.object_manager")
 
-
-
 WorldBossSpawner = ScreenPlay:new {
-
 	numberOfActs = 1,
 	bossesToSpawn = 1,
 	initSpawnTimer = 60, -- 3600
@@ -26,8 +23,8 @@ WorldBossSpawner = ScreenPlay:new {
 
 	screenplayName = "WorldBossSpawner",
 
-	bossSpawnPoint = {
-		{planetName = "corellia", xPos = -3646, yPos = 2870},
+	bossSpawnPoint = { 
+		--[[{planetName = "corellia", xPos = -3646, yPos = 2870},
 		{planetName = "corellia", xPos = 4630, yPos = -5740},
 		{planetName = "corellia", xPos = 1414, yPos = -316},
 		{planetName = "naboo", xPos = -1969, yPos = 5295},
@@ -36,8 +33,10 @@ WorldBossSpawner = ScreenPlay:new {
 		{planetName = "naboo", xPos = 2850, yPos = 1084},
 		{planetName = "tatooine", xPos = -4512, yPos = -2270},
 		{planetName = "tatooine", xPos = -3933, yPos = -4423},
-		{planetName = "tatooine", xPos = -2575, yPos = -5517}, 
-		{planetName = "tatooine", xPos = -4000, yPos = 6250},
+		{planetName = "tatooine", xPos = -2575, yPos = -5517},]]--
+		{planetName = "tatooine", xPos = -3045, yPos = 2136},
+		{planetName = "tatooine", xPos = -3040, yPos = 2140},
+		--[[{planetName = "tatooine", xPos = -4000, yPos = 6250},
 		{planetName = "tatooine", xPos = -4632, yPos = -4346},
 		{planetName = "lok", xPos = 4578, yPos = -1151},
 		{planetName = "lok", xPos = -70, yPos = 2650},
@@ -55,7 +54,7 @@ WorldBossSpawner = ScreenPlay:new {
 		{planetName = "talus", xPos = 4285, yPos = 1032},
 		{planetName = "yavin4", xPos = 5097, yPos = 5537},
 		{planetName = "yavin4", xPos = 466, yPos = -693},
-		{planetName = "yavin4", xPos = -3150, yPos = -3050},
+		{planetName = "yavin4", xPos = -3150, yPos = -3050},]]--
 	},
 	
 	bigGameHunterSpawns = {
@@ -88,7 +87,6 @@ function WorldBossSpawner:spawnMobiles()
 	end
 end
 
-
 function WorldBossSpawner:setupBoss(pBoss)
 	createObserver(OBJECTDESTRUCTION, "WorldBossSpawner", "notifyBossDead", pBoss)
 	createEvent(getRandomNumber(self.secondsToDespawn - self.randomVariance, self.secondsToDespawn + self.randomVariance) * 1000, "WorldBossSpawner", "despawnBoss", pBoss, "")
@@ -120,7 +118,7 @@ function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
 			end
 		end
 	end
-	
+
 	return 1
 end
 
