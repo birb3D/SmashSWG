@@ -13,10 +13,11 @@ WorldBossSpawner = ScreenPlay:new {
 	randomVariance = 60,
 
 	bossMobileTemplates =  {
-		{template = "acklay_boss", name = "Corrupted Acklay"}, 
-		{template = "rancor_boss", name = "Corrupted Rancor"},
-		{template = "tusken_raider_boss", name = "Corrupted Tusken Raider King"},
-		{template = "droideka_boss", name = "M1r.d3r Experimental Attack Droid"},
+		--{template = "acklay_boss", name = "Corrupted Acklay"}, 
+		--{template = "rancor_boss", name = "Corrupted Rancor"},
+		--{template = "tusken_raider_boss", name = "Corrupted Tusken Raider King"},
+		--{template = "droideka_boss", name = "M1r.d3r Experimental Attack Droid"},
+		{template = "jawa_boss", name = "Glob the Footpad"},
 		--{template = "wampa_boss", name = "Corrupted Wampa"},
 		--{template = "kkorrwrot_boss", name = "Corrupted Geonosian"},
 		--{template = "deathsting_boss", name = "Corrupted Deathsting"},

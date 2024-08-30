@@ -1,14 +1,14 @@
-tusken_raider_boss = Creature:new {
-	customName = "Corrupted Tusken Raider King",
-	socialGroup = "tusken_raider",
-	faction = "tusken_raider",
+jawa_boss = Creature:new {
+	customName = "Glob the Footpad",
+	socialGroup = "jawa",
+	faction = "jawa",
 	level = 500,
 	chanceHit = 70.0,
-	damageMin = 100,
-	damageMax = 300,
+	damageMin = 500,
+	damageMax = 1000,
 	baseXp = 28549,
-	baseHAM = 3000,
-	baseHAMmax = 3500,
+	baseHAM = 10000,
+	baseHAMmax = 10500,
 	--[[damageMin = 7570,
 	damageMax = 9950,
 	baseXp = 28549,
@@ -29,9 +29,9 @@ tusken_raider_boss = Creature:new {
 	creatureBitmask = PACK + KILLER + STALKER,
 	optionsBitmask = AIENABLED,
 	diet = CARNIVORE,
-	scale = 2.0,
+	scale = 4.0,
 
-	templates = {"object/mobile/tusken_raider.iff"},
+	templates = {"object/mobile/jawa.iff"},
 	lootGroups = {
 		{
 			groups = {
@@ -76,24 +76,19 @@ tusken_raider_boss = Creature:new {
 			lootChance = 10000000
 		},
 
-	},
-	weapons = {},
-	attacks = {
-		{"creatureareacombo","stateAccuracyBonus=100"},
-		{"creatureareaknockdown","stateAccuracyBonus=100"},
-		{"creatureareapoison","stateAccuracyBonus=90"}
+
 	},
 
 	-- Primary and secondary weapon should be different types (rifle/carbine, carbine/pistol, rifle/unarmed, etc)
 	-- Unarmed should be put on secondary unless the mobile doesn't use weapons, in which case "unarmed" should be put primary and "none" as secondary
-	primaryWeapon = "tusken_weapons",
+	primaryWeapon = "object/weapon/ranged/rifle/rifle_flame_thrower.iff",
 	secondaryWeapon = "unarmed",
 	conversationTemplate = "",
 	
 	-- primaryAttacks and secondaryAttacks should be separate skill groups specific to the weapon type listed in primaryWeapon and secondaryWeapon
 	-- Use merge() to merge groups in creatureskills.lua together. If a weapon is set to "none", set the attacks variable to empty brackets
-	primaryAttacks = merge(marksmanmaster,brawlermaster,fencermaster,riflemanmaster),
-	secondaryAttacks = { }
+	primaryAttacks = merge(commandomaster,marksmanmaster),
+	secondaryAttacks = { merge(brawlermaster,fencermaster,riflemanmaster) }
 }
 
-CreatureTemplates:addCreatureTemplate(tusken_raider_boss, "tusken_raider_boss")
+CreatureTemplates:addCreatureTemplate(jawa_boss, "jawa_boss")
