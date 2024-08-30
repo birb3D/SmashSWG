@@ -9,7 +9,7 @@ WorldBossSpawner = ScreenPlay:new {
 	numReferencePoints = 29,
 	secondsToDespawn = 7200, 
 	secondsToRespawn = 100, -- 14400
-	maxRadius = 5,
+	maxRadius = 2000,
 	randomVariance = 60,
 
 	bossMobileTemplates =  {
@@ -82,7 +82,7 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 
 	local bossObject = self.bossMobileTemplates[getRandomNumber(1, #self.bossMobileTemplates)]
 	local bossTemplate = bossObject.template
-	local referencePoint = getRandomNumber(1, #BossSpawnPoint)
+	local referencePoint = getRandomNumber(1, numReferencePoints)
 	local zone = BossSpawnPoint[referencePoint].planetName
 		
 	if (not isZoneEnabled(zone)) then
@@ -90,7 +90,7 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 		local counter = 1
 			
 		while (not isZoneEnabled(zone) and counter <= 11) do
-			referencePoint = getRandomNumber(0, #BossSpawnPoint)
+			referencePoint = getRandomNumber(0, numReferencePoints -1)
 			zone = BossSpawnPoint[referencePoint].planetName
 				
 			if (counter == 11) then

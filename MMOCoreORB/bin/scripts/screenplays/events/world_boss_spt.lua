@@ -1,6 +1,6 @@
 BossSpawnPoint = {
 	{planetName = "tatooine", xPos = -3045, yPos = 2136}, 
-	--[[{planetName = "corellia", xPos = -3646, yPos = 2870},
+	{planetName = "corellia", xPos = -3646, yPos = 2870},
 	{planetName = "corellia", xPos = 4630, yPos = -5740},
 	{planetName = "corellia", xPos = 1414, yPos = -316},
 	{planetName = "naboo", xPos = -1969, yPos = 5295},
@@ -28,7 +28,7 @@ BossSpawnPoint = {
 	{planetName = "talus", xPos = 4285, yPos = 1032},
 	{planetName = "yavin4", xPos = 5097, yPos = 5537},
 	{planetName = "yavin4", xPos = 466, yPos = -693},
-	{planetName = "yavin4", xPos = -3150, yPos = -3050},]]--
+	{planetName = "yavin4", xPos = -3150, yPos = -3050},
 }
 
 BigGameHunterSpawns = {
