@@ -93,9 +93,8 @@ nalyaro_faction_too_low = ConvoScreen:new {
   id = "faction_too_low",
   leftDialog = "",
   customDialogText = "Sorry, but I don't trust you enough to do business with you.",
-  stopConversation = "false",
+  stopConversation = "true",
   options = {
-	{"I get that. I really do... Bye", "bye"}
   }
 }
 nalyaro_template:addScreen(nalyaro_faction_too_low);
