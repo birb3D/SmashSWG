@@ -1,6 +1,6 @@
 u8l7 = Creature:new {
 	objectName = "@mob/creature_names:commoner",
-	customName = "U8L7 (New Player Greeter)",
+	customName = "N-3wB (New Player Greeter)",
 	socialGroup = "townsperson",
 	pvpFaction = "townsperson",
 	faction = "townsperson",
@@ -24,7 +24,7 @@ u8l7 = Creature:new {
 	ferocity = 0,
 	pvpBitmask = NONE,
 	creatureBitmask = NONE,
-	optionsBitmask = AIENABLED + CONVERSABLE + INTERESTING,
+	optionsBitmask = CONVERSABLE + INTERESTING,
 	diet = HERBIVORE,
 
 	templates = {"object/mobile/3po_protocol_droid_silver.iff"},
