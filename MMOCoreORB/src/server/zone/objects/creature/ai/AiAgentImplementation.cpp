@@ -2144,7 +2144,7 @@ void AiAgentImplementation::addDefender(SceneObject* defender) {
 	CreatureObjectImplementation::addDefender(defender);
 
 	if (defender->isTangibleObject() && threatMap != nullptr) {
-		threatMap->addAggro(defender->asTangibleObject(), 1);
+		threatMap->addAggro(defender->asTangibleObject(), 100, 5);
 	}
 
 	notifyPackMobs(defender);
@@ -3876,7 +3876,7 @@ int AiAgentImplementation::inflictDamage(TangibleObject* attacker, int damageTyp
 	if (damage > 0) {
 		// This damage is DOT or other types of non direct combat damage, it should not count towards loot and thus not be added to the threat map damage.
 		// Adding aggro should still be done.
-		getThreatMap()->addAggro(attacker, 1);
+		getThreatMap()->addAggro(attacker, damage, 10);
 	}
 
 	notifyObservers(ObserverEventType::DAMAGERECEIVED, attacker);

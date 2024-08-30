@@ -424,6 +424,8 @@ TangibleObject* ThreatMap::getHighestThreatAttacker() {
 			continue;
 		}
 
+		entry->removeAggro(entry->getAggroMod() / 3);
+
 		if (selfStrong->isCreatureObject()) {
 			CreatureObject* selfCreo = selfStrong->asCreatureObject();
 
