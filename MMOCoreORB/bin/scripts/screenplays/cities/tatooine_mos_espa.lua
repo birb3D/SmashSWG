@@ -430,7 +430,7 @@ TatooineMosEspaScreenPlay = CityScreenPlay:new {
 		{"bounty_hunter",300,2.1656,-0.894992,-15.9672,360.011,1256061, "calm"},
 		{"contractor",60,2.1656,-0.894992,-14.9672,180.001,1256061, "conversation"},
 		--junk dealer far left cell in back
-		{"junk_dealer", ,300,-5.02826,-0.894991,-21.3375,-20, 1256063, "worried"},
+		{"junk_dealer",300,-5.02826,-0.894991,-21.3375,-20, 1256063, "worried"},
 		-- 2 people talking far right said behind bar back room
 		{"commoner_tatooine",60,-20.6545,-0.894989,25.0112,0,1256067, "conversation"},
 		{"noble",300,-20.6545,-0.894989,26.0112,180.01,1256067, "conversation"},
