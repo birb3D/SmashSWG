@@ -1,5 +1,6 @@
 local ObjectManager = require("managers.object.object_manager")
-includeFile("events/world_boss_spt.lua")
+
+
 
 WorldBossSpawner = ScreenPlay:new {
 
@@ -9,7 +10,7 @@ WorldBossSpawner = ScreenPlay:new {
 	numReferencePoints = 29,
 	secondsToDespawn = 7200, 
 	secondsToRespawn = 100, -- 14400
-	maxRadius = 2000,
+	maxRadius = 5,
 	randomVariance = 60,
 
 	bossMobileTemplates =  {
@@ -24,6 +25,52 @@ WorldBossSpawner = ScreenPlay:new {
 	},
 
 	screenplayName = "WorldBossSpawner",
+
+	bossSpawnPoint = {
+		{planetName = "tatooine", xPos = -3045, yPos = 2136}, 
+		--[[{planetName = "corellia", xPos = -3646, yPos = 2870},
+		{planetName = "corellia", xPos = 4630, yPos = -5740},
+		{planetName = "corellia", xPos = 1414, yPos = -316},
+		{planetName = "naboo", xPos = -1969, yPos = 5295},
+		{planetName = "naboo", xPos = -4627, yPos = 4207},
+		{planetName = "naboo", xPos = -5832, yPos = -94},
+		{planetName = "naboo", xPos = 2850, yPos = 1084},
+		{planetName = "tatooine", xPos = -4512, yPos = -2270},
+		{planetName = "tatooine", xPos = -3933, yPos = -4423},
+		{planetName = "tatooine", xPos = -2575, yPos = -5517}, 
+		{planetName = "tatooine", xPos = -4000, yPos = 6250},
+		{planetName = "tatooine", xPos = -4632, yPos = -4346},
+		{planetName = "lok", xPos = 4578, yPos = -1151},
+		{planetName = "lok", xPos = -70, yPos = 2650},
+		{planetName = "dantooine", xPos = 4195, yPos = 5208},	
+		{planetName = "dantooine", xPos = -3819, yPos = -5726},
+		{planetName = "dantooine", xPos = -555, yPos = -3825},
+		{planetName = "dathomir", xPos = -4002, yPos = -58},		
+		{planetName = "dathomir", xPos = -2102, yPos = 3165},
+		{planetName = "dathomir", xPos = 5676, yPos = 1901},	
+		{planetName = "endor", xPos = -4550, yPos = -2250},
+		{planetName = "endor", xPos = -1714, yPos = 9},	
+		{planetName = "rori", xPos = -2073, yPos = 3339},
+		{planetName = "rori", xPos = 772, yPos = -2109},
+		{planetName = "talus", xPos = -2595, yPos =  3724},
+		{planetName = "talus", xPos = 4285, yPos = 1032},
+		{planetName = "yavin4", xPos = 5097, yPos = 5537},
+		{planetName = "yavin4", xPos = 466, yPos = -693},
+		{planetName = "yavin4", xPos = -3150, yPos = -3050},]]--
+	},
+	
+	bigGameHunterSpawns = {
+		{"corellia", "big_game_hunter", 0, -128.21, 28, -4758.9, 282, 0},
+		{"naboo", "big_game_hunter", 0, -4876.47, 6.42773, 4190.98, 177, 0},
+		{"tatooine", "big_game_hunter", 0, 3517.26, 5, -4799.64, 144, 0},
+		{"lok", "big_game_hunter", 0, 438.818, 8.72217, 5505.23, 103, 0},
+		{"dantooine", "big_game_hunter", 0, -657.838, 3, 2472.76, 60, 0},
+		{"dathomir", "big_game_hunter", 0, 595.538, 6, 3106.55, 236, 0},
+		{"endor", "big_game_hunter", 0, 3228.4, 24, -3500.69, 43, 0},
+		{"rori", "big_game_hunter", 0, -5302.11, 80.0358, -2197.98, 102, 0},
+		{"talus", "big_game_hunter", 0, 320.404, 6, -2908.43, 61, 0},
+		{"yavin4", "big_game_hunter", 0, -6928.55, 73, -5686.36, 183, 0},
+	}
 }
 
 registerScreenPlay("WorldBossSpawner", true)
@@ -82,16 +129,16 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 
 	local bossObject = self.bossMobileTemplates[getRandomNumber(1, #self.bossMobileTemplates)]
 	local bossTemplate = bossObject.template
-	local referencePoint = getRandomNumber(1, numReferencePoints)
-	local zone = BossSpawnPoint[referencePoint].planetName
+	local referencePoint = getRandomNumber(1, #self.bossSpawnPoint)
+	local zone = self.bossSpawnPoint[referencePoint].planetName
 		
 	if (not isZoneEnabled(zone)) then
 		
 		local counter = 1
 			
 		while (not isZoneEnabled(zone) and counter <= 11) do
-			referencePoint = getRandomNumber(0, numReferencePoints -1)
-			zone = BossSpawnPoint[referencePoint].planetName
+			referencePoint = getRandomNumber(1, #self.bossSpawnPoint)
+			zone = self.bossSpawnPoint[referencePoint].planetName
 				
 			if (counter == 11) then
 				return
@@ -101,8 +148,8 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 		end
 	end
 
-	local xPos = BossSpawnPoint[referencePoint].xPos
-	local yPos = BossSpawnPoint[referencePoint].yPos
+	local xPos = self.bossSpawnPoint[referencePoint].xPos
+	local yPos = self.bossSpawnPoint[referencePoint].yPos
 	local pSpawner = spawnSceneObject(zone, "object/tangible/spawning/quest_spawner.iff", xPos, 0, yPos, 0, 0)
 
 	if (pSpawner == nil) then
@@ -214,8 +261,8 @@ end
 
 function WorldBossSpawner:spawnBigGameHunter(pBoss, planet)
 	if (pBoss ~= nil or CreatureObject(pBoss):isDead() == false) then
-		for i = 1, #BigGameHunterSpawns, 1 do
-			local bghSpawn = BigGameHunterSpawns[i]
+		for i = 1, #self.bigGameHunterSpawns, 1 do
+			local bghSpawn = self.bigGameHunterSpawns[i]
 			if (bghSpawn[1] == planet) then
 
 				if (readData(planet .. ":bghPlanet") == 0) then
