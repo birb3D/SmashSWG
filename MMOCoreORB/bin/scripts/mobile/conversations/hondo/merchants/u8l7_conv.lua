@@ -13,7 +13,7 @@ u8l7_template = ConvoTemplate:new {
 u8l7_start = ConvoScreen:new {
   id = "start",
   leftDialog = "",
-  customDialogText = "Hello, I am U8L7, Human - Cyborg relations. How may I be of assistance today?",
+  customDialogText = "Hello, I am N-3wB, Human - Cyborg relations. How may I be of assistance today?",
   stopConversation = "false",
   options = {
   	{"I need some basic crafting equipment.", "shop"},
@@ -117,7 +117,7 @@ u8l7_template:addScreen(u8l7_insufficient_funds);
 u8l7_help1 = ConvoScreen:new {
   id = "help1",
   leftDialog = "",
-  customDialogText = "It looks to me, that you are a member of that... group of adventuring entrepreneurs who recently relocated here from Lok. The generousity and hard work of your group has really made a positive impact here in Mos Eisley. In fact, the crime rate has declined so much that the Imperial presence has dimimished significantly beyond their garrison on the ourskirts of town. You'll find many comforts and facilities are available to you here in Mos Eisley",
+  customDialogText = "It looks to me, that you are a member of that... group of adventuring entrepreneurs who recently relocated here from Lok. The generousity and hard work of your group has really made a positive impact here in Mos Espa. In fact, the crime rate has declined so much that the Imperial presence has dimimished significantly beyond their garrison on the ourskirts of town. You'll find many comforts and facilities are available to you here in Mos Espa",
   stopConversation = "false",
   options = {
 	{"Are there other helpers like you?", "help1a"},
@@ -132,7 +132,7 @@ u8l7_template:addScreen(u8l7_help1);
 u8l7_help1a = ConvoScreen:new {
   id = "help1a",
   leftDialog = "",
-  customDialogText = "Yes, there are many merchants, guides, and other characters throughout the galaxy who offer services such as item sales and item purchasing, while others may have tasks they need accomplished. Here in Mos Eisley you will find Crazy Larry in the cantina. I know he has some... rarer goods!",
+  customDialogText = "Yes, there are many merchants, guides, and other characters throughout the galaxy who offer services such as item sales and item purchasing, while others may have tasks they need accomplished. Here in Mos Espa you will find Crazy Larry in the cantina. I know he has some... rarer goods!",
   stopConversation = "false",
   options = {
 	{"Anything new I should know about?", "help1b"},

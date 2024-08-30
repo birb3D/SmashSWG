@@ -7,10 +7,8 @@ local ObjectManager = require("managers.object.object_manager")
 CrazyLarry = ScreenPlay:new {
 	numberOfActs = 1, 	
 	relations = { 
-		{name="nym", npcStanding=-9000, priceAdjust=15}, -- Adjust price only
-		{name="lok_mercenaries", npcStanding=-9000, priceAdjust=5}, -- Adjust price only
-		{name="bloodrazor", npcStanding=-1000, priceAdjust=20},  -- Enemy
-		{name="canyon_corsair", npcStanding=-1000, priceAdjust=20}  -- Enemy
+		{name="jawa", npcStanding=100, priceAdjust=25}, -- Friends
+		{name="tusken_raider", npcStanding=-2000, priceAdjust=10}, -- Enemy
 	},
 	goods = {
 		{optName="vendor_loot", cost=1000, itemName="Some Stuff I Found", items={"vendor_loot"}}, 

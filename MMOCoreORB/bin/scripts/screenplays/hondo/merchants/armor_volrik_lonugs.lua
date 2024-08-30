@@ -7,8 +7,8 @@ local ObjectManager = require("managers.object.object_manager")
 VolrikLonugsSP = ScreenPlay:new {
 	numberOfActs = 1, 	
 	relations = { 
-		{name="meatlump", npcStanding=-9000, priceAdjust=15}, -- Adjust price only
-		{name="townsperson", npcStanding=-9000, priceAdjust=12}, -- Adjust price only
+		{name="tusken_raider", npcStanding=100, priceAdjust=25}, -- Friends
+		{name="jawa", npcStanding=-2000, priceAdjust=10}, -- Enemy
 	},
 	goods = {
 		{optName="vendor_loot", cost=1000, itemName="Some Stuff I Found", items={"vendor_loot"}}, 

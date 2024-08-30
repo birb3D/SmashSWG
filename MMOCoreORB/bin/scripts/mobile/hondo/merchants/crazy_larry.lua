@@ -1,9 +1,9 @@
 crazylarry = Creature:new {
 	objectName = "@mob/creature_names:commoner",
 	customName = "Crazy Larry (Unique Items Merchant)",
-	socialGroup = "townsperson",
+	socialGroup = "jawa",
 	pvpFaction = "townsperson",
-	faction = "townsperson",
+	faction = "jawa",
 	level = 1,
 	chanceHit = 0.25,
 	damageMin = 50,
