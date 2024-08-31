@@ -5,11 +5,11 @@ worldboss_rare = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{groupTemplate = "all_attachments", weight = 5000000},
-		{groupTemplate = "armor_all", weight = 1000000},
-		{groupTemplate = "color_crystals", weight = 1000000},
-		{groupTemplate = "strange_items", weight = 500000},
-		{groupTemplate = "large_resource_all", weight = 500000},
+		{groupTemplate = "all_attachments", weight = 2000000},
+		{groupTemplate = "armor_all", weight = 2000000},
+		{groupTemplate = "color_crystals", weight = 2000000},
+		{groupTemplate = "strange_items", weight = 2000000},
+		{groupTemplate = "large_resource_all", weight = 2000000},
 	}
 }
 
