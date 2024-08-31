@@ -5,12 +5,12 @@ worldboss_legendary = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{itemTemplate = "jedi_holocron_light", weight = 5000000},
-		{itemTemplate = "holocron_splinters", weight = 5000000},
-		{itemTemplate = "krayt_dragon_pearl", weight = 10000000},
-		{groupTemplate = "crafting_component_advanced", weight = 10000000},
-		{groupTemplate = "legendary_strange_items", weight = 500000},
-		{groupTemplate = "massive_resource_all", weight = 500000},
+		{itemTemplate = "jedi_holocron_light", weight = 1666667},
+		{itemTemplate = "holocron_splinters", weight = 1666666},
+		{itemTemplate = "krayt_dragon_pearl", weight = 1666666},
+		{groupTemplate = "crafting_component_advanced", weight = 1666666},
+		{groupTemplate = "legendary_strange_items", weight = 1666666},
+		{groupTemplate = "massive_resource_all", weight = 1666666},
 
 	}
 }
