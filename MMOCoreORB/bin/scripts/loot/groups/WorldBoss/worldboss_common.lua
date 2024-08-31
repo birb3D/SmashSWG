@@ -5,9 +5,9 @@ worldboss_common = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{groupTemplate = "resource_all", weight = 1000000},
-		{groupTemplate = "junk", weight = 1000000},
-		{groupTemplate = "crafting_component", weight = 1000000},
+		{groupTemplate = "resource_all", weight = 3333334},
+		{groupTemplate = "junk", weight = 3333333},
+		{groupTemplate = "crafting_component", weight = 3333333},
 	}
 }
 
