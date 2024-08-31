@@ -4,6 +4,7 @@ require("conv_handler")
 require("themeParkLogic")
 require("corvetteTicketGiverLogic")
 require("corvetteTicketTakerLogic")
+require("development_controls")
 
 -- SUI
 --require("sui.custom.SuiSample")
