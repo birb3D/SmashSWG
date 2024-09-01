@@ -454,7 +454,7 @@ int CombatManager::creoTargetCombatAction(CreatureObject* attacker, WeaponObject
 		break;
 	case BLOCK:
 		doBlock(attacker, weapon, defender, damage);
-		damageMultiplier = 0.25f;
+		damageMultiplier = 0.35f;
 		break;
 	case DODGE:
 		doDodge(attacker, weapon, defender, damage);
@@ -623,7 +623,7 @@ int CombatManager::tanoTargetCombatAction(TangibleObject* attacker, WeaponObject
 		break;
 	case BLOCK:
 		doBlock(attacker, weapon, defenderObject, damage);
-		damageMultiplier = 0.25f;
+		damageMultiplier = 0.35f;
 		break;
 	case DODGE:
 		doDodge(attacker, weapon, defenderObject, damage);
@@ -2170,7 +2170,7 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* creoDe
 			int attackMask = weapon->getWeaponBitmask();
 			int attackType = weapon->getAttackType();
 
-			if ((!attacker->isTurret() && attackMask != WeaponType::GRENADEWEAPON) && (attackType == SharedWeaponObjectTemplate::RANGEDATTACK || attackMask == WeaponType::HEAVYWEAPON)) {
+			if ((!attacker->isTurret() && attackMask != WeaponType::GRENADEWEAPON && attackMask != WeaponType::HEAVYWEAPON) && attackType == SharedWeaponObjectTemplate::RANGEDATTACK) {
 				evadeTotal = evadeSkill = creoDefender->getSkillMod("saber_block");
 
 				if (evadeTotal > 0 && System::random(100) <= evadeTotal) {
