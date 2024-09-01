@@ -597,8 +597,6 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 	ThreatMap* threatMap = destructedObject->getThreatMap();
 	ThreatMap copyThreatMap(*threatMap);
 
-	threatMap->removeObservers();
-
 	auto destructorObjectID = destructor->getObjectID();
 
 	// lets unlock destructor so we dont get into complicated deadlocks
@@ -609,22 +607,6 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 
 	try {
 		SortedVector<ManagedReference<Observer* > > observers = destructedObject->getObservers(ObserverEventType::QUESTKILL);
-
-		if (observers.size() > 0) {
-			for (int i = 0; i < copyThreatMap.size(); ++i) {
-				TangibleObject* attacker = copyThreatMap.elementAt(i).getKey();
-
-				if (attacker == nullptr || !attacker->isPlayerCreature())
-					continue;
-
-				CreatureObject* attackerCreo = attacker->asCreatureObject();
-
-				if (attackerCreo == nullptr)
-					continue;
-
-				attackerCreo->notifyObservers(ObserverEventType::QUESTKILL, destructedObject);
-			}
-		}
 
 		ManagedReference<CreatureObject*> player = copyThreatMap.getHighestDamageGroupLeader();
 
@@ -709,6 +691,25 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 				trx.abort() << "createLoot failed for ai object for unknown reason.";
 			}
 		}
+
+
+		if (observers.size() > 0) {
+			for (int i = 0; i < copyThreatMap.size(); ++i) {
+				TangibleObject* attacker = copyThreatMap.elementAt(i).getKey();
+
+				if (attacker == nullptr || !attacker->isPlayerCreature())
+					continue;
+
+				CreatureObject* attackerCreo = attacker->asCreatureObject();
+
+				if (attackerCreo == nullptr)
+					continue;
+
+				attackerCreo->notifyObservers(ObserverEventType::QUESTKILL, destructedObject);
+			}
+		}
+
+		threatMap->removeObservers();
 
 		// Check to see if we can expedite the despawn of this corpse
 		// We can expedite the despawn when corpse has no loot, no credits, player cannot harvest, and no group members in range can harvest

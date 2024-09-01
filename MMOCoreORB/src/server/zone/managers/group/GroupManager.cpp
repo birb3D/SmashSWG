@@ -821,7 +821,7 @@ void GroupManager::doRandomLoot(GroupObject* group, AiAgent* corpse) {
 			if (member == nullptr || !member->isPlayerCreature())
 				continue;
 
-			if (!member->isInRange(corpse, 128.f))
+			if (!member->isInRange(corpse, 256.f))
 				continue;
 
 			candidates.add(member);

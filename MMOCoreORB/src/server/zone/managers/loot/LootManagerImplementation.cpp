@@ -19,6 +19,7 @@
 #include "server/zone/managers/resource/ResourceManager.h"
 #include "server/zone/Zone.h"
 #include "templates/params/creature/CreatureAttribute.h"
+#include "server/zone/objects/tangible/threat/ThreatMap.h"
 
 // #define DEBUG_LOOT_MAN
 
@@ -636,6 +637,43 @@ String LootManagerImplementation::getRandomLootableMod(uint32 sceneObjectType) {
 bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* container, AiAgent* creature) {
 	auto lootCollection = creature->getLootGroups();
 
+	// World Boss Loot System (World bosses are level 500)
+	int creatureLevel = creature->getLevel();
+	//Rare Loot System
+	if (creatureLevel >= 500){
+		ThreatMap* threatMap = creature->getThreatMap();
+
+		if (threatMap != nullptr && threatMap->size() > 0) {
+			for (int i = 0; i < threatMap->size(); ++i) {
+				TangibleObject* threatTano = threatMap->elementAt(i).getKey();
+
+				if (threatTano == nullptr) {
+					continue;
+				}
+
+				if (threatTano->isPlayerCreature()) {
+					CreatureObject* player = cast<CreatureObject*>(threatTano);
+
+					ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+
+					createLootFromCollection(trx, inventory, lootCollection, creature->getLevel());
+
+					player->sendSystemMessage("YOU GOT BOSS LOOT!");
+				}
+			}
+		}
+
+		/*
+		if (System::random(100) < 2) { //2% Rare Loot System
+			createLoot(container, "rarelootsystem", creatureLevel, false);
+			creature->playEffect("clienteffect/rare_loot.cef", "");
+			creature->showFlyText("Rare", "Loot", 0, 255, 0);
+		}*/
+	}
+
+
+
+
 	if (lootCollection == nullptr) {
 		trx.abort() << "No lootCollection.";
 		return false;
@@ -1023,15 +1061,24 @@ float LootManagerImplementation::getRandomModifier(const LootItemTemplate* itemT
 	}
 
 	if (excMod <= baseModifier) {
+
+		// level % of min max * level chance
+		// level 150 = 50
+		// level 30 = 20 <-- clamped
 		float chance = LootValues::getLevelRankValue(level, 0.2f, 0.9f) * levelChance;
 
+		// 1000 random < 50 = 5% chance for yellow @ level 150
 		if (System::random(yellowChance) <= chance) {
 			excMod = yellowModifier;
-		} else if (System::random(baseChance) <= chance) {
-			excMod = baseModifier;
 		} else {
-			excMod = 0.f;
+			excMod = baseModifier;
 		}
+		/*
+		} else if (System::random(baseChance) <= chance) {
+			excMod = baseModifier; // 20% chance at low level??
+		} else {
+			excMod = 0.f; // Otherwise bottom rolled?
+		}*/
 	}
 
 	int modMax = 0;
