@@ -1177,9 +1177,11 @@ void PlayerObjectImplementation::addFriend(const String& name, bool notifyClient
 		param.setTT(nameLower);
 		if (strongParent->isCreatureObject())
 			(cast<CreatureObject*>(strongParent.get()))->sendSystemMessage(param);
+		sendFriendLists()
 
 	} else {
 		friendList.add(nameLower);
+		sendFriendLists()
 	}
 }
 
@@ -1241,8 +1243,11 @@ void PlayerObjectImplementation::removeFriend(const String& name, bool notifyCli
 		if (strongParent != nullptr)
 			strongParent->sendSystemMessage(param);
 
+		sendFriendLists();
+
 	} else {
 		friendList.removePlayer(nameLower);
+		sendFriendLists();
 	}
 }
 
@@ -1274,6 +1279,7 @@ void PlayerObjectImplementation::removeAllFriends() {
 
 		friendList.removePlayer(name);
 	}
+	sendFriendLists();
 
 	while (friendList.reversePlayerCount() > 0) {
 		String name = friendList.getReversePlayer(0).toLowerCase();
@@ -1341,9 +1347,11 @@ void PlayerObjectImplementation::addIgnore(const String& name, bool notifyClient
 		param.setTT(nameLower);
 		if (parent->isCreatureObject())
 			(cast<CreatureObject*>(parent.get()))->sendSystemMessage(param);
+		sendFriendLists();
 
 	} else {
 		ignoreList.add(nameLower);
+		sendFriendLists();
 	}
 }
 
@@ -1379,9 +1387,10 @@ void PlayerObjectImplementation::removeIgnore(const String& name, bool notifyCli
 		param.setTT(nameLower);
 		if (parent->isCreatureObject())
 			(cast<CreatureObject*>(parent.get()))->sendSystemMessage(param);
-
+		sendFriendLists();
 	} else {
 		ignoreList.removePlayer(nameLower);
+		sendFriendLists();
 	}
 }
 
