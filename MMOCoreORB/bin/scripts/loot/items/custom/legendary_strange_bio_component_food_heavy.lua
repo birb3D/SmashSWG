@@ -3,7 +3,7 @@
 legendary_strange_bio_component_food_heavy = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Intelligent Nanonutrients",
+	customObjectName = "Experimental Intelligent Nanonutrients",
 	directObjectTemplate = "object/tangible/component/bio/bio_component_food_heavy_nutrition.iff",
 	craftingValues = {
 		{"add_nutrition", 60,140,0}, -- could be better than good, could be bad. average lower than mid range

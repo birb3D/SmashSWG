@@ -61,7 +61,8 @@ includeFile("items/custom/legendary_strange_structure_light_ore_mining_unit.lua"
 includeFile("items/custom/legendary_strange_structure_ore_mining_unit.lua")
 includeFile("items/custom/legendary_strange_structure_turbo_fluidic_drilling_pumping_unit.lua")
 
-
+includeFile("items/cloning_coupon.lua")
+includeFile("items/travel_coupon.lua")
 includeFile("items/attachment_armor.lua")
 includeFile("items/attachment_clothing.lua")
 includeFile("items/balanced_feed_mechanism.lua")

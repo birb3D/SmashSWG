@@ -3,7 +3,7 @@
 legendary_strange_bio_component_food_medium = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Broad-Spectrum Nutrients",
+	customObjectName = "Experimental Broad-Spectrum Nutrients",
 	directObjectTemplate = "object/tangible/component/bio/bio_component_food_medium_nutrition.iff",
 	craftingValues = {
 		{"add_nutrition", 40,120,0}, -- could be better than good, could be bad. average lower than mid range
