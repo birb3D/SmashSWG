@@ -3,7 +3,7 @@
 legendary_strange_structure_light_ore_mining_unit = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Light Ore Mining Unit",
+	customObjectName = "Experimental Light Ore Mining Unit",
 	directObjectTemplate = "object/tangible/component/structure/light_ore_mining_unit.iff",
 	craftingValues = {
         {"extractrate", 4, 12, 0},

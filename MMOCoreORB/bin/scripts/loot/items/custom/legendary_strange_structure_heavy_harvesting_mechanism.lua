@@ -3,7 +3,7 @@
 legendary_strange_structure_heavy_harvesting_mechanism = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Heavy Harvesting Mechanism",
+	customObjectName = "Experimental Heavy Harvesting Mechanism",
 	directObjectTemplate = "object/tangible/component/structure/heavy_harvesting_mechanism.iff",
 	craftingValues = {
         {"extractrate", 6, 16, 0},

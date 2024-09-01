@@ -3,7 +3,7 @@
 legendary_strange_stock_advanced = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Advanced Weapon Stock",
+	customObjectName = "Experimental Advanced Weapon Stock",
 	directObjectTemplate = "object/tangible/component/weapon/stock_advanced.iff",
 	craftingValues = {
 		{"mindamage", 30,80,0},

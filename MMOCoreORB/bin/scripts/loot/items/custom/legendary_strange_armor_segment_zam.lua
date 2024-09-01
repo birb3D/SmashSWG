@@ -3,7 +3,7 @@
 legendary_strange_armor_segment_zam = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Mabari Armorweave Segment",
+	customObjectName = "Experimental Mabari Armorweave Segment",
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_zam_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},

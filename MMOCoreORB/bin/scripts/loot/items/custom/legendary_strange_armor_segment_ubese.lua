@@ -3,7 +3,7 @@
 legendary_strange_armor_segment_ubese = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Ubese Armor Segment",
+	customObjectName = "Experimental Ubese Armor Segment",
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_ubese_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},

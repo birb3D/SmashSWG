@@ -3,7 +3,7 @@
 legendary_strange_droid_combat_module_slow = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Droid Combat Module",
+	customObjectName = "Experimental Droid Combat Module",
 	directObjectTemplate = "object/tangible/component/droid/combat_module.iff",
 	craftingValues = {
 		{"decayrate", 5,15,0}, 

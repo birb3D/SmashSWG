@@ -3,7 +3,7 @@
 legendary_strange_reinforcement_core_advanced = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Reinforcement Core",
+	customObjectName = "Experimental Reinforcement Core",
 	directObjectTemplate = "object/tangible/component/weapon/reinforcement_core_advanced.iff",
 	craftingValues = {
 		{"mindamage", 40,80,0},
