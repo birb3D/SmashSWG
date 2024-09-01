@@ -1,7 +1,7 @@
 legendary_strange_biologic_effect_controller = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Advanced Biological Effect Controller",
+	customObjectName = "Experimental Advanced Biological Effect Controller",
 	directObjectTemplate = "object/tangible/component/chemistry/biologic_effect_controller_advanced.iff",
 	craftingValues = {
 		{"power", 400,560,0},

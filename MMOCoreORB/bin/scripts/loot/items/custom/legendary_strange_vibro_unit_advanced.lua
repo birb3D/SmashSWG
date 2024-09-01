@@ -3,7 +3,7 @@
 legendary_strange_vibro_unit_advanced = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Blade Vibro Unit",
+	customObjectName = "Experimental Blade Vibro Unit",
 	directObjectTemplate = "object/tangible/component/weapon/vibro_unit_advanced.iff",
 	craftingValues = {
 		{"mindamage", 40,80,0},

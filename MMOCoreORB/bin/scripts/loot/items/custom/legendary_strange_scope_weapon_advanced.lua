@@ -3,7 +3,7 @@
 legendary_strange_scope_weapon_advanced = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Weapon Scope",
+	customObjectName = "Experimental Weapon Scope",
 	directObjectTemplate = "object/tangible/component/weapon/scope_weapon_advanced.iff",
 	craftingValues = {
 		{"woundchance", 8,22,1},

@@ -3,7 +3,7 @@
 legendary_strange_sword_core_advanced = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Sword Core",
+	customObjectName = "Experimental Sword Core",
 	directObjectTemplate = "object/tangible/component/weapon/sword_core_advanced.iff",
 	craftingValues = {
 		{"mindamage", 40,80,0},

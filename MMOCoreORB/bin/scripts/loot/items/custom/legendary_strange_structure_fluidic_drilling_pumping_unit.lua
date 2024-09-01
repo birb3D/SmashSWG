@@ -3,7 +3,7 @@
 legendary_strange_structure_fluidic_drilling_pumping_unit = {
 	minimumLevel = 0,
 	maximumLevel = -1,
-	customObjectName = "Legendary Strange Fluidic Drilling Pump Unit",
+	customObjectName = "Experimental Fluidic Drilling Pump Unit",
 	directObjectTemplate = "object/tangible/component/structure/fluidic_drilling_pumping_unit.iff",
 	craftingValues = {
         {"extractrate", 4, 12, 0},
