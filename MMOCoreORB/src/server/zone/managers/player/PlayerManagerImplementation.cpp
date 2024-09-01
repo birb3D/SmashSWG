@@ -1186,6 +1186,11 @@ int PlayerManagerImplementation::notifyDestruction(TangibleObject* destructor, T
 		playerCreature->setPosture(CreaturePosture::INCAPACITATED, true, true);
 		playerCreature->clearCombatState(false);
 		playerCreature->clearState(CreatureState::FEIGNDEATH); // We got incapped for real - Remove the state so we can be DB'd
+		// Remove Damage of Time effects
+		playerCreature->clearState(CreatureState::BLEEDING);
+		playerCreature->clearState(CreatureState::POISONED);
+		playerCreature->clearState(CreatureState::DISEASED);
+		playerCreature->clearState(CreatureState::ONFIRE);
 
 		uint8 incapTime = calculateIncapacitationTimer(playerCreature, condition);
 		playerCreature->setIncapacitationTimer((uint32) incapTime, true);
