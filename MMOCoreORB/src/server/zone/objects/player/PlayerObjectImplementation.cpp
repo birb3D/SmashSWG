@@ -1177,11 +1177,12 @@ void PlayerObjectImplementation::addFriend(const String& name, bool notifyClient
 		param.setTT(nameLower);
 		if (strongParent->isCreatureObject())
 			(cast<CreatureObject*>(strongParent.get()))->sendSystemMessage(param);
-		sendFriendLists()
+		
+		sendFriendLists();
 
 	} else {
 		friendList.add(nameLower);
-		sendFriendLists()
+		sendFriendLists();
 	}
 }
 
