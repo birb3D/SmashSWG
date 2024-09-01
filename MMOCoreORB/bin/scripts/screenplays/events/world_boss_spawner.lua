@@ -153,7 +153,7 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 		return
 	end
 
-	local spawnPoint = getSpawnPoint(zone, xPos, yPos, self.minimumDistance, self.maxRadius, false)
+	local spawnPoint = getSpawnPoint(zone, xPos, yPos, self.minimumDistance, self.maxRadius, true)
 		
 	if (spawnPoint == nil) then
 			spawnPoint = { spawnerX, getTerrainHeight(pSpawner, xPos, yPos), yPos }

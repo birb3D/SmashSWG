@@ -24,6 +24,8 @@ public:
 	static int getAttributeType(uint32 objectType, const String& attribute) {
 		uint32 attributeCRC = attribute.toLowerCase().hashCode();
 
+		return RandomType::DYNAMIC;
+
 		if (objectType & SceneObjectType::COMPONENT) {
 			return getComponentAttributeType(objectType, attribute);
 		} else {
@@ -33,6 +35,8 @@ public:
 
 	static int getComponentAttributeType(uint32 objectType, const String& attribute) {
 		uint32 attributeCRC = attribute.toLowerCase().hashCode();
+
+		return RandomType::DYNAMIC;
 
 		if (objectType == SceneObjectType::ARMORCOMPONENT) {
 			switch (attributeCRC) {
@@ -150,6 +154,7 @@ public:
 		}
 
 		if (objectType == SceneObjectType::COMPONENT) {
+			
 			switch (attributeCRC) {
 				case String::hashCode("usecount"):						return RandomType::UNIFORM;
 				default:												return RandomType::STATIC;
