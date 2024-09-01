@@ -57,6 +57,20 @@ BurstShot1Command = {
 	animType = GENERATE_RANGED,
 
 	combatSpam = "burstshot",
+
+	dotEffects = {
+		DotEffect( 
+		  BLEEDING, 
+		  { "resistance_bleeding", "bleed_resist" },
+		  ACTION,
+		  true,
+		  0,
+		  100,
+		  60, 
+		  60,
+		  75
+		)
+	  },
 	
 	weaponType = CARBINEWEAPON,
 
