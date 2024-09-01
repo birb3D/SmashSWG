@@ -4,11 +4,11 @@ tusken_raider_boss = Creature:new {
 	faction = "tusken_raider",
 	level = 500,
 	chanceHit = 70.0,
-	damageMin = 100,
-	damageMax = 300,
-	baseXp = 28549,
-	baseHAM = 3000,
-	baseHAMmax = 3500,
+	damageMin = 200,
+	damageMax = 500,
+	baseXp = 60549,
+	baseHAM = 90000,
+	baseHAMmax = 110000,
 	--[[damageMin = 7570,
 	damageMax = 9950,
 	baseXp = 28549,
@@ -33,18 +33,6 @@ tusken_raider_boss = Creature:new {
 
 	templates = {"object/mobile/tusken_raider.iff"},
 	lootGroups = {
-		{
-			groups = {
-				{group = "strange_items", chance = 10000000}
-			},
-			lootChance = 10000000
-		},
-		{
-			groups = {
-				{group = "strange_items", chance = 10000000}
-			},
-			lootChance = 10000000
-		},
 		{
 			groups = {
 				{group = "strange_items", chance = 10000000}
