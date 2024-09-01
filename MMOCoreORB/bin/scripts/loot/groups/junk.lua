@@ -6,8 +6,8 @@ junk = {
 	maximumLevel = 0,
 	lootItems = {
 		{itemTemplate = "broken_binoculars_s1", weight = 277778},
-		{itemTemplate = "cloning_coupon", weight = 277777}
-		{itemTemplate = "travel_coupon", weight = 277777}
+		{itemTemplate = "cloning_coupon", weight = 277777},
+		{itemTemplate = "travel_coupon", weight = 277777},
 		{itemTemplate = "broken_binoculars_s2", weight = 277777},
 		{itemTemplate = "broken_decryptor", weight = 277777},
 		{itemTemplate = "broken_viewscreen_grey", weight = 277777},
