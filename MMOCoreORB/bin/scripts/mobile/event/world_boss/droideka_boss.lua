@@ -1,14 +1,14 @@
 droideka_boss = Creature:new {
-	objectName = "M1r.d3r Experimental Attack Droid",
+	customName = "M1r.d3r Experimental Attack Droid",
 	socialGroup = "droideka",
 	faction = "",
 	level = 500,
 	chanceHit = 70.0,
 	damageMin = 100,
-	damageMax = 300,
+	damageMax = 400,
 	baseXp = 28549,
-	baseHAM = 3000,
-	baseHAMmax = 3500,
+	baseHAM = 10000,
+	baseHAMmax = 15000,
 	--[[damageMin = 7570,
 	damageMax = 9950,
 	baseXp = 28549,
@@ -34,10 +34,23 @@ droideka_boss = Creature:new {
 	templates = {"object/mobile/droideka.iff"},
 	lootGroups = {
 		{
+	        groups = {
+				{group = "worldboss_common", chance = 10000000},
+			},
+			lootChance = 10000000
+		},
+		{
 			groups = {
-				{group = "lok_droid_tier_1", chance = 10000000}
-			}
-		}
+				{group = "worldboss_rare", chance = 10000000}
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "worldboss_legendary", chance = 10000000}
+			},
+			lootChance = 10000000
+		},
 	},
 	conversationTemplate = "",
 	weapons = {},
