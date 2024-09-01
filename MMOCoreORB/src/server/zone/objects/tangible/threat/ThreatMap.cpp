@@ -424,6 +424,7 @@ TangibleObject* ThreatMap::getHighestThreatAttacker() {
 			continue;
 		}
 
+		// Decay Threat Map
 		entry->removeAggro(entry->getAggroMod() / 3);
 
 		if (selfStrong->isCreatureObject()) {
