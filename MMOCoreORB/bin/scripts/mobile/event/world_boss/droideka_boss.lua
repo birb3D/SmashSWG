@@ -4,11 +4,11 @@ droideka_boss = Creature:new {
 	faction = "",
 	level = 500,
 	chanceHit = 70.0,
-	damageMin = 100,
-	damageMax = 400,
-	baseXp = 28549,
-	baseHAM = 10000,
-	baseHAMmax = 15000,
+	damageMin = 200,
+	damageMax = 500,
+	baseXp = 60549,
+	baseHAM = 90000,
+	baseHAMmax = 110000,
 	--[[damageMin = 7570,
 	damageMax = 9950,
 	baseXp = 28549,
@@ -34,20 +34,32 @@ droideka_boss = Creature:new {
 	templates = {"object/mobile/droideka.iff"},
 	lootGroups = {
 		{
-	        groups = {
-				{group = "worldboss_common", chance = 10000000},
+			groups = {
+				{group = "strange_items", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "worldboss_rare", chance = 10000000}
+				{group = "strange_items", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "worldboss_legendary", chance = 10000000}
+				{group = "strange_items", chance = 10000000}
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "strange_items", chance = 10000000}
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "strange_items", chance = 10000000}
 			},
 			lootChance = 10000000
 		},

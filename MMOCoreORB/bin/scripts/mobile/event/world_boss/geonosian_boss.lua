@@ -29,14 +29,32 @@ geonosian_boss = Creature:new {
 	templates = {"object/mobile/dressed_geonosian_warrior_03.iff"},
 	lootGroups = {
 		{
-	        groups = {
-				{group = "junk", chance = 10000000},
+			groups = {
+				{group = "strange_items", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 10000000}
+				{group = "strange_items", chance = 10000000}
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "strange_items", chance = 10000000}
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "strange_items", chance = 10000000}
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "strange_items", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
