@@ -1061,15 +1061,24 @@ float LootManagerImplementation::getRandomModifier(const LootItemTemplate* itemT
 	}
 
 	if (excMod <= baseModifier) {
+
+		// level % of min max * level chance
+		// level 150 = 50
+		// level 30 = 20 <-- clamped
 		float chance = LootValues::getLevelRankValue(level, 0.2f, 0.9f) * levelChance;
 
+		// 1000 random < 50 = 5% chance for yellow @ level 150
 		if (System::random(yellowChance) <= chance) {
 			excMod = yellowModifier;
-		} else if (System::random(baseChance) <= chance) {
-			excMod = baseModifier;
 		} else {
-			excMod = 0.f;
+			excMod = baseModifier;
 		}
+		/*
+		} else if (System::random(baseChance) <= chance) {
+			excMod = baseModifier; // 20% chance at low level??
+		} else {
+			excMod = 0.f; // Otherwise bottom rolled?
+		}*/
 	}
 
 	int modMax = 0;
