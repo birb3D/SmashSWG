@@ -113,11 +113,12 @@ void EntertainerMissionObjectiveImplementation::clearLocationActiveAreaAndObserv
 void EntertainerMissionObjectiveImplementation::complete() {
 	clearLocationActiveAreaAndObservers();
 
+	ManagedReference<MissionObject* > mission = this->mission.get();
+
 	// Award XP 
-	String healxptype("entertainer_healing");	
-	int xp = mission->getRewardCredits() * 2 * float(player->getSkillMod(healxptype) / 100.0f + 0.02f); // The 0.02f ensures you get XP even if you have dropped Novice Entertainer for some crazy reason...
-	xp = MIN(896, xp); 
-	player->getZoneServer()->getPlayerManager()->awardExperience(player, healxptype, xp, true, 1);
+	CreatureObject* player = getPlayerOwner();
+	int xp = mission->getRewardCredits() * 2;
+	player->getZoneServer()->getPlayerManager()->awardExperience(player, "entertainer_healing", xp, true, 1);
 
 	MissionObjectiveImplementation::complete();
 }
@@ -128,6 +129,8 @@ void EntertainerMissionObjectiveImplementation::setIsEntertaining(bool value) {
 	if (isEntertaining == value) {
 		return;
 	}
+
+
 
 	isEntertaining = value;
 
