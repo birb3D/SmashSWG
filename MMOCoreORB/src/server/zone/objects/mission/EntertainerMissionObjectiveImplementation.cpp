@@ -15,6 +15,7 @@
 #include "server/zone/objects/mission/MissionObject.h"
 #include "server/zone/objects/mission/MissionObserver.h"
 #include "server/zone/objects/creature/CreatureObject.h"
+#include "server/zone/managers/player/PlayerManager.h"
 
 void EntertainerMissionObjectiveImplementation::activate() {
 	Locker _lock(_this.getReferenceUnsafeStaticCast());
@@ -111,6 +112,12 @@ void EntertainerMissionObjectiveImplementation::clearLocationActiveAreaAndObserv
 
 void EntertainerMissionObjectiveImplementation::complete() {
 	clearLocationActiveAreaAndObservers();
+
+	// Award XP 
+	String healxptype("entertainer_healing");	
+	int xp = mission->getRewardCredits() * 2 * float(player->getSkillMod(healxptype) / 100.0f + 0.02f); // The 0.02f ensures you get XP even if you have dropped Novice Entertainer for some crazy reason...
+	xp = MIN(896, xp); 
+	player->getZoneServer()->getPlayerManager()->awardExperience(player, healxptype, xp, true, 1);
 
 	MissionObjectiveImplementation::complete();
 }
