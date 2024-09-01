@@ -117,7 +117,7 @@ void EntertainerMissionObjectiveImplementation::complete() {
 
 	// Award XP 
 	CreatureObject* player = getPlayerOwner();
-	int xp = mission->getRewardCredits() * 2;
+	int xp = mission->getRewardCredits();
 	player->getZoneServer()->getPlayerManager()->awardExperience(player, "entertainer_healing", xp, true, 1);
 
 	MissionObjectiveImplementation::complete();
