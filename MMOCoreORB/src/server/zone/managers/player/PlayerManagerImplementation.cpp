@@ -6250,6 +6250,12 @@ bool PlayerManagerImplementation::doBurstRun(CreatureObject* player, float hamMo
 	float cooldown = 300;
 
 	float burstRunMod = (float) player->getSkillMod("burst_run");
+
+	cooldown = cooldown - burstRunMod;
+	if(cooldown < 60) {
+		cooldown = 60;
+	}
+
 	hamModifier += (burstRunMod / 100.f);
 
 	if (hamModifier > 1.0f) {
