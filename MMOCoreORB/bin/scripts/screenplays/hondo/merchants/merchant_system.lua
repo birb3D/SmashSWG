@@ -144,13 +144,15 @@ function MerchantSystem:completeSale(pObject, creature, relationsTable, goodsTab
 				local pItem = nil
 				if (string.find(goodsTable[gtlc].items[ic], 'iff') == nil) then
 					pItem = createLoot(pInventory, goodsTable[gtlc].items[ic], getRandomNumber(100), false)
+
+					local sceneObj = getSceneObject(pItem)
+					local objectName = SceneObject(sceneObj):getDisplayedName()
+	
+					creature:sendSystemMessage("Purchase Complete! " .. objectName .. " has been added to your inventory.")
 				else
 					pItem = giveItem(pInventory, goodsTable[gtlc].items[ic], -1)
 				end
-				local sceneObj = getSceneObject(pItem)
-				local objectName = SceneObject(sceneObj):getDisplayedName()
 
-				creature:sendSystemMessage("Purchase Complete! " .. objectName .. " has been added to your inventory.")
 			end
 		else 
 			creature:sendSystemMessage("Transaction Failed. System error in price calculation.")
