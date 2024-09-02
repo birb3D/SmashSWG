@@ -634,6 +634,37 @@ String LootManagerImplementation::getRandomLootableMod(uint32 sceneObjectType) {
 	return "";
 }
 
+
+bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObject* player, SceneObject* container) {
+
+
+	int lootroll = System::random(10000);
+	int objectID = 0;
+
+	if(lootroll < 100) { // 1% Chance for legendary
+		objectID = createLoot(trx, container, "worldboss_legendary", 500);
+		player->playEffect("clienteffect/level_granted_chronicles.cef", "");
+		player->showFlyText("Loot", "Legendary", 227, 171, 41);
+		player->sendSystemMessage("\\#cccccc You got \\#e3ab29 LEGENDARY \\#cccccc boss loot!");
+	}
+	else if(lootroll < 2000) { // 20% Chance for rare
+		objectID = createLoot(trx, container, "worldboss_rare", 300);
+		player->playEffect("clienteffect/level_granted.cef", "");
+		player->showFlyText("Loot", "Rare", 30, 30, 255);
+		player->sendSystemMessage("\\#cccccc You got \\#1e1eff Rare \\#cccccc boss loot!");
+	}
+	else {
+		objectID = createLoot(trx, container, "worldboss_common", 150);
+		player->playEffect("clienteffect/rare_loot.cef", "");
+		player->showFlyText("Loot", "Common", 150, 150, 150);
+		player->sendSystemMessage("\\#cccccc You got \\#ffffff common \\#cccccc boss loot!");
+	}
+
+
+	return objectID == 0 ? false : true;
+}
+
+
 bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* container, AiAgent* creature) {
 	auto lootCollection = creature->getLootGroups();
 
@@ -656,9 +687,15 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 
 					ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
 
-					createLootFromCollection(trx, inventory, lootCollection, creature->getLevel());
+					int bossroll = System::random(10000);
+					if(bossroll < 100) { // 1% Chance for three items
+						handleBossLoot(trx, player, container);
+					}
+					if(bossroll < 500) { // 5% Chance for two items
+						handleBossLoot(trx, player, container);
+					}
+					handleBossLoot(trx, player, container);
 
-					player->sendSystemMessage("YOU GOT BOSS LOOT!");
 				}
 			}
 		}
