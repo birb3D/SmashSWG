@@ -309,6 +309,14 @@ includeFile("items/corellian_corvette/spice_crash_n_burn.lua")
 includeFile("items/corellian_corvette/spice_giggledust.lua")
 includeFile("items/corellian_corvette/veh_power_plant_av21.lua")
 
+--crafting_tools sub-folder
+includeFile("items/crafting_tools/clothing_tool.lua")
+includeFile("items/crafting_tools/food_tool.lua")
+includeFile("items/crafting_tools/generic_tool.lua")
+includeFile("items/crafting_tools/space_tool.lua")
+includeFile("items/crafting_tools/structure_tool.lua")
+includeFile("items/crafting_tools/weapon_tool.lua")
+
 -- creature sub-folder
 includeFile("items/creature/brackaset_plates.lua")
 includeFile("items/creature/brackaset_plating_segment.lua")
@@ -710,6 +718,17 @@ includeFile("items/skill_buff/skill_buff_twohandmelee_accuracy.lua")
 includeFile("items/skill_buff/skill_buff_twohandmelee_speed.lua")
 includeFile("items/skill_buff/skill_buff_unarmed_accuracy.lua")
 includeFile("items/skill_buff/skill_buff_unarmed_speed.lua")
+
+--survey_tools sub-folder
+includeFile("items/survey_tools/survey_tool_gas.lua")
+includeFile("items/survey_tools/survey_tool_inorganic.lua")
+includeFile("items/survey_tools/survey_tool_liquid.lua")
+includeFile("items/survey_tools/survey_tool_lumber.lua")
+includeFile("items/survey_tools/survey_tool_mineral.lua")
+includeFile("items/survey_tools/survey_tool_moisture.lua")
+includeFile("items/survey_tools/survey_tool_organic.lua")
+includeFile("items/survey_tools/survey_tool_solar.lua")
+includeFile("items/survey_tools/survey_tool_wind.lua")
 
 --task_loot sub-folder
 includeFile("items/task_loot/ancient_lightsaber.lua")
