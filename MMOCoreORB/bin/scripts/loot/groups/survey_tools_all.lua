@@ -3,15 +3,15 @@ survey_tools_all = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-		{itemTemplate = "survey_tool_gas", weight = 5000000},
-		{itemTemplate = "survey_tool_inorganic.lua", weight = 5000000},
-		{itemTemplate = "survey_tool_liquid.lua", weight = 5000000},
-		{itemTemplate = "survey_tool_lumber.lua", weight = 5000000},
-		{itemTemplate = "survey_tool_mineral.lua", weight = 5000000},
-		{itemTemplate = "survey_tool_moisture.lua", weight = 5000000},
-		{itemTemplate = "survey_tool_organic.lua", weight = 5000000},
-		{itemTemplate = "survey_tool_solar.lua", weight = 5000000},
-		{itemTemplate = "survey_tool_wind.lua", weight = 5000000},
+		{itemTemplate = "survey_tool_gas", weight = 1111111},
+		{itemTemplate = "survey_tool_inorganic", weight = 1111111},
+		{itemTemplate = "survey_tool_liquid", weight = 1111111},
+		{itemTemplate = "survey_tool_lumber", weight = 1111111},
+		{itemTemplate = "survey_tool_mineral", weight = 1111112},
+		{itemTemplate = "survey_tool_moisture", weight = 1111111},
+		{itemTemplate = "survey_tool_organic", weight = 1111111},
+		{itemTemplate = "survey_tool_solar", weight = 1111111},
+		{itemTemplate = "survey_tool_wind", weight = 1111111},
 
 	}
 }
