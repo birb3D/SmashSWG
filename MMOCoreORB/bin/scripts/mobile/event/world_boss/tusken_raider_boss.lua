@@ -51,18 +51,6 @@ tusken_raider_boss = Creature:new {
 			},
 			lootChance = 10000000
 		},
-		{
-			groups = {
-				{group = "strange_items", chance = 10000000}
-			},
-			lootChance = 10000000
-		},
-		{
-			groups = {
-				{group = "strange_items", chance = 10000000}
-			},
-			lootChance = 10000000
-		},
 
 	},
 	weapons = {},
