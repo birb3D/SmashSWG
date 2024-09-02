@@ -3,10 +3,10 @@ local ObjectManager = require("managers.object.object_manager")
 WorldBossSpawner = ScreenPlay:new {
 	numberOfActs = 1,
 	bossesToSpawn = 1,
-	initSpawnTimer = 3600, -- 3600
+	initSpawnTimer = 60, -- 3600
 	numReferencePoints = 29,
 	secondsToDespawn = 7200, 
-	secondsToRespawn = 14400, -- 14400
+	secondsToRespawn = 120, -- 14400
 	maxRadius = 5,
 	randomVariance = 60,
 
@@ -21,6 +21,8 @@ WorldBossSpawner = ScreenPlay:new {
 	screenplayName = "WorldBossSpawner",
 
 	bossSpawnPoint = { 
+		{planetName = "tatooine", xPos = -3045, yPos = 2136},
+		--[[
 		{planetName = "corellia", xPos = -3646, yPos = 2870},
 		{planetName = "corellia", xPos = 4630, yPos = -5740},
 		{planetName = "corellia", xPos = 1414, yPos = -316},
@@ -31,7 +33,6 @@ WorldBossSpawner = ScreenPlay:new {
 		{planetName = "tatooine", xPos = -4512, yPos = -2270},
 		{planetName = "tatooine", xPos = -3933, yPos = -4423},
 		{planetName = "tatooine", xPos = -2575, yPos = -5517},
-		{planetName = "tatooine", xPos = -3045, yPos = 2136},
 		{planetName = "tatooine", xPos = -4000, yPos = 6250},
 		{planetName = "tatooine", xPos = -4632, yPos = -4346},
 		{planetName = "lok", xPos = 4578, yPos = -1151},
@@ -50,7 +51,7 @@ WorldBossSpawner = ScreenPlay:new {
 		{planetName = "talus", xPos = 4285, yPos = 1032},
 		{planetName = "yavin4", xPos = 5097, yPos = 5537},
 		{planetName = "yavin4", xPos = 466, yPos = -693},
-		{planetName = "yavin4", xPos = -3150, yPos = -3050},
+		{planetName = "yavin4", xPos = -3150, yPos = -3050},]]--
 	},
 	
 	bigGameHunterSpawns = {
@@ -102,8 +103,8 @@ function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
 	local zone = self:getBossZone(pBoss)
 
 	if (bossName ~= nil and zone ~= nil) then
-		CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incomming Transmission> \n\n \\#ffff99" .. bossName .. " \\#ff9966 has been slain on " .. zone)
-		CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incomming Transmission> \n\n \\#ffff99" .. bossName .. " \\#ff9966 has been slain on " .. zone) 
+		CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incomming Transmission> \n\\#ffff99" .. bossName .. " \\#ff9966 has been slain on " .. zone)
+		CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incomming Transmission> \n\\#ffff99" .. bossName .. " \\#ff9966 has been slain on " .. zone) 
 		deleteStringData(SceneObject(pBoss):getObjectID() .. ":name")
 		deleteStringData(SceneObject(pBoss):getObjectID() .. ":zone")
 		for i = 1, self.bossesToSpawn, 1 do
@@ -187,8 +188,8 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 				end
 			end
 
-			CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission> \n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3])) 
-			CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission> \n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3]))
+			CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission>\n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3])) 
+			CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission>\n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3]))
 		end
 
 end
