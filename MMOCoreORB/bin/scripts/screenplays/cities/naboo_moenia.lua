@@ -174,6 +174,8 @@ NabooMoeniaScreenPlay = CityScreenPlay:new {
 		{"noble",300,-20.6545,-0.894989,26.0112,180.01,120, "conversation"},
 		-- Pilot trainer very last roomn in the right behind the bar
 		{"da_la_socuna",60,-29.7168,-0.519991,7.77728,54.7476,121, "conversation"},
+		-- npc placement test
+		{"entertainer",60,-26.7168,-0.519991,7.77728,0,119, "conversation"},
 
 		--Hotel
 		{"bartender",60,20.2,1.6,12.3,-180,1717470, "conversation"},
