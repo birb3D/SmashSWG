@@ -11,10 +11,6 @@ WorldBossSpawner = ScreenPlay:new {
 	maxRadius = 5,
 	randomVariance = 5,
 
-	spawnPointIndex = 0,
-	bossTemplateIndex = 0,
-
-
 
 	bossMobileTemplates =  {
 		{template = "acklay_boss", name = "Corrupted Acklay"}, 
@@ -77,7 +73,9 @@ WorldBossSpawner = ScreenPlay:new {
 registerScreenPlay("WorldBossSpawner", true)
 
 function WorldBossSpawner:start()
-	createEvent((self.initSpawnTimer - self.notificationTime) * 1000, "WorldBossSpawner", "notifyBossSpawning")
+	self:pickBossSpawn()
+	local pBoss
+	createEvent((self.initSpawnTimer - self.notificationTime) * 1000, "WorldBossSpawner", "notifyBossSpawning", pBoss, "")
 	createEvent(self.initSpawnTimer * 1000, "WorldBossSpawner", "spawnMobiles", pBoss, "")
 end
 
@@ -106,7 +104,7 @@ function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
 	end
 
 	local returnTime = getRandomNumber(self.secondsToRespawn - self.randomVariance, self.secondsToRespawn + self.randomVariance)
-	createEvent((returnTime - self.notificationTime) * 1000, "WorldBossSpawner", "notifyBossSpawning")
+	createEvent((returnTime - self.notificationTime) * 1000, "WorldBossSpawner", "notifyBossSpawning" , pBoss, "")
 	createEvent(returnTime * 1000, "WorldBossSpawner", "respawnBoss", pBoss, "")
 	print("Boss was killed, initiating respawn.")
 	local bossName = self:getBossName(pBoss)
@@ -117,6 +115,8 @@ function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
 		CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incomming Transmission> \n\\#ffff99" .. bossName .. " \\#ff9966 has been slain on " .. zone) 
 		deleteStringData(SceneObject(pBoss):getObjectID() .. ":name")
 		deleteStringData(SceneObject(pBoss):getObjectID() .. ":zone")
+		deleteData("worldBosses:spawnIndex")
+		deleteData("worldBosses:templateIndex")
 		for i = 1, self.bossesToSpawn, 1 do
 			local checkBossPlanetData = readData(zone .. ":" .. i)
 			if (checkBossPlanetData ~= nil and checkBossPlanetData == SceneObject(pBoss):getObjectID()) then
@@ -132,26 +132,32 @@ end
 
 function WorldBossSpawner:pickBossSpawn()
 
-	self.spawnPointIndex = getRandomNumber(1, #self.bossSpawnPoint)
-	self.bossTemplateIndex = getRandomNumber(1, #self.bossMobileTemplates)
+	local spawnIndex = getRandomNumber(1, #self.bossSpawnPoint)
+	local templateIndex = getRandomNumber(1, #self.bossMobileTemplates)
+	writeData("worldBosses:spawnIndex", spawnIndex)
+	writeData("worldBosses:templateIndex", templateIndex)
+	
 
 end
 
 
-function WorldBossSpawner:notifyBossSpawning()
+function WorldBossSpawner:notifyBossSpawning(pBoss)
 
-	pickBossSpawn()
+	self:pickBossSpawn()
 
-	local bossObject = self.bossMobileTemplates[self.bossTemplateIndex]
+	local spawnIndex = tonumber(readData("worldBosses:spawnIndex"))
+	local templateIndex = tonumber(readData("worldBosses:templateIndex"))
+
+	local bossObject = self.bossMobileTemplates[templateIndex]
 	local bossName = bossObject.name
-	local zone = self.bossSpawnPoint[self.spawnPointIndex].planetName
+	local zone = self.bossSpawnPoint[spawnIndex].planetName
 
-	local xPos = self.bossSpawnPoint[self.spawnPointIndex].xPos
-	local yPos = self.bossSpawnPoint[self.spawnPointIndex].yPos
+	local xPos = self.bossSpawnPoint[spawnIndex].xPos
+	local yPos = self.bossSpawnPoint[spawnIndex].yPos
 
-	if (bossName ~= nil and zone ~= nil and xPos ~= nil and yPos ~= nil) then
-		CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission>\n ".."Rumors are spreading of a \\#ffff99" .. bossObject.name .. " \\#66ff99 appearing on " .. zone .. "\nCoordinates: " .. math.floor(xPos) .. ", " .. math.floor(yPos)) 
-		CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission>\n ".."Rumors are spreading of a \\#ffff99" .. bossObject.name .. " \\#66ff99 appearing on " .. zone .. "\nCoordinates: " .. math.floor(xPos) .. ", " .. math.floor(yPos))
+	if (pBoss ~= nil and bossName ~= nil and zone ~= nil and xPos ~= nil and yPos ~= nil) then
+		CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission>\n".."Rumors are spreading of a \\#ffff99" .. bossName .. " \\#66ff99appearing on " .. zone .. "\nCoordinates: " .. math.floor(xPos) .. ", " .. math.floor(yPos)) 
+		CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission>\n".."Rumors are spreading of a \\#ffff99" .. bossName .. " \\#66ff99appearing on " .. zone .. "\nCoordinates: " .. math.floor(xPos) .. ", " .. math.floor(yPos))
 	end
 
 	return 1
@@ -159,9 +165,13 @@ end
 
 function WorldBossSpawner:respawnBoss(pOldBoss)
 
-	local bossObject = self.bossMobileTemplates[self.bossTemplateIndex]
+
+	local spawnIndex = tonumber(readData("worldBosses:spawnIndex"))
+	local templateIndex = tonumber(readData("worldBosses:templateIndex"))
+
+	local bossObject = self.bossMobileTemplates[templateIndex]
 	local bossTemplate = bossObject.template
-	local referencePoint = self.spawnPointIndex
+	local referencePoint = spawnIndex
 	local zone = self.bossSpawnPoint[referencePoint].planetName
 		
 	if (not isZoneEnabled(zone)) then
@@ -226,8 +236,8 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 				end
 			end
 
-			CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission>\n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3])) 
-			CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission>\n ".." a \\#ffff99" .. bossObject.name .. " \\#66ff99 has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3]))
+			CreatureObject(pBoss):broadcastToServer("\\#6699ff <Incoming Transmission>\n".."a \\#ffff99" .. bossObject.name .. " \\#66ff99has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3])) 
+			CreatureObject(pBoss):broadcastToDiscord("\\#6699ff <Incoming Transmission>\n".."a \\#ffff99" .. bossObject.name .. " \\#66ff99has been sighted on " .. zone .. "\nCoordinates: " .. math.floor(spawnPoint[1]) .. ", " .. math.floor(spawnPoint[3]))
 		end
 
 end
@@ -241,6 +251,8 @@ function WorldBossSpawner:despawnBoss(pBoss)
 		local bossZone = readStringData(SceneObject(pBoss):getObjectID() .. ":zone")
 		deleteStringData(SceneObject(pBoss):getObjectID() .. ":name")
 		deleteStringData(SceneObject(pBoss):getObjectID() .. ":zone")
+		deleteData("worldBosses:spawnIndex")
+		deleteData("worldBosses:templateIndex")
 
 		for i = 1, self.bossesToSpawn, 1 do
 			local checkBossPlanetData = readData(bossZone .. ":" .. i)
@@ -277,8 +289,10 @@ function WorldBossSpawner:despawnBoss(pBoss)
 	SceneObject(pBoss):destroyObjectFromWorld()
 	deleteStringData(SceneObject(pBoss):getObjectID() .. ":name")
 	deleteStringData(SceneObject(pBoss):getObjectID() .. ":zone")
+	deleteData("worldBosses:spawnIndex")
+	deleteData("worldBosses:templateIndex")
 	local returnTime = getRandomNumber(self.secondsToRespawn - self.randomVariance, self.secondsToRespawn + self.randomVariance)
-	createEvent((returnTime - self.notificationTime) * 1000, "WorldBossSpawner", "notifyBossSpawning")
+	createEvent((returnTime - self.notificationTime) * 1000, "WorldBossSpawner", "notifyBossSpawning", pBoss, "")
 	createEvent(returnTime * 1000, "WorldBossSpawner", "respawnBoss", pNewBoss, "")
 	return 1
 end
