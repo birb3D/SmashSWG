@@ -15,7 +15,7 @@ worldboss_legendary = {
 		{groupTemplate = "massive_resource_water", weight = 226190}, 
 		{groupTemplate = "massive_resource_creature", weight = 226190},
 
-		{itemTemplate = "jedi_holocron_light", weight = 1583334},
+		{itemTemplate = "experimental_crafting_tools_all", weight = 1583334},
 		{itemTemplate = "holocron_splinters", weight = 1583333},
 		{itemTemplate = "krayt_dragon_pearl", weight = 1583333},
 		{groupTemplate = "crafting_component_advanced", weight = 1583333},
