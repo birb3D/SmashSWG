@@ -1830,7 +1830,7 @@ void ChatManagerImplementation::handleGeneralDiscordChat(CreatureObject* sender,
 
 	if (generalRoom != nullptr) {
 		BaseMessage* msg = new ChatRoomMessage(fullName, server->getGalaxyName(), formattedMessage, generalRoom->getRoomID());
-		generalRoom->broadcastMessageCheckIgnore(msg, name);
+		generalRoom->broadcastMessage(msg);
 	}
 
 }
