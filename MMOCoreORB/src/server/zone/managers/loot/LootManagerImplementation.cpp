@@ -643,21 +643,21 @@ bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObje
 
 	if(lootroll < 100) { // 1% Chance for legendary
 		objectID = createLoot(trx, container, "worldboss_legendary", 500);
-		player->playEffect("clienteffect/level_granted_chronicles.cef", "");
+		player->playEffect("clienteffect/rare_loot.cef", "");
 		player->showFlyText("Loot", "Legendary", 227, 171, 41);
 		player->sendSystemMessage("\\#cccccc You got \\#e3ab29 LEGENDARY \\#cccccc boss loot!");
 	}
 	else if(lootroll < 2000) { // 20% Chance for rare
 		objectID = createLoot(trx, container, "worldboss_rare", 300);
-		player->playEffect("clienteffect/level_granted.cef", "");
+		player->playEffect("clienteffect/level_granted_chronicles.cef", "");
 		player->showFlyText("Loot", "Rare", 30, 30, 255);
 		player->sendSystemMessage("\\#cccccc You got \\#1e1eff Rare \\#cccccc boss loot!");
 	}
 	else {
 		objectID = createLoot(trx, container, "worldboss_common", 150);
-		player->playEffect("clienteffect/rare_loot.cef", "");
+		player->playEffect("clienteffect/level_granted.cef", "");
 		player->showFlyText("Loot", "Common", 150, 150, 150);
-		player->sendSystemMessage("\\#cccccc You got \\#ffffff common \\#cccccc boss loot!");
+		player->sendSystemMessage("\\#cccccc You got \\#888888 common \\#cccccc boss loot!");
 	}
 
 
@@ -689,12 +689,12 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 
 					int bossroll = System::random(10000);
 					if(bossroll < 100) { // 1% Chance for three items
-						handleBossLoot(trx, player, container);
+						handleBossLoot(trx, player, inventory);
 					}
 					if(bossroll < 500) { // 5% Chance for two items
-						handleBossLoot(trx, player, container);
+						handleBossLoot(trx, player, inventory);
 					}
-					handleBossLoot(trx, player, container);
+					handleBossLoot(trx, player, inventory);
 
 				}
 			}
