@@ -316,6 +316,12 @@ includeFile("items/crafting_tools/generic_tool.lua")
 includeFile("items/crafting_tools/space_tool.lua")
 includeFile("items/crafting_tools/structure_tool.lua")
 includeFile("items/crafting_tools/weapon_tool.lua")
+includeFile("items/crafting_tools/experimental_clothing_tool.lua")
+includeFile("items/crafting_tools/experimental_food_tool.lua")
+includeFile("items/crafting_tools/experimental_generic_tool.lua")
+includeFile("items/crafting_tools/experimental_space_tool.lua")
+includeFile("items/crafting_tools/experimental_structure_tool.lua")
+includeFile("items/crafting_tools/experimental_weapon_tool.lua")
 
 -- creature sub-folder
 includeFile("items/creature/brackaset_plates.lua")
