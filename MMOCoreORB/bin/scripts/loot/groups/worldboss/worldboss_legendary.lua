@@ -16,7 +16,7 @@ worldboss_legendary = {
 		{groupTemplate = "massive_resource_creature", weight = 226190},
 
 		{itemTemplate = "experimental_crafting_tools_all", weight = 1583334},
-		{itemTemplate = "holocron_splinters", weight = 1583333},
+		{itemTemplate = "force_power_crystal", weight = 1583333},
 		{itemTemplate = "krayt_dragon_pearl", weight = 1583333},
 		{groupTemplate = "crafting_component_advanced", weight = 1583333},
 		{groupTemplate = "legendary_strange_items", weight = 1583333},
