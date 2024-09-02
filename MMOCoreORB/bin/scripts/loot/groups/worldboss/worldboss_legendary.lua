@@ -5,13 +5,23 @@ worldboss_legendary = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
+
+
+		{groupTemplate = "massive_resource_chemical", weight = 226190},
+		{groupTemplate = "massive_resource_flora", weight = 226190},
+		{groupTemplate = "massive_resource_gemstone", weight = 226190},
+		{groupTemplate = "massive_resource_metal", weight = 226190},
+		{groupTemplate = "massive_resource_ore", weight = 226190},
+		{groupTemplate = "massive_resource_water", weight = 226190}, 
+		{groupTemplate = "massive_resource_creature", weight = 226190},
+
 		{itemTemplate = "jedi_holocron_light", weight = 1583334},
 		{itemTemplate = "holocron_splinters", weight = 1583333},
 		{itemTemplate = "krayt_dragon_pearl", weight = 1583333},
 		{groupTemplate = "crafting_component_advanced", weight = 1583333},
 		{groupTemplate = "legendary_strange_items", weight = 1583333},
-		{groupTemplate = "massive_resource_all", weight = 1583333},
-		{itemTemplate = "speederbike_swoop_deed", weight = 500000},
+		
+		{itemTemplate = "speederbike_swoop_deed", weight = 500004},
 	}
 }
 

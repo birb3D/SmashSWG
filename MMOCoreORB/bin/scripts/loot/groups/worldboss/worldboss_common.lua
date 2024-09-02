@@ -5,6 +5,15 @@ worldboss_common = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
+
+		{groupTemplate = "resource_chemical", weight = 476190},
+		{groupTemplate = "resource_flora", weight = 476190},
+		{groupTemplate = "resource_gemstone", weight = 476190},
+		{groupTemplate = "resource_metal", weight = 476194},
+		{groupTemplate = "resource_ore", weight = 476190},
+		{groupTemplate = "resource_water", weight = 476190}, 
+		{groupTemplate = "resource_creature", weight = 476190},
+
 		{groupTemplate = "resource_all", weight = 3333334},
 		{groupTemplate = "junk", weight = 3333333},
 		{groupTemplate = "crafting_component", weight = 3333333},

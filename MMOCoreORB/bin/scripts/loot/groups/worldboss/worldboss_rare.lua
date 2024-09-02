@@ -9,7 +9,14 @@ worldboss_rare = {
 		{groupTemplate = "armor_all", weight = 2000000},
 		{groupTemplate = "color_crystals", weight = 2000000},
 		{groupTemplate = "strange_items", weight = 2000000},
-		{groupTemplate = "large_resource_all", weight = 2000000},
+
+		{groupTemplate = "large_resource_chemical", weight = 285714},
+		{groupTemplate = "large_resource_flora", weight = 285714},
+		{groupTemplate = "large_resource_gemstone", weight = 285714},
+		{groupTemplate = "large_resource_metal", weight = 285716},
+		{groupTemplate = "large_resource_ore", weight = 285714},
+		{groupTemplate = "large_resource_water", weight = 285714}, 
+		{groupTemplate = "large_resource_creature", weight = 285714},
 	}
 }
 
