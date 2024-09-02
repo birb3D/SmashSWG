@@ -644,7 +644,7 @@ bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObje
 	if(lootroll < 100) { // 1% Chance for legendary
 		objectID = createLoot(trx, container, "worldboss_legendary", 500);
 		player->playEffect("clienteffect/level_granted_chronicles.cef", "");
-		player->showFlyText("Loot", "egendary", 227, 171, 41);
+		player->showFlyText("Loot", "Legendary", 227, 171, 41);
 		player->sendSystemMessage("\\#cccccc You got \\#e3ab29 LEGENDARY \\#cccccc boss loot!");
 	}
 	else if(lootroll < 2000) { // 20% Chance for rare
