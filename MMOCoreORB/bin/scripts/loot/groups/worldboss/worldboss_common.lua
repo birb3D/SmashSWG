@@ -14,7 +14,7 @@ worldboss_common = {
 		{groupTemplate = "resource_water", weight = 500000}, 
 		{groupTemplate = "resource_creature", weight = 500000},
 		{groupTemplate = "looted_container", weight = 500000}, 
-		{itemTemplate = "treasure_map", weight = 500000}.
+		{itemTemplate = "treasure_map", weight = 500000},
 		{groupTemplate = "wearables_all", weight = 500000}, 
 
 		{groupTemplate = "junk", weight = 2500000},
