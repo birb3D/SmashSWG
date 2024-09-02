@@ -4969,7 +4969,7 @@ bool PlayerManagerImplementation::acceptTeachingOffer(CreatureObject* teacher, C
 
 	if(currentMoney < moneyRequired) // has enough credits?
 	{
-		student->sendSystemMessage("@gambling/default_interface:player_broke");
+		student->sendSystemMessage("@dispenser:insufficient_funds");
 		teacher->sendSystemMessage("@teaching:teaching_failed"); //Teaching failed.
 		return false;
 	}
