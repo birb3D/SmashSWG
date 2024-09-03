@@ -118,9 +118,9 @@ tatooine = {
 
 	defaultWeather = 0, -- Sunny
 
-	averageWeatherDuration = 3600, -- In seconds
+	averageWeatherDuration = 300, -- In seconds
 
-	weatherStability = 70, -- Range 0 - 100, Higher = Less weather changes, Overall better weather
+	weatherStability = 90, -- Range 0 - 100, Higher = Less weather changes, Overall better weather
 
 	hasDamagingSandstorms = 0,
 
@@ -171,7 +171,7 @@ lok = {
 
 	defaultWeather = 0, -- Sunny
 
-	averageWeatherDuration = 3600, -- In seconds
+	averageWeatherDuration = 300, -- In seconds
 
 	weatherStability = 60, -- Range 0 - 100, Higher = Less weather changes, Overall better weather
 
