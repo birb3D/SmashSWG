@@ -53,8 +53,11 @@ void SurveyMissionObjectiveImplementation::complete(ManagedObject* spawn, int64 
 	// Award some of the resources surveyed
 	ManagedReference<MissionObject* > mission = this->mission.get();
 	ManagedReference<CreatureObject*> owner = getPlayerOwner();
+
+	if(owner == NULL)
+		return;
 	
-	int quantity = (mission->getRewardCredits() + 200) * float(sampledDensity / 100.0f);
+	int quantity = (mission->getRewardCredits()) * float(sampledDensity / 125.0f);
 	
 	ResourceSpawn* sampledSpawn = cast<ResourceSpawn*>( spawn);
 	
@@ -96,13 +99,13 @@ int SurveyMissionObjectiveImplementation::notifyObserverEvent(MissionObserver* o
 			startPosition.setX(mission->getStartPositionX());
 			startPosition.setY(mission->getStartPositionY());
 			float distance = startPosition.distanceTo(player->getWorldPosition());
-			if (distance > 500.0f) {
+			if (distance > 700.0f) {
 				complete(arg1, sampledDensity); // Send the spawn and survey density so we can grant some resources as a reward
 
 				return 1;
 			} else {
 				StringIdChatParameter stringId("mission/mission_generic", "survey_too_close");
-				stringId.setDI(500);
+				stringId.setDI(700);
 				stringId.setDF(distance);
 				player->sendSystemMessage(stringId);
 
