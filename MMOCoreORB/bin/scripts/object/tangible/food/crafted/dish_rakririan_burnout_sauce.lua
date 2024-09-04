@@ -55,7 +55,7 @@ object_tangible_food_crafted_dish_rakririan_burnout_sauce = object_tangible_food
 	flavorMin = 720,
 	flavorMax = 1560,
 	nutritionMin = 7,
-	nutritionMax = 12,
+	nutritionMax = 32,
 	quantityMin = 2,
 	quantityMax = 5,
 

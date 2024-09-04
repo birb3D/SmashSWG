@@ -55,7 +55,7 @@ object_tangible_food_crafted_dish_bagel = object_tangible_food_crafted_shared_di
 	flavorMin = 540,
 	flavorMax = 2080,
 	nutritionMin = 200,
-	nutritionMax = 500,
+	nutritionMax = 700,
 	quantityMin = 2,
 	quantityMax = 6,
 

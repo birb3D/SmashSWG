@@ -55,7 +55,7 @@ object_tangible_food_crafted_drink_accarragm = object_tangible_food_crafted_shar
 	flavorMin = 1800,
 	flavorMax = 3600,
 	nutritionMin = 150,
-	nutritionMax = 240,
+	nutritionMax = 340,
 	quantityMin = 6,
 	quantityMax = 10,
 

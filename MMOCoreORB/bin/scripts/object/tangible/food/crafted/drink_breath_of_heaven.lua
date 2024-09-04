@@ -55,7 +55,7 @@ object_tangible_food_crafted_drink_breath_of_heaven = object_tangible_food_craft
 	flavorMin = 360,
 	flavorMax = 720,
 	nutritionMin = 370,
-	nutritionMax = 600,
+	nutritionMax = 900,
 	quantityMin = 1,
 	quantityMax = 6,
 

@@ -56,7 +56,7 @@ object_tangible_food_crafted_drink_vasarian_brandy = object_tangible_food_crafte
 	flavorMin = 1800,
 	flavorMax = 3600,
 	nutritionMin = 150,
-	nutritionMax = 240,
+	nutritionMax = 640,
 	quantityMin = 6,
 	quantityMax = 10,
 

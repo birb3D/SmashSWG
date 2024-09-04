@@ -57,7 +57,7 @@ object_tangible_food_crafted_drink_caf = object_tangible_food_crafted_shared_dri
 	flavorMax = 3600,
 
 	nutritionMin = 35,
-	nutritionMax = 60,
+	nutritionMax = 220,
 	quantityMin = 6,
 	quantityMax = 10,
 

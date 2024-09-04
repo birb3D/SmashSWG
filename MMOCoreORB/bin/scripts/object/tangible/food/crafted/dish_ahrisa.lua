@@ -55,7 +55,7 @@ object_tangible_food_crafted_dish_ahrisa = object_tangible_food_crafted_shared_d
 	flavorMin = 1800,
 	flavorMax = 3600,
 	nutritionMin = 150,
-	nutritionMax = 240,
+	nutritionMax = 440,
 	quantityMin = 3,
 	quantityMax = 4,
 

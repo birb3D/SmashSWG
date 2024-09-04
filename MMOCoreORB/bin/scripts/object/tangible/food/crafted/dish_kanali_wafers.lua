@@ -57,7 +57,7 @@ object_tangible_food_crafted_dish_kanali_wafers = object_tangible_food_crafted_s
 	flavorMax = 3600,
 
 	nutritionMin = 30,
-	nutritionMax = 60,
+	nutritionMax = 260,
 	quantityMin = 6,
 	quantityMax = 10,
 

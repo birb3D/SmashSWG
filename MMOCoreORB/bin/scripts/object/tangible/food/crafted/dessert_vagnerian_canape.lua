@@ -56,7 +56,7 @@ object_tangible_food_crafted_dessert_vagnerian_canape = object_tangible_food_cra
 	flavorMin = 450,
 	flavorMax = 1050,
 	nutritionMin = 225,
-	nutritionMax = 375,
+	nutritionMax = 675,
 	quantityMin = 6,
 	quantityMax = 10,
 

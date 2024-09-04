@@ -55,7 +55,7 @@ object_tangible_food_crafted_dessert_parwan_nutricake = object_tangible_food_cra
 	flavorMin = 40,
 	flavorMax = 75,
 	nutritionMin = 48,
-	nutritionMax = 88,
+	nutritionMax = 188,
 	quantityMin = 5,
 	quantityMax = 8,
 

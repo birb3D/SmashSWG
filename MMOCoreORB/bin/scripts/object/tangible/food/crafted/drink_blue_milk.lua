@@ -55,7 +55,7 @@ object_tangible_food_crafted_drink_blue_milk = object_tangible_food_crafted_shar
 	flavorMin = 0,
 	flavorMax = 0,
 	nutritionMin = 295,
-	nutritionMax = 495,
+	nutritionMax = 695,
 	quantityMin = 4,
 	quantityMax = 7,
 
