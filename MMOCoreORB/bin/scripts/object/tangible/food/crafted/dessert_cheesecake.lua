@@ -55,7 +55,7 @@ object_tangible_food_crafted_dessert_cheesecake = object_tangible_food_crafted_s
 	flavorMin = 420,
 	flavorMax = 1440,
 	nutritionMin = 50,
-	nutritionMax = 150,
+	nutritionMax = 175,
 	quantityMin = 2,
 	quantityMax = 5,
 

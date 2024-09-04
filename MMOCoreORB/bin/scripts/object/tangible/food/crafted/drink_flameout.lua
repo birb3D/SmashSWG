@@ -53,8 +53,8 @@ object_tangible_food_crafted_drink_flameout = object_tangible_food_crafted_share
 
 	fillingMin = 72,
 	fillingMax = 43,
-	flavorMin = 3,
-	flavorMax = 6,
+	flavorMin = 10,
+	flavorMax = 20,
 	nutritionMin = 70,
 	nutritionMax = 100,
 	quantityMin = 2,

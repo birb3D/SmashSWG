@@ -55,8 +55,8 @@ object_tangible_food_crafted_dish_exo_protein_wafers = object_tangible_food_craf
 
 	fillingMin = 5,
 	fillingMax = 4,
-	flavorMin = 10,
-	flavorMax = 25,
+	flavorMin = 20,
+	flavorMax = 45,
 	nutritionMin = 10,
 	nutritionMax = 18,
 	quantityMin = 6,

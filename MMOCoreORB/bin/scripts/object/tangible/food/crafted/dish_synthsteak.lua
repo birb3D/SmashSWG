@@ -54,8 +54,8 @@ object_tangible_food_crafted_dish_synthsteak = object_tangible_food_crafted_shar
 
 	fillingMin = 29,
 	fillingMax = 20,
-	flavorMin = 22,
-	flavorMax = 50,
+	flavorMin = 32,
+	flavorMax = 100,
 	nutritionMin = 17,
 	nutritionMax = 31,
 	quantityMin = 4,
