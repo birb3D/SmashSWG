@@ -83,17 +83,22 @@ public:
 		// Get tickets user has in inventory for this location
 		SortedVector<ManagedReference<TicketObject*> > tickets = findTicketsInInventory(creature, closestPoint);
 
+		// Is shuttle ready to board yet?
+		// Shuttle at Theed Spaceport, Naboo should always be available. Even when the shuttle isn't there.
+		if (!closestPoint->isPoint("naboo","Theed Spaceport")){
+			if (!planetManager->checkShuttleStatus(creature, shuttle)) {
+				// Do they have any tickets for this location?
+				if (tickets.size() == 0) {
+					creature->sendSystemMessage("@travel:no_ticket"); //You do not have a ticket to board this shuttle.
+				}
+				return GENERALERROR;
+			}
+		}
+
 		// Do they have any tickets for this location?
 		if (tickets.size() == 0) {
 			creature->sendSystemMessage("@travel:no_ticket"); //You do not have a ticket to board this shuttle.
 			return GENERALERROR;
-		}
-
-		// Is shuttle ready to board yet?
-		// Shuttle at Theed Spaceport, Naboo should always be available. Even when the shuttle isn't there.
-		if (!closestPoint->isPoint("naboo","Theed Spaceport")){
-			if (!planetManager->checkShuttleStatus(creature, shuttle))
-				return GENERALERROR;
 		}
 
 		uint64 ticketoid = target;
