@@ -57,8 +57,8 @@ object_tangible_food_crafted_drink_spiced_tea = object_tangible_food_crafted_sha
 	flavorMin = 1800,
 	flavorMax = 3600,
 
-	nutritionMin = 35,
-	nutritionMax = 60,
+	nutritionMin = 135,
+	nutritionMax = 360,
 	quantityMin = 3,
 	quantityMax = 4,
 

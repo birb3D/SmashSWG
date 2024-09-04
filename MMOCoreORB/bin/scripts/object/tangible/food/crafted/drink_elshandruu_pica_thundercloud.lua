@@ -55,7 +55,7 @@ object_tangible_food_crafted_drink_elshandruu_pica_thundercloud = object_tangibl
 	flavorMin = 720,
 	flavorMax = 1440,
 	nutritionMin = 7,
-	nutritionMax = 12,
+	nutritionMax = 22,
 	quantityMin = 6,
 	quantityMax = 10,
 

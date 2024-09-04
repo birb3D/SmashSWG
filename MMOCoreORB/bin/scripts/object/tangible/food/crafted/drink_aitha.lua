@@ -57,7 +57,7 @@ object_tangible_food_crafted_drink_aitha = object_tangible_food_crafted_shared_d
 	flavorMax = 10800,
 
 	nutritionMin = 110,
-	nutritionMax = 180,
+	nutritionMax = 280,
 	quantityMin = 4,
 	quantityMax = 7,
 

@@ -55,7 +55,7 @@ object_tangible_food_crafted_dish_sausage = object_tangible_food_crafted_shared_
 	flavorMin = 540,
 	flavorMax = 2080,
 	nutritionMin = 100,
-	nutritionMax = 300,
+	nutritionMax = 400,
 	quantityMin = 2,
 	quantityMax = 6,
 

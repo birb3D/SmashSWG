@@ -55,7 +55,7 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 	flavorMin = 540,
 	flavorMax = 2080,
 	nutritionMin = 400,
-	nutritionMax = 800,
+	nutritionMax = 900,
 	quantityMin = 2,
 	quantityMax = 6,
 

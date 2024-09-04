@@ -56,7 +56,7 @@ object_tangible_food_crafted_dish_rations = object_tangible_food_crafted_shared_
 	flavorMin = 15,
 	flavorMax = 30,
 	nutritionMin = 20,
-	nutritionMax = 30,
+	nutritionMax = 60,
 	quantityMin = 6,
 	quantityMax = 10,
 

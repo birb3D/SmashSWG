@@ -55,7 +55,7 @@ object_tangible_food_crafted_drink_corellian_ale = object_tangible_food_crafted_
 	flavorMin = 720,
 	flavorMax = 1440,
 	nutritionMin = 7,
-	nutritionMax = 12,
+	nutritionMax = 22,
 	quantityMin = 6,
 	quantityMax = 12,
 

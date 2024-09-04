@@ -55,7 +55,7 @@ object_tangible_food_crafted_dish_vegeparsine = object_tangible_food_crafted_sha
 	flavorMin = 780,
 	flavorMax = 1200,
 	nutritionMin = 7,
-	nutritionMax = 12,
+	nutritionMax = 22,
 	quantityMin = 2,
 	quantityMax = 4,
 
