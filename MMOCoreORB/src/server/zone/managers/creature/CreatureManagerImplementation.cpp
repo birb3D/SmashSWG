@@ -668,7 +668,7 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 
 			if (destructedObject->isNonPlayerCreatureObject() && !destructedObject->isEventMob()) {
 				
-				int lootChance = 2000000 + (destructedObject->getLevel() * 26000); // 20% + (0.26% * level)
+				int lootChance = 1000000 + (destructedObject->getLevel() * 26000); // 10% + (0.26% * level)
 				int roll = System::random(10000000);
 
 				if (roll < lootChance) {
