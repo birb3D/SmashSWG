@@ -339,7 +339,6 @@ CorelliaCoronetScreenPlay = CityScreenPlay:new {
 		{-161, 	28, 		-4828, 	0 },
 		{-175, 	28, 		-4726, 	0 },
 		{48.13, -0.894,     -1.47,  8105494 },
-		{-4.6, 	0.639424, 	50.72, 	1855675 },
 	},
 
 	stationaryCommoners = {"commoner", "commoner_fat", "commoner_old"},
