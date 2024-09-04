@@ -53,9 +53,6 @@ void SurveyMissionObjectiveImplementation::complete(ManagedObject* spawn, int64 
 	// Award some of the resources surveyed
 	ManagedReference<MissionObject* > mission = this->mission.get();
 	ManagedReference<CreatureObject*> owner = getPlayerOwner();
-
-	if(owner == NULL)
-		return;
 	
 	int quantity = (mission->getRewardCredits()) * float(sampledDensity / 125.0f);
 	

@@ -2,7 +2,7 @@ clothing_tool = {
 	minimumLevel = 0,
 	maximumLevel = -1,
 	customObjectName = "",
-	directObjectTemplate = "object/tangible/survey_tool/clothing_tool.iff",
+	directObjectTemplate = "object/tangible/crafting/station/lothing_tool.iff",
 	craftingValues = {
 		{"useCount",0,15,0},
 	},
