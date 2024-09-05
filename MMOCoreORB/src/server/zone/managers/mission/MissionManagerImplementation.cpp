@@ -1600,7 +1600,7 @@ void MissionManagerImplementation::randomizeGenericHuntingMission(CreatureObject
 		diffString = "hard";
 	}
 
-	difficulty = (randomLairSpawn->getMinDifficulty() + randomLairSpawn->getMaxDifficulty()) /2;
+	//difficulty = (randomLairSpawn->getMinDifficulty() + randomLairSpawn->getMaxDifficulty()) /2;
 	difficulty += 7;
 
 	int baseReward = 500 + (200 * difficulty);

@@ -53,8 +53,8 @@ object_draft_schematic_vehicle_civilian_landspeeder_x34 = object_draft_schematic
 	factoryCrateSize = 50,
 	factoryCrateType = "object/factory/factory_crate_installation.iff",
    
-	xpType = "crafting_general",
-	xp = 1800,
+	xpType = "crafting_droid_general",
+	xp = 920,
 
 	assemblySkill = "droid_assembly",
 	experimentingSkill = "droid_experimentation",
