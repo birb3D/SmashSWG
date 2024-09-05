@@ -53,7 +53,7 @@ object_draft_schematic_vehicle_civilian_speeder_bike_swoop = object_draft_schema
 	factoryCrateSize = 50,
 	factoryCrateType = "object/factory/factory_crate_installation.iff",
    
-	xpType = "crafting_general",
+	xpType = "crafting_droid_general",
 	xp = 1600,
 
 	assemblySkill = "droid_assembly",
