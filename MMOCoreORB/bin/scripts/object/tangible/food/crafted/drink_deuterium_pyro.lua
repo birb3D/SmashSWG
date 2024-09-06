@@ -48,18 +48,20 @@ object_tangible_food_crafted_drink_deuterium_pyro = object_tangible_food_crafted
 	filling = 10,
 	nutrition = 10,
 
-	effectType = 4,
+	effectType = 1,
 
 	fillingMin = 17,
 	fillingMax = 10,
-	flavorMin = 720,
-	flavorMax = 1440,
-	nutritionMin = 7,
-	nutritionMax = 12,
-	quantityMin = 6,
-	quantityMax = 12,
 
-	modifiers = { "intimidate_defense", 0 },
+	flavorMin = 2100,
+	flavorMax = 3600,
+
+	nutritionMin = 275,
+	nutritionMax = 620,
+	quantityMin = 4,
+	quantityMax = 10,
+
+	modifiers = { "willpower", 0 },
 
 	buffName = "food.drink_deuterium_pyro",
 	buffCRC = 0,

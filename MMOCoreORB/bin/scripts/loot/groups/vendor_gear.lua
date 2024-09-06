@@ -4,15 +4,14 @@ vendor_gear = {
 	maximumLevel = 0,
 	lootItems = {
 
-		{groupTemplate = "looted_container", weight = 1000000}, 
-		-- Weapons (30% chance)
-		{groupTemplate = "weapons_all", weight = 3000000},
+		-- Weapons (40% chance)
+		{groupTemplate = "weapons_all", weight = 4000000},
 
-		-- Armors (30% chance)
-		{groupTemplate = "armor_all", weight = 3000000},
+		-- Armors (40% chance)
+		{groupTemplate = "armor_all", weight = 4000000},
 
-		-- Clothing (30% chance)
-		{groupTemplate = "wearables_all", weight = 3000000},
+		-- Clothing (20% chance)
+		{groupTemplate = "wearables_all", weight = 2000000},
 
 	}
 }

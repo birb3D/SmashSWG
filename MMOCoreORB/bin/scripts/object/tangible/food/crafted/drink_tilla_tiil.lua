@@ -55,7 +55,7 @@ object_tangible_food_crafted_drink_tilla_tiil = object_tangible_food_crafted_sha
 	flavorMin = 0,
 	flavorMax = 0,
 	nutritionMin = 11,
-	nutritionMax = 19,
+	nutritionMax = 60,
 	quantityMin = 1,
 	quantityMax = 1,
 

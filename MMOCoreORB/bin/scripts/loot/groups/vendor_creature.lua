@@ -4,7 +4,7 @@ vendor_creature = {
 	maximumLevel = 0,
 	lootItems = {
 
-		{groupTemplate = "resource_creature", weight = 3500000}, -- 35%
+		{groupTemplate = "large_resource_creature", weight = 3500000}, -- 35%
 
 		-- 51%
 		{groupTemplate = "brackaset_common", weight = 850000},

@@ -50,14 +50,14 @@ object_tangible_food_crafted_dish_sushi = object_tangible_food_crafted_shared_di
 
 	effectType = 1,
 
-	fillingMin = 50,
-	fillingMax = 20,
-	flavorMin = 540,
-	flavorMax = 2080,
-	nutritionMin = 400,
-	nutritionMax = 900,
-	quantityMin = 2,
-	quantityMax = 6,
+	fillingMin = 25,
+	fillingMax = 10,
+	flavorMin = 1540,
+	flavorMax = 4080,
+	nutritionMin = 600,
+	nutritionMax = 1100,
+	quantityMin = 4,
+	quantityMax = 10,
 
 	modifiers = { "constitution", 0, "stamina", 0 },
 

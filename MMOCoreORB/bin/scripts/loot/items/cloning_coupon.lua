@@ -4,7 +4,7 @@ cloning_coupon = {
 	minimumLevel = 0,
 	maximumLevel = -1,
 	customObjectName = "A Cloning Facility Authorization Release",
-	directObjectTemplate = "object/tangible/item/new_player/shared_new_player_cloning_coupon.iff",
+	directObjectTemplate = "object/tangible/item/new_player/new_player_cloning_coupon.iff",
 	craftingValues = {
 	},
 	customizationStringNames = {},

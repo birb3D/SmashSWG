@@ -50,8 +50,8 @@ object_tangible_food_crafted_dessert_kiwik_clusjo_swirl = object_tangible_food_c
 
 	effectType = 1,
 
-	fillingMin = 41,
-	fillingMax = 28,
+	fillingMin = 31,
+	fillingMax = 18,
 	flavorMin = 450,
 	flavorMax = 1050,
 	nutritionMin = 225,
