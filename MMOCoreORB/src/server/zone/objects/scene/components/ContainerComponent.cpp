@@ -7,6 +7,7 @@
 #include "server/zone/objects/scene/SceneObject.h"
 #include "server/zone/objects/building/BuildingObject.h"
 #include "server/zone/Zone.h"
+#include "server/zone/SpaceZone.h"
 #include "server/zone/objects/creature/CreatureObject.h"
 #include "server/zone/objects/player/PlayerObject.h"
 #include "server/zone/objects/player/sessions/SlicingSession.h"
@@ -198,42 +199,15 @@ bool ContainerComponent::checkContainerPermission(SceneObject* sceneObject, Crea
 
 	return permission & (allowPermissions & ~denyPermissions);
 }
-
-bool ContainerComponent::completeTransfer(SceneObject* sceneObject, SceneObject* object, SceneObject* objParent) const {
-	ManagedReference<Zone*> objZone = object->getLocalZone();
-
-	if (objParent != nullptr || objZone != nullptr) {
-		// Don't notify client yet, if you do here it confuses the client and drops from toolbar etc.
-		if (objParent != nullptr && !objParent->removeObject(object, sceneObject, false)) {
-			object->error() << "Failed to remove object from parent #1";
-			return false;
-		}
-
-		if (object->getParent() != nullptr) {
-			object->error() << "Failed to remove object from parent #2";
-			return false;
-		}
-
-		if (objZone != nullptr) {
-			objZone->remove(object);
-		}
-
-		object->setZone(nullptr);
-	}
-
-	object->setParent(sceneObject);
-
-	return true;
-}
+// This should work
 
 bool ContainerComponent::transferObject(SceneObject* sceneObject, SceneObject* object, int containmentType, bool notifyClient, bool allowOverflow, bool notifyRoot) const {
 	if (sceneObject == object) {
 		return false;
 	}
 
-	if (!object->canBeTransferred(sceneObject)) {
+	if (!object->canBeTransferred(sceneObject))
 		return false;
-	}
 
 	ManagedReference<SceneObject*> objParent = object->getParent().get();
 
@@ -247,6 +221,28 @@ bool ContainerComponent::transferObject(SceneObject* sceneObject, SceneObject* o
 		if (session != nullptr) {
 			session->cancelSession();
 		}
+	}
+
+	if (objParent != nullptr || objZone != nullptr) {
+		if (objParent != nullptr) {
+			// Don't notify client yet, if you do here it confuses the client and drops from toolbar etc.
+			objParent->removeObject(object, sceneObject, false);
+		}
+
+		if (object->getParent() != nullptr) {
+			object->error("error removing from parent");
+
+			return false;
+		}
+
+		if (objZone != nullptr) {
+			objZone->remove(object);
+		}
+
+		object->setZone(nullptr);
+
+		if (objParent == nullptr)
+			objParent = objZone;
 	}
 
 	bool update = true;
@@ -276,11 +272,7 @@ bool ContainerComponent::transferObject(SceneObject* sceneObject, SceneObject* o
 			return false;
 		}
 
-		if (!completeTransfer(sceneObject, object, objParent)) {
-			object->error() << "completeTransfer - Failed to assign: " << object->getDisplayedName() << " ID: " << object->getObjectID() << " to container: " << sceneObject->getDisplayedName() << " ID: " << sceneObject->getObjectID();
-			return false;
-		}
-
+		object->setParent(sceneObject);
 		object->setContainmentType(containmentType);
 	} else if (containmentType == -1) {
 		if (!allowOverflow && containerObjects->size() >= sceneObject->getContainerVolumeLimit()){
@@ -290,15 +282,10 @@ bool ContainerComponent::transferObject(SceneObject* sceneObject, SceneObject* o
 		/*if (containerObjects.contains(object->getObjectID()))
 			return false*/
 
-		if (containerObjects->put(object->getObjectID(), object) == -1) {
+		if (containerObjects->put(object->getObjectID(), object) == -1)
 			update = false;
-		}
 
-		if (!completeTransfer(sceneObject, object, objParent)) {
-			object->error() << "completeTransfer - Failed to assign: " << object->getDisplayedName() << " ID: " << object->getObjectID() << " to container: " << sceneObject->getDisplayedName() << " ID: " << sceneObject->getObjectID();
-			return false;
-		}
-
+		object->setParent(sceneObject);
 		object->setContainmentType(containmentType);
 
 		ManagedReference<Zone*> newRootZone = object->getZone();
@@ -319,9 +306,8 @@ bool ContainerComponent::transferObject(SceneObject* sceneObject, SceneObject* o
 				}
 			}
 
-			if (shouldRegister) {
+			if (shouldRegister)
 				newRootZone->registerObjectWithPlanetaryMap(object);
-			}
 		}
 	} else {
 		sceneObject->error("unknown containment type " + String::valueOf(containmentType));
@@ -331,7 +317,7 @@ bool ContainerComponent::transferObject(SceneObject* sceneObject, SceneObject* o
 
 	contLocker.release();
 
-	if ((containmentType >= 4) && (object->getLocalZone() == nullptr)) {
+	if ((containmentType >= 4) && (objZone == nullptr)) {
 		sceneObject->broadcastObject(object, true);
 	} else if (notifyClient) {
 		sceneObject->broadcastMessage(object->link(sceneObject->getObjectID(), containmentType), true);
@@ -341,17 +327,13 @@ bool ContainerComponent::transferObject(SceneObject* sceneObject, SceneObject* o
 
 	if (update) {
 		sceneObject->updateToDatabase();
+		//object->updateToDatabaseWithoutChildren()();
 	}
 
 	ManagedReference<SceneObject*> rootParent = object->getRootParent();
 
-	if (rootParent != nullptr && notifyRoot) {
-		if (objParent == nullptr) {
-			objParent = objZone;
-		}
-
+	if (rootParent != nullptr && notifyRoot)
 		rootParent->notifyObjectInsertedToChild(object, sceneObject, objParent);
-	}
 
 	object->notifyObservers(ObserverEventType::PARENTCHANGED, sceneObject);
 
