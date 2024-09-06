@@ -19,7 +19,7 @@ ubese_armor_gloves = {
 	customizationStringNames = {},
 	customizationValues = {},
 
-	junkDealerTypeNeeded = JUNKGENERIC,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 45,
 	junkMaxValue = 90
 }

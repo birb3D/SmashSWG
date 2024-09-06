@@ -17,7 +17,7 @@ bh_armor_bracer_l = {
 	customizationStringNames = {},
 	customizationValues = {},
 
-	junkDealerTypeNeeded = JUNKGENERIC,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 55,
 	junkMaxValue = 110
 }

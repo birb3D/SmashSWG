@@ -41,7 +41,7 @@ nightsister_controllerfp_lance = {
 		{"potency", 70, 70},
 		{"uses", 8000, 8000}
 	},
-	junkDealerTypeNeeded = JUNKARMS,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 30,
 	junkMaxValue = 55
 

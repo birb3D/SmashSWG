@@ -17,7 +17,7 @@ bh_armor_boots = {
 	customizationStringNames = {},
 	customizationValues = {},
 
-	junkDealerTypeNeeded = JUNKGENERIC,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 55,
 	junkMaxValue = 110
 }

@@ -14,7 +14,7 @@ ubese_armor_bandolier = {
 	customizationStringNames = {},
 	customizationValues = {},
 
-	junkDealerTypeNeeded = JUNKGENERIC,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 45,
 	junkMaxValue = 90
 }

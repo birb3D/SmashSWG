@@ -17,7 +17,7 @@ bh_armor_gloves = {
 	customizationStringNames = {},
 	customizationValues = {},
 
-	junkDealerTypeNeeded = JUNKGENERIC,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 55,
 	junkMaxValue = 110
 }

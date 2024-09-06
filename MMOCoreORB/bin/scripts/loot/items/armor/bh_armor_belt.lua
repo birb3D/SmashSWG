@@ -14,7 +14,7 @@ bh_armor_belt = {
 	customizationStringNames = {},
 	customizationValues = {},
 
-	junkDealerTypeNeeded = JUNKGENERIC,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 55,
 	junkMaxValue = 110
 }
