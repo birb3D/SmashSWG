@@ -75,8 +75,8 @@ void CraftingMissionObjectiveImplementation::updateMissionStatus(CreatureObject*
 				objectiveStatus = DELIVEREDSTATUS;
 				
 				// Award XP 
-				int xp = mission->getRewardCredits() * 2 * float(player->getSkillMod("general_assembly") / 100.0f + 0.02f); // The 0.02f ensures you get XP even if you have dropped Novice Scout for some crazy reason...
-				if(xp > 834) xp = 834; 
+				int xp = mission->getRewardCredits() * float(player->getSkillMod("general_assembly") / 100.0f + 0.02f); // The 0.02f ensures you get XP even if you have dropped Novice Scout for some crazy reason...
+				if(xp > 546) xp = 546; 
 				player->getZoneServer()->getPlayerManager()->awardExperience(player, "crafting_general", xp, true, 1); 
 			}
 		}

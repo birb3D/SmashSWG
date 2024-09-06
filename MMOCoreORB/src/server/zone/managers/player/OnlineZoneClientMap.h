@@ -44,7 +44,7 @@ public:
 
 		insertLogEntry(accountId, galaxyId, ip, 0, onlineCount);
 
-		if (onlineCount >= ConfigManager::instance()->getInt("Core3.LogOnlineCount", 3)) {
+		if (onlineCount >= ConfigManager::instance()->getInt("Core3.LogOnlineCount", 2)) {
 			String delim = " ";
 			StringBuffer msg;
 

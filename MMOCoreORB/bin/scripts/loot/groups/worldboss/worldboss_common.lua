@@ -6,16 +6,12 @@ worldboss_common = {
 	maximumLevel = 0,
 	lootItems = {
 
-		{groupTemplate = "resource_chemical", weight = 500000},
-		{groupTemplate = "resource_flora", weight = 500000},
-		{groupTemplate = "resource_gemstone", weight = 500000},
-		{groupTemplate = "resource_metal", weight = 500000},
-		{groupTemplate = "resource_ore", weight = 500000},
-		{groupTemplate = "resource_water", weight = 500000}, 
-		{groupTemplate = "resource_creature", weight = 500000},
+		{itemTemplate = "locked_container", weight = 1000000},
+		{groupTemplate = "armor_all", weight = 1000000}, 
+		{groupTemplate = "weapons_all", weight = 1000000}, 
 		{groupTemplate = "looted_container", weight = 500000}, 
 		{itemTemplate = "treasure_map", weight = 500000},
-		{groupTemplate = "wearables_all", weight = 500000}, 
+		{groupTemplate = "wearables_all", weight = 1000000}, 
 
 		{groupTemplate = "junk", weight = 2500000},
 		{groupTemplate = "crafting_component", weight = 2500000},

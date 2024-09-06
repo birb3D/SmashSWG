@@ -54,8 +54,8 @@ object_tangible_food_crafted_dessert_won_won = object_tangible_food_crafted_shar
 	fillingMax = 27,
 	flavorMin = 450,
 	flavorMax = 1050,
-	nutritionMin = 225,
-	nutritionMax = 675,
+	nutritionMin = 175,
+	nutritionMax = 475,
 	quantityMin = 6,
 	quantityMax = 10,
 

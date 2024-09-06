@@ -50,14 +50,14 @@ object_tangible_food_crafted_dish_sausage = object_tangible_food_crafted_shared_
 
 	effectType = 1,
 
-	fillingMin = 50,
-	fillingMax = 20,
-	flavorMin = 540,
-	flavorMax = 2080,
-	nutritionMin = 100,
-	nutritionMax = 400,
-	quantityMin = 2,
-	quantityMax = 6,
+	fillingMin = 25,
+	fillingMax = 10,
+	flavorMin = 1540,
+	flavorMax = 4080,
+	nutritionMin = 300,
+	nutritionMax = 700,
+	quantityMin = 4,
+	quantityMax = 10,
 
 	modifiers = { "constitution", 0, "stamina", 0 },
 

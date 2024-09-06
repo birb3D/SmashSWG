@@ -4,7 +4,7 @@ travel_coupon = {
 	minimumLevel = 0,
 	maximumLevel = -1,
 	customObjectName = "A Travel Voucher",
-	directObjectTemplate = "object/tangible/item/new_player/shared_new_player_travel_coupon.iff",
+	directObjectTemplate = "object/tangible/item/new_player/new_player_travel_coupon.iff",
 	craftingValues = {
 	},
 	customizationStringNames = {},

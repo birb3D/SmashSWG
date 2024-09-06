@@ -56,7 +56,7 @@ object_tangible_food_crafted_dessert_pyollian_cake = object_tangible_food_crafte
 	flavorMin = 1,
 	flavorMax = 1,
 	nutritionMin = 5,
-	nutritionMax = 10,
+	nutritionMax = 15,
 	quantityMin = 5,
 	quantityMax = 8,
 
