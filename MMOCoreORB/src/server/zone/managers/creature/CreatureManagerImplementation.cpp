@@ -876,14 +876,20 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 	}
 
 	trx.commit();
-
+	
+	if(creatureHealth == "creature_quality_jackpot") {
+		String resourceClass = resourceSpawn->getFinalClass();
+		owner->sendSystemMessage("PRAISED BE! The Force blesses you with a bountiful harvest! You harvested " + std::to_string(quantityExtracted) + " unit(s) of " + resourceClass + "!");
+	}
+	else {
 	/// Send System Messages
-	StringIdChatParameter harvestMessage("skl_use", creatureHealth);
+		StringIdChatParameter harvestMessage("skl_use", creatureHealth);
 
-	harvestMessage.setDI(quantityExtracted);
-	harvestMessage.setTU(resourceSpawn->getFinalClass());
+		harvestMessage.setDI(quantityExtracted);
+		harvestMessage.setTU(resourceSpawn->getFinalClass());
 
-	owner->sendSystemMessage(harvestMessage);
+		owner->sendSystemMessage(harvestMessage);
+	}
 
 	/// Send bonus message
 	if (modifier == 1.2f)
