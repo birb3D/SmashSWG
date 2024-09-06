@@ -12,7 +12,7 @@ polearm_staff_wood_reinforced = {
 		{"woundchance",7,7,1},
 		{"hitpoints",750,1500,0},
 		{"zerorange",0,0,0},
-		{"zerorangemod",7,7,0},
+		{"zerorangemod",7,17,0},
 		{"midrange",4,4,0},
 		{"midrangemod",7,7,0},
 		{"maxrange",5,5,0},
@@ -26,7 +26,7 @@ polearm_staff_wood_reinforced = {
 
 	-- randomDotChance: The chance of this weapon object dropping with a random dot on it. Higher number means less chance. Set to 0 to always have a random dot.
 	randomDotChance = 500,
-	junkDealerTypeNeeded = JUNKARMS,
+	junkDealerTypeNeeded = JUNKNOTSELLABLE,
 	junkMinValue = 25,
 	junkMaxValue = 45
 
