@@ -2026,14 +2026,6 @@ bool SceneObject::isAiAgent() {
 	return false;
 }
 
-bool SceneObjectImplementation::isCreature() {
-	return false;
-}
-
-bool SceneObject::isCreature() {
-	return false;
-}
-
 bool SceneObjectImplementation::isVendor() {
 	return false;
 }

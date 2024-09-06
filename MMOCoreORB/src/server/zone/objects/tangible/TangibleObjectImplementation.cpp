@@ -495,7 +495,7 @@ void TangibleObjectImplementation::removeOutOfRangeObjects() {
 	uint64 rangeCheckObjectId = rangeCheckObject->getObjectID();
 
 	for (int i = closeObjects.size() - 1; i >= 0; i--) {
-		ManagedReference<SceneObject*> covObject = static_cast<SceneObject*>(closeObjects.getUnsafe(i));
+		auto covObject = static_cast<SceneObject*>(closeObjects.getUnsafe(i));
 
 		if (covObject == nullptr) {
 			continue;
@@ -510,15 +510,16 @@ void TangibleObjectImplementation::removeOutOfRangeObjects() {
 
 		// Check for objects inside another object
 		auto covObjectRoot = covObject->getRootParent();
-		uint64 covParentID = covObject->getParentID();
-		auto objectWorldPos = covObject->getWorldPosition();
 
-		/* If covObjectRoot is not null, skip given should be managed by the rootParent (building, vehicle, ship etc.)
-		* If the covObject has a parent and this objects parent is not null, skip the covObject. Removal should be notified from this objects parent.
-		*/
-		if (covObjectRoot != nullptr || (covParentID > 0 && parent != nullptr)) {
+		// They should be managed by the parent
+		if (covObjectRoot != nullptr) {
+			continue;
+		// covObject is a player, their root is null but this object has a parent
+		} else if (covObject->isPlayerCreature() && parent != nullptr) {
 			continue;
 		}
+
+		auto objectWorldPos = covObject->getWorldPosition();
 
 		float deltaX = ourX - objectWorldPos.getX();
 		float deltaY = ourY - objectWorldPos.getY();
