@@ -50,8 +50,8 @@ object_tangible_component_droid_armor_module_6 = object_tangible_component_droid
 	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	experimentalGroupTitles = {"null", "null", "exp_durability", "null", "exp_effectiveness", "exp_effectiveness", "exp_effectiveness"},
 	experimentalSubGroupTitles = {"null", "null", "decayrate", "hitpoints", "mechanism_quality", "armor_toughness", "armor_module"},
-	experimentalMin = {0, 0, 5, 1000, -10, 600, 6},
-	experimentalMax = {0, 0, 15, 1000, 15, 1500, 6},
+	experimentalMin = {0, 0, 5, 1000, -10, 900, 6},
+	experimentalMax = {0, 0, 15, 1000, 15, 2500, 6},
 	experimentalPrecision = {0, 0, 0, 0, 0, 0, 0},
 	experimentalCombineType = {0, 0, 1, 4, 1, 1, 1},
 }
