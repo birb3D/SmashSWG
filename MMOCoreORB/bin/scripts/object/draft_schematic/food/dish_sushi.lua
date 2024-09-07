@@ -67,7 +67,7 @@ object_draft_schematic_food_dish_sushi = object_draft_schematic_food_shared_dish
    ingredientTitleNames = {"flaky_crust", "meaty_core", "vegetable_mash", "rice", "carbosyrup", "additive"},
    ingredientSlotType = {0, 0, 0, 0, 1, 3},
    resourceTypes = {"hide_leathery", "meat_carnivore", "vegetable", "rice_wild", "object/tangible/component/food/shared_ingredient_carbosyrup.iff", "object/tangible/food/crafted/additive/shared_additive_heavy.iff"},
-   resourceQuantities = {15, 30, 12, 60, 3, 1},
+   resourceQuantities = {15, 40, 12, 64, 5, 1},
    contribution = {100, 100, 100, 100, 100, 100},
 
 

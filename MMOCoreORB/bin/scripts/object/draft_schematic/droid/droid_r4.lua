@@ -54,7 +54,7 @@ object_draft_schematic_droid_droid_r4 = object_draft_schematic_droid_shared_droi
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "crafting_droid_general",
-	xp = 260,
+	xp = 320,
 
 	assemblySkill = "droid_assembly",
 	experimentingSkill = "droid_experimentation",
