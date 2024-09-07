@@ -59,9 +59,6 @@ void GroupManager::inviteToGroup(CreatureObject* inviter, CreatureObject* target
 			if (!target->isInRange(inviter, 120)) {
 				return;
 			}
-		} else if (group->getLeader() != inviter) {
-			inviter->sendSystemMessage("@group:must_be_leader");
-			return;
 		}
 
 		// can't invite if the group is full
