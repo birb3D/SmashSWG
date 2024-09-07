@@ -140,7 +140,7 @@ void ManufactureSchematicImplementation::synchronizedUIListen(CreatureObject* pl
 		return;
 	}
 
-	if (!initialized)
+	if (!initialized || value == 0)
 		initializeIngredientSlots();
 
 	possibleSyncIssue = false;
