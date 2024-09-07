@@ -54,7 +54,7 @@ object_draft_schematic_vehicle_civilian_speeder_bike = object_draft_schematic_ve
 	factoryCrateType = "object/factory/factory_crate_installation.iff",
    
 	xpType = "crafting_droid_general", 
-	xp = 1120, 
+	xp = 2120, 
 
 	assemblySkill = "droid_assembly",
 	experimentingSkill = "droid_experimentation",

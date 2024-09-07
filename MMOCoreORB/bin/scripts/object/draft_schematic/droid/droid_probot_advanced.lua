@@ -54,7 +54,7 @@ object_draft_schematic_droid_droid_probot_advanced = object_draft_schematic_droi
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "crafting_droid_general",
-	xp = 560,
+	xp = 660,
 
 	assemblySkill = "droid_assembly",
 	experimentingSkill = "droid_experimentation",
