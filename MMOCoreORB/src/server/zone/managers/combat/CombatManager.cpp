@@ -1401,9 +1401,9 @@ int CombatManager::calculatePoolsToDamage(int poolsToDamage) const {
 	if (poolsToDamage & RANDOM) {
 		int rand = System::random(100);
 
-		if (rand <= 60) {
+		if (rand <= 55) {
 			poolsToDamage = HEALTH;
-		} else if (rand <= 95) {
+		} else if (rand <= 90) {
 			poolsToDamage = ACTION;
 		} else {
 			poolsToDamage = MIND;
@@ -1762,8 +1762,15 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 		debug() << "entering addDotState with dotType:" << dotType;
 
 		float damMod = attacker->isAiAgent() ? cast<AiAgent*>(attacker)->getSpecialDamageMult() : 1.f;
-		defender->addDotState(attacker, dotType, data.getCommand()->getNameCRC(), effect.isDotDamageofHit() ? damageToApply * effect.getPrimaryPercent() / 100.0f : effect.getDotStrength() * damMod, pool, effect.getDotDuration(), potency, resist,
-							  effect.isDotDamageofHit() ? damageToApply * effect.getSecondaryPercent() / 100.0f : effect.getDotStrength() * damMod);
+
+		int strength = effect.isDotDamageofHit() ? damageToApply * effect.getPrimaryPercent() / 100.0f : effect.getDotStrength() * damMod;
+		strength = (int)(strength / 5.0f);
+		int secondaryStrength = effect.isDotDamageofHit() ? damageToApply * effect.getSecondaryPercent() / 100.0f : effect.getDotStrength() * damMod;
+		secondaryStrength = (int)(secondaryStrength / 5.0f);
+
+
+		defender->addDotState(attacker, dotType, data.getCommand()->getNameCRC(), strength, pool, effect.getDotDuration(), potency, resist,
+							  secondaryStrength);
 	}
 }
 
@@ -1814,7 +1821,10 @@ void CombatManager::applyWeaponDots(CreatureObject* attacker, CreatureObject* de
 		if (defender->hasDotImmunity(type))
 			continue;
 
-		if (weapon->getDotPotency(i) * (1.f - resist / 100.f) > System::random(100) && defender->addDotState(attacker, type, weapon->getObjectID(), weapon->getDotStrength(i), weapon->getDotAttribute(i), weapon->getDotDuration(i), -1, 0, (int)(weapon->getDotStrength(i) / 5.f)) > 0)
+		int dotStrength = weapon->getDotStrength(i);
+		dotStrength = (int)(dotStrength / 5.0f);
+
+		if (weapon->getDotPotency(i) * (1.f - resist / 100.f) > System::random(100) && defender->addDotState(attacker, type, weapon->getObjectID(), dotStrength, weapon->getDotAttribute(i), weapon->getDotDuration(i), -1, 0, (int)(weapon->getDotStrength(i) / 5.f)) > 0)
 			if (weapon->getDotUses(i) > 0)
 				weapon->setDotUses(weapon->getDotUses(i) - 1, i); // Unresisted despite mod, reduce use count.
 	}

@@ -210,7 +210,7 @@ public:
 	}
 
 	void doAreaMedicActionTarget(CreatureObject* creature, CreatureObject* targetCreature, DotPack* dotPack) const {
-		int dotPower = dotPack->calculatePower(creature);
+		int dotPower = (int)(dotPack->calculatePower(creature) / 5.0f);
 		int dotDMG = 0;
 
 		if (dotPack->isPoisonDeliveryUnit()) {
@@ -382,7 +382,7 @@ public:
 
 		applyCost(creature, cost);
 
-		int dotPower = dotPack->calculatePower(creature);
+		int dotPower = (int)(dotPack->calculatePower(creature) / 5.0f);
 		int dotDMG = 0;
 		bool isPoisonDot = dotPack->isPoisonDeliveryUnit();
 

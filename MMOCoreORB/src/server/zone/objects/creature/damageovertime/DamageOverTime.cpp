@@ -150,23 +150,23 @@ uint32 DamageOverTime::applyDot(CreatureObject* victim) {
 	switch(type) {
 	case CreatureState::BLEEDING:
 		power = doBleedingTick(victim, attacker);
-		time = 20000;
+		time = 4000;
 		break;
 	case CreatureState::POISONED:
 		power = doPoisonTick(victim, attacker);
-		time = 10000;
+		time = 2000;
 		break;
 	case CreatureState::DISEASED:
 		power = doDiseaseTick(victim, attacker);
-		time = 40000;
+		time = 8000;
 		break;
 	case CreatureState::ONFIRE:
 		power = doFireTick(victim, attacker);
-		time = 10000;
+		time = 2000;
 		break;
 	case CommandEffect::FORCECHOKE:
 		power = doForceChokeTick(victim, attacker);
-		time = 5000;
+		time = 1000;
 		break;
 	}
 
@@ -193,22 +193,22 @@ uint32 DamageOverTime::initDot(CreatureObject* victim, CreatureObject* attacker)
 	switch(type) {
 	case CreatureState::BLEEDING:
 		absorptionMod = Math::max(0, Math::min(50, victim->getSkillMod("absorption_bleeding")));
-		nextTick.addMiliTime(20000);
+		nextTick.addMiliTime(4000);
 		break;
 	case CreatureState::ONFIRE:
 		absorptionMod = Math::max(0, Math::min(50, victim->getSkillMod("absorption_fire")));
-		nextTick.addMiliTime(10000);
+		nextTick.addMiliTime(2000);
 		break;
 	case CreatureState::POISONED:
 		absorptionMod = Math::max(0, Math::min(50, victim->getSkillMod("absorption_poison")));
-		nextTick.addMiliTime(10000);
+		nextTick.addMiliTime(2000);
 		break;
 	case CreatureState::DISEASED:
 		absorptionMod = Math::max(0, Math::min(50, victim->getSkillMod("absorption_disease")));
-		nextTick.addMiliTime(40000);
+		nextTick.addMiliTime(8000);
 		break;
 	case CommandEffect::FORCECHOKE:
-		nextTick.addMiliTime(5000);
+		nextTick.addMiliTime(1000);
 		strength *= ((100 - System::random(20)) * 0.01f);
 		victim->showFlyText("combat_effects", "choke", 0xFF, 0, 0);
 
