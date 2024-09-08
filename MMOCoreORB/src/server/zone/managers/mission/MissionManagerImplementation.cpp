@@ -265,7 +265,7 @@ void MissionManagerImplementation::handleMissionAccept(MissionTerminal* missionT
 	}
 
 	//Limit to two missions (only one of them can be a bounty mission)
-	if (missionCount >= 2 || (hasBountyMission && mission->getTypeCRC() == MissionTypes::BOUNTY) || (missionCount >= 1 && mission->getTypeCRC() == MissionTypes::CRAFTING)  || (missionCount >= 1 && mission->getTypeCRC() == MissionTypes::SURVEY) ) {
+	if (missionCount >= 2 || (hasBountyMission && mission->getTypeCRC() == MissionTypes::BOUNTY) || (missionCount >= 1 && mission->getTypeCRC() == MissionTypes::CRAFTING) || (missionCount >= 1 && mission->getTypeCRC() == MissionTypes::DELIVER) || (missionCount >= 1 && mission->getTypeCRC() == MissionTypes::SURVEY) ) {
 		StringIdChatParameter stringId("mission/mission_generic", "too_many_missions");
 		player->sendSystemMessage(stringId);
 		return;
@@ -1491,7 +1491,7 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 
 	int distanceReward = (int)(Math::min(player->getWorldPosition().distanceTo(target->getPosition()), (float)2000) * (float)strength / 50.0f * 1.5f);
 
-	mission->setRewardCredits(150 + distanceReward + System::random(200));
+	mission->setRewardCredits(300 + distanceReward + System::random(300));
 
 	mission->setFaction(faction);
 
