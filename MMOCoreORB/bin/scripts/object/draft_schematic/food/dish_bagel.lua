@@ -66,7 +66,7 @@ object_draft_schematic_food_dish_bagel = object_draft_schematic_food_shared_dish
    ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
    ingredientTitleNames = {"protein_source", "vegetable_mash", "exotic_spices", "dough", "protein_fortifier", "additive"},
    ingredientSlotType = {0, 0, 0, 1, 1, 3},
-   resourceTypes = {"meat", "vegetable", "petrochem_inert_lubricating_oil", "object/tangible/component/food/shared_ingredient_ball_of_dough.iff", "object/tangible/food/crafted/dish_soypro.iff", "object/tangible/food/crafted/additive/shared_additive_medium.iff"},
+   resourceTypes = {"meat", "vegetable", "petrochem_inert_lubricating_oil", "object/tangible/component/food/shared_ingredient_ball_of_dough.iff", "object/tangible/food/crafted/shared_dish_soypro.iff", "object/tangible/food/crafted/additive/shared_additive_medium.iff"},
    resourceQuantities = {54, 14, 12, 1, 1, 1},
    contribution = {100, 100, 100, 100, 100, 100},
 
