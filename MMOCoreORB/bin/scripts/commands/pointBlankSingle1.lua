@@ -49,7 +49,7 @@ PointBlankSingle1Command = {
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1.25,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 15,
+	accuracyBonus = 115,
 
 	animation = "fire_3_single", 
 	animType = GENERATE_RANGED,

@@ -71,6 +71,20 @@ ConfusionShotCommand = {
 	  )
 	},
 
+	dotEffects = {
+		DotEffect( 
+		  BLEEDING, 
+		  { "resistance_bleeding", "bleed_resist" },
+		  MIND,
+		  true,
+		  0,
+		  100,
+		  60, 
+		  60,
+		  30
+		)
+	  },	
+
 	animation = "fire_5_special_single", 
 	animType = GENERATE_RANGED,
 
