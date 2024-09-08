@@ -974,12 +974,15 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 
 	// Remove all resources - Not recovering them
 	if (assemblyResult == CraftingManager::CRITICALFAILURE) {
-		createPrototypeObject(draftSchematic);
+		/*createPrototypeObject(draftSchematic);
 
 		state = 2;
 
 		// re-setup the slots and ingredients
-		manufactureSchematic->synchronizedUIListen(crafter, 0);
+		manufactureSchematic->synchronizedUIListen(crafter, 0);*/
+
+		closeCraftingWindow(0, false);
+		cancelSession();
 
 		// Start Dplay9 **************************************
 		// Reset crafting state
