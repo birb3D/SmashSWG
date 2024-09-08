@@ -44,12 +44,12 @@
 PistolMeleeDefense2Command = {
         name = "pistolmeleedefense2",
 
-	damageMultiplier = 4.0,
+	damageMultiplier = 5.0,
 	speedMultiplier = 2.0,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1.0,
 	mindCostMultiplier = 0.5,
-        accuracyBonus = 50,
+        accuracyBonus = 70,
 
 	stateEffects = {
 	  StateEffect(
@@ -57,7 +57,7 @@ PistolMeleeDefense2Command = {
 		{ "knockdownRecovery", "lastKnockdown" },
 		{ "knockdown_defense" },
 		{},
-		65,
+		100,
 		0,
 		0
 	  )

@@ -49,7 +49,7 @@ FlushingShot2Command = {
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 0.5,
 	mindCostMultiplier = 2.0,
-	accuracyBonus = 5,
+	accuracyBonus = 15,
 
 	coneAngle = 15,
 	coneAction = true,

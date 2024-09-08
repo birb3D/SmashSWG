@@ -49,7 +49,7 @@ PointBlankArea2Command = {
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1.5,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 50,
+	accuracyBonus = 150,
 
 	coneAngle = 60,
 	coneAction = true,

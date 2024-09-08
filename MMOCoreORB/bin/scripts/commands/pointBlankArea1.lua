@@ -49,7 +49,7 @@ PointBlankArea1Command = {
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1.25,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 15,
+	accuracyBonus = 115,
 
 	areaRange = 15,
 	areaAction = true,

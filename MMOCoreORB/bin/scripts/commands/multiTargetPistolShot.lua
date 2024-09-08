@@ -44,15 +44,15 @@
 MultiTargetPistolShotCommand = {
         name = "multitargetpistolshot",
 
-	damageMultiplier = 4.2,
-	speedMultiplier = 3.5,
+	damageMultiplier = 5.2,
+	speedMultiplier = 2.7,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1.25,
 	mindCostMultiplier = 0.5,
 	accuracyBonus = 50,
 
 	areaAction = true,
-        areaRange = 32,
+        areaRange = 40,
         
 	poolsToDamage = RANDOM_ATTRIBUTE,
 

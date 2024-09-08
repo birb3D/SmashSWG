@@ -44,7 +44,7 @@
 FanShotCommand = {
         name = "fanshot",
 	damageMultiplier = 4.0,
-	speedMultiplier = 2.0,
+	speedMultiplier = 1.8,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1,
 	mindCostMultiplier = 0.5,
@@ -54,7 +54,7 @@ FanShotCommand = {
 	coneAngle = 60,
 	coneAction = true,
 
-	poolsToDamage = RANDOM_ATTRIBUTE,
+	poolsToDamage = HEALTH_ATTRIBUTE + ACTION_ATTRIBUTE + MIND_ATTRIBUTE,
 
 	animation = "fire_area", 
 	animType = GENERATE_INTENSITY,

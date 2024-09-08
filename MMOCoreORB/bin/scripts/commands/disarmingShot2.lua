@@ -51,6 +51,18 @@ DisarmingShot2Command = {
 	mindCostMultiplier = 0.5,
 	accuracyBonus = 50,
 
+	stateEffects = {
+		StateEffect( 
+		  STUN_EFFECT, 
+		  {}, 
+		  { "stun_defense" }, 
+		  { "jedi_state_defense", "resistance_states" },
+		  100, 
+		  0, 
+		  30 
+		)
+	  },
+
 	coneAngle = 15,
 	coneAction = true,
 

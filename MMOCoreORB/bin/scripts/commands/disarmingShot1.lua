@@ -51,6 +51,18 @@ DisarmingShot1Command = {
 	mindCostMultiplier = 0.5,
 	accuracyBonus = 50,
 
+	stateEffects = {
+		StateEffect( 
+		  STUN_EFFECT, 
+		  {}, 
+		  { "stun_defense" }, 
+		  { "jedi_state_defense", "resistance_states" },
+		  100, 
+		  0, 
+		  30 
+		)
+	  },
+
 	animation = "fire_3_single",
 	animType = GENERATE_RANGED,
 
