@@ -8,7 +8,7 @@ legendary_strange_armor_segment_zam = {
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
 		{"armor_effectiveness",8,30,10},
-		{"armor_special_effectiveness",5,20,10},
+		{"armor_special_effectiveness",10,25,10},
 		{"armor_integrity",400,3000,10},
 		{"armor_health_encumbrance",8,1,0},
 		{"armor_action_encumbrance",10,1,0},
