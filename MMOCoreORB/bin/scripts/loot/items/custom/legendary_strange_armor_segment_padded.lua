@@ -8,7 +8,7 @@ legendary_strange_armor_segment_padded = {
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
 		{"armor_effectiveness",10,45,10},
-		{"armor_special_effectiveness",1,20,10},
+		{"armor_special_effectiveness",10,30,10},
 		{"armor_integrity",300,3000,10},
 		{"armor_health_encumbrance",12,1,0},
 		{"armor_action_encumbrance",20,1,0},

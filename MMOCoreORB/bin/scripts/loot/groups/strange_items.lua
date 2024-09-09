@@ -13,8 +13,8 @@ strange_items = {
 		{groupTemplate = "large_resource_creature", weight = 142857},
 
 
-		-- 15.95%
-		{groupTemplate = "looted_container", weight = 1595001}, 
+		-- 10.75%
+		{itemTemplate = "locked_container", weight = 1075001}, 
 
 		-- 10%
 		{groupTemplate = "color_crystals", weight = 1000000}, 
@@ -26,6 +26,8 @@ strange_items = {
 		{itemTemplate = "strange_armor_segment_chitin", weight = 260000},
 		{itemTemplate = "strange_armor_segment_padded", weight = 260000},
 		{itemTemplate = "strange_armor_segment_ubese", weight = 260000},
+		{itemTemplate = "strange_armor_segment_kashyyykian_black_mtn", weight = 260000},
+		{itemTemplate = "strange_armor_segment_kashyyykian_ceremonial", weight = 260000},
 		{itemTemplate = "strange_armor_segment_tantel", weight = 260000},
 		{itemTemplate = "strange_bio_component_food_light", weight = 260000},
 		{itemTemplate = "strange_bio_component_food_medium", weight = 260000},

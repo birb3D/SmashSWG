@@ -44,8 +44,8 @@
 PolearmSpinAttack2Command = {
         name = "polearmspinattack2",
 
-	damageMultiplier = 2.5,
-	speedMultiplier = 2.5,
+	damageMultiplier = 3.0,
+	speedMultiplier = 2.0,
 	healthCostMultiplier = 2.0,
 	actionCostMultiplier = 1.5,
 	mindCostMultiplier = 1.5,
@@ -63,6 +63,15 @@ PolearmSpinAttack2Command = {
 		100, 
 		0, 
 		50 
+	  ),
+	  StateEffect( 
+		DIZZY_EFFECT, 
+		{}, 
+		{ "dizzy_defense" }, 
+		{ "jedi_state_defense", "resistance_states" },
+		100, 
+		0, 
+		10 
 	  )
 	},
 
