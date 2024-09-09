@@ -950,13 +950,6 @@ void MissionManagerImplementation::randomizeGenericSurveyMission(CreatureObject*
 	if (surveySkill > 70) {
 		maxLevel += 10;
 	}
-	if (surveySkill > 90) {
-		maxLevel += 10;
-	}
-	if (surveySkill > 100) {
-		//Max mission level is 95.
-		maxLevel += 5;
-	}
 
 	//Mission level used as needed concentration in increments of 5. I.e. 50, 55, 60 etc. up to 95.
 	int randLevel = minLevel + 5 * System::random((maxLevel - minLevel) / 5);
@@ -995,7 +988,7 @@ void MissionManagerImplementation::randomizeGenericSurveyMission(CreatureObject*
 	mission->setTargetTemplate(templateObject);
 
 	//Reward depending on mission level.
-	int rewardCreds = 400 + (randLevel - minLevel) * 20 + System::random(100);
+	int rewardCreds = 200 + ((randLevel - minLevel) * 50) + System::random(100);
 	rewardCreds = ceil(rewardCreds * 2 / 3);
 	mission->setRewardCredits(rewardCreds);
 
