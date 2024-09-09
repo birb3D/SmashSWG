@@ -707,11 +707,13 @@ bool GroundZoneImplementation::objectIsValidPlanetaryMapPerformanceLocation(Scen
 	if (planetMapCategory != nullptr) {
 		String category = planetMapCategory->getName();
 
-		if (category == "cantina" || category == "hotel") {
+		//if (category == "cantina" || category == "hotel") {
+		if (category == "cantina") {
 			hasPerformanceLocationCategory = true;
 		}
 	}
 
+	/*
 	if (!hasPerformanceLocationCategory) {
 		const PlanetMapSubCategory* planetMapSubCategory = object->getPlanetMapSubCategory();
 
@@ -722,7 +724,7 @@ bool GroundZoneImplementation::objectIsValidPlanetaryMapPerformanceLocation(Scen
 				hasPerformanceLocationCategory = true;
 			}
 		}
-	}
+	} */
 
 	if (hasPerformanceLocationCategory) {
 		if (building->isPublicStructure()) {
