@@ -1482,9 +1482,9 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 
 	mission->setTargetTemplate(TemplateManager::instance()->getTemplate(STRING_HASHCODE("object/building/general/mun_all_guild_theater_s01.iff")));
 
-	int distanceReward = (int)(Math::min(player->getWorldPosition().distanceTo(target->getPosition()), (float)2000) * (float)strength / 50.0f * 1.5f);
+	int distanceReward = (int)(Math::min(player->getWorldPosition().distanceTo(target->getPosition()), (float)2000) * (float)strength / 50.0f * 1f);
 
-	mission->setRewardCredits(300 + distanceReward + System::random(300));
+	mission->setRewardCredits(300 + distanceReward + System::random(900));
 
 	mission->setFaction(faction);
 
@@ -1515,7 +1515,8 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 }
 
 void MissionManagerImplementation::randomizeGenericHuntingMission(CreatureObject* player, MissionObject* mission, const uint32 faction) {
-	LairSpawn* randomLairSpawn = getRandomLairSpawn(player, Factions::FACTIONNEUTRAL, MissionTypes::HUNTING);
+	LairSpawn* randomLairSpawn = getRandomLairSpawn(player, Factions::FACTIONNEUTRAL, MissionTypes::DESTROY);
+	//LairSpawn* randomLairSpawn = getRandomLairSpawn(player, Factions::FACTIONNEUTRAL, MissionTypes::HUNTING);
 
 	if (randomLairSpawn == nullptr) {
 		return;
@@ -1580,7 +1581,17 @@ void MissionManagerImplementation::randomizeGenericHuntingMission(CreatureObject
 	mission->setTargetTemplate(sharedTemplate);
 
 	//50% easy missions, 33% medium missions, 17% hard missions.
-	int difficulty = System::random(5) + 1;
+	//int difficulty = System::random(5) + 1;
+
+
+	int maxDiff = randomLairSpawn->getMaxDifficulty();
+	int minDiff = randomLairSpawn->getMinDifficulty();
+	int difficultyLevel = System::random(maxDiff - minDiff) + minDiff;
+	int difficulty = (difficultyLevel - minDiff) / ((maxDiff > (minDiff + 5) ? maxDiff - minDiff : 5) / 5);
+
+	if (difficulty == 5)
+		difficulty = 4;
+
 	String diffString;
 	if (difficulty <= 3) {
 		difficulty = 1;
@@ -1596,7 +1607,11 @@ void MissionManagerImplementation::randomizeGenericHuntingMission(CreatureObject
 	//difficulty = (randomLairSpawn->getMinDifficulty() + randomLairSpawn->getMaxDifficulty()) /2;
 	difficulty += 7;
 
-	int baseReward = 500 + (200 * difficulty);
+	/*int reward = destroyMissionBaseReward + destroyMissionDifficultyRewardFactor * difficultyLevel;
+	reward += System::random(destroyMissionRandomReward) + System::random(destroyMissionDifficultyRandomReward * difficultyLevel);
+	mission->setRewardCredits(reward);*/
+
+	int baseReward = 500 + (300 * difficulty);
 	mission->setRewardCredits(baseReward + System::random(500));
 	mission->setMissionDifficulty(difficulty);
 	//mission->setMissionTitle("mission/mission_npc_hunting_neutral_" + diffString, "m" + String::valueOf(randTexts) + "t");
