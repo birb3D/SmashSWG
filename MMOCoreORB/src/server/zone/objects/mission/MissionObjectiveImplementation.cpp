@@ -270,10 +270,10 @@ void MissionObjectiveImplementation::awardReward() {
 					memberPosition.setZ(0);
 				}
 
-				if (memberPosition.distanceTo(missionEndPoint) < 128) {
+				if (memberPosition.distanceTo(missionEndPoint) < 256) {
 					players.add(groupMember);
 				}
-			} else if(groupMember->isPet()) {
+				} else if(groupMember->isPet()) {
 				Vector3 petPosition = groupMember->getWorldPosition();
 
 				if (groupMember->getFaction() != 0) {
@@ -282,7 +282,7 @@ void MissionObjectiveImplementation::awardReward() {
 					petCount++;
 				}
 
-				if (petPosition.distanceTo(missionEndPoint) >= 128) {
+				if (petPosition.distanceTo(missionEndPoint) >= 256) {
 					if (groupMember->getFaction() != 0) {
 						petFactionOutOfRangeCount++;
 					} else {
@@ -315,6 +315,7 @@ void MissionObjectiveImplementation::awardReward() {
 
 	if (playerCount > players.size()) {
 		owner->sendSystemMessage("@mission/mission_generic:group_too_far"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
+		divisor = players.size();
 	}
 	
 	float bonus = 1.0f;
