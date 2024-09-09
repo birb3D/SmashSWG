@@ -621,8 +621,13 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 			}
 
 			if (player->isPlayerCreature()) {
+
 				if (!destructedObject->isEventMob()) {
+					FactionManager* factionManager = FactionManager::instance();
+					int level = destructedObject->getLevel();
+
 					if (player->isGrouped()) {
+
 						ManagedReference<GroupObject*> group = player->getGroup();
 
 						if (group != nullptr) {
@@ -632,24 +637,24 @@ int CreatureManagerImplementation::notifyDestruction(TangibleObject* destructor,
 								if (groupMember->isPlayerCreature()) {
 									Locker locker(groupMember, destructedObject);
 									groupMember->notifyObservers(ObserverEventType::KILLEDCREATURE, destructedObject);
+
+									Vector3 memberPosition = groupMember->getWorldPosition();
+									Vector3 creaturePosition = destructedObject->getWorldPosition();
+
+									if (!destructedObject->getFactionString().isEmpty() && memberPosition.distanceTo(creaturePosition) < 256) {
+										factionManager->awardFactionStanding(groupMember, destructedObject->getFactionString(), level);
+									}
 								}
 							}
 						}
 					} else {
 						Locker locker(player, destructedObject);
 						player->notifyObservers(ObserverEventType::KILLEDCREATURE, destructedObject);
+
+						if (!destructedObject->getFactionString().isEmpty()) {
+							factionManager->awardFactionStanding(player, destructedObject->getFactionString(), level);
+						}
 					}
-				}
-
-				FactionManager* factionManager = FactionManager::instance();
-
-				if (!destructedObject->getFactionString().isEmpty() && !destructedObject->isEventMob()) {
-					int level = destructedObject->getLevel();
-
-					if(!player->isGrouped())
-						factionManager->awardFactionStanding(player, destructedObject->getFactionString(), level);
-					else
-						factionManager->awardFactionStanding(copyThreatMap.getHighestDamagePlayer(), destructedObject->getFactionString(), level);
 				}
 			}
 
@@ -824,8 +829,8 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 	int roll = System::random(100000);
 	String creatureHealth = "";
 
-	if (roll < 50) { // 0.05% chance of BIG BOI HARVEST
-		quantityExtracted = int(quantityExtracted * 200);
+	if (roll < 20) { // 0.020% chance of BIG BOI HARVEST
+		quantityExtracted = int(quantityExtracted * 100);
 		creatureHealth = "creature_quality_jackpot";
 	} else if (roll < 10000) { // 10% fat boi
 		quantityExtracted = int(quantityExtracted * 1.25f);
@@ -1005,7 +1010,7 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 	int roll = System::random(100000);
 	String creatureHealth = "";
 
-	if (roll < 50) { // 0.05% chance of BIG BOI HARVEST
+	if (roll < 20) { // 0.02% chance of BIG BOI HARVEST
 		quantityExtracted = int(quantityExtracted * 200);
 		creatureHealth = "creature_quality_jackpot";
 	} else if (roll < 10000) { // 10% fat boi
@@ -1041,12 +1046,19 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 	trx.commit();
 
 	/// Send System Messages
-	StringIdChatParameter harvestMessage("skl_use", creatureHealth);
 
-	harvestMessage.setDI(quantityExtracted);
-	harvestMessage.setTU(resourceSpawn->getFinalClass());
+	if(creatureHealth == "creature_quality_jackpot") {
+		String resourceClass = resourceSpawn->getFinalClass();
+		player->sendSystemMessage("PRAISED BE! The Force blesses you with a bountiful harvest! You harvested " + std::to_string(quantityExtracted) + " unit(s) of " + resourceClass + "!");
+	}
+	else {
+		StringIdChatParameter harvestMessage("skl_use", creatureHealth);
 
-	player->sendSystemMessage(harvestMessage);
+		harvestMessage.setDI(quantityExtracted);
+		harvestMessage.setTU(resourceSpawn->getFinalClass());
+
+		player->sendSystemMessage(harvestMessage);
+	}
 
 	/// Send bonus message
 	if (modifier == 1.2f)
