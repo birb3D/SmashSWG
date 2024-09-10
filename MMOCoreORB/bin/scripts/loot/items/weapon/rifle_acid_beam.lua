@@ -4,8 +4,8 @@ rifle_acid_beam = {
 	customObjectName = "",
 	directObjectTemplate = "object/weapon/ranged/rifle/rifle_acid_beam.iff",
 	craftingValues = {
-		{"mindamage",20,330,0},
-		{"maxdamage",235,770,0},
+		{"mindamage",20,430,0},
+		{"maxdamage",475,970,0},
 		{"attackspeed",7.7,5.5,1},
 		{"woundchance",19,35,1},
 		{"hitpoints",750,1500,0},

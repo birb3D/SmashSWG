@@ -7,8 +7,8 @@ pistol_dl44_metal = {
 	directObjectTemplate = "object/weapon/ranged/pistol/pistol_dl44_metal.iff",
 	craftingValues = {
 		{"mindamage",11,24,0},
-		{"maxdamage",63,127,0},
-		{"attackspeed",5.3,3.4,1},
+		{"maxdamage",63,145,0},
+		{"attackspeed",4.5,2.5,1},
 		{"woundchance",4.2,8.6,1},
 		{"roundsused",10,50,0},
 		{"hitpoints",750,750,0},

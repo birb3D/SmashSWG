@@ -7,8 +7,8 @@ pistol_power5 = {
 	directObjectTemplate = "object/weapon/ranged/pistol/pistol_power5.iff",
 	craftingValues = {
 		{"mindamage",15,29,0},
-		{"maxdamage",67,154,0},
-		{"attackspeed",5.2,3.4,1},
+		{"maxdamage",98,183,0},
+		{"attackspeed",4.5,3.4,1},
 		{"woundchance",6.2,12.4,1},
 		{"roundsused",10,50,0},
 		{"hitpoints",750,750,0},

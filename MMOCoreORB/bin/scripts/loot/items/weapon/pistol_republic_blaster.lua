@@ -7,8 +7,8 @@ pistol_republic_blaster = {
 	directObjectTemplate = "object/weapon/ranged/pistol/pistol_republic_blaster.iff",
 	craftingValues = {
 		{"mindamage",17,37,0},
-		{"maxdamage",79,170,0},
-		{"attackspeed",5.1,3.7,1},
+		{"maxdamage",79,202,0},
+		{"attackspeed",4.3,3.1,1},
 		{"woundchance",8,18,1},
 		{"hitpoints",750,750,0},
 		{"zerorange",0,0,0},

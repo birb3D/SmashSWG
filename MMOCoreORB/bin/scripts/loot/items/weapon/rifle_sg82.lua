@@ -7,8 +7,8 @@ rifle_sg82 = {
 	directObjectTemplate = "object/weapon/ranged/rifle/rifle_sg82.iff",
 	craftingValues = {
 		{"mindamage",64,97,0},
-		{"maxdamage",101,157,0},
-		{"attackspeed",8.1,5.7,1},
+		{"maxdamage",101,202,0},
+		{"attackspeed",5.2,4.5,1},
 		{"woundchance",8,16,1},
 		{"roundsused",30,65,0},
 		{"hitpoints",750,750,0},
