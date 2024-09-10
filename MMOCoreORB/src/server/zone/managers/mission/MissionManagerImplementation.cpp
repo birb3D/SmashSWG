@@ -1515,8 +1515,8 @@ void MissionManagerImplementation::randomizeGenericEntertainerMission(CreatureOb
 }
 
 void MissionManagerImplementation::randomizeGenericHuntingMission(CreatureObject* player, MissionObject* mission, const uint32 faction) {
-	LairSpawn* randomLairSpawn = getRandomLairSpawn(player, Factions::FACTIONNEUTRAL, MissionTypes::DESTROY);
-	//LairSpawn* randomLairSpawn = getRandomLairSpawn(player, Factions::FACTIONNEUTRAL, MissionTypes::HUNTING);
+	//LairSpawn* randomLairSpawn = getRandomLairSpawn(player, Factions::FACTIONNEUTRAL, MissionTypes::DESTROY);
+	LairSpawn* randomLairSpawn = getRandomLairSpawn(player, Factions::FACTIONNEUTRAL, MissionTypes::HUNTING);
 
 	if (randomLairSpawn == nullptr) {
 		return;
@@ -1581,13 +1581,14 @@ void MissionManagerImplementation::randomizeGenericHuntingMission(CreatureObject
 	mission->setTargetTemplate(sharedTemplate);
 
 	//50% easy missions, 33% medium missions, 17% hard missions.
-	//int difficulty = System::random(5) + 1;
+	int difficulty = System::random(5) + 1;
 
-
+	/*
 	int maxDiff = randomLairSpawn->getMaxDifficulty();
 	int minDiff = randomLairSpawn->getMinDifficulty();
 	int difficultyLevel = System::random(maxDiff - minDiff) + minDiff;
 	int difficulty = (difficultyLevel - minDiff) / ((maxDiff > (minDiff + 5) ? maxDiff - minDiff : 5) / 5);
+	*/
 
 	if (difficulty == 5)
 		difficulty = 4;
