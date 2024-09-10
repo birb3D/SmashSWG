@@ -5,8 +5,8 @@ carbine_dxr6 = {
 	customObjectName = "",
 	directObjectTemplate = "object/weapon/ranged/carbine/carbine_dxr6.iff",
 	craftingValues = {
-		{"mindamage",63,90,0},
-		{"maxdamage",91,143,0},
+		{"mindamage",80,110,0},
+		{"maxdamage",111,193,0},
 		{"attackspeed",6,4.1,1},
 		{"woundchance",10,20,1},
 		{"roundsused",30,65,0},

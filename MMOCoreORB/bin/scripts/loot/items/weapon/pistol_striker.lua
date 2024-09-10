@@ -6,9 +6,9 @@ pistol_striker = {
 	customObjectName = "",
 	directObjectTemplate = "object/weapon/ranged/pistol/pistol_striker.iff",
 	craftingValues = {
-		{"mindamage",23,41,0},
-		{"maxdamage",44,73,0},
-		{"attackspeed",4.9,3.5,1},
+		{"mindamage",70,90,0},
+		{"maxdamage",91,100,0},
+		{"attackspeed",4.4,2.6,1},
 		{"woundchance",4,11,1},
 		{"roundsused",1,5,0},
 		{"hitpoints",750,750,0},

@@ -8,7 +8,7 @@ pistol_dl44 = {
 	craftingValues = {
 		{"mindamage",11,24,0},
 		{"maxdamage",63,127,0},
-		{"attackspeed",5.3,3.4,1},
+		{"attackspeed",4.5,2.5,1},
 		{"woundchance",4.2,8.6,1},
 		{"roundsused",10,40,0},
 		{"hitpoints",750,750,0},
