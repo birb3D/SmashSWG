@@ -51,7 +51,7 @@ SurpriseShotCommand = {
 	mindCostMultiplier = 1.5,
 	accuracyBonus = 5,
 
-	poolsToDamage = HEALTH_ATTRIBUTE + ACTION_ATTRIBUTE + MIND_ATTRIBUTE,
+	poolsToDamage = RANDOM_ATTRIBUTE,
 
 	animation = "fire_1_special_single",
 	animType = GENERATE_RANGED,
