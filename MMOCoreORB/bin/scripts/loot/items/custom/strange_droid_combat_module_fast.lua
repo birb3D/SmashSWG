@@ -9,7 +9,7 @@ strange_droid_combat_module_fast = {
 		{"decayrate", 5,15,0}, 
 		{"hitpoints", 1000,1000,0}, 
 		{"mechanism_quality", 15,25,0}, 
-		{"cmbt_module", 50,90,0},
+		{"cmbt_module", 50,390,0},
 		{"useCount",1,3,0}
 	},
 	customizationStringName = {},

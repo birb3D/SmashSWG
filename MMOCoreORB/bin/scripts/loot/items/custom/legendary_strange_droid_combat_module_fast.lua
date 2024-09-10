@@ -8,8 +8,8 @@ legendary_strange_droid_combat_module_fast = {
 	craftingValues = {
 		{"decayrate", 5,15,0}, 
 		{"hitpoints", 1000,1000,0}, 
-		{"mechanism_quality", 25,35,0}, 
-		{"cmbt_module", 70,110,0},
+		{"mechanism_quality", 25,65,0}, 
+		{"cmbt_module", 170,410,0},
 		{"useCount",1,3,0}
 	},
 	customizationStringName = {},
