@@ -17,23 +17,23 @@ public:
 		int maxHam = 55;
 		int minHam = 45;
 		if(droidType == DroidObject::R_SERIES) {
-			maxHam = 4500;
-			minHam = 1125;
+			maxHam = 5500;
+			minHam = 2125;
 		}
 		if(droidType == DroidObject::DZ70 || droidType == DroidObject::PROBOT) {
-			maxHam = 3200;
-			minHam = 800;
+			maxHam = 4200;
+			minHam = 1800;
 		}
 		if(droidType == DroidObject::LE_REPAIR) {
-			maxHam = 6000;
-			minHam = 1500;
+			maxHam = 9000;
+			minHam = 2500;
 		}
 		if (droidType == DroidObject::MSE || droidType == DroidObject::POWER_DROID || droidType == DroidObject::PROTOCOL || droidType == DroidObject::SURGICAL || droidType == DroidObject::TREADWELL) {
-			maxHam = 55;
-			minHam = 45;
+			maxHam = 555;
+			minHam = 245;
 		}
 		if (droidType == DroidObject::BLL) {
-			maxHam = 1400;
+			maxHam = 4400;
 			minHam = 1200;
 		}
 		float hamValue = quality * (float)maxHam;
@@ -65,22 +65,22 @@ public:
 		if (rating == 0)
 			return 1;
 		if(droidType == DroidObject::R_SERIES)
-			return ((int)((rating/600.0) * 80.0)) + 80;
+			return ((int)((rating/600.0) * 160.0)) + 160;
 		if(droidType == DroidObject::LE_REPAIR)
-			return ((int)((rating/600.0) * 45.0)) + 45;
+			return ((int)((rating/600.0) * 90.0)) + 90;
 		if(droidType == DroidObject::PROBOT || droidType == DroidObject::DZ70)
-			return ((int)((rating/600.0) * 95.0)) + 95;
+			return ((int)((rating/600.0) * 195.0)) + 195;
 		return 1;
 	}
 	static float determineMaxDamage(int droidType, int rating) {
 		if (rating == 0)
 			return 1;
 		if(droidType == DroidObject::R_SERIES)
-			return ((int)((rating/600.0) * 85.0)) + 85;
+			return ((int)((rating/600.0) * 285.0)) + 285;
 		if(droidType == DroidObject::LE_REPAIR)
-			return ((int)((rating/600.0) * 55.0)) + 55;
+			return ((int)((rating/600.0) * 155.0)) + 155;
 		if(droidType == DroidObject::PROBOT || droidType == DroidObject::DZ70)
-			return ((int)((rating/600.0) * 100.0)) + 100;
+			return ((int)((rating/600.0) * 400.0)) + 400;
 		return 1;
 	}
 	/** Used to determine harvest droid and trap droid skill mod*/
