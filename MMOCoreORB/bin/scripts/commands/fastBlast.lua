@@ -44,14 +44,14 @@
 FastBlastCommand = {
         name = "fastblast",
 
-	damageMultiplier = 6,
-	speedMultiplier = 3.05,
+	damageMultiplier = 7,
+	speedMultiplier = 3.0,
 	healthCostMultiplier = 1.5,
 	actionCostMultiplier = 1.5,
 	mindCostMultiplier = 1,
 	accuracyBonus = 95,
 
-	poolsToDamage = HEALTH_ATTRIBUTE + ACTION_ATTRIBUTE + MIND_ATTRIBUTE,
+	poolsToDamage = HEALTH_ATTRIBUTE + ACTION_ATTRIBUTE,
 
 	animation = "fire_5_special_single", 
 	animType = GENERATE_RANGED,
