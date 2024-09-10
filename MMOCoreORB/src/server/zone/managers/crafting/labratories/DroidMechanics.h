@@ -17,23 +17,23 @@ public:
 		int maxHam = 55;
 		int minHam = 45;
 		if(droidType == DroidObject::R_SERIES) {
-			maxHam = 5500;
-			minHam = 2125;
+			maxHam = 4500;
+			minHam = 1125;
 		}
 		if(droidType == DroidObject::DZ70 || droidType == DroidObject::PROBOT) {
-			maxHam = 4200;
-			minHam = 1800;
+			maxHam = 3200;
+			minHam = 800;
 		}
 		if(droidType == DroidObject::LE_REPAIR) {
-			maxHam = 9000;
-			minHam = 2500;
+			maxHam = 6000;
+			minHam = 1500;
 		}
 		if (droidType == DroidObject::MSE || droidType == DroidObject::POWER_DROID || droidType == DroidObject::PROTOCOL || droidType == DroidObject::SURGICAL || droidType == DroidObject::TREADWELL) {
 			maxHam = 555;
 			minHam = 245;
 		}
 		if (droidType == DroidObject::BLL) {
-			maxHam = 4400;
+			maxHam = 1400;
 			minHam = 1200;
 		}
 		float hamValue = quality * (float)maxHam;
