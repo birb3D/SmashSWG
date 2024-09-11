@@ -648,13 +648,13 @@ bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObje
 		player->sendSystemMessage("\\#cccccc You got \\#e3ab29 LEGENDARY \\#cccccc boss loot!");
 	}
 	else if(lootroll < 4000) { // 40% Chance for rare
-		objectID = createLoot(trx, container, "worldboss_rare", 300);
+		objectID = createLoot(trx, container, "worldboss_rare", 200);
 		player->playEffect("clienteffect/level_granted_chronicles.cef", "");
 		player->showFlyText("Loot", "Rare", 30, 30, 255);
 		player->sendSystemMessage("\\#cccccc You got \\#1e1eff Rare \\#cccccc boss loot!");
 	}
 	else {
-		objectID = createLoot(trx, container, "worldboss_common", 150);
+		objectID = createLoot(trx, container, "worldboss_common", 100);
 		player->playEffect("clienteffect/level_granted.cef", "");
 		player->showFlyText("Loot", "Common", 150, 150, 150);
 		player->sendSystemMessage("\\#cccccc You got \\#888888 common \\#cccccc boss loot!");
