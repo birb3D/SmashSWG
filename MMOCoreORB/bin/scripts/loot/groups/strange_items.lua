@@ -13,8 +13,8 @@ strange_items = {
 		{groupTemplate = "large_resource_creature", weight = 142857},
 
 
-		-- 10.75%
-		{itemTemplate = "locked_container", weight = 1075001}, 
+		-- 13.35%
+		{itemTemplate = "locked_container", weight = 1335001}, 
 
 		-- 10%
 		{groupTemplate = "color_crystals", weight = 1000000}, 
