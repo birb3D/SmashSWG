@@ -12,7 +12,7 @@ polearm_lance_vibrolance = {
 		{"woundchance",14,26,1},
 		{"hitpoints",750,1500,0},
 		{"zerorange",0,0,0},
-		{"zerorangemod",-24,-14,0},
+		{"zerorangemod",-24,-24,0},
 		{"midrange",3,3,0},
 		{"midrangemod",-24,-24,0},
 		{"maxrange",5,5,0},
@@ -26,7 +26,7 @@ polearm_lance_vibrolance = {
 
 	-- randomDotChance: The chance of this weapon object dropping with a random dot on it. Higher number means less chance. Set to 0 to always have a random dot.
 	randomDotChance = 500,
-	junkDealerTypeNeeded = JUNKNOTSELLABLE,
+	junkDealerTypeNeeded = JUNKARMS,
 	junkMinValue = 30,
 	junkMaxValue = 55
 

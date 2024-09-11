@@ -12,7 +12,7 @@ polearm_staff_metal = {
 		{"woundchance",7,7,1},
 		{"hitpoints",750,1500,0},
 		{"zerorange",0,0,0},
-		{"zerorangemod",-5,5,0},
+		{"zerorangemod",-5,-5,0},
 		{"midrange",3,3,0},
 		{"midrangemod",-5,-5,0},
 		{"maxrange",5,5,0},
@@ -26,7 +26,7 @@ polearm_staff_metal = {
 
 	-- randomDotChance: The chance of this weapon object dropping with a random dot on it. Higher number means less chance. Set to 0 to always have a random dot.
 	randomDotChance = 500,
-	junkDealerTypeNeeded = JUNKNOTSELLABLE,
+	junkDealerTypeNeeded = JUNKARMS,
 	junkMinValue = 25,
 	junkMaxValue = 45
 

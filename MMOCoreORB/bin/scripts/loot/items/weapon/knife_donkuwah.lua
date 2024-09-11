@@ -41,7 +41,7 @@ knife_donkuwah = {
 		{"potency", 60, 60},
 		{"uses", 500, 500}
 	},
-	junkDealerTypeNeeded = JUNKNOTSELLABLE,
+	junkDealerTypeNeeded = JUNKARMS,
 	junkMinValue = 20,
 	junkMaxValue = 60
 

@@ -13,7 +13,7 @@ padded_armor_belt = {
 	customizationStringNames = {},
 	customizationValues = {},
 
-	junkDealerTypeNeeded = JUNKNOTSELLABLE,
+	junkDealerTypeNeeded = JUNKGENERIC,
 	junkMinValue = 50,
 	junkMaxValue = 100
 }

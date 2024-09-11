@@ -22,7 +22,7 @@ chitin_armor_helmet = {
 			{0, 1, 2, 3, 4, 5}
 	},
 
-	junkDealerTypeNeeded = JUNKNOTSELLABLE,
+	junkDealerTypeNeeded = JUNKGENERIC,
 	junkMinValue = 35,
 	junkMaxValue = 70
 }
