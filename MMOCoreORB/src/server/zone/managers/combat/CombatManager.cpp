@@ -2568,11 +2568,11 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 	ManagedReference<ArmorObject*> psg = getPSGArmor(defender);
 
 	if (psg != nullptr && !psg->isVulnerable(damageType)) {
-		float armorReduction = getArmorObjectReduction(psg, damageType);
 		float dmgAbsorbed = damage;
 
 		damage *= getArmorPiercing(psg, armorPiercing);
 
+		float armorReduction = getArmorObjectReduction(psg, damageType);
 		if (armorReduction > 0)
 			damage *= 1.f - (armorReduction / 100.f);
 
@@ -2595,14 +2595,11 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 	armor = getArmorObject(defender, hitLocation);
 
 	if (armor != nullptr && !armor->isVulnerable(damageType)) {
-		float armorReduction = getArmorObjectReduction(armor, damageType);
-		
-
+		float dmgAbsorbed = damage;
 		// use only the damage applied to the armor for piercing (after the PSG takes some off)
 		damage *= getArmorPiercing(armor, armorPiercing);
 		
-		float dmgAbsorbed = damage;
-
+		float armorReduction = getArmorObjectReduction(armor, damageType);
 		if (armorReduction > 0) {
 			damage *= (1.f - (armorReduction / 100.f));
 			dmgAbsorbed -= damage;
