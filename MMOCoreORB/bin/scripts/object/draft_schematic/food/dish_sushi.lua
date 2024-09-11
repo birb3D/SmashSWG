@@ -63,12 +63,12 @@ object_draft_schematic_food_dish_sushi = object_draft_schematic_food_shared_dish
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
-   ingredientTitleNames = {"flaky_crust", "meaty_core", "vegetable_mash", "rice", "carbosyrup", "additive"},
-   ingredientSlotType = {0, 0, 0, 0, 1, 3},
-   resourceTypes = {"hide_leathery_lok", "meat_carnivore", "vegetable", "rice_wild_dantooine", "object/tangible/component/food/shared_ingredient_carbosyrup.iff", "object/tangible/food/crafted/additive/shared_additive_heavy.iff"},
-   resourceQuantities = {15, 40, 12, 64, 5, 1},
-   contribution = {100, 100, 100, 100, 100, 100},
+   ingredientTemplateNames = {"craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n", "craft_food_ingredients_n"},
+   ingredientTitleNames = {"flaky_crust", "meaty_core", "vegetable_mash", "rice", "carbosyrup", "protein_fortifier", "additive"},
+   ingredientSlotType = {0, 0, 0, 0, 1, 1, 3},
+   resourceTypes = {"hide_leathery_lok", "meat_carnivore", "vegetable", "rice_wild_dantooine", "object/tangible/component/food/shared_ingredient_carbosyrup.iff", "object/tangible/food/crafted/shared_dish_soypro.iff", "object/tangible/food/crafted/additive/shared_additive_heavy.iff"},
+   resourceQuantities = {15, 40, 12, 64, 5, 3, 1},
+   contribution = {100, 100, 100, 100, 100, 100, 100},
 
 
    targetTemplate = "object/tangible/food/crafted/dish_sushi.iff",
