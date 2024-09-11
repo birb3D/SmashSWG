@@ -92,6 +92,7 @@ end
 function WorldBossSpawner:setupBoss(pBoss)
 	createObserver(OBJECTDESTRUCTION, "WorldBossSpawner", "notifyBossDead", pBoss)
 	createEvent(getRandomNumber(self.secondsToDespawn - self.randomVariance, self.secondsToDespawn + self.randomVariance) * 1000, "WorldBossSpawner", "despawnBoss", pBoss, "")
+	createEvent(5 * 1000, "WorldBossSpawner", "spawnGuards", pBoss, "")
 end
 
 function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
@@ -138,6 +139,49 @@ function WorldBossSpawner:pickBossSpawn()
 	writeData("worldBosses:templateIndex", templateIndex)
 	
 
+end
+
+
+function WorldBossSpawner:spawnGuards(pBoss)
+	if (pBoss == nil or CreatureObject(pBoss):isDead() or CreatureObject(pBoss):isInCombat() == false) then
+		return 1
+	end
+
+	local spawnIndex = tonumber(readData("worldBosses:spawnIndex"))
+	local templateIndex = tonumber(readData("worldBosses:templateIndex"))
+
+	if (spawnIndex == nil or templateIndex == nil  )
+		return 1
+	end
+
+	local bossObject = self.bossMobileTemplates[templateIndex]
+	local bossTemplate = bossObject.template
+	local referencePoint = spawnIndex
+	local zone = self.bossSpawnPoint[referencePoint].planetName
+
+	spatialChat(pBoss, "@space/taunts/blacksun_low:death4")
+
+	for i = 1, 10, 1 do
+		local guardID = readData("worldBossGuard:" .. i)
+
+		local pGuard = getSceneObject(guardID)
+
+		if (pGuard == nil or CreatureObject(pGuard):isDead()) then
+
+			local positionX = SceneObject(pBoss):getPositionX() + getRandomNumber(-40, 40)
+			local positionY = SceneObject(pBoss):getPositionY() + getRandomNumber(-40, 40)
+			local positionZ = SceneObject(pBoss):getPositionZ()
+			pGuard = spawnMobile(zone, "worldboss_guard_probot", 0, positionX, positionZ, positionY, getRandomNumber(0,360), 0)
+
+			if (pGuard ~= nil) then
+				writeData("worldBossGuard:" .. i, SceneObject(pGuard):getObjectID())
+			end
+		end
+	end
+
+	createEvent(60 * 1000, "WorldBossSpawner", "spawnGuards", pBoss, "")
+
+	return 1
 end
 
 

@@ -14,7 +14,8 @@ includeFile("event/world_boss/tusken_raider_boss.lua")
 includeFile("event/world_boss/jawa_boss.lua")
 includeFile("event/world_boss/rancor_boss.lua")
 --includeFile("event/world_boss/wampa_boss.lua")
-includeFile("event/world_boss/geonosian_boss.lua")
+--includeFile("event/world_boss/geonosian_boss.lua")
+includeFile("event/world_boss/worldboss_guard_probot.lua")
 
 
 --CityControlLanding
