@@ -59,7 +59,8 @@ droideka_boss = Creature:new {
 	attacks = {
 		{"creatureareacombo","stateAccuracyBonus=100"},
 		{"creatureareaknockdown","stateAccuracyBonus=100"},
-		{"creatureareapoison","stateAccuracyBonus=90"}
+		{"creatureareapoison","stateAccuracyBonus=90"},
+		{"poisongascloud",""}
 	}
 }
 

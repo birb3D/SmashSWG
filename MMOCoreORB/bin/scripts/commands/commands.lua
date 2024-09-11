@@ -27,6 +27,8 @@ function DotEffect(t, dm, pl, h, p, c, s, d, pp, sp)
   }
 end
 
+RunSlashCommandsFile("poisongascloud.lua")
+
 -- run command scripts
 RunSlashCommandsFile("actionShot1.lua")
 RunSlashCommandsFile("actionShot2.lua")
