@@ -167,9 +167,9 @@ public:
 
 		// HIT_LOCATION has a circular dependency nightmare with CombatManager and CreatureObject
 		switch(hl) {
-		case 1: // HIT_BODY
+		case HIT_BODY: // HIT_BODY
 			return protectionArmorMap.get((uint8)ArmorObjectTemplate::CHEST); // CHEST
-		case 2: // HIT_LARM
+		case HIT_LARM: // HIT_LARM
 		{
 			Vector<ManagedReference<ArmorObject*> > armArmor = protectionArmorMap.get((uint8)ArmorObjectTemplate::ARMS); // ARMS
 			Vector<ManagedReference<ArmorObject*> > armorAtLocation;
@@ -224,7 +224,7 @@ public:
 			else
 				return armorAtLocation;*/
 		}
-		case 3: // HIT_RARM
+		case HIT_RARM: // HIT_RARM
 		{
 			Vector<ManagedReference<ArmorObject*> > armArmor = protectionArmorMap.get((uint8)ArmorObjectTemplate::ARMS); // ARMS
 			Vector<ManagedReference<ArmorObject*> > armorAtLocation;
@@ -280,8 +280,8 @@ public:
 			else
 				return armorAtLocation;*/
 		}
-		case 4: // HIT_LLEG
-		case 5: // HIT_RLEG
+		case HIT_LLEG: // HIT_LLEG
+		case HIT_RLEG: // HIT_RLEG
 		{
 			Vector<ManagedReference<ArmorObject*> > legArmor = protectionArmorMap.get((uint8)ArmorObjectTemplate::LEGS); // LEGS
 			Vector<ManagedReference<ArmorObject*> > armorAtLocation;
@@ -312,7 +312,7 @@ public:
 			// Mini Suit
 			//return protectionArmorMap.get((uint8)ArmorObjectTemplate::LEGS); // LEGS
 		}
-		case 6: // HIT_HEAD
+		case HIT_HEAD: // HIT_HEAD
 		{
 			if(species == 4) return protectionArmorMap.get((uint8)ArmorObjectTemplate::CHEST); // Wookies dont have helmets. Take from chest
 
