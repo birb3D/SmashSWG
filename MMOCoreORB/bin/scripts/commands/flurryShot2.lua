@@ -44,7 +44,7 @@
 FlurryShot2Command = {
         name = "flurryshot2",
 
-	damageMultiplier = 3.0,
+	damageMultiplier = 4.5,
 	speedMultiplier = 1.8,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 0.5,

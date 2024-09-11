@@ -44,7 +44,7 @@
 MindShot1Command = {
 	name = "mindshot1",
 
-	damageMultiplier = 2.5,
+	damageMultiplier = 3.75,
 	speedMultiplier = 1,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 0.5,

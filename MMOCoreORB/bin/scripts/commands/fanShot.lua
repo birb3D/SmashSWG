@@ -43,7 +43,7 @@
 
 FanShotCommand = {
         name = "fanshot",
-	damageMultiplier = 2.5,
+	damageMultiplier = 3.25,
 	speedMultiplier = 1.8,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1,
