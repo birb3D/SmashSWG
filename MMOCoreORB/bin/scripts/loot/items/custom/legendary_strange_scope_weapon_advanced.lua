@@ -6,6 +6,9 @@ legendary_strange_scope_weapon_advanced = {
 	customObjectName = "Experimental Weapon Scope",
 	directObjectTemplate = "object/tangible/component/weapon/scope_weapon_advanced.iff",
 	craftingValues = {
+		{"mindamage", 5,40,0},
+		{"maxdamage", 5,50,0},
+		{"attackspeed",0.8,-0.5,1},
 		{"woundchance", 8,22,1},
 		{"hitpoints", 60,100,0},
 		{"midrangemod",11,62,0},

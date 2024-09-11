@@ -6,6 +6,9 @@ strange_scope_weapon_advanced = {
 	customObjectName = "Strange Weapon Scope",
 	directObjectTemplate = "object/tangible/component/weapon/scope_weapon_advanced.iff",
 	craftingValues = {
+		{"mindamage", -10,30,0},
+		{"maxdamage", -10,40,0},
+		{"attackspeed",0.8,-0.3,1},
 		{"woundchance", 4,20,1},
 		{"hitpoints", 60,100,0},
 		{"midrangemod",9,60,0},
