@@ -7,14 +7,11 @@ worldboss_common = {
 	lootItems = {
 
 		{itemTemplate = "locked_container", weight = 1000000},
-		{groupTemplate = "armor_all", weight = 1000000}, 
-		{groupTemplate = "weapons_all", weight = 1000000}, 
-		{groupTemplate = "looted_container", weight = 500000}, 
-		{itemTemplate = "treasure_map", weight = 500000},
-		{groupTemplate = "wearables_all", weight = 1000000}, 
-
-		{groupTemplate = "junk", weight = 2500000},
-		{groupTemplate = "crafting_component", weight = 2500000},
+		{groupTemplate = "armor_all", weight = 3000000}, 
+		{groupTemplate = "weapons_all", weight = 3000000}, 
+		{itemTemplate = "treasure_map", weight = 1000000},
+		{itemTemplate = "holocron_splinters", weight = 1000000},
+		{groupTemplate = "crafting_tools_all", weight = 1000000},
 
 	}
 }
