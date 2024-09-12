@@ -262,6 +262,7 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 			if (mechanicType ~= "") then
 				createObserver(STARTCOMBAT, mechanicType, "setupMech", pBoss, "")
 			end
+			createObserver(STARTCOMBAT, "WorldBossSpawner", "spawnGuards", pBoss, "")
 
 			createEvent(30, "WorldBossSpawner", "setupBoss", pBoss, "")
 
