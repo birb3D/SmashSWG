@@ -35,7 +35,7 @@ class AuctionManager extends ManagedService implements Logger {
 
 	public final static int MAXBAZAARPRICE = 100000;
 	public final static int MAXSALES = 100; // this only apply to bazaars
-	public final static int SALESFEE = 200;
+	public final static int SALESFEE = 100;
 	public final static int CHECKEVERY = 60; // Minutes
 
 	public final static int MAXVENDORPRICE = 99999999;
