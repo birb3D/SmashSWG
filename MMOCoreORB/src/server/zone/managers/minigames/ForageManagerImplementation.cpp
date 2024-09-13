@@ -402,7 +402,8 @@ bool ForageManagerImplementation::forageGiveResource(TransactionLog& trx, Creatu
 		}
 	}
 
-	int quantity = System::random(30) + 10;
+	//int quantity = System::random(30) + 10;
+	int quantity = (3*(System::random(30) + 10));
 	resourceManager->harvestResourceToPlayer(trx, player, resource, quantity);
 	return true;
 }
