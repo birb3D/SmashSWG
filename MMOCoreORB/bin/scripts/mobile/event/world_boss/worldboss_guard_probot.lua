@@ -22,7 +22,7 @@ worldboss_guard_probot = Creature:new {
 	tamingChance = 0,
 	ferocity = 0,
 	pvpBitmask = AGGRESSIVE + ATTACKABLE + ENEMY,
-	creatureBitmask = PACK + KILLER + STALKER,
+	creatureBitmask = PACK + STALKER,
 	optionsBitmask = AIENABLED,
 	diet = CARNIVORE,
 	scale = 1.5,
@@ -34,7 +34,8 @@ worldboss_guard_probot = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "strange_items", chance = 10000000}
+				{group = "strange_items", chance = 5000000},
+				{group = "junk", chance = 5000000}
 			}
 		}
 	},
