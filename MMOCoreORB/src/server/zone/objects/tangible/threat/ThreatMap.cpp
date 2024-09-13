@@ -519,13 +519,13 @@ void ThreatMap::addHeal(TangibleObject* target, int value) {
 	if (idx == -1) {
 		ThreatMapEntry entry;
 		entry.addHeal(value);
-		entry.addAggro(value*6); // Heals Aggro 6x over damage
+		entry.addAggro(value*2); // Heals Aggro 2x over damage
 		put(target, entry);
 		registerObserver(target);
 
 	} else {
 		ThreatMapEntry* entry = &elementAt(idx).getValue();
 		entry->addHeal(value);
-		entry->addAggro(value*7);
+		entry->addAggro(value*2);
 	}
 }

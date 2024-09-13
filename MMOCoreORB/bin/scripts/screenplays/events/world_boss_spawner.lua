@@ -3,11 +3,11 @@ local ObjectManager = require("managers.object.object_manager")
 WorldBossSpawner = ScreenPlay:new {
 	numberOfActs = 1,
 	bossesToSpawn = 1,
-	initSpawnTimer = 120, -- 3600
+	initSpawnTimer = 3600, -- 3600
 	numReferencePoints = 29,
 	secondsToDespawn = 7200, 
-	notificationTime = 60,
-	secondsToRespawn = 120, -- 14400
+	notificationTime = 1800, -- 1800
+	secondsToRespawn = 14400, -- 14400
 	maxRadius = 5,
 	randomVariance = 5,
 
@@ -23,8 +23,7 @@ WorldBossSpawner = ScreenPlay:new {
 	screenplayName = "WorldBossSpawner",
 
 	bossSpawnPoint = { 
-		{planetName = "tatooine", xPos = -3045, yPos = 2136},
-		--[[
+		--{planetName = "tatooine", xPos = -3045, yPos = 2136},
 		{planetName = "corellia", xPos = -3646, yPos = 2870},
 		{planetName = "corellia", xPos = 4630, yPos = -5740},
 		{planetName = "corellia", xPos = 1414, yPos = -316},
@@ -53,7 +52,7 @@ WorldBossSpawner = ScreenPlay:new {
 		{planetName = "talus", xPos = 4285, yPos = 1032},
 		{planetName = "yavin4", xPos = 5097, yPos = 5537},
 		{planetName = "yavin4", xPos = 466, yPos = -693},
-		{planetName = "yavin4", xPos = -3150, yPos = -3050},]]--
+		{planetName = "yavin4", xPos = -3150, yPos = -3050},
 	},
 	
 	bigGameHunterSpawns = {
@@ -150,7 +149,7 @@ function WorldBossSpawner:spawnGuards(pBoss)
 	local spawnIndex = tonumber(readData("worldBosses:spawnIndex"))
 	local templateIndex = tonumber(readData("worldBosses:templateIndex"))
 
-	if (spawnIndex == nil or templateIndex == nil  )
+	if (spawnIndex == nil or templateIndex == nil  ) then
 		return 1
 	end
 
@@ -263,6 +262,7 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 			if (mechanicType ~= "") then
 				createObserver(STARTCOMBAT, mechanicType, "setupMech", pBoss, "")
 			end
+			createObserver(STARTCOMBAT, "WorldBossSpawner", "spawnGuards", pBoss, "")
 
 			createEvent(30, "WorldBossSpawner", "setupBoss", pBoss, "")
 
