@@ -42,19 +42,18 @@
 --true = 1, false = 0
 
 UnarmedHeadHit1Command = {
-        name = "unarmedheadhit1",
+	name = "unarmedheadhit1",
 
 	damageMultiplier = 2.5,
 	speedMultiplier = 2.0,
 	healthCostMultiplier = 1.75,
 	actionCostMultiplier = 1.75,
 	mindCostMultiplier = 1.75,
-        accuracyBonus = 15,
+	accuracyBonus = 15,
 
 	poolsToDamage = MIND_ATTRIBUTE,
 
-	animation = "force_lightning_1_particle_level_3",
-	animType = GENERATE_INTENSITY,
+	animation = "knockdown_unarmed_1",
 
 	combatSpam = "nexugrin",
 	
