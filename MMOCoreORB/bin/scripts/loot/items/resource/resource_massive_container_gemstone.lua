@@ -6,7 +6,7 @@ resource_massive_container_gemstone = {
 	customObjectName = "",
 	directObjectTemplate = "object/resource_container/simple.iff",
 	craftingValues = {
-		{"quantity",10000,20000,0, true},
+		{"quantity",10000,30000,0, true},
 	},
 	customizationStringNames = {},
 	customizationValues = {}

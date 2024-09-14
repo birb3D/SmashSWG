@@ -6,7 +6,7 @@ resource_large_container_seeds = {
 	customObjectName = "",
 	directObjectTemplate = "object/resource_container/simple.iff",
 	craftingValues = {
-		{"quantity",1000,2500,0, true},
+		{"quantity",2000,5000,0, true},
 	},
 	customizationStringNames = {},
 	customizationValues = {}
