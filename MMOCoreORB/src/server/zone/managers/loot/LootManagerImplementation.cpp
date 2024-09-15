@@ -492,6 +492,8 @@ TangibleObject* LootManagerImplementation::createLootResource(const String& reso
 		return nullptr;
 	}
 
+	String resourceTypeName = resourceDataName.replaceAll("resource_massive_container_", "");
+	String resourceTypeName = resourceDataName.replaceAll("resource_large_container_", "");
 	String resourceTypeName = resourceDataName.replaceAll("resource_container_", "");
 
 	if (resourceTypeName == "") {
