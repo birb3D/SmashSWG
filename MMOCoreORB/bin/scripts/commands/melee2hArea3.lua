@@ -51,16 +51,15 @@ Melee2hArea3Command = {
         accuracyBonus = 10,
 
 	stateEffects = {
-	  StateEffect( 
-               --documentation clearly defines dizzy instead of blind
-		DIZZY_EFFECT, 
-		{}, 
-		{ "dizzy_defense" }, 
-		{ "jedi_state_defense", "resistance_states" },
-		30, 
-		0, 
-		30
-	  ),
+		StateEffect( 
+			BLIND_EFFECT, 
+			{}, 
+			{ "blind_defense" }, 
+			{ "jedi_state_defense", "resistance_states" },
+			100, 
+			0, 
+			50 
+		  ),
 	  StateEffect( 
 		POSTUREDOWN_EFFECT, 
 		{ "postureDownRecovery" }, 
