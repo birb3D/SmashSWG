@@ -623,8 +623,7 @@ void FishingManagerImplementation::success(CreatureObject* player, int fish, Sce
 				}
 
 				String resourceString = "seafood_fish_" + zoneName;
-				//int amount = harvestingMod * 50;
-				int amount = harvestingMod * 200;
+				int amount = harvestingMod * 50;
 
 				ManagedReference<ResourceManager*> resourceManager = zoneServer->getResourceManager();
 				ManagedReference<SceneObject*> resource = cast<SceneObject*>(resourceManager->harvestResource(player, resourceString, amount));
