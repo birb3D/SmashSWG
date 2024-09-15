@@ -15,12 +15,12 @@ public:
 	constexpr static float EPSILON = 5e-7f;
 	constexpr static float DISTMAX = 0.95f;
 	constexpr static float DISTMIN = 0.15f;
-	constexpr static float LEVELMAX = 350;
+	constexpr static float LEVELMAX = 300;
 	constexpr static float LEVELMIN = 0;
 
 	enum BonusType : int {
-		LEGENDARY = 9,
-		EXCEPTIONAL = 8,
+		LEGENDARY = 4,
+		EXCEPTIONAL = 3,
 		ENHANCED = 2,
 		EXPERIMENTAL = 1,
 		STATIC = 0,
@@ -113,15 +113,17 @@ public:
 
 		prototype->setCustomObjectName(itemTemplate->getCustomObjectName(), false);
 
-		if (modifier > EXCEPTIONAL+1) {
+/*
+		if (modifier > EXCEPTIONAL) {
 			prototype->setCustomObjectName(prototype->getDisplayedName() + " (Legendary)", false);
-		} else if (modifier > ENHANCED+1) {
+		} else if (modifier > ENHANCED) {
 			prototype->setCustomObjectName(prototype->getDisplayedName() + " (Exceptional)", false);
-		} else if (modifier > EXPERIMENTAL+1) {
+		} else if (modifier > EXPERIMENTAL) {
 			prototype->setCustomObjectName(prototype->getDisplayedName() + " (Enhanced)", false);
 		} else if (modifier > STATIC) {
 			prototype->setCustomObjectName(prototype->getDisplayedName() + " (Experimental)", false);
 		}
+		*/
 
 		StringBuffer msg;
 

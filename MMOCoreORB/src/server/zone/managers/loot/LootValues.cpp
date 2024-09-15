@@ -112,10 +112,13 @@ void LootValues::setRandomValues() {
 
 	dynamicValues = attributeIndex.size();
 
+
+	// Pick a number of dynamic values? 
+	/*
 	if (modifier <= BonusType::ENHANCED) {
 		dynamicValues = getDistributedValue(1, attributeIndex.size(), level, DISTMIN, DISTMAX) * modifier;
 		dynamicValues = Math::min(dynamicValues, attributeIndex.size());
-	}
+	} */
 
 	float bonusValue = Math::max(1, modifier);
 
@@ -135,6 +138,7 @@ void LootValues::setRandomValues() {
 			setDynamicValue<float>(attribute, bonusValue);
 		}
 
+		// this does nothing?
 		if (fabs(min) > EPSILON && fabs(max) > EPSILON) {
 			bonusValue = getDistributedValue(1, modifier, level, DISTMIN, DISTMAX);
 		}
@@ -214,7 +218,8 @@ template<typename Auto>
 void LootValues::setDynamicValue(const String& attribute, float percentageMax) {
 	Auto min = staticValues.getMinValue(attribute);
 	Auto max = staticValues.getMaxValue(attribute);
-	Auto value = getDistributedValue(min, max, level, DISTMIN, DISTMAX);
+	Auto value = getRandomValue(min, max);
+	//Auto value = getDistributedValue(min, max, level, DISTMIN, DISTMAX);
 
 	float percent = getValuePercentage(min, max, value);
 	float percentMax = Math::max(1.f, percentageMax);
