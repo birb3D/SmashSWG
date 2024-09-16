@@ -7,7 +7,7 @@ legendary_strange_armor_segment_kashyyykian_ceremonial = {
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_kashyyykian_ceremonial_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
-		{"armor_effectiveness",5,20,10},
+		{"armor_effectiveness",20,25,10},
 		{"armor_special_effectiveness",12,35,0},
 		{"armor_integrity",1000,3000,0},
 		{"armor_health_encumbrance",13,1,0},

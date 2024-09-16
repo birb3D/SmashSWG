@@ -8,7 +8,7 @@ strange_structure_turbo_fluidic_drilling_pumping_unit = {
 	craftingValues = {
         {"extractrate", 4, 14, 0},
         {"hoppersize", -95000, -75000, 0},
-		{"useCount", 1, 2, 0}
+		{"useCount", 2, 4, 0}
 	},
 	customizationStringName = {},
 	customizationValues = {}

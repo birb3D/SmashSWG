@@ -64,6 +64,7 @@ includeFile("items/custom/legendary_strange_structure_heavy_harvesting_mechanism
 includeFile("items/custom/legendary_strange_structure_light_ore_mining_unit.lua")
 includeFile("items/custom/legendary_strange_structure_ore_mining_unit.lua")
 includeFile("items/custom/legendary_strange_structure_turbo_fluidic_drilling_pumping_unit.lua")
+includeFile("items/custom/speederbike_swoop_deed.lua")
 
 includeFile("items/cloning_coupon.lua")
 includeFile("items/travel_coupon.lua")

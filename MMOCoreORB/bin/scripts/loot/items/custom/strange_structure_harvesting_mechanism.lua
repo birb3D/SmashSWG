@@ -8,7 +8,7 @@ strange_structure_harvesting_mechanism = {
 	craftingValues = {
         {"extractrate", 2, 10, 0},
         {"hoppersize", -20000, -10000, 0},
-		{"useCount", 1, 2, 0}
+		{"useCount", 2, 4, 0}
 	},
 	customizationStringName = {},
 	customizationValues = {}
