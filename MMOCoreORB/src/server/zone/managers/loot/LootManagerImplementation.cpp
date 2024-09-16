@@ -1103,7 +1103,7 @@ void LootManagerImplementation::addRandomDots(TangibleObject* object, const Loot
 }
 
 float LootManagerImplementation::getRandomModifier(const LootItemTemplate* itemTemplate, int level, float excMod) {
-	if (level <= 0 || excMod <= 0.f || itemTemplate == nullptr || itemTemplate->getLevelMax() == 0) {
+	if (level <= 0 || itemTemplate == nullptr || itemTemplate->getLevelMax() == 0) {
 		return 0.f;
 	}
 
