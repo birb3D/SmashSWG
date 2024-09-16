@@ -8,7 +8,7 @@ strange_armor_segment_chitin = {
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
 		{"armor_effectiveness",5,35,10},
-		{"armor_special_effectiveness",1,20,10},
+		{"armor_special_effectiveness",1,25,10},
 		{"armor_integrity",500,4000,10},
 		{"armor_health_encumbrance",13,1,0},
 		{"armor_action_encumbrance",13,1,0},

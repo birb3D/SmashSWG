@@ -7,7 +7,7 @@ legendary_strange_armor_segment_ubese = {
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_ubese_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
-		{"armor_effectiveness",10,45,10},
+		{"armor_effectiveness",20,45,10},
 		{"armor_special_effectiveness",10,30,10},
 		{"armor_integrity",300,3000,10},
 		{"armor_health_encumbrance",14,1,0},

@@ -6,8 +6,8 @@ legendary_strange_bio_component_food_medium = {
 	customObjectName = "Experimental Broad-Spectrum Nutrients",
 	directObjectTemplate = "object/tangible/component/bio/bio_component_food_medium_nutrition.iff",
 	craftingValues = {
-		{"add_nutrition", 40,120,0}, -- could be better than good, could be bad. average lower than mid range
-		{"add_flavor", 10,50,0}, -- only benefitial
+		{"add_nutrition", 80,190,0}, -- could be better than good, could be bad. average lower than mid range
+		{"add_flavor", 250,500,0}, -- only benefitial
 		{"add_quantity", -10,50,0}, -- could be bad, could be benefitial. teeters on benefit
 		{"useCount",1,6,0}
 	},

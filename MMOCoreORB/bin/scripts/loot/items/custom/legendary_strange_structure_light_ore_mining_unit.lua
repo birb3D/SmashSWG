@@ -8,7 +8,7 @@ legendary_strange_structure_light_ore_mining_unit = {
 	craftingValues = {
         {"extractrate", 4, 12, 0},
         {"hoppersize", -18000, -8000, 0},
-		{"useCount", 1, 2, 0}
+		{"useCount", 2, 4, 0}
 	},
 	customizationStringName = {},
 	customizationValues = {}

@@ -7,8 +7,8 @@ legendary_strange_armor_segment_bone = {
 	directObjectTemplate = "object/tangible/component/armor/armor_segment_bone_advanced.iff",
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
-		{"armor_effectiveness",6,30,10},
-		{"armor_special_effectiveness",1,20,10},
+		{"armor_effectiveness",20,30,10},
+		{"armor_special_effectiveness",10,30,10},
 		{"kineticeffectiveness",3,8,10},
 		{"armor_integrity",300,2000,10},
 		{"armor_health_encumbrance",6,1,0},

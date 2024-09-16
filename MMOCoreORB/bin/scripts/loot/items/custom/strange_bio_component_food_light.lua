@@ -6,7 +6,7 @@ strange_bio_component_food_light = {
 	customObjectName = "Strange Micronutrient Supplement",
 	directObjectTemplate = "object/tangible/component/bio/bio_component_food_light_nutrition.iff",
 	craftingValues = {
-		{"add_nutrition", 10,120,0}, -- could be better than good, could be bad. average lower than mid range
+		{"add_nutrition", -10,120,0}, -- could be better than good, could be bad. average lower than mid range
 		{"add_flavor", 100,300,0}, -- only benefitial
 		{"add_quantity", -30,50,0}, -- could be bad, could be benefitial. teeters on benefit
 		{"useCount",1,6,0}

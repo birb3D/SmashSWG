@@ -8,7 +8,7 @@ strange_armor_segment_bone = {
 	craftingValues = {
 		{"armor_special_type",-1,-1,0},
 		{"armor_effectiveness",3,30,10},
-		{"armor_special_effectiveness",1,20,10},
+		{"armor_special_effectiveness",1,25,10},
 		{"kineticeffectiveness",1,8,10},
 		{"armor_integrity",100,2000,10},
 		{"armor_health_encumbrance",6,1,0},
