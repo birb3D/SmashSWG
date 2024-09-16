@@ -106,7 +106,7 @@ void LootValues::setRandomValues() {
 		}
 	}
 
-	if (modifier <= 0.f || level <= 0 || attributeIndex.size() == 0) {
+	if (level <= 0 || attributeIndex.size() == 0) {
 		return;
 	}
 
