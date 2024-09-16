@@ -129,7 +129,7 @@ CitiesAllowed = {
 --]]
 CityTaxes = {
 	{--Income Tax
-		min = 0, max = 2000,
+		min = 0, max = 20000,
 		menuText = "@city/city:income_tax",
 		inputTitle = "@city/city:set_tax_t_income",
 		inputText = "@city/city:set_tax_d_income",
