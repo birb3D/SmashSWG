@@ -822,6 +822,21 @@ void CombatManager::finalCombatSpam(TangibleObject* attacker, WeaponObject* weap
 	}
 }
 
+constexpr const char* DamageTypeToString(SharedWeaponObjectTemplate::DamageType e) throw() {
+	switch (e){
+		case SharedWeaponObjectTemplate::DamageType::KINETIC: return "Kinetic";
+		case SharedWeaponObjectTemplate::DamageType::ENERGY: return "Energy";
+		case SharedWeaponObjectTemplate::DamageType::BLAST: return "Blast";
+		case SharedWeaponObjectTemplate::DamageType::STUN: return "Stun";
+		case SharedWeaponObjectTemplate::DamageType::LIGHTSABER: return "Lightsaber";
+		case SharedWeaponObjectTemplate::DamageType::HEAT: return "Heat";
+		case SharedWeaponObjectTemplate::DamageType::COLD: return "Cold";
+		case SharedWeaponObjectTemplate::DamageType::ACID: return "Acid";
+		case SharedWeaponObjectTemplate::DamageType::ELECTRICITY: return "Electricity";
+		default: throw std::invalid_argument("Unimplemented item");
+	}
+}
+
 // broadcast CombatSpam packets
 void CombatManager::broadcastCombatSpam(TangibleObject* attacker, TangibleObject* defender, TangibleObject* item, int damage, const String& file, const String& stringName, byte color) const {
 	if (attacker == nullptr)
@@ -845,13 +860,39 @@ void CombatManager::broadcastCombatSpam(TangibleObject* attacker, TangibleObject
 		zone->getInRangeObjects(attacker->getWorldPositionX(), attacker->getWorldPositionZ(), attacker->getWorldPositionY(), COMBAT_SPAM_RANGE, &closeObjects, true);
 	}
 
+	UnicodeString spam_weapon = "";
+	if (attacker->isCreatureObject() && damage > 0) {
+		CreatureObject *c_attacker = attacker->asCreatureObject();
+		if( c_attacker != nullptr ){
+			WeaponObject* weapon = c_attacker->getWeapon();
+			
+			spam_weapon.append(attacker->getDisplayedName());
+			spam_weapon.append(" damaged you with ");
+			
+			UnicodeString weapon_name = weapon->getDisplayedName();
+			if(weapon_name.indexOf("AI_DEFAULT") == -1 && weapon_name.indexOf("unknown weapon") == -1){
+				spam_weapon.append(weapon_name);
+			} else {
+				spam_weapon.append("their fists");
+			}
+
+			spam_weapon.append(" ( AP: ");
+			spam_weapon.append(std::to_string(weapon->getArmorPiercing()));
+
+			spam_weapon.append(" Type: ");
+			spam_weapon.append(DamageTypeToString(SharedWeaponObjectTemplate::DamageType(weapon->getDamageType())));
+
+			spam_weapon.append(" )");
+		};
+	}
+	
 	for (int i = 0; i < closeObjects.size(); ++i) {
 		SceneObject* object = static_cast<SceneObject*>(closeObjects.get(i));
 
 		if (object->isPlayerCreature() && attacker->isInRange(object, COMBAT_SPAM_RANGE)) {
 			CreatureObject* receiver = static_cast<CreatureObject*>(object);
-			CombatSpam* spam = new CombatSpam(attacker, defender, receiver, item, damage, file, stringName, color);
-			receiver->sendMessage(spam);
+			receiver->sendMessage(new CombatSpam(attacker, defender, receiver, item, damage, file, stringName, color));
+			if (!spam_weapon.isEmpty() && damage > 0 ) receiver->sendMessage(new CombatSpam(receiver, spam_weapon, color));
 		}
 	}
 }
