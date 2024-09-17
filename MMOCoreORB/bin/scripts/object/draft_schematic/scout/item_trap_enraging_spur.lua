@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_enraging_spur = object_draft_schematic_sc
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 16,
+	xp = 32,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_enraging_spur = object_draft_schematic_sc
 	ingredientTitleNames = {"spur_core", "spur_housing", "spur_spikes"},
 	ingredientSlotType = {0, 0, 0},
 	resourceTypes = {"bone", "hide", "bone"},
-	resourceQuantities = {2, 4, 2},
+	resourceQuantities = {4, 8, 4},
 	contribution = {100, 100, 100},
 
 	targetTemplate = "object/tangible/scout/trap/trap_enraging_spur.iff",

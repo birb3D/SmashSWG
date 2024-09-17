@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_tranq_dart = object_draft_schematic_scout
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 40,
+	xp = 80,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_tranq_dart = object_draft_schematic_scout
 	ingredientTitleNames = {"dart_housing", "dart_grip_wrapping", "dart_tip"},
 	ingredientSlotType = {0, 0, 0},
 	resourceTypes = {"bone", "hide", "metal"},
-	resourceQuantities = {7, 10, 3},
+	resourceQuantities = {14, 20, 6},
 	contribution = {100, 100, 100},
 
 
