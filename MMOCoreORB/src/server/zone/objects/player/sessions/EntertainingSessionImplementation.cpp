@@ -1065,9 +1065,10 @@ void EntertainingSessionImplementation::awardEntertainerExperience() {
 
 			int xpAmount = flourishXp + performance->getBaseXp();
 
-			int audienceSize = Math::min(getBandAudienceSize(), 50);
-			float audienceMod = audienceSize / 50.f;
-			float applauseMod = applauseCount / 100.f;
+			const int maxAudienceSize = ConfigManager::instance()->getInt("Core3.Entertainer.MaxAudienceSize", 50);
+			int audienceSize = Math::min(getBandAudienceSize(), maxAudienceSize);
+			float audienceMod = audienceSize / static_cast<float>(maxAudienceSize);
+			float applauseMod = applauseCount / (static_cast<float>(maxAudienceSize) * 2.0);
 
 			float groupMod = groupBonusCount * 0.05;
 
