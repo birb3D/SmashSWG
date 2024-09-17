@@ -1985,6 +1985,17 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				totalDamage -= damage;
 			}
 		}
+		else if (attacker->isPlayerCreature()) {
+			PlayerObject* playerObject = attacker->asPlayerObject();
+
+			for (int j = 0; j < entry->size(); ++j) {
+				String xpType = entry->elementAt(j).getKey();
+				if(playerObject->hasCappedExperience(xpType)) {
+					uint32 damage = entry->elementAt(j).getValue();
+					totalDamage -= damage;
+				}
+			}
+		}
 	}
 
 	for (int i = 0; i < threatMap->size(); ++i) {
