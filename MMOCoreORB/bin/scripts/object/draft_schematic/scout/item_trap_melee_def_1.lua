@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_melee_def_1 = object_draft_schematic_scou
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 12,
+	xp = 24,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_melee_def_1 = object_draft_schematic_scou
 	ingredientTitleNames = {"trap_housing", "entangling_mesh"},
 	ingredientSlotType = {0, 0},
 	resourceTypes = {"bone", "hide"},
-	resourceQuantities = {3, 3},
+	resourceQuantities = {6, 6},
 	contribution = {100, 100},
 
 

@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_sonic_pulse = object_draft_schematic_scou
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 90,
+	xp = 180,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_sonic_pulse = object_draft_schematic_scou
 	ingredientTitleNames = {"device_housing", "device_interior", "device_systems"},
 	ingredientSlotType = {0, 0, 0},
 	resourceTypes = {"bone", "hide", "metal"},
-	resourceQuantities = {15, 15, 15},
+	resourceQuantities = {30, 30, 30},
 	contribution = {100, 100, 100},
 
 

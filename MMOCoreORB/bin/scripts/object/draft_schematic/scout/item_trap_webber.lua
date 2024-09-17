@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_webber = object_draft_schematic_scout_sha
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 70,
+	xp = 140,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_webber = object_draft_schematic_scout_sha
 	ingredientTitleNames = {"device_housing", "device_systems", "webbing_fluid"},
 	ingredientSlotType = {0, 0, 0},
 	resourceTypes = {"bone", "metal", "petrochem_inert_polymer"},
-	resourceQuantities = {15, 7, 13},
+	resourceQuantities = {30, 14, 26},
 	contribution = {100, 100, 100},
 
 

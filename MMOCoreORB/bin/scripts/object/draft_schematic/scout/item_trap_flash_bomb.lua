@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_flash_bomb = object_draft_schematic_scout
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 70,
+	xp = 140,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_flash_bomb = object_draft_schematic_scout
 	ingredientTitleNames = {"device_housing", "device_interior"},
 	ingredientSlotType = {0, 0},
 	resourceTypes = {"bone", "metal"},
-	resourceQuantities = {20, 15},
+	resourceQuantities = {40, 30},
 	contribution = {100, 100},
 
 

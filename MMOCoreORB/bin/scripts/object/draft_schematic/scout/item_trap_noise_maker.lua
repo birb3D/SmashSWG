@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_noise_maker = object_draft_schematic_scou
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 30,
+	xp = 60,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_noise_maker = object_draft_schematic_scou
 	ingredientTitleNames = {"device_housing", "device_interior"},
 	ingredientSlotType = {0, 0},
 	resourceTypes = {"hide", "bone"},
-	resourceQuantities = {10, 5},
+	resourceQuantities = {20, 10},
 	contribution = {100, 100},
 
 	targetTemplate = "object/tangible/scout/trap/trap_noise_maker.iff",

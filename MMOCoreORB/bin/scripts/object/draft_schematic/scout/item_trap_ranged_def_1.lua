@@ -52,7 +52,7 @@ object_draft_schematic_scout_item_trap_ranged_def_1 = object_draft_schematic_sco
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "camp",
-	xp = 16,
+	xp = 32,
 
 	assemblySkill = "general_assembly",
 	experimentingSkill = "general_experimentation",
@@ -66,7 +66,7 @@ object_draft_schematic_scout_item_trap_ranged_def_1 = object_draft_schematic_sco
 	ingredientTitleNames = {"trap_housing", "bioluminescence", "thickener"},
 	ingredientSlotType = {0, 0, 0},
 	resourceTypes = {"bone", "organic", "organic"},
-	resourceQuantities = {2, 4, 2},
+	resourceQuantities = {4, 8, 4},
 	contribution = {100, 100, 100},
 
 
