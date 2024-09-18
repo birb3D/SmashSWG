@@ -644,6 +644,7 @@ bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObje
 
 	int lootroll = System::random(10000);
 	int objectID = 0;
+	String lootName = "";
 
 	if(lootroll < 100) { // 1% Chance for legendary
 		objectID = createLoot(trx, container, "worldboss_legendary", 500);
@@ -651,7 +652,10 @@ bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObje
 		player->playEffect("clienteffect/rare_loot.cef", "");
 		player->showFlyText("Loot", "Legendary", 227, 171, 41);
 		player->sendSystemMessage("\\#cccccc You got \\#e3ab29 LEGENDARY \\#cccccc boss loot!");
-		player->sendSystemMessage("\\#cccccc You have been rewarded a \\#e3ab29 " + object->getDisplayedName());
+		if(object != nullptr) {
+			lootName = object->getDisplayedName();
+			player->sendSystemMessage("\\#cccccc You have been rewarded a \\#e3ab29 " + lootName);
+		}
 	}
 	else if(lootroll < 4000) { // 40% Chance for rare
 		objectID = createLoot(trx, container, "worldboss_rare", 150);
@@ -659,7 +663,10 @@ bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObje
 		player->playEffect("clienteffect/level_granted_chronicles.cef", "");
 		player->showFlyText("Loot", "Rare", 30, 30, 255);
 		player->sendSystemMessage("\\#cccccc You got \\#1e1eff Rare \\#cccccc boss loot!");
-		player->sendSystemMessage("\\#cccccc You have been rewarded a \\#1e1eff " + object->getDisplayedName());
+		if(object != nullptr) {
+			lootName = object->getDisplayedName();
+			player->sendSystemMessage("\\#cccccc You have been rewarded a \\#1e1eff " + lootName);
+		}
 	}
 	else {
 		objectID = createLoot(trx, container, "worldboss_common", 100);
@@ -667,7 +674,10 @@ bool LootManagerImplementation::handleBossLoot(TransactionLog& trx, CreatureObje
 		player->playEffect("clienteffect/level_granted.cef", "");
 		player->showFlyText("Loot", "Common", 150, 150, 150);
 		player->sendSystemMessage("\\#cccccc You got \\#888888 common \\#cccccc boss loot!");
-		player->sendSystemMessage("\\#cccccc You have been rewarded a \\#888888 " + object->getDisplayedName());
+		if(object != nullptr) {
+			lootName = object->getDisplayedName();
+			player->sendSystemMessage("\\#cccccc You have been rewarded a \\#888888 " + lootName);
+		}
 	}
 
 
