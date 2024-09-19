@@ -59,8 +59,22 @@ public:
 		if (!checkInvalidLocomotions(creature))
 			return INVALIDLOCOMOTION;
 
-		if (vehicle->getCreatureLinkID() != creature->getObjectID())
+		if (vehicle->getCreatureLinkID() != creature->getObjectID()) {
+			ManagedReference<GroupObject*> group = creature->getGroup();
+			if (group != nullptr) {
+				ManagedReference<CreatureObject* > vehicleOwner = vehicle->getLinkedCreature();
+				if (vehicleOwner != nullptr) {
+					if (object->isVehicleObject()) {
+						VehicleObject* speeder = cast<VehicleObject*>(vehicle);
+						if (group->hasMember(vehicleOwner) && speeder->hasRidingCreature() && speeder->hasOpenSeat()) {
+							speeder->slotPassenger(creature);
+							creature->setPosition(vehicle->getWorldPositionX(), vehicle->getWorldPositionZ(), vehicle->getWorldPositionY());
+						}
+					}
+				}
+			}
 			return GENERALERROR;
+		}
 
 		if (!vehicle->isInRange(creature, 5) || !CollisionManager::checkLineOfSight(vehicle, creature))
 			return GENERALERROR;

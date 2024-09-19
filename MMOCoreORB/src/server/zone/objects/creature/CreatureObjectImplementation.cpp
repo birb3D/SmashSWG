@@ -2257,6 +2257,37 @@ void CreatureObjectImplementation::notifyInsert(TreeEntry* obj) {
 	}
 #endif // DEBUG_COV
 
+	//EiF multipassenger - COV updates
+	float x = linkedCreature->getWorldPositionX();
+	float y = linkedCreature->getWorldPositionY();
+	float z = linkedCreature->getWorldPositionZ();
+	for (int i = 1; i < 8; ++i) {
+		String text = "rider";
+		text += String::valueOf(i);
+		CreatureObject* seat = getSlottedObject(text).castTo<CreatureObject*>();
+		if (seat != nullptr) {
+			seat->setPosition(x, z, y);
+			CreatureObject* rider = seat->getSlottedObject("rider").castTo<CreatureObject*>();
+			if (rider != nullptr) {
+				rider->setPosition(x, z, y);
+				if (rider->getCloseObjects() != nullptr)
+					rider->removeInRangeObject(obj);
+				if (obj->getCloseObjects() != nullptr)
+					obj->removeInRangeObject(rider);
+			}
+		}
+	}
+
+
+	if (hasRidingCreature()) {
+		CreatureObject* rider = getSlottedObject("rider").castTo<CreatureObject*>();
+		if (rider != nullptr) {
+			rider->removeInRangeObject(obj);
+			if (obj->getCloseObjects() != nullptr)
+				obj->removeInRangeObject(rider);
+		}
+	}
+
 	TangibleObjectImplementation::notifyInsert(obj);
 
 	if (linkedCreature != nullptr && linkedCreature->getParent() == asCreatureObject() && linkedCreature->getObjectID() != obj->getObjectID()) {
@@ -2291,6 +2322,37 @@ void CreatureObjectImplementation::notifyDissapear(TreeEntry* obj) {
 	}
 #endif // DEBUG_COV
 
+	//EiF multipassenger - position updates
+	float x = linkedCreature->getWorldPositionX();
+	float y = linkedCreature->getWorldPositionY();
+	float z = linkedCreature->getWorldPositionZ();
+	for (int i = 1; i < 8; ++i) {
+		String text = "rider";
+		text += String::valueOf(i);
+		CreatureObject* seat = getSlottedObject(text).castTo<CreatureObject*>();
+		if (seat != nullptr) {
+			seat->setPosition(x, z, y);
+			CreatureObject* rider = seat->getSlottedObject("rider").castTo<CreatureObject*>();
+			if (rider != nullptr) {
+				rider->setPosition(x, z, y);
+				if (rider->getCloseObjects() != nullptr)
+					rider->addInRangeObject(entry);
+				if (entry->getCloseObjects() != nullptr)
+					entry->addInRangeObject(rider);
+			}
+		}
+	}
+
+	if (hasRidingCreature()) {
+		CreatureObject* rider = getSlottedObject("rider").castTo<CreatureObject*>();
+		if (rider != nullptr) {
+			rider->addInRangeObject(entry);
+
+			if (entry->getCloseObjects() != nullptr)
+				entry->addInRangeObject(rider);
+		}		
+	}
+
 	TangibleObjectImplementation::notifyDissapear(obj);
 
 	if (linkedCreature != nullptr && linkedCreature->getParent() == asCreatureObject() && linkedCreature->getObjectID() != obj->getObjectID()) {
@@ -2314,6 +2376,37 @@ void CreatureObjectImplementation::notifyPositionUpdate(TreeEntry* entry) {
 
 	if (entryObject == nullptr) {
 		return;
+	}
+
+	// EiF multipassenger - position updates
+	float x = linkedCreature->getWorldPositionX();
+	float y = linkedCreature->getWorldPositionY();
+	float z = linkedCreature->getWorldPositionZ();
+	for (int i = 1; i < 8; ++i) {
+		String text = "rider";
+		text += String::valueOf(i);
+		CreatureObject* seat = getSlottedObject(text).castTo<CreatureObject*>();
+		if (seat != nullptr) {
+			seat->setPosition(x, z, y);
+			CreatureObject* rider = seat->getSlottedObject("rider").castTo<CreatureObject*>();
+			if (rider != nullptr) {
+				rider->setPosition(x, z, y);
+				if (rider->getCloseObjects() != nullptr)
+					rider->addInRangeObject(entry);
+				if (entry->getCloseObjects() != nullptr)
+					entry->addInRangeObject(rider);
+			}
+		}
+	}
+	
+	if (hasRidingCreature()) {
+		CreatureObject* rider = getSlottedObject("rider").castTo<CreatureObject*>();
+		if (rider != nullptr) {
+			rider->addInRangeObject(entry);
+
+			if (entry->getCloseObjects() != nullptr)
+				entry->addInRangeObject(rider);
+		}
 	}
 
 	TangibleObjectImplementation::notifyPositionUpdate(entry);

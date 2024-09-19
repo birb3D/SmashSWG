@@ -17,9 +17,26 @@
 #include "server/zone/objects/region/Region.h"
 #include "server/zone/objects/creature/sui/RepairVehicleSuiCallback.h"
 #include "templates/customization/AssetCustomizationManagerTemplate.h"
+//added includes for EiF multipassenger
+#include "server/zone/objects/group/GroupObject.h"
+#include "templates/creature/VehicleObjectTemplate.h"
+#include "server/zone/managers/creature/CreatureManager.h"
 
 
 void VehicleObjectImplementation::fillObjectMenuResponse(ObjectMenuResponse* menuResponse, CreatureObject* player) {
+	//EiF additions for multipassenger vehicles
+	//checks to see if the player radialing the vehicle is the owner and, if he isn't, if he could possibly get in
+	if (linkedCreature != player) {
+		ManagedReference<GroupObject*> group = player->getGroup();
+		if (group != nullptr) {
+			CreatureObject* vehicleOwner = this->linkedCreature.get();
+			if (vehicleOwner != nullptr)
+				if (group->hasMember(this->linkedCreature.get()) && hasRidingCreature() && hasOpenSeat()) 
+					menuResponse->addRadialMenuItem(205, 1, "@pet/pet_menu:menu_enter_exit");
+		}
+	}
+	//end EiF additions
+
 	if (!player->getPlayerObject()->isPrivileged() && linkedCreature != player)
 		return;
 
@@ -75,6 +92,9 @@ void VehicleObjectImplementation::fillAttributeList(AttributeListMessage* alm, C
 		return;
 
 	alm->insertAttribute("@obj_attr_n:owner", linkedCreature->getFirstName());
+
+	//EiF addition - add the passenger capacity to the speeder's examine window
+	alm->insertAttribute("@obj_attr_n:riders", getPassengerCapacity() + 1);
 
 }
 
@@ -307,5 +327,107 @@ bool VehicleObject::isVehicleObject() {
 }
 
 bool VehicleObjectImplementation::isVehicleObject() {
+	return true;
+}
+
+//EiF additions for multipassenger
+//Get the number of passengers a vehicle can hold
+int VehicleObjectImplementation::getPassengerCapacity() {
+	ManagedReference<TangibleObject*> vehicle = _this.getReferenceUnsafeStaticCast();
+
+	if (vehicle == nullptr)
+		return 10;
+
+	Reference<VehicleObjectTemplate*> vehicleTemplate = cast<VehicleObjectTemplate*>(vehicle->getObjectTemplate());
+
+	if (vehicleTemplate == nullptr)
+		return 10;
+
+	return vehicleTemplate->getPassengerCapacity();
+
+}
+
+//Return the string used to generate a seat in the vehicle
+String VehicleObjectImplementation::getPassengerSeatName() {
+	ManagedReference<TangibleObject*> vehicle = _this.getReferenceUnsafeStaticCast();
+
+	if (vehicle == nullptr)
+		return "default";
+
+	Reference<VehicleObjectTemplate*> vehicleTemplate = cast<VehicleObjectTemplate*>(vehicle->getObjectTemplate());
+
+	if (vehicleTemplate == nullptr)
+		return "error";
+
+	return vehicleTemplate->getPassengerSeatString();
+
+}
+
+//Check for whether a vehicle has a seat available
+bool VehicleObjectImplementation::hasOpenSeat() {
+	int passengerSeats = getPassengerCapacity();
+
+	if (passengerSeats == 0)
+		return false;
+
+	bool openSeat = false;
+
+	for (int i = 1; i <= passengerSeats; ++i){
+		String text = "rider";
+		text += String::valueOf(i);
+		CreatureObject* seat = this->getSlottedObject(text).castTo<CreatureObject*>();
+		if (seat == nullptr) {
+			openSeat = true;
+		}
+	}
+
+	return openSeat;
+}
+
+//Get the number of an open seat - used for generating a seat for a player
+int VehicleObjectImplementation::getOpenSeat() {
+	int passengerSeats = getPassengerCapacity();
+
+	if (passengerSeats == 0)
+		return 0;
+
+	for (int i = 1; i <= passengerSeats; ++i){
+		String text = "rider";
+		text += String::valueOf(i);
+		CreatureObject* seat = this->getSlottedObject(text).castTo<CreatureObject*>();
+		if (seat == nullptr) {
+			return i;
+		}
+	}
+
+	return 0;
+}
+
+//Slot a passenger into a vehicle
+bool VehicleObjectImplementation::slotPassenger(CreatureObject* passenger) {
+	//Get the relevant info to generate a seat, generate it, and slot it into the vehicle
+	int seatNumber = getOpenSeat();
+	String seat = "passenger_" + getPassengerSeatName() + "_" + String::valueOf(seatNumber);
+	Zone* zone = getZone();
+	float x = getWorldPositionX();
+	float y = getWorldPositionY();
+	float z = getWorldPositionZ();
+	CreatureManager* creatureManager = zone->getCreatureManager();
+	CreatureObject* seatObject = creatureManager->spawnCreature(seat.hashCode(), 0, x, z, y, 0);
+	transferObject(seatObject, 4 + seatNumber, true);
+	seatObject->setPosition(x, z, y);
+	Locker slocker(seatObject);
+
+	//put the passenger into the seat
+	Locker plocker(passenger);
+	seatObject->transferObject(passenger, 4, true);
+	passenger->setState(CreatureState::RIDINGMOUNT);
+	passenger->teleport(x, z, y, 0);
+	passenger->setPosition(x, z, y);
+
+	//sync
+	synchronizeCloseObjects();
+	seatObject->synchronizeCloseObjects();
+	passenger->synchronizeCloseObjects();
 	return true;
 }

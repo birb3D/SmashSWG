@@ -53,3 +53,7 @@ includeFile("misc/record_keeper_rebel.lua")
 includeFile("misc/seeker.lua")
 includeFile("misc/sullustan_male.lua")
 includeFile("misc/trials_gungan_captain.lua")
+
+--EiF addition for multipassenger
+includeFile("misc/passenger_flash_speeder_1.lua")
+
