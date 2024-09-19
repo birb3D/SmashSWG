@@ -17,6 +17,7 @@ WorldBossSpawner = ScreenPlay:new {
 		{template = "rancor_boss", name = "Corrupted Rancor"},
 		{template = "tusken_raider_boss", name = "Corrupted Tusken Raider King"},
 		{template = "droideka_boss", name = "M1r.d3r Experimental Attack Droid"},
+		{template = "leviasquall_boss", name = "The Killer Rabbit of Caerbannog"},
 		{template = "jawa_boss", name = "Glob the Footpad"},
 	},
 
