@@ -213,7 +213,7 @@ void GroupManager::joinGroup(CreatureObject* creature) {
 	}
 
 	// if inviter IS in the group but is not the leader
-	if (group->getLeaderID() != leader->getObjectID() && !playerIsInvitingOwnPet(leader, creature)) {
+	/* if (group->getLeaderID() != leader->getObjectID() && !playerIsInvitingOwnPet(leader, creature)) {
 		creature->updateGroupInviterID(0);
 
 		StringIdChatParameter param("group", "prose_leader_changed"); // "%TU has abdicated group leadership to %TT."
@@ -223,7 +223,7 @@ void GroupManager::joinGroup(CreatureObject* creature) {
 		creature->sendSystemMessage(param);
 
 		return;
-	}
+	} */
 
 #ifdef DEBUG_GROUPS
 	info(true) << "Player: " << player->getDisplayedName() << " joining group of " << leader->getDisplayedName();
